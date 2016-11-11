@@ -34,9 +34,6 @@ public class MainFrame extends JFrame {
         button1 = new JButton();
         button2 = new JButton();
         button3 = new JButton();
-        tabbedPane1 = new JTabbedPane();
-        panel1 = new JPanel();
-        panel2 = new JPanel();
 
         //======== this ========
         Container contentPane = getContentPane();
@@ -76,23 +73,6 @@ public class MainFrame extends JFrame {
             toolBar1.add(button3);
         }
         contentPane.add(toolBar1, BorderLayout.NORTH);
-
-        //======== tabbedPane1 ========
-        {
-
-            //======== panel1 ========
-            {
-                panel1.setLayout(new BorderLayout());
-            }
-            tabbedPane1.addTab("Converter", panel1);
-
-            //======== panel2 ========
-            {
-                panel2.setLayout(new BorderLayout());
-            }
-            tabbedPane1.addTab("Analyzer", panel2);
-        }
-        contentPane.add(tabbedPane1, BorderLayout.CENTER);
         pack();
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
@@ -106,8 +86,5 @@ public class MainFrame extends JFrame {
     private JButton button1;
     private JButton button2;
     private JButton button3;
-    private JTabbedPane tabbedPane1;
-    private JPanel panel1;
-    private JPanel panel2;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

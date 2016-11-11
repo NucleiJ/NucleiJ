@@ -72,7 +72,7 @@ public class NucleiJ extends SingleFrameApplication
         setMainFrame(mainFrame);
         getMainFrame().setTitle(resource.getString("Application.id"));
 
-        show(new JButton("Hallo"));
+        show(glScanAnalyzerView);
 
         // getMainFrame().setResizable(false);
         addExitListener(new CarConfiguratorExitListener());
