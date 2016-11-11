@@ -5,6 +5,7 @@ new FormModel {
 	root: new FormRoot {
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class java.awt.BorderLayout ) ) {
 			name: "this"
+			"iconImage": new com.jformdesigner.model.SwingIcon( 0, "/at/ac/htlhl/nucleij/resources/images/icons/icon_png_v1.png" )
 			add( new FormContainer( "javax.swing.JToolBar", new FormLayoutManager( class javax.swing.JToolBar ) ) {
 				name: "toolBar1"
 				"floatable": false
