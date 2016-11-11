@@ -9,7 +9,7 @@ import com.jgoodies.binding.beans.Model;
  * @author Stefan Erben & Andreas Mattes
  * @version 1.0
  */
-public class Main
+public class Main extends Model
 {
     // region Constants
     // ************************************************************************

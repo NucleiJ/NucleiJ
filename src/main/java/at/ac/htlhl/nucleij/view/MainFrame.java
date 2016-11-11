@@ -6,29 +6,42 @@ package at.ac.htlhl.nucleij.view;
 
 import java.awt.*;
 import javax.swing.*;
+
+import at.ac.htlhl.nucleij.presenter.MainPM;
+import com.jgoodies.forms.factories.*;
 import com.jgoodies.forms.layout.*;
 
 /**
  * @author Schülerlizenz 2016/17
  */
 public class MainFrame extends JFrame {
-    public MainFrame() {
+
+    private MainPM mainPM;
+
+    public MainFrame(MainPM mainPM)
+    {
+        this.mainPM = mainPM;
+
         initComponents();
     }
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
+        label1 = new JLabel();
 
         //======== this ========
         Container contentPane = getContentPane();
-        contentPane.setLayout(new FormLayout(
-            "default, $lcgap, default",
-            "2*(default, $lgap), default"));
+        contentPane.setLayout(new BorderLayout());
+
+        //---- label1 ----
+        label1.setText("NucleiJ");
+        contentPane.add(label1, BorderLayout.CENTER);
         pack();
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
+    private JLabel label1;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

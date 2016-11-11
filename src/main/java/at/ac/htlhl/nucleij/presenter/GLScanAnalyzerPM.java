@@ -8,8 +8,15 @@ import com.jgoodies.binding.PresentationModel;
  */
 public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer>
 {
+    private GLScanAnalyzerPM glScanAnalyzerPM;
+
     public GLScanAnalyzerPM(GLScanAnalyzer glScanAnalyzer)
     {
         super(glScanAnalyzer);
+    }
+
+    public GLScanAnalyzerPM getGLScanAnalyzerPM()
+    {
+        return glScanAnalyzerPM;
     }
 }
