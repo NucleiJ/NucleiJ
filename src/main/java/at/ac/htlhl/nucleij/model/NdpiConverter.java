@@ -6,4 +6,8 @@ package at.ac.htlhl.nucleij.model;
 public class NdpiConverter
 {
     //erster Kommentar
+    public NdpiConverter()
+    {
+        super();
+    }
 }

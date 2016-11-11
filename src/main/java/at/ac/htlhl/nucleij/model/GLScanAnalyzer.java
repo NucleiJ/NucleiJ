@@ -6,4 +6,8 @@ package at.ac.htlhl.nucleij.model;
 public class GLScanAnalyzer
 {
     //test kommentar
+    public GLScanAnalyzer()
+    {
+        super();
+    }
 }
