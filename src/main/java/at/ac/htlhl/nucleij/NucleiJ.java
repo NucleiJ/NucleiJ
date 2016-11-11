@@ -67,11 +67,12 @@ public class NucleiJ extends SingleFrameApplication
         MainFrame mainFrame = new MainFrame(mainPM);
 
         GLScanAnalyzerView glScanAnalyzerView = new GLScanAnalyzerView(mainPM.getGLScanAnalyzerPM());
-        NdpiConverterView ndpiConverter = new NdpiConverterView(mainPM.getNdpiConverterPM());
+        NdpiConverterView ndpiConverterView = new NdpiConverterView(mainPM.getNdpiConverterPM());
 
         setMainFrame(mainFrame);
         getMainFrame().setTitle(resource.getString("Application.id"));
 
+        //show(ndpiConverterView);
         show(glScanAnalyzerView);
 
         // getMainFrame().setResizable(false);
