@@ -6,7 +6,7 @@
 
 * 11.11.2016: Projektstruktur erstellt, Source Files erstellt
 * 12.10.2016: Domainobjekt für Analyzeroberfläche erstellt 
-
+* 13.11.2016: einfache GUI für den Analyzer
 
 ## Contributers
 
