@@ -2,12 +2,12 @@
 
 # NucleiJ #
 
-# Changelog NucleiJ
+## Changelog NucleiJ
 
 * 11.11.2016: Projektstruktur erstellt, Source Files erstellt
 * 12.10.2016: Domainobjekt für Analyzeroberfläche erstellt 
 
 
-# Contributers
+## Contributers
 
 Andreas Mattes & Stefan Erben
