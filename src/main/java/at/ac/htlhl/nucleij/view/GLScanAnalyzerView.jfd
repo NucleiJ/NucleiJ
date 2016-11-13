@@ -5,9 +5,16 @@ new FormModel {
 	root: new FormRoot {
 		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
 			"$columnSpecs": "23dlu, labelcompgap, 47dlu, labelcompgap, 63dlu, labelcompgap, default:grow"
-			"$rowSpecs": "18dlu, linegap, default, linegap, default, linegap, default, linegap, default, linegap, default"
+			"$rowSpecs": "18dlu, linegap, default, linegap, default, linegap, default, linegap, default, linegap, default, linegap, default, linegap, default, linegap, default, linegap, default"
 		} ) {
 			name: "this"
+			add( new FormComponent( "com.jformdesigner.designer.wrapper.JGoodiesFormsSeparator" ) {
+				name: "separator1"
+				"text": "text"
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 1
+				"gridY": 1
+			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "label1"
 				"text": "text"
@@ -16,7 +23,7 @@ new FormModel {
 				"gridY": 3
 			} )
 			add( new FormComponent( "javax.swing.JTextField" ) {
-				name: "textField1"
+				name: "inputpathTextField"
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 5
 				"gridY": 3
@@ -48,9 +55,26 @@ new FormModel {
 				"gridX": 7
 				"gridY": 5
 			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "startAnalyzerButton"
+				"text": "text"
+				"action": new FormReference( "analyzeAction" )
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 7
+				"gridY": 19
+			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )
 			"size": new java.awt.Dimension( 400, 300 )
+		} )
+		add( new FormNonVisual( "javax.swing.AbstractAction" ) {
+			name: "analyzeAction"
+			"$action.Name": "Start Analyzer"
+			auxiliary() {
+				"JavaCodeGenerator.customCreate": true
+			}
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 25, 330 )
 		} )
 	}
 }
