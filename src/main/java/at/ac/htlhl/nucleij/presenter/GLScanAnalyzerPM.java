@@ -2,6 +2,7 @@ package at.ac.htlhl.nucleij.presenter;
 
 import at.ac.htlhl.nucleij.model.GLScanAnalyzer;
 import at.ac.htlhl.nucleij.util.SuffixFileFilter;
+import at.ac.htlhl.nucleij.view.GLScanAnalyzerView;
 import com.jgoodies.binding.PresentationModel;
 import org.jdesktop.application.Application;
 import org.jdesktop.application.SingleFrameApplication;
@@ -72,18 +73,19 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
     {
         LOGGER.info("Select Path Action clicked");
 
-        // TODO Action ausprogrammieren
         JFrame parent = ((SingleFrameApplication) Application.getInstance()).getMainFrame();
-
-
 
         JFileChooser chooser = new JFileChooser();
         //chooser.setCurrentDirectory();
         chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         if (chooser.showOpenDialog(parent) == JFileChooser.APPROVE_OPTION)
         {
-            System.out.println("OKOKOK");
+            System.out.println("Selected Path:");
             System.out.println(chooser.getSelectedFile());
+
+            // TODO Wert an Domainobj. uebergeben
+
+            //GLScanAnalyzer.class.get
         }
     }
 

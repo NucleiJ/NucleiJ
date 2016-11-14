@@ -4,7 +4,9 @@
 
 package at.ac.htlhl.nucleij.view;
 
+import java.awt.*;
 import java.util.*;
+import javax.swing.border.*;
 import at.ac.htlhl.nucleij.model.GLScanAnalyzer;
 import at.ac.htlhl.nucleij.presenter.GLScanAnalyzerPM;
 import com.jgoodies.binding.binder.Binders;
@@ -38,6 +40,7 @@ public class GLScanAnalyzerView extends JPanel
     private JSlider heatmapqualitySlider;
     private JLabel selectroiLabel;
     private JRadioButton selectroiRadioButton;
+    private JToggleButton toggleButton1;
     private JButton startAnalyzerButton;
     private AbstractAction analyzeAction;
     private AbstractAction selectpathAction;
@@ -75,10 +78,11 @@ public class GLScanAnalyzerView extends JPanel
         binder.bindBeanProperty(GLScanAnalyzer.PROPERTY_CALCULATEANDSHOWHEATMAP).to(calculateandshowheatmapRadioBox);
         binder.bindBeanProperty(GLScanAnalyzer.PROPERTY_SELECTROI).to(selectroiRadioButton);
 
+
         //binder.bindBeanProperty(GLScanAnalyzer.PROPERTY_TYPE).to(typeComboBox);
         //binder.bindBeanProperty(GLScanAnalyzer.PROPERTY_HEATMAPQUALITY).to(heatmapqualitySlider);
 
-        // TODO Felder binden
+        // TODO KomboBox und Slider binden
     }
 
     private void initComponents() {
@@ -103,12 +107,13 @@ public class GLScanAnalyzerView extends JPanel
         heatmapqualitySlider = new JSlider();
         selectroiLabel = new JLabel();
         selectroiRadioButton = new JRadioButton();
+        toggleButton1 = new JToggleButton();
         startAnalyzerButton = new JButton();
 
         //======== this ========
         setLayout(new FormLayout(
             "right:56dlu, $lcgap, 63dlu, 2*($lcgap, default:grow)",
-            "18dlu, 9*($lgap, default), $lgap, default:grow"));
+            "18dlu, 4*($lgap, default), $lgap, 16dlu, $lgap, 18dlu, 3*($lgap, default), $lgap, default:grow"));
         add(generalSeparator, CC.xywh(1, 1, 7, 1));
 
         //---- analyzeType ----
@@ -133,6 +138,9 @@ public class GLScanAnalyzerView extends JPanel
         inputpathButton.setText("text");
         inputpathButton.setAction(selectpathAction);
         add(inputpathButton, CC.xy(5, 5));
+
+        //---- detailsSeperator ----
+        detailsSeperator.setFont(new Font("sansserif", Font.PLAIN, 12));
         add(detailsSeperator, CC.xywh(1, 7, 7, 1));
 
         //---- outputpathLabel ----
@@ -146,6 +154,7 @@ public class GLScanAnalyzerView extends JPanel
 
         //---- calculateandshowheatmapLabel ----
         calculateandshowheatmapLabel.setText(bundle.getString("GLScanAnalyzerView.calculateandshowheatmapLabel.text"));
+        calculateandshowheatmapLabel.setFont(calculateandshowheatmapLabel.getFont().deriveFont(calculateandshowheatmapLabel.getFont().getStyle() & ~Font.BOLD));
         add(calculateandshowheatmapLabel, CC.xy(1, 11));
 
         //---- calculateandshowheatmapRadioBox ----

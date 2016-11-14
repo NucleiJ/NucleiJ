@@ -9,7 +9,7 @@ new FormModel {
 	root: new FormRoot {
 		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
 			"$columnSpecs": "right:56dlu, labelcompgap, 63dlu, labelcompgap, default:grow, labelcompgap, default:grow"
-			"$rowSpecs": "18dlu, linegap, default, linegap, default, linegap, default, linegap, default, linegap, default, linegap, default, linegap, default, linegap, default, linegap, default, linegap, default:grow"
+			"$rowSpecs": "18dlu, linegap, default, linegap, default, linegap, default, linegap, default, linegap, 16dlu, linegap, 18dlu, linegap, default, linegap, default, linegap, default, linegap, default:grow"
 		} ) {
 			name: "this"
 			add( new FormComponent( "com.jformdesigner.designer.wrapper.JGoodiesFormsSeparator" ) {
@@ -60,6 +60,7 @@ new FormModel {
 			add( new FormComponent( "com.jformdesigner.designer.wrapper.JGoodiesFormsSeparator" ) {
 				name: "detailsSeperator"
 				"text": new FormMessage( null, "GLScanAnalyzerView.detailsSeperator.text" )
+				"font": new java.awt.Font( "sansserif", 0, 12 )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridY": 7
 				"gridWidth": 7
@@ -86,6 +87,7 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "calculateandshowheatmapLabel"
 				"text": new FormMessage( null, "GLScanAnalyzerView.calculateandshowheatmapLabel.text" )
+				"font": new com.jformdesigner.model.SwingDerivedFont( null, 65536, 0, false )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridY": 11
 			} )
@@ -122,6 +124,13 @@ new FormModel {
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 3
 				"gridY": 15
+			} )
+			add( new FormComponent( "javax.swing.JToggleButton" ) {
+				name: "toggleButton1"
+				"text": new FormMessage( null, "GLScanAnalyzerView.toggleButton1.text" )
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 3
+				"gridY": 17
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "startAnalyzerButton"
