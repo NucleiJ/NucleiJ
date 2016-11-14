@@ -1,23 +1,26 @@
 JFDML JFormDesigner: "5.2.5.0.333" Java: "1.8.0_112-release" encoding: "UTF-8"
 
 new FormModel {
+	"i18n.bundlePackage": "resources.at.ac.htlhl.nucleij.resources.i18n"
+	"i18n.bundleName": "glscananalyzerview"
+	"i18n.keyPrefix": "GLScanAnalyzerView"
+	"i18n.autoExternalize": true
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
-			"$columnSpecs": "23dlu, labelcompgap, 47dlu, labelcompgap, 63dlu, labelcompgap, default:grow"
+			"$columnSpecs": "25dlu, labelcompgap, 47dlu, labelcompgap, 63dlu, labelcompgap, default:grow, labelcompgap, default"
 			"$rowSpecs": "18dlu, linegap, default, linegap, default, linegap, default, linegap, default, linegap, default, linegap, default, linegap, default, linegap, default, linegap, default"
 		} ) {
 			name: "this"
 			add( new FormComponent( "com.jformdesigner.designer.wrapper.JGoodiesFormsSeparator" ) {
 				name: "separator1"
-				"text": "text"
+				"text": new FormMessage( null, "GLScanAnalyzerView.generalSeperator.text" )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 1
-				"gridY": 1
+				"gridWidth": 9
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "label1"
-				"text": "text"
+				"text": new FormMessage( null, "GLScanAnalyzerView.inputpathLabel.text" )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 3
 				"gridY": 3
@@ -31,19 +34,20 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "button1"
 				"text": "text"
+				"action": new FormReference( "selectpathAction" )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 7
 				"gridY": 3
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "label2"
-				"text": "text"
+				"text": new FormMessage( null, "GLScanAnalyzerView.outputpathLabel.text" )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 3
 				"gridY": 5
 			} )
 			add( new FormComponent( "javax.swing.JTextField" ) {
-				name: "textField2"
+				name: "outputpathTextField"
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 5
 				"gridY": 5
@@ -69,12 +73,21 @@ new FormModel {
 		} )
 		add( new FormNonVisual( "javax.swing.AbstractAction" ) {
 			name: "analyzeAction"
-			"$action.Name": "Start Analyzer"
+			"$action.Name": new FormMessage( null, "GLScanAnalyzerView.analyzeAction.Name" )
 			auxiliary() {
 				"JavaCodeGenerator.customCreate": true
 			}
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 25, 330 )
+		} )
+		add( new FormNonVisual( "javax.swing.AbstractAction" ) {
+			name: "selectpathAction"
+			"$action.Name": new FormMessage( null, "GLScanAnalyzerView.selectpathAction.Name" )
+			auxiliary() {
+				"JavaCodeGenerator.customCreate": true
+			}
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 130, 330 )
 		} )
 	}
 }

@@ -21,15 +21,22 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
     private static final Logger LOGGER = Logger.getLogger(GLScanAnalyzerPM.class.getName());
 
     private Action analyzeAction;
+    private Action selectpathAction;
 
     public GLScanAnalyzerPM(GLScanAnalyzer glScanAnalyzer) {
         super(glScanAnalyzer);
 
         analyzeAction = new AnalyzeAction();
+        selectpathAction = new SelectpathAction();
     }
 
     public Action getAnalyzeAction() {
         return analyzeAction;
+    }
+
+    public Action getSelectpathAction()
+    {
+        return selectpathAction;
     }
 
     private class AnalyzeAction extends AbstractAction {
@@ -41,6 +48,24 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
             LOGGER.info("Analyze Action clicked");
 
             System.out.println("Mach etwas!!\n");
+
+            JFrame parent = ((SingleFrameApplication) Application.getInstance()).getMainFrame();
+
+
+        }
+    }
+
+    private class SelectpathAction extends AbstractAction
+    {
+        public SelectpathAction()
+        {
+
+        }
+
+        public void actionPerformed(ActionEvent e) {
+            LOGGER.info("Select Path Action clicked");
+
+            System.out.println("Pfad auswählen!!\n");
 
             JFrame parent = ((SingleFrameApplication) Application.getInstance()).getMainFrame();
 

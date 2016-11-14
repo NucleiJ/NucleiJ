@@ -4,6 +4,7 @@
 
 package at.ac.htlhl.nucleij.view;
 
+import java.util.*;
 import at.ac.htlhl.nucleij.model.GLScanAnalyzer;
 import at.ac.htlhl.nucleij.presenter.GLScanAnalyzerPM;
 import com.jgoodies.binding.binder.Binders;
@@ -26,10 +27,11 @@ public class GLScanAnalyzerView extends JPanel
     private JTextField inputpathTextField;
     private JButton button1;
     private JLabel label2;
-    private JTextField textField2;
+    private JTextField outputpathTextField;
     private JButton button2;
     private JButton startAnalyzerButton;
     private AbstractAction analyzeAction;
+    private AbstractAction selectpathAction;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 
     private GLScanAnalyzerPM glScanAnalyzerPM;
@@ -49,6 +51,7 @@ public class GLScanAnalyzerView extends JPanel
     private void createUIComponents()
     {
         analyzeAction = (AbstractAction) glScanAnalyzerPM.getAnalyzeAction();
+        selectpathAction= (AbstractAction) glScanAnalyzerPM.getSelectpathAction();
     }
 
     private void initBinding()
@@ -61,35 +64,37 @@ public class GLScanAnalyzerView extends JPanel
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         createUIComponents();
 
+        ResourceBundle bundle = ResourceBundle.getBundle("at.ac.htlhl.nucleij.resources.i18n.glscananalyzerview");
         DefaultComponentFactory compFactory = DefaultComponentFactory.getInstance();
-        separator1 = compFactory.createSeparator("text");
+        separator1 = compFactory.createSeparator(bundle.getString("GLScanAnalyzerView.generalSeperator.text"));
         label1 = new JLabel();
         inputpathTextField = new JTextField();
         button1 = new JButton();
         label2 = new JLabel();
-        textField2 = new JTextField();
+        outputpathTextField = new JTextField();
         button2 = new JButton();
         startAnalyzerButton = new JButton();
 
         //======== this ========
         setLayout(new FormLayout(
-            "23dlu, $lcgap, 47dlu, $lcgap, 63dlu, $lcgap, default:grow",
+            "25dlu, $lcgap, 47dlu, $lcgap, 63dlu, $lcgap, default:grow, $lcgap, default",
             "18dlu, 9*($lgap, default)"));
-        add(separator1, CC.xy(1, 1));
+        add(separator1, CC.xywh(1, 1, 9, 1));
 
         //---- label1 ----
-        label1.setText("text");
+        label1.setText(bundle.getString("GLScanAnalyzerView.inputpathLabel.text"));
         add(label1, CC.xy(3, 3));
         add(inputpathTextField, CC.xy(5, 3));
 
         //---- button1 ----
         button1.setText("text");
+        button1.setAction(selectpathAction);
         add(button1, CC.xy(7, 3));
 
         //---- label2 ----
-        label2.setText("text");
+        label2.setText(bundle.getString("GLScanAnalyzerView.outputpathLabel.text"));
         add(label2, CC.xy(3, 5));
-        add(textField2, CC.xy(5, 5));
+        add(outputpathTextField, CC.xy(5, 5));
 
         //---- button2 ----
         button2.setText("text");
@@ -101,7 +106,10 @@ public class GLScanAnalyzerView extends JPanel
         add(startAnalyzerButton, CC.xy(7, 19));
 
         //---- analyzeAction ----
-        analyzeAction.putValue(Action.NAME, "Start Analyzer");
+        analyzeAction.putValue(Action.NAME, bundle.getString("GLScanAnalyzerView.analyzeAction.Name"));
+
+        //---- selectpathAction ----
+        selectpathAction.putValue(Action.NAME, bundle.getString("GLScanAnalyzerView.selectpathAction.Name"));
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 
