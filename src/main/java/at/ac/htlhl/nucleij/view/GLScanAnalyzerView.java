@@ -22,13 +22,20 @@ public class GLScanAnalyzerView extends JPanel
     // region Fields
     // ************************************************************************
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    private JComponent separator1;
-    private JLabel label1;
+    private JComponent generalSeparator;
+    private JLabel analyzeType;
+    private JComboBox modeComboBox;
+    private JLabel inputpathLabel;
     private JTextField inputpathTextField;
-    private JButton button1;
-    private JLabel label2;
+    private JButton inputpathButton;
+    private JComponent detailsSeperator;
+    private JLabel outputpathLabel;
     private JTextField outputpathTextField;
-    private JButton button2;
+    private JButton outputpathButton;
+    private JLabel selectroiButton;
+    private JRadioButton selectroiRadioButton;
+    private JSlider slider1;
+    private JRadioButton radioButton2;
     private JButton startAnalyzerButton;
     private AbstractAction analyzeAction;
     private AbstractAction selectpathAction;
@@ -66,39 +73,68 @@ public class GLScanAnalyzerView extends JPanel
 
         ResourceBundle bundle = ResourceBundle.getBundle("at.ac.htlhl.nucleij.resources.i18n.glscananalyzerview");
         DefaultComponentFactory compFactory = DefaultComponentFactory.getInstance();
-        separator1 = compFactory.createSeparator(bundle.getString("GLScanAnalyzerView.generalSeperator.text"));
-        label1 = new JLabel();
+        generalSeparator = compFactory.createSeparator(bundle.getString("GLScanAnalyzerView.generalSeperator.text"));
+        analyzeType = new JLabel();
+        modeComboBox = new JComboBox();
+        inputpathLabel = new JLabel();
         inputpathTextField = new JTextField();
-        button1 = new JButton();
-        label2 = new JLabel();
+        inputpathButton = new JButton();
+        detailsSeperator = compFactory.createSeparator(bundle.getString("GLScanAnalyzerView.detailsSeperator.text"));
+        outputpathLabel = new JLabel();
         outputpathTextField = new JTextField();
-        button2 = new JButton();
+        outputpathButton = new JButton();
+        selectroiButton = new JLabel();
+        selectroiRadioButton = new JRadioButton();
+        slider1 = new JSlider();
+        radioButton2 = new JRadioButton();
         startAnalyzerButton = new JButton();
 
         //======== this ========
         setLayout(new FormLayout(
-            "25dlu, $lcgap, 47dlu, $lcgap, 63dlu, $lcgap, default:grow, $lcgap, default",
-            "18dlu, 9*($lgap, default)"));
-        add(separator1, CC.xywh(1, 1, 9, 1));
+            "25dlu, $lcgap, right:47dlu, $lcgap, 63dlu, 2*($lcgap, default:grow)",
+            "18dlu, 9*($lgap, default), $lgap, default:grow"));
+        add(generalSeparator, CC.xywh(1, 1, 9, 1));
 
-        //---- label1 ----
-        label1.setText(bundle.getString("GLScanAnalyzerView.inputpathLabel.text"));
-        add(label1, CC.xy(3, 3));
-        add(inputpathTextField, CC.xy(5, 3));
+        //---- analyzeType ----
+        analyzeType.setText(bundle.getString("GLScanAnalyzerView.analyzetypeLabel.text"));
+        add(analyzeType, CC.xy(3, 3));
+        add(modeComboBox, CC.xy(5, 3));
 
-        //---- button1 ----
-        button1.setText("text");
-        button1.setAction(selectpathAction);
-        add(button1, CC.xy(7, 3));
+        //---- inputpathLabel ----
+        inputpathLabel.setText(bundle.getString("GLScanAnalyzerView.inputpathLabel.text"));
+        add(inputpathLabel, CC.xy(3, 5));
+        add(inputpathTextField, CC.xy(5, 5));
 
-        //---- label2 ----
-        label2.setText(bundle.getString("GLScanAnalyzerView.outputpathLabel.text"));
-        add(label2, CC.xy(3, 5));
-        add(outputpathTextField, CC.xy(5, 5));
+        //---- inputpathButton ----
+        inputpathButton.setText("text");
+        inputpathButton.setAction(selectpathAction);
+        add(inputpathButton, CC.xy(7, 5));
+        add(detailsSeperator, CC.xywh(1, 7, 9, 1));
 
-        //---- button2 ----
-        button2.setText("text");
-        add(button2, CC.xy(7, 5));
+        //---- outputpathLabel ----
+        outputpathLabel.setText(bundle.getString("GLScanAnalyzerView.outputpathLabel.text"));
+        add(outputpathLabel, CC.xy(3, 9));
+        add(outputpathTextField, CC.xy(5, 9));
+
+        //---- outputpathButton ----
+        outputpathButton.setText("text");
+        add(outputpathButton, CC.xy(7, 9));
+
+        //---- selectroiButton ----
+        selectroiButton.setText(bundle.getString("GLScanAnalyzerView.selectroiButton.text"));
+        add(selectroiButton, CC.xy(3, 11));
+
+        //---- selectroiRadioButton ----
+        selectroiRadioButton.setText(bundle.getString("GLScanAnalyzerView.selectroiRadioButton.text"));
+        add(selectroiRadioButton, CC.xy(5, 11));
+
+        //---- slider1 ----
+        slider1.setMinimum(1);
+        add(slider1, CC.xywh(5, 13, 3, 1));
+
+        //---- radioButton2 ----
+        radioButton2.setText(bundle.getString("GLScanAnalyzerView.radioButton2.text"));
+        add(radioButton2, CC.xy(5, 15));
 
         //---- startAnalyzerButton ----
         startAnalyzerButton.setText("text");

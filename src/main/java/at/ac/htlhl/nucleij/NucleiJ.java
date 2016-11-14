@@ -74,7 +74,7 @@ public class NucleiJ extends SingleFrameApplication
 
         // IMMER AUSKOMMENTIEREN
         //show(ndpiConverterView);
-        //show(glScanAnalyzerView);
+        show(glScanAnalyzerView);
 
         // getMainFrame().setResizable(false);
         addExitListener(new CarConfiguratorExitListener());
