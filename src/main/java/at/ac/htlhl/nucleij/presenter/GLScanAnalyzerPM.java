@@ -54,14 +54,6 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
         return outputpathAction;
     }
 
-    private JFileChooser createPreparedFileChooser()
-    {
-        JFileChooser chooser = new JFileChooser();
-        chooser.setAcceptAllFileFilterUsed(false);
-        chooser.setFileFilter(new SuffixFileFilter(FILE_EXTENSION, "*." + FILE_EXTENSION, true));
-        return chooser;
-    }
-
 
     private class AnalyzeAction extends AbstractAction {
         public AnalyzeAction() {
@@ -83,10 +75,15 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
         // TODO Action ausprogrammieren
         JFrame parent = ((SingleFrameApplication) Application.getInstance()).getMainFrame();
 
-        JFileChooser chooser = createPreparedFileChooser();
+
+
+        JFileChooser chooser = new JFileChooser();
+        //chooser.setCurrentDirectory();
+        chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         if (chooser.showOpenDialog(parent) == JFileChooser.APPROVE_OPTION)
         {
             System.out.println("OKOKOK");
+            System.out.println(chooser.getSelectedFile());
         }
     }
 
