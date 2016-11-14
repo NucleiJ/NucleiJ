@@ -1,12 +1,12 @@
 package at.ac.htlhl.nucleij.presenter;
 
 import at.ac.htlhl.nucleij.model.GLScanAnalyzer;
+import at.ac.htlhl.nucleij.util.SuffixFileFilter;
 import com.jgoodies.binding.PresentationModel;
 import org.jdesktop.application.Application;
 import org.jdesktop.application.SingleFrameApplication;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.logging.Logger;
 
@@ -19,6 +19,7 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
     // Constants
     // ************************************************************************
     private static final Logger LOGGER = Logger.getLogger(GLScanAnalyzerPM.class.getName());
+    public static final String FILE_EXTENSION			= "nucleij";
 
     private Action analyzeAction;
     private Action selectpathAction;
@@ -53,6 +54,14 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
         return outputpathAction;
     }
 
+    private JFileChooser createPreparedFileChooser()
+    {
+        JFileChooser chooser = new JFileChooser();
+        chooser.setAcceptAllFileFilterUsed(false);
+        chooser.setFileFilter(new SuffixFileFilter(FILE_EXTENSION, "*." + FILE_EXTENSION, true));
+        return chooser;
+    }
+
 
     private class AnalyzeAction extends AbstractAction {
         public AnalyzeAction() {
@@ -67,6 +76,21 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
         }
     }
 
+    private void selectPath()
+    {
+        LOGGER.info("Select Path Action clicked");
+
+        // TODO Action ausprogrammieren
+        JFrame parent = ((SingleFrameApplication) Application.getInstance()).getMainFrame();
+
+        JFileChooser chooser = createPreparedFileChooser();
+        if (chooser.showOpenDialog(parent) == JFileChooser.APPROVE_OPTION)
+        {
+            System.out.println("OKOKOK");
+        }
+    }
+
+
     private class SelectpathAction extends AbstractAction
     {
         public SelectpathAction()
@@ -74,11 +98,9 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
         }
 
         public void actionPerformed(ActionEvent e) {
-            LOGGER.info("Select Path Action clicked");
 
-            System.out.println("Pfad auswählen!!\n");
-            // TODO Action ausprogrammieren
-            JFrame parent = ((SingleFrameApplication) Application.getInstance()).getMainFrame();
+            selectPath();
+
         }
     }
 
@@ -105,6 +127,12 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
             System.out.println("Ändere den Outputpath!!\n");
             // TODO Action ausprogrammieren
             JFrame parent = ((SingleFrameApplication) Application.getInstance()).getMainFrame();
+
+            // JFileChooser-Objekt erstellen
+            JFileChooser chooser = new JFileChooser();
+            // Dialog zum Speichern von Dateien anzeigen
+            chooser.showSaveDialog(null);
+
         }
     }
 }

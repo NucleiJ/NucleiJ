@@ -72,7 +72,12 @@ public class GLScanAnalyzerView extends JPanel
         PresentationModelBinder binder = Binders.binderFor(glScanAnalyzerPM);
         binder.bindBeanProperty(GLScanAnalyzer.PROPERTY_INPUTPATH).to(inputpathTextField);
         binder.bindBeanProperty(GLScanAnalyzer.PROPERTY_OUTPUTPATH).to(outputpathTextField);
+        binder.bindBeanProperty(GLScanAnalyzer.PROPERTY_CALCULATEANDSHOWHEATMAP).to(calculateandshowheatmapRadioBox);
+        binder.bindBeanProperty(GLScanAnalyzer.PROPERTY_SELECTROI).to(selectroiRadioButton);
+
         //binder.bindBeanProperty(GLScanAnalyzer.PROPERTY_TYPE).to(typeComboBox);
+        //binder.bindBeanProperty(GLScanAnalyzer.PROPERTY_HEATMAPQUALITY).to(heatmapqualitySlider);
+
         // TODO Felder binden
     }
 
