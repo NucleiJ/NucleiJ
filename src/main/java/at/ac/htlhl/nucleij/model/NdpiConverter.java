@@ -1,6 +1,7 @@
 package at.ac.htlhl.nucleij.model;
 
 import com.jgoodies.binding.beans.Model;
+import com.jgoodies.forms.layout.ColumnSpec;
 
 /**
  * Created by Stefan on 11.11.2016.
@@ -13,13 +14,16 @@ public class NdpiConverter extends Model
     public static final String PROPERTY_OUTPUTPATH = "outputpath";
     public static final String PROPERTY_MAGNIFICATION = "magnification";
 
+
+    public static final Object SINGLE = ColumnSpec.LEFT;
+    public static final Object MULTI = ColumnSpec.RIGHT;
+
     //endregion Constants
 
     //*******************************************************************
-    enum Type  {MULTI,SINGLE}
     enum Magnification {x40,x10}
 
-    private Type type;
+    private Object type;
     private Magnification magnification;
     private String inputpath;
     private String outputpath;
@@ -28,20 +32,20 @@ public class NdpiConverter extends Model
     {
         super();
 
-        //this.type = MULTI;
+        this.type = MULTI;
         this.inputpath = "";
         this.outputpath = "";
-        //this.magnification = x40;
+        this.magnification = Magnification.x10;
     }
 
     //region Getter&Setter
 
-    public Type getType() {
+    public Object getType() {
         return type;
     }
 
-    public void setType(Type type) {
-        Type oldValue = this.type;
+    public void setType(Object type) {
+        Object oldValue = this.type;
         this.type = type;
         firePropertyChange(PROPERTY_TYPE,oldValue,type);
     }
