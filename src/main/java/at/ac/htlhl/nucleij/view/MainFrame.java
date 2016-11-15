@@ -36,7 +36,7 @@ public class MainFrame extends JFrame {
         button3 = new JButton();
 
         //======== this ========
-        setIconImage(new ImageIcon(getClass().getResource("/at/ac/htlhl/nucleij/resources/images/icons/icon_png_v1.png")).getImage());
+        setIconImage(new ImageIcon(getClass().getResource("/at/ac/htlhl/nucleij/resources/images/icon_png_v1.png")).getImage());
         Container contentPane = getContentPane();
         contentPane.setLayout(new BorderLayout());
 
