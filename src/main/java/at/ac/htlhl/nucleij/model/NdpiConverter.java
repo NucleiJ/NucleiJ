@@ -16,7 +16,7 @@ public class NdpiConverter extends Model
     //endregion Constants
 
     //*******************************************************************
-    enum Type  {MULTI,SINGLE}
+    enum Type  {MULTI, SINGLE}
     enum Magnification {x40,x10}
 
     private Type type;
