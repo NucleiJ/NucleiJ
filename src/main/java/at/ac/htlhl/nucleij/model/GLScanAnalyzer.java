@@ -1,8 +1,7 @@
 package at.ac.htlhl.nucleij.model;
 
 import com.jgoodies.binding.beans.Model;
-
-import static at.ac.htlhl.nucleij.model.GLScanAnalyzer.Type.MULTI;
+import com.jgoodies.forms.layout.ColumnSpec;
 
 /**
  *
@@ -11,6 +10,7 @@ import static at.ac.htlhl.nucleij.model.GLScanAnalyzer.Type.MULTI;
  */
 public class GLScanAnalyzer extends Model
 {
+
     // region Constants
     // ************************************************************************
     // Properties
@@ -20,25 +20,20 @@ public class GLScanAnalyzer extends Model
     public static final String PROPERTY_CALCULATEANDSHOWHEATMAP = "calculateandshowheatmap";
     public static final String PROPERTY_HEATMAPQUALITY = "heatmapquality";
     public static final String PROPERTY_SELECTROI = "selectroi";
+    public static final String PROPERTY_FLOAT_VALUE    = "floatValue";
 
-    // XXX Ist heatmapquality nicht eigentlich Object? Jetzt mit String geloest
     // endregion
 
-
-    /*
     // TODO Erweiterung von JGoodies Beispiel fuer ObjectChoice
-    // An int based enumeration, Zeile 38..
-    public static final Integer X10   = 10;
-    public static final Integer X40 = 40;
-    static final Integer[] INTEGER_CHOICES =
-            { X10, X40 };
-    */
+    public static final Object SINGLE   = ColumnSpec.LEFT;
+    public static final Object MULTI   = ColumnSpec.RIGHT;
+    static final Object[] OBJECT_CHOICES =
+            { SINGLE, MULTI };
 
     // region Fields
     // ************************************************************************
-    enum Type { MULTI, SINGLE }
 
-    private Type type;
+    private Object type;
     private String inputpath;
     private String outputpath;
     private int heatmapquality;
@@ -119,12 +114,12 @@ public class GLScanAnalyzer extends Model
         firePropertyChange(PROPERTY_SELECTROI, oldValue, selectroi);
     }
 
-    public Type getType() {
+    public Object getType() {
         return type;
     }
 
-    public void setType(Type type) {
-        Type oldValue = this.type;
+    public void setType(Object type) {
+        Object oldValue = this.type;
         this.type = type;
         firePropertyChange(PROPERTY_TYPE, oldValue, type);
     }

@@ -113,6 +113,12 @@ new FormModel {
 				"gridWidth": 3
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "heatmapqualityvalueLabel"
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 7
+				"gridY": 13
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "selectroiLabel"
 				"text": new FormMessage( null, "GLScanAnalyzerView.selectroiLabel.text" )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
@@ -124,13 +130,6 @@ new FormModel {
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 3
 				"gridY": 15
-			} )
-			add( new FormComponent( "javax.swing.JToggleButton" ) {
-				name: "toggleButton1"
-				"text": new FormMessage( null, "GLScanAnalyzerView.toggleButton1.text" )
-			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 3
-				"gridY": 17
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "startAnalyzerButton"
