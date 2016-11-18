@@ -25,18 +25,17 @@ public class GLScanAnalyzer extends Model
     // endregion
 
     // TODO Erweiterung von JGoodies Beispiel fuer ObjectChoice
-    public static final Object SINGLE   = ColumnSpec.LEFT;
-    public static final Object MULTI   = ColumnSpec.RIGHT;
-    static final Object[] OBJECT_CHOICES =
-            { SINGLE, MULTI };
+    public static final String SINGLE   = "Single";
+    public static final String MULTI    = "Multi";
+    public static final String[] STRING_CHOICES = { SINGLE, MULTI };
 
     // region Fields
     // ************************************************************************
 
-    private Object type;
+    private String type;
     private String inputpath;
     private String outputpath;
-    private int heatmapquality;
+    private float heatmapquality;
     private boolean calculateandshowheatmap;
     private boolean selectroi;
     // endregion
@@ -80,14 +79,14 @@ public class GLScanAnalyzer extends Model
         firePropertyChange(PROPERTY_OUTPUTPATH, oldValue, outputpath);
     }
 
-    public int getHeatmapquality()
+    public float getHeatmapquality()
     {
         return heatmapquality;
     }
 
-    public void setHeatmapquality(int heatmapquality)
+    public void setHeatmapquality(float heatmapquality)
     {
-        int oldValue = this.heatmapquality;
+        float oldValue = this.heatmapquality;
         this.heatmapquality = heatmapquality;
         firePropertyChange(PROPERTY_HEATMAPQUALITY, oldValue, heatmapquality);
     }
@@ -114,12 +113,12 @@ public class GLScanAnalyzer extends Model
         firePropertyChange(PROPERTY_SELECTROI, oldValue, selectroi);
     }
 
-    public Object getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(Object type) {
-        Object oldValue = this.type;
+    public void setType(String type) {
+        String oldValue = this.type;
         this.type = type;
         firePropertyChange(PROPERTY_TYPE, oldValue, type);
     }

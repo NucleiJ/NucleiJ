@@ -11,6 +11,8 @@ import javax.swing.border.*;
 import at.ac.htlhl.nucleij.model.GLScanAnalyzer;
 import at.ac.htlhl.nucleij.presenter.GLScanAnalyzerPM;
 import com.jgoodies.binding.adapter.BoundedRangeAdapter;
+import com.jgoodies.binding.beans.BeanAdapter;
+import com.jgoodies.binding.beans.PropertyAdapter;
 import com.jgoodies.binding.binder.Binders;
 import com.jgoodies.binding.binder.PresentationModelBinder;
 import com.jgoodies.binding.value.ConverterFactory;
@@ -91,6 +93,11 @@ public class GLScanAnalyzerView extends JPanel
         binder.bindBeanProperty(GLScanAnalyzer.PROPERTY_CALCULATEANDSHOWHEATMAP).to(calculateandshowheatmapCheckBox);
         binder.bindBeanProperty(GLScanAnalyzer.PROPERTY_SELECTROI).to(selectroiCheckBox);
 
+        //binder.bindBeanProperty(GLScanAnalyzer.PROPERTY_TYPE).to(typeComboBox, "(None)");
+        //
+        //
+        // binder.bindBeanProperty(GLScanAnalyzer.PROPERTY_HEATMAPQUALITY).to(heatmapqualitySlider.setValue());
+
 
         //binder.bindBeanProperty(GLScanAnalyzer.PROPERTY_TYPE).to(typeComboBox, SingleMode);
         //binder.bindBeanProperty(GLScanAnalyzer.PROPERTY_HEATMAPQUALITY).to(heatmapqualityvalueLabel);
@@ -135,6 +142,7 @@ public class GLScanAnalyzerView extends JPanel
         startAnalyzerButton = new JButton();
 
         //======== this ========
+        setBorder(Borders.DIALOG);
         setLayout(new FormLayout(
             "right:59dlu, $lcgap, 63dlu, $lcgap, default:grow, 2*($lcgap, default)",
             "18dlu, 5*($lgap, default), $lgap, 16dlu, $lgap, 18dlu, 3*($lgap, default), $lgap, default:grow"));
@@ -161,7 +169,7 @@ public class GLScanAnalyzerView extends JPanel
         //---- inputpathButton ----
         inputpathButton.setText("text");
         inputpathButton.setAction(selectpathAction);
-        add(inputpathButton, CC.xy(7, 5));
+        add(inputpathButton, CC.xy(7, 5, CC.LEFT, CC.DEFAULT));
 
         //---- outputSeperator ----
         outputSeperator.setFont(new Font("sansserif", Font.PLAIN, 12));
@@ -206,7 +214,7 @@ public class GLScanAnalyzerView extends JPanel
         //---- startAnalyzerButton ----
         startAnalyzerButton.setText("text");
         startAnalyzerButton.setAction(analyzeAction);
-        add(startAnalyzerButton, CC.xy(7, 21));
+        add(startAnalyzerButton, CC.xy(7, 21, CC.RIGHT, CC.DEFAULT));
 
         //---- analyzeAction ----
         analyzeAction.putValue(Action.NAME, bundle.getString("GLScanAnalyzerView.analyzeAction.Name"));

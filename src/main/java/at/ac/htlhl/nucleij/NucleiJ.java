@@ -44,7 +44,7 @@ public class NucleiJ extends SingleFrameApplication
     protected void initialize(String[] args)
     {
         // Force application to use given language setting instead of using OS default
-        Locale.setDefault(Locale.ENGLISH);
+        // Locale.setDefault(Locale.ENGLISH);
 
         // Load CarConfiguration.properties file
         ApplicationContext ctxt = getContext();

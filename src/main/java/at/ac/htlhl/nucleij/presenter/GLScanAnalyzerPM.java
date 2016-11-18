@@ -7,6 +7,9 @@ import at.ac.htlhl.nucleij.util.SuffixFileFilter;
 import at.ac.htlhl.nucleij.view.GLScanAnalyzerView;
 import com.ezware.dialog.task.TaskDialog;
 import com.jgoodies.binding.PresentationModel;
+import com.jgoodies.binding.adapter.BoundedRangeAdapter;
+import com.jgoodies.binding.beans.BeanAdapter;
+import com.jgoodies.binding.value.ValueModel;
 import org.jdesktop.application.Application;
 import org.jdesktop.application.SingleFrameApplication;
 
@@ -45,12 +48,16 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
 
         this.glScanAnalyzer = glScanAnalyzer;
 
+
+
         analyzeAction = new AnalyzeAction();
         selectpathAction = new SelectpathAction();
         typeAction = new TypeAction();
         outputpathAction = new OutputpathAction();
         calculateandshowheatmapAction = new CalculateandshowheatmapAction();
         selectroiAction = new SelectroiAction();
+
+
     }
 
     public Action getAnalyzeAction() {
@@ -226,6 +233,9 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
             // Radiobox toggled von selber, Domainobject aendert sich von selber
             glScanAnalyzer.setCalculateandshowheatmap(glScanAnalyzer.isCalculateandshowheatmap());
             System.out.println(glScanAnalyzer.isCalculateandshowheatmap());
+
+            // TODO Slider sichtbar machen
+
         }
     }
 

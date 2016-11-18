@@ -1,4 +1,4 @@
-JFDML JFormDesigner: "5.2.5.0.333" Java: "1.8.0_112-release" encoding: "UTF-8"
+JFDML JFormDesigner: "6.0.0.0.51" Java: "1.8.0_112-release" encoding: "UTF-8"
 
 new FormModel {
 	"i18n.bundlePackage": "at.ac.htlhl.nucleij.resources.i18n"
@@ -12,6 +12,7 @@ new FormModel {
 			"$rowSpecs": "18dlu, linegap, default, linegap, default, linegap, default, linegap, default, linegap, default, linegap, 16dlu, linegap, 18dlu, linegap, default, linegap, default, linegap, default, linegap, default:grow"
 		} ) {
 			name: "this"
+			"border": sfield com.jgoodies.forms.factories.Borders DIALOG_BORDER
 			add( new FormComponent( "com.jformdesigner.designer.wrapper.JGoodiesFormsSeparator" ) {
 				name: "inputSeparator"
 				"text": new FormMessage( null, "GLScanAnalyzerView.inputSeperator.text" )
@@ -57,6 +58,7 @@ new FormModel {
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 7
 				"gridY": 5
+				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints LEFT
 			} )
 			add( new FormComponent( "com.jformdesigner.designer.wrapper.JGoodiesFormsSeparator" ) {
 				name: "outputSeperator"
@@ -155,10 +157,11 @@ new FormModel {
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 7
 				"gridY": 21
+				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints RIGHT
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )
-			"size": new java.awt.Dimension( 400, 315 )
+			"size": new java.awt.Dimension( 400, 335 )
 		} )
 		add( new FormNonVisual( "javax.swing.AbstractAction" ) {
 			name: "analyzeAction"
@@ -167,7 +170,7 @@ new FormModel {
 				"JavaCodeGenerator.customCreate": true
 			}
 		}, new FormLayoutConstraints( null ) {
-			"location": new java.awt.Point( 310, 475 )
+			"location": new java.awt.Point( 310, 515 )
 		} )
 		add( new FormNonVisual( "javax.swing.AbstractAction" ) {
 			name: "selectpathAction"
@@ -176,7 +179,7 @@ new FormModel {
 				"JavaCodeGenerator.customCreate": true
 			}
 		}, new FormLayoutConstraints( null ) {
-			"location": new java.awt.Point( 0, 375 )
+			"location": new java.awt.Point( 0, 415 )
 		} )
 		add( new FormNonVisual( "javax.swing.AbstractAction" ) {
 			name: "typeAction"
@@ -185,7 +188,7 @@ new FormModel {
 				"JavaCodeGenerator.customCreate": true
 			}
 		}, new FormLayoutConstraints( null ) {
-			"location": new java.awt.Point( 0, 325 )
+			"location": new java.awt.Point( 0, 365 )
 		} )
 		add( new FormNonVisual( "javax.swing.AbstractAction" ) {
 			name: "outputpathAction"
@@ -194,7 +197,7 @@ new FormModel {
 				"JavaCodeGenerator.customCreate": true
 			}
 		}, new FormLayoutConstraints( null ) {
-			"location": new java.awt.Point( 0, 425 )
+			"location": new java.awt.Point( 0, 465 )
 		} )
 		add( new FormNonVisual( "javax.swing.AbstractAction" ) {
 			name: "calculateandshowheatmapAction"
@@ -202,7 +205,7 @@ new FormModel {
 				"JavaCodeGenerator.customCreate": true
 			}
 		}, new FormLayoutConstraints( null ) {
-			"location": new java.awt.Point( 155, 325 )
+			"location": new java.awt.Point( 155, 365 )
 		} )
 		add( new FormNonVisual( "javax.swing.AbstractAction" ) {
 			name: "selectroiAction"
@@ -210,7 +213,7 @@ new FormModel {
 				"JavaCodeGenerator.customCreate": true
 			}
 		}, new FormLayoutConstraints( null ) {
-			"location": new java.awt.Point( 155, 375 )
+			"location": new java.awt.Point( 155, 415 )
 		} )
 	}
 }
