@@ -87,6 +87,7 @@ new FormModel {
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 7
 				"gridY": 9
+				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints LEFT
 			} )
 			add( new FormComponent( "com.jformdesigner.designer.wrapper.JGoodiesFormsSeparator" ) {
 				name: "heatmapSeparator"
@@ -121,7 +122,14 @@ new FormModel {
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 3
 				"gridY": 15
-				"gridWidth": 5
+				"gridWidth": 3
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "floatLabel"
+				"text": new FormMessage( null, "GLScanAnalyzerView.floatLabel.text" )
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 7
+				"gridY": 15
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "heatmapqualityvalueLabel"
@@ -192,7 +200,7 @@ new FormModel {
 		} )
 		add( new FormNonVisual( "javax.swing.AbstractAction" ) {
 			name: "outputpathAction"
-			"$action.Name": new FormMessage( null, "GLScanAnalyzerView.outputpathButton.text" )
+			"$action.Name": new FormMessage( null, "GLScanAnalyzerView.outputpathAction.Name" )
 			auxiliary() {
 				"JavaCodeGenerator.customCreate": true
 			}

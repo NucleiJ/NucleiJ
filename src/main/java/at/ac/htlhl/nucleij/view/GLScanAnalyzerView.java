@@ -48,6 +48,7 @@ public class GLScanAnalyzerView extends JPanel
     private JCheckBox calculateandshowheatmapCheckBox;
     private JLabel heatmapqualityLabel;
     private JSlider heatmapqualitySlider;
+    private JLabel floatLabel;
     private JLabel heatmapqualityvalueLabel;
     private JComponent roiSeperator;
     private JLabel selectroiLabel;
@@ -93,6 +94,8 @@ public class GLScanAnalyzerView extends JPanel
         binder.bindBeanProperty(GLScanAnalyzer.PROPERTY_CALCULATEANDSHOWHEATMAP).to(calculateandshowheatmapCheckBox);
         binder.bindBeanProperty(GLScanAnalyzer.PROPERTY_SELECTROI).to(selectroiCheckBox);
 
+
+
         //binder.bindBeanProperty(GLScanAnalyzer.PROPERTY_TYPE).to(typeComboBox, "(None)");
         //
         //
@@ -135,6 +138,7 @@ public class GLScanAnalyzerView extends JPanel
         calculateandshowheatmapCheckBox = new JCheckBox();
         heatmapqualityLabel = new JLabel();
         heatmapqualitySlider = new JSlider();
+        floatLabel = new JLabel();
         heatmapqualityvalueLabel = new JLabel();
         roiSeperator = compFactory.createSeparator(bundle.getString("GLScanAnalyzerView.roiSeperator.text"));
         selectroiLabel = new JLabel();
@@ -182,7 +186,7 @@ public class GLScanAnalyzerView extends JPanel
 
         //---- outputpathButton ----
         outputpathButton.setAction(outputpathAction);
-        add(outputpathButton, CC.xy(7, 9));
+        add(outputpathButton, CC.xy(7, 9, CC.LEFT, CC.DEFAULT));
         add(heatmapSeparator, CC.xywh(1, 11, 9, 1));
 
         //---- calculateandshowheatmapLabel ----
@@ -199,7 +203,11 @@ public class GLScanAnalyzerView extends JPanel
 
         //---- heatmapqualitySlider ----
         heatmapqualitySlider.setMinimum(1);
-        add(heatmapqualitySlider, CC.xywh(3, 15, 5, 1));
+        add(heatmapqualitySlider, CC.xywh(3, 15, 3, 1));
+
+        //---- floatLabel ----
+        floatLabel.setText(bundle.getString("GLScanAnalyzerView.floatLabel.text"));
+        add(floatLabel, CC.xy(7, 15));
         add(heatmapqualityvalueLabel, CC.xy(9, 15));
         add(roiSeperator, CC.xywh(1, 17, 9, 1));
 
@@ -226,7 +234,7 @@ public class GLScanAnalyzerView extends JPanel
         typeAction.putValue(Action.NAME, bundle.getString("GLScanAnalyzerView.analyzetypeLabel.text"));
 
         //---- outputpathAction ----
-        outputpathAction.putValue(Action.NAME, bundle.getString("GLScanAnalyzerView.outputpathButton.text"));
+        outputpathAction.putValue(Action.NAME, bundle.getString("GLScanAnalyzerView.outputpathAction.Name"));
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 
