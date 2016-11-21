@@ -1,6 +1,8 @@
-JFDML JFormDesigner: "5.2.5.0.333" Java: "1.8.0_112-release" encoding: "UTF-8"
+JFDML JFormDesigner: "6.0.0.0.51" Java: "1.8.0_112-release" encoding: "UTF-8"
 
 new FormModel {
+	"i18n.bundlePackage": "at.ac.htlhl.nucleij.resources.i18n"
+	"i18n.bundleName": "mainview"
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class java.awt.BorderLayout ) ) {
@@ -29,15 +31,96 @@ new FormModel {
 				add( new FormContainer( "javax.swing.JMenu", new FormLayoutManager( class javax.swing.JMenu ) ) {
 					name: "menu1"
 					"text": "File"
+					add( new FormComponent( "javax.swing.JMenuItem" ) {
+						name: "openMenuItem"
+						"text": "text"
+						"action": new FormReference( "loadAction" )
+					} )
+					add( new FormComponent( "javax.swing.JMenuItem" ) {
+						name: "saveMenuItem"
+						"text": "text"
+						"action": new FormReference( "saveAction" )
+					} )
+					add( new FormComponent( "javax.swing.JMenuItem" ) {
+						name: "newMenuItem"
+						"text": "text"
+						"action": new FormReference( "newAction" )
+					} )
+					add( new FormComponent( "javax.swing.JPopupMenu$Separator" ) {
+						name: "separator1"
+					} )
+					add( new FormComponent( "javax.swing.JMenuItem" ) {
+						name: "exitMenuItem"
+						"text": "text"
+						"action": new FormReference( "exitAction" )
+					} )
 				} )
 				add( new FormContainer( "javax.swing.JMenu", new FormLayoutManager( class javax.swing.JMenu ) ) {
 					name: "menu2"
 					"text": "Help"
+					add( new FormComponent( "javax.swing.JMenuItem" ) {
+						name: "aboutMenuItem"
+						"text": "text"
+						"action": new FormReference( "aboutAction" )
+					} )
 				} )
 			}
 		}, new FormLayoutConstraints( null ) {
-			"location": new java.awt.Point( 5, 0 )
+			"location": new java.awt.Point( 10, 0 )
 			"size": new java.awt.Dimension( 400, 300 )
+		} )
+		add( new FormNonVisual( "javax.swing.AbstractAction" ) {
+			name: "loadAction"
+			"$action.Name": new FormMessage( null, "MainFrame.loadAction.Name" )
+			"$action.SwingLargeIconKey": new com.jformdesigner.model.SwingIcon( 0, "/at/ac/htlhl/nucleij/resources/images/i32x32/document-open.png" )
+			"$action.SmallIcon": new com.jformdesigner.model.SwingIcon( 0, "/at/ac/htlhl/nucleij/resources/images/i16x16/document-open.png" )
+			auxiliary() {
+				"JavaCodeGenerator.customCreate": true
+			}
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 10, 315 )
+		} )
+		add( new FormNonVisual( "javax.swing.AbstractAction" ) {
+			name: "saveAction"
+			"$action.Name": new FormMessage( null, "MainFrame.saveAction.Name" )
+			"$action.SmallIcon": new com.jformdesigner.model.SwingIcon( 0, "/at/ac/htlhl/nucleij/resources/images/i16x16/document-save-as.png" )
+			"$action.SwingLargeIconKey": new com.jformdesigner.model.SwingIcon( 0, "/at/ac/htlhl/nucleij/resources/images/i32x32/document-save-as.png" )
+			auxiliary() {
+				"JavaCodeGenerator.customCreate": true
+			}
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 80, 315 )
+		} )
+		add( new FormNonVisual( "javax.swing.AbstractAction" ) {
+			name: "aboutAction"
+			"$action.Name": new FormMessage( null, "MainFrame.aboutAction.Name" )
+			"$action.SmallIcon": new com.jformdesigner.model.SwingIcon( 0, "/at/ac/htlhl/nucleij/resources/images/i16x16/contact-new.png" )
+			"$action.SwingLargeIconKey": new com.jformdesigner.model.SwingIcon( 0, "/at/ac/htlhl/nucleij/resources/images/i32x32/contact-new.png" )
+			auxiliary() {
+				"JavaCodeGenerator.customCreate": true
+			}
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 150, 315 )
+		} )
+		add( new FormNonVisual( "javax.swing.AbstractAction" ) {
+			name: "exitAction"
+			"$action.Name": new FormMessage( null, "MainFrame.exitAction.Name" )
+			auxiliary() {
+				"JavaCodeGenerator.customCreate": true
+			}
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 230, 315 )
+		} )
+		add( new FormNonVisual( "javax.swing.AbstractAction" ) {
+			name: "newAction"
+			"$action.Name": new FormMessage( null, "MainFrame.newAction.Name" )
+			"$action.SmallIcon": new com.jformdesigner.model.SwingIcon( 0, "/at/ac/htlhl/nucleij/resources/images/i16x16/document-new.png" )
+			"$action.SwingLargeIconKey": new com.jformdesigner.model.SwingIcon( 0, "/at/ac/htlhl/nucleij/resources/images/i32x32/document-new.png" )
+			auxiliary() {
+				"JavaCodeGenerator.customCreate": true
+			}
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 10, 365 )
 		} )
 	}
 }

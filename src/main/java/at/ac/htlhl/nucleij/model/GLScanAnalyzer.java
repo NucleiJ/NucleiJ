@@ -35,7 +35,7 @@ public class GLScanAnalyzer extends Model
     private String type;
     private String inputpath;
     private String outputpath;
-    private float heatmapquality;
+    private int heatmapquality;
     private boolean calculateandshowheatmap;
     private boolean selectroi;
     // endregion
@@ -79,14 +79,14 @@ public class GLScanAnalyzer extends Model
         firePropertyChange(PROPERTY_OUTPUTPATH, oldValue, outputpath);
     }
 
-    public float getHeatmapquality()
+    public int getHeatmapquality()
     {
         return heatmapquality;
     }
 
-    public void setHeatmapquality(float heatmapquality)
+    public void setHeatmapquality(int heatmapquality)
     {
-        float oldValue = this.heatmapquality;
+        int oldValue = this.heatmapquality;
         this.heatmapquality = heatmapquality;
         firePropertyChange(PROPERTY_HEATMAPQUALITY, oldValue, heatmapquality);
     }

@@ -66,7 +66,7 @@ public class NucleiJ extends SingleFrameApplication
         MainPM mainPM = new MainPM(main);
         MainFrame mainFrame = new MainFrame(mainPM);
 
-        GLScanAnalyzerView glScanAnalyzerView = new GLScanAnalyzerView(mainPM.getGLScanAnalyzerPM());
+        GLScanAnalyzerView glScanAnalyzerView = new GLScanAnalyzerView(mainPM.getGLScanAnalyzerPM(), main.getGLScanAnalyzer());
         NdpiConverterView ndpiConverterView = new NdpiConverterView(mainPM.getNdpiConverterPM());
 
         setMainFrame(mainFrame);

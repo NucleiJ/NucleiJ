@@ -48,8 +48,6 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
 
         this.glScanAnalyzer = glScanAnalyzer;
 
-
-
         analyzeAction = new AnalyzeAction();
         selectpathAction = new SelectpathAction();
         typeAction = new TypeAction();

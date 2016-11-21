@@ -5,14 +5,18 @@
 package at.ac.htlhl.nucleij.view;
 
 import java.awt.*;
+import java.awt.event.*;
+import java.beans.*;
 import java.text.NumberFormat;
 import java.util.*;
 import javax.swing.border.*;
+import javax.swing.event.*;
 import at.ac.htlhl.nucleij.model.GLScanAnalyzer;
 import at.ac.htlhl.nucleij.presenter.GLScanAnalyzerPM;
 import com.jgoodies.binding.adapter.BoundedRangeAdapter;
 import com.jgoodies.binding.beans.BeanAdapter;
 import com.jgoodies.binding.beans.PropertyAdapter;
+import com.jgoodies.binding.beans.PropertyConnector;
 import com.jgoodies.binding.binder.Binders;
 import com.jgoodies.binding.binder.PresentationModelBinder;
 import com.jgoodies.binding.value.ConverterFactory;
@@ -48,7 +52,7 @@ public class GLScanAnalyzerView extends JPanel
     private JCheckBox calculateandshowheatmapCheckBox;
     private JLabel heatmapqualityLabel;
     private JSlider heatmapqualitySlider;
-    private JLabel floatLabel;
+    private JTextField SliderValue;
     private JLabel heatmapqualityvalueLabel;
     private JComponent roiSeperator;
     private JLabel selectroiLabel;
@@ -60,16 +64,20 @@ public class GLScanAnalyzerView extends JPanel
     private AbstractAction outputpathAction;
     private AbstractAction calculateandshowheatmapAction;
     private AbstractAction selectroiAction;
+    private AbstractAction changeheatmapqualityAction;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 
     private GLScanAnalyzerPM glScanAnalyzerPM;
+    private GLScanAnalyzer glScanAnalyzer;
+
     // endregion
 
     // Instance creation
     // ************************************************************************
-    public GLScanAnalyzerView(GLScanAnalyzerPM glScanAnalyzerPM) {
+    public GLScanAnalyzerView(GLScanAnalyzerPM glScanAnalyzerPM, GLScanAnalyzer glScanAnalyzer) {
 
         this.glScanAnalyzerPM = glScanAnalyzerPM;
+        this.glScanAnalyzer = glScanAnalyzer;
 
         initComponents();
 
@@ -94,12 +102,13 @@ public class GLScanAnalyzerView extends JPanel
         binder.bindBeanProperty(GLScanAnalyzer.PROPERTY_CALCULATEANDSHOWHEATMAP).to(calculateandshowheatmapCheckBox);
         binder.bindBeanProperty(GLScanAnalyzer.PROPERTY_SELECTROI).to(selectroiCheckBox);
 
+        //PropertyConnector.connect(glScanAnalyzer., "valueA", beanB, "valueB");
 
 
         //binder.bindBeanProperty(GLScanAnalyzer.PROPERTY_TYPE).to(typeComboBox, "(None)");
         //
         //
-        // binder.bindBeanProperty(GLScanAnalyzer.PROPERTY_HEATMAPQUALITY).to(heatmapqualitySlider.setValue());
+        //binder.bindBeanProperty(GLScanAnalyzer.PROPERTY_HEATMAPQUALITY).to(heatmapqualitySlider);
 
 
         //binder.bindBeanProperty(GLScanAnalyzer.PROPERTY_TYPE).to(typeComboBox, SingleMode);
@@ -115,6 +124,17 @@ public class GLScanAnalyzerView extends JPanel
                 floatModel,
                 NumberFormat.getPercentInstance())).to(heatmapqualityvalueLabel);
        */
+    }
+
+    private void heatmapqualitySliderStateChanged(ChangeEvent e) {
+        SliderValue.setText(String.valueOf(heatmapqualitySlider.getValue()));
+    }
+
+    private void SliderValueActionPerformed(ActionEvent e) {
+        int n = Integer.parseInt(SliderValue.getText());
+        if (n<1) { n=1; }
+        else if (n>100) { n=100; }
+        heatmapqualitySlider.setValue(n);
     }
 
     private void initComponents() {
@@ -138,7 +158,7 @@ public class GLScanAnalyzerView extends JPanel
         calculateandshowheatmapCheckBox = new JCheckBox();
         heatmapqualityLabel = new JLabel();
         heatmapqualitySlider = new JSlider();
-        floatLabel = new JLabel();
+        SliderValue = new JTextField();
         heatmapqualityvalueLabel = new JLabel();
         roiSeperator = compFactory.createSeparator(bundle.getString("GLScanAnalyzerView.roiSeperator.text"));
         selectroiLabel = new JLabel();
@@ -203,11 +223,23 @@ public class GLScanAnalyzerView extends JPanel
 
         //---- heatmapqualitySlider ----
         heatmapqualitySlider.setMinimum(1);
+        heatmapqualitySlider.setValue(60);
+        heatmapqualitySlider.addChangeListener(new ChangeListener() {
+            public void stateChanged(ChangeEvent e) {
+                heatmapqualitySliderStateChanged(e);
+            }
+        });
         add(heatmapqualitySlider, CC.xywh(3, 15, 3, 1));
 
-        //---- floatLabel ----
-        floatLabel.setText(bundle.getString("GLScanAnalyzerView.floatLabel.text"));
-        add(floatLabel, CC.xy(7, 15));
+        //---- SliderValue ----
+        SliderValue.setBackground(UIManager.getColor("ArrowButton.background"));
+        SliderValue.setColumns(3);
+        SliderValue.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                SliderValueActionPerformed(e);
+            }
+        });
+        add(SliderValue, CC.xy(7, 15, CC.LEFT, CC.DEFAULT));
         add(heatmapqualityvalueLabel, CC.xy(9, 15));
         add(roiSeperator, CC.xywh(1, 17, 9, 1));
 

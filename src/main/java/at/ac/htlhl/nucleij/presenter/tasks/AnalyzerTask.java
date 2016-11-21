@@ -33,7 +33,7 @@ public class AnalyzerTask extends SwingWorker<String, Integer>
         for(int i=1; i<=100; i++)
         {
             // Task
-            Thread.sleep(10);
+            Thread.sleep(20);
             publish(i);
         }
         return "Finished";

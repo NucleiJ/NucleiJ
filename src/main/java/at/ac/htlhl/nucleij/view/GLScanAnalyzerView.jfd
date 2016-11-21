@@ -119,17 +119,22 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JSlider" ) {
 				name: "heatmapqualitySlider"
 				"minimum": 1
+				"value": 60
+				addEvent( new FormEvent( "javax.swing.event.ChangeListener", "stateChanged", "heatmapqualitySliderStateChanged", true ) )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 3
 				"gridY": 15
 				"gridWidth": 3
 			} )
-			add( new FormComponent( "javax.swing.JLabel" ) {
-				name: "floatLabel"
-				"text": new FormMessage( null, "GLScanAnalyzerView.floatLabel.text" )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "SliderValue"
+				"background": new com.jformdesigner.model.SwingColor( "ArrowButton.background" )
+				"columns": 3
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "SliderValueActionPerformed", true ) )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 7
 				"gridY": 15
+				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints LEFT
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "heatmapqualityvalueLabel"
@@ -222,6 +227,14 @@ new FormModel {
 			}
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 155, 415 )
+		} )
+		add( new FormNonVisual( "javax.swing.AbstractAction" ) {
+			name: "changeheatmapqualityAction"
+			auxiliary() {
+				"JavaCodeGenerator.customCreate": true
+			}
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 155, 465 )
 		} )
 	}
 }
