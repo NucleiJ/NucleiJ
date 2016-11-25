@@ -5,13 +5,10 @@
 package at.ac.htlhl.nucleij.view;
 
 import java.awt.*;
-import java.awt.event.*;
 import java.util.*;
 import javax.swing.*;
 
 import at.ac.htlhl.nucleij.presenter.MainPM;
-import com.jgoodies.forms.factories.*;
-import com.jgoodies.forms.layout.*;
 
 /**
  * @author Schülerlizenz 2016/17
@@ -29,16 +26,15 @@ public class MainFrame extends JFrame {
     private JMenu helpMenu;
     private JMenuItem aboutMenuItem;
     private JToolBar toolBar1;
-    private JButton button1;
-    private JButton button2;
-    private JButton button3;
-    private JTabbedPane tabbedPane1;
-    private JPanel panel1;
+    private JButton analyzeButton;
+    private JButton convertButton;
     private AbstractAction loadAction;
     private AbstractAction saveAction;
     private AbstractAction aboutAction;
     private AbstractAction exitAction;
     private AbstractAction newAction;
+    private AbstractAction enableAnalyzerViewAction;
+    private AbstractAction enableConverterViewAction;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 
     private MainPM mainPM;
@@ -48,6 +44,9 @@ public class MainFrame extends JFrame {
         this.mainPM = mainPM;
 
         initComponents();
+
+        //mainTabbedPain.setComponentAt(0, new JButton("Hallo"));
+
     }
 
     private void createUIComponents() {
@@ -56,7 +55,12 @@ public class MainFrame extends JFrame {
         aboutAction = (AbstractAction) mainPM.getAboutAction();
         exitAction = (AbstractAction) mainPM.getExitAction();
         newAction = (AbstractAction) mainPM.getNewAction();
+        enableAnalyzerViewAction = (AbstractAction) mainPM.getEnableAnalyzerViewAction();
+        enableConverterViewAction = (AbstractAction) mainPM.getEnableConverterViewAction();
+
     }
+
+
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
@@ -72,11 +76,8 @@ public class MainFrame extends JFrame {
         helpMenu = new JMenu();
         aboutMenuItem = new JMenuItem();
         toolBar1 = new JToolBar();
-        button1 = new JButton();
-        button2 = new JButton();
-        button3 = new JButton();
-        tabbedPane1 = new JTabbedPane();
-        panel1 = new JPanel();
+        analyzeButton = new JButton();
+        convertButton = new JButton();
 
         //======== this ========
         setIconImage(new ImageIcon(getClass().getResource("/at/ac/htlhl/nucleij/resources/images/icon_png_v1.png")).getImage());
@@ -130,32 +131,16 @@ public class MainFrame extends JFrame {
         {
             toolBar1.setFloatable(false);
 
-            //---- button1 ----
-            button1.setText("Convert & Analyze");
-            toolBar1.add(button1);
+            //---- analyzeButton ----
+            analyzeButton.setAction(enableAnalyzerViewAction);
+            toolBar1.add(analyzeButton);
 
-            //---- button2 ----
-            button2.setText("Analyse");
-            toolBar1.add(button2);
-
-            //---- button3 ----
-            button3.setText("Convert");
-            toolBar1.add(button3);
+            //---- convertButton ----
+            convertButton.setText("Convert");
+            convertButton.setAction(enableConverterViewAction);
+            toolBar1.add(convertButton);
         }
         contentPane.add(toolBar1, BorderLayout.NORTH);
-
-        //======== tabbedPane1 ========
-        {
-
-            //======== panel1 ========
-            {
-                panel1.setLayout(new FormLayout(
-                    "default, $lcgap, default",
-                    "2*(default, $lgap), default"));
-            }
-            tabbedPane1.addTab("text", panel1);
-        }
-        contentPane.add(tabbedPane1, BorderLayout.CENTER);
         pack();
         setLocationRelativeTo(getOwner());
 
@@ -176,11 +161,19 @@ public class MainFrame extends JFrame {
 
         //---- exitAction ----
         exitAction.putValue(Action.NAME, bundle.getString("MainFrame.exitAction.Name"));
+        exitAction.putValue("SwingLargeIconKey", new ImageIcon(getClass().getResource("/at/ac/htlhl/nucleij/resources/images/i32x32/process-stop.png")));
+        exitAction.putValue(Action.SMALL_ICON, new ImageIcon(getClass().getResource("/at/ac/htlhl/nucleij/resources/images/i16x16/process-stop.png")));
 
         //---- newAction ----
         newAction.putValue(Action.NAME, bundle.getString("MainFrame.newAction.Name"));
         newAction.putValue(Action.SMALL_ICON, new ImageIcon(getClass().getResource("/at/ac/htlhl/nucleij/resources/images/i16x16/document-new.png")));
         newAction.putValue("SwingLargeIconKey", new ImageIcon(getClass().getResource("/at/ac/htlhl/nucleij/resources/images/i32x32/document-new.png")));
+
+        //---- enableAnalyzerViewAction ----
+        enableAnalyzerViewAction.putValue(Action.NAME, bundle.getString("MainFrame.enableAnalyzerViewAction.Name"));
+
+        //---- enableConverterViewAction ----
+        enableConverterViewAction.putValue(Action.NAME, bundle.getString("MainFrame.enableConverterViewAction.Name"));
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 

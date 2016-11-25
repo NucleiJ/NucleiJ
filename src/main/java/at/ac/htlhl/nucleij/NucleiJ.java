@@ -1,7 +1,5 @@
 package at.ac.htlhl.nucleij;
 
-import at.ac.htlhl.nucleij.model.GLScanAnalyzer;
-import at.ac.htlhl.nucleij.model.NdpiConverter;
 import at.ac.htlhl.nucleij.model.Main;
 import at.ac.htlhl.nucleij.presenter.MainPM;
 import at.ac.htlhl.nucleij.util.logging.ConsoleHandler;
@@ -9,16 +7,11 @@ import at.ac.htlhl.nucleij.util.logging.ConsoleOutFormatter;
 import at.ac.htlhl.nucleij.view.GLScanAnalyzerView;
 import at.ac.htlhl.nucleij.view.MainFrame;
 import at.ac.htlhl.nucleij.view.NdpiConverterView;
-import com.ezware.dialog.task.TaskDialog;
 import com.ezware.dialog.task.TaskDialogs;
-import com.jgoodies.looks.plastic.PlasticLookAndFeel;
-import com.jgoodies.looks.plastic.PlasticXPLookAndFeel;
-import com.jgoodies.looks.plastic.theme.SkyBluer;
 import org.jdesktop.application.*;
 
 import javax.swing.*;
 import java.util.EventObject;
-import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -29,11 +22,13 @@ public class NucleiJ extends SingleFrameApplication
 {
     // Constants
     // ************************************************************************
+    public static final NucleiJ nucleiJ = new NucleiJ();
     private static final Logger LOGGER = Logger.getLogger(NucleiJ.class.getName());
-
 
     // Fields
     private ResourceMap resource;
+    public int currentView;
+
 
     // region Public API
     // ************************************************************************
@@ -46,13 +41,12 @@ public class NucleiJ extends SingleFrameApplication
         // Force application to use given language setting instead of using OS default
         // Locale.setDefault(Locale.ENGLISH);
 
-        // Load CarConfiguration.properties file
+        // Load NucleiJ.properties file
         ApplicationContext ctxt = getContext();
         ResourceManager mgr = ctxt.getResourceManager();
         resource = mgr.getResourceMap(NucleiJ.class);
 
         configureLoggingSystem();
-
         initLookAndFeel();
     }
 
@@ -74,7 +68,17 @@ public class NucleiJ extends SingleFrameApplication
 
         // IMMER AUSKOMMENTIEREN
         //show(ndpiConverterView);
-        show(glScanAnalyzerView);
+        //show(glScanAnalyzerView);
+
+        //if(currentView == 0) {
+        //    show(glScanAnalyzerView);
+        //    System.out.println("Anylse");
+        //}
+        //else
+        //{
+        //    show(ndpiConverterView);
+        //    System.out.println("Converter");
+        //}
 
         // getMainFrame().setResizable(false);
         addExitListener(new CarConfiguratorExitListener());
@@ -168,6 +172,10 @@ public class NucleiJ extends SingleFrameApplication
         {
 
         }
+    }
+
+    public void setCurrentView(int currentView) {
+        this.currentView = currentView;
     }
 
     // endregion

@@ -1,6 +1,7 @@
 package at.ac.htlhl.nucleij.presenter;
 
 import at.ac.htlhl.nucleij.AppContext;
+import at.ac.htlhl.nucleij.NucleiJ;
 import at.ac.htlhl.nucleij.model.GLScanAnalyzer;
 import at.ac.htlhl.nucleij.model.Main;
 import at.ac.htlhl.nucleij.util.SuffixFileFilter;
@@ -14,6 +15,8 @@ import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.Logger;
+
+import static at.ac.htlhl.nucleij.NucleiJ.nucleiJ;
 
 /**
  * Created by Stefan on 11.11.2016.
@@ -35,11 +38,12 @@ public class MainPM extends PresentationModel<Main>
     private Action aboutAction;
     private Action exitAction;
     private Action newAction;
+    private Action enableAnalyzerViewAction;
+    private Action enableConverterViewAction;
 
     // References to sub presentation models
     private GLScanAnalyzerPM glScanAnalyzerPM;
     private NdpiConverterPM ndpiConverterPM;
-
 
 
     public MainPM(Main main)
@@ -55,6 +59,8 @@ public class MainPM extends PresentationModel<Main>
         aboutAction = new AboutAction();
         exitAction = new ExitAction();
         newAction = new newAction();
+        enableAnalyzerViewAction = new enableAnalyzerViewAction();
+        enableConverterViewAction = new enableConverterViewAction();
     }
 
     public GLScanAnalyzerPM getGLScanAnalyzerPM()
@@ -88,6 +94,14 @@ public class MainPM extends PresentationModel<Main>
 
     public Action getNewAction() {
         return newAction;
+    }
+
+    public Action getEnableAnalyzerViewAction() {
+        return enableAnalyzerViewAction;
+    }
+
+    public Action getEnableConverterViewAction() {
+        return enableConverterViewAction;
     }
 
 
@@ -186,6 +200,29 @@ public class MainPM extends PresentationModel<Main>
             newClass();
         }
     }
+
+    private class enableAnalyzerViewAction extends AbstractAction
+    {
+        public void actionPerformed(ActionEvent e)
+        {
+            System.out.println("Analyzen");
+            //Macht noch nix!
+            // TODO view enablen!
+        }
+    }
+
+    private class enableConverterViewAction extends AbstractAction
+    {
+        public void actionPerformed(ActionEvent e)
+        {
+            System.out.println("Konvertieren");
+            //Macht noch nix!
+            // TODO view enablen!
+        }
+    }
+
+
+
     // endregion
 
 
