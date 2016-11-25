@@ -42,18 +42,18 @@ public class GLScanAnalyzerView extends JPanel
     private JLabel analyzeType;
     private JComboBox typeComboBox;
     private JLabel inputpathLabel;
-    private JTextField inputpathTextField;
+    private JFormattedTextField inputpathTextField;
     private JButton inputpathButton;
     private JComponent outputSeperator;
     private JLabel outputpathLabel;
-    private JTextField outputpathTextField;
+    private JFormattedTextField outputpathTextField;
     private JButton outputpathButton;
     private JComponent heatmapSeparator;
     private JLabel calculateandshowheatmapLabel;
     private JCheckBox calculateandshowheatmapCheckBox;
     private JLabel heatmapqualityLabel;
     private JSlider heatmapqualitySlider;
-    private JFormattedTextField heatMapQualityTextField;
+    private JFormattedTextField heatmapqualityTextField;
     private JLabel heatmapqualityvalueLabel;
     private JComponent roiSeperator;
     private JLabel selectroiLabel;
@@ -94,8 +94,6 @@ public class GLScanAnalyzerView extends JPanel
         calculateandshowheatmapAction = (AbstractAction) glScanAnalyzerPM.getCalculateandshowheatmapAction();
         selectroiAction = (AbstractAction) glScanAnalyzerPM.getSelectroiAction();
 
-        // add(heatmapqualitySlider, CC.xywh(3, 15, 3, 1));
-
     }
 
     private void initBinding()
@@ -114,7 +112,7 @@ public class GLScanAnalyzerView extends JPanel
         // Property: HeatMapQuality
         ValueModel heatmapQualityValueModel = glScanAnalyzerPM.getModel(GLScanAnalyzer.PROPERTY_HEATMAPQUALITY);
         heatmapqualitySlider.setModel(new BoundedRangeAdapter(heatmapQualityValueModel, 1,  1,  101) );
-        binder.bindBeanProperty(GLScanAnalyzer.PROPERTY_HEATMAPQUALITY).to(heatMapQualityTextField);
+        binder.bindBeanProperty(GLScanAnalyzer.PROPERTY_HEATMAPQUALITY).to(heatmapqualityTextField);
         //TODO Wieso max Value = 101?, in View aber 100, wenn 100 eingestellt, dann 99 in View??
 
     }
@@ -130,18 +128,18 @@ public class GLScanAnalyzerView extends JPanel
         analyzeType = new JLabel();
         typeComboBox = new JComboBox();
         inputpathLabel = new JLabel();
-        inputpathTextField = new JTextField();
+        inputpathTextField = new JFormattedTextField();
         inputpathButton = new JButton();
         outputSeperator = compFactory.createSeparator(bundle.getString("GLScanAnalyzerView.outputSeperator.text"));
         outputpathLabel = new JLabel();
-        outputpathTextField = new JTextField();
+        outputpathTextField = new JFormattedTextField();
         outputpathButton = new JButton();
         heatmapSeparator = compFactory.createSeparator(bundle.getString("GLScanAnalyzerView.heatmapSeperator.text"));
         calculateandshowheatmapLabel = new JLabel();
         calculateandshowheatmapCheckBox = new JCheckBox();
         heatmapqualityLabel = new JLabel();
         heatmapqualitySlider = new JSlider();
-        heatMapQualityTextField = new JFormattedTextField();
+        heatmapqualityTextField = new JFormattedTextField();
         heatmapqualityvalueLabel = new JLabel();
         roiSeperator = compFactory.createSeparator(bundle.getString("GLScanAnalyzerView.roiSeperator.text"));
         selectroiLabel = new JLabel();
@@ -209,10 +207,10 @@ public class GLScanAnalyzerView extends JPanel
         heatmapqualitySlider.setValue(60);
         add(heatmapqualitySlider, CC.xywh(3, 15, 3, 1));
 
-        //---- heatMapQualityTextField ----
-        heatMapQualityTextField.setBackground(UIManager.getColor("ArrowButton.background"));
-        heatMapQualityTextField.setColumns(3);
-        add(heatMapQualityTextField, CC.xy(7, 15, CC.LEFT, CC.DEFAULT));
+        //---- heatmapqualityTextField ----
+        heatmapqualityTextField.setBackground(UIManager.getColor("ArrowButton.background"));
+        heatmapqualityTextField.setColumns(3);
+        add(heatmapqualityTextField, CC.xy(7, 15, CC.LEFT, CC.DEFAULT));
         add(heatmapqualityvalueLabel, CC.xy(11, 15));
         add(roiSeperator, CC.xywh(1, 17, 11, 1));
 

@@ -12,32 +12,16 @@ new FormModel {
 				name: "toolBar1"
 				"floatable": false
 				add( new FormComponent( "javax.swing.JButton" ) {
-					name: "button1"
-					"text": "Convert & Analyze"
+					name: "analyzeButton"
+					"action": new FormReference( "enableAnalyzerViewAction" )
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
-					name: "button2"
-					"text": "Analyse"
-				} )
-				add( new FormComponent( "javax.swing.JButton" ) {
-					name: "button3"
+					name: "convertButton"
 					"text": "Convert"
+					"action": new FormReference( "enableConverterViewAction" )
 				} )
 			}, new FormLayoutConstraints( class java.lang.String ) {
 				"value": "North"
-			} )
-			add( new FormContainer( "javax.swing.JTabbedPane", new FormLayoutManager( class javax.swing.JTabbedPane ) ) {
-				name: "tabbedPane1"
-				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
-					"$columnSpecs": "default, labelcompgap, default"
-					"$rowSpecs": "default, linegap, default, linegap, default"
-				} ) {
-					name: "panel1"
-				}, new FormLayoutConstraints( null ) {
-					"title": "text"
-				} )
-			}, new FormLayoutConstraints( class java.lang.String ) {
-				"value": "Center"
 			} )
 			menuBar: new FormContainer( "javax.swing.JMenuBar", new FormLayoutManager( class javax.swing.JMenuBar ) ) {
 				name: "menuBar1"
@@ -118,6 +102,8 @@ new FormModel {
 		add( new FormNonVisual( "javax.swing.AbstractAction" ) {
 			name: "exitAction"
 			"$action.Name": new FormMessage( null, "MainFrame.exitAction.Name" )
+			"$action.SwingLargeIconKey": new com.jformdesigner.model.SwingIcon( 0, "/at/ac/htlhl/nucleij/resources/images/i32x32/process-stop.png" )
+			"$action.SmallIcon": new com.jformdesigner.model.SwingIcon( 0, "/at/ac/htlhl/nucleij/resources/images/i16x16/process-stop.png" )
 			auxiliary() {
 				"JavaCodeGenerator.customCreate": true
 			}
@@ -134,6 +120,28 @@ new FormModel {
 			}
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 10, 365 )
+		} )
+		add( new FormNonVisual( "javax.swing.AbstractAction" ) {
+			name: "enableAnalyzerViewAction"
+			"$action.Name": new FormMessage( null, "MainFrame.enableAnalyzerViewAction.Name" )
+			"$action.SmallIcon": new com.jformdesigner.model.SwingIcon( 1, "C:\\DA-Workspace\\NucleiJ\\src\\main\\resources\\at\\ac\\htlhl\\nucleij\\resources\\images\\i16x16\\analyzer.png" )
+			"$action.SwingLargeIconKey": new com.jformdesigner.model.SwingIcon( 1, "C:\\DA-Workspace\\NucleiJ\\src\\main\\resources\\at\\ac\\htlhl\\nucleij\\resources\\images\\i32x32\\analyzer.png" )
+			auxiliary() {
+				"JavaCodeGenerator.customCreate": true
+			}
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 150, 365 )
+		} )
+		add( new FormNonVisual( "javax.swing.AbstractAction" ) {
+			name: "enableConverterViewAction"
+			"$action.Name": new FormMessage( null, "MainFrame.enableConverterViewAction.Name" )
+			"$action.SmallIcon": new com.jformdesigner.model.SwingIcon( 1, "C:\\DA-Workspace\\NucleiJ\\src\\main\\resources\\at\\ac\\htlhl\\nucleij\\resources\\images\\i16x16\\converter.png" )
+			"$action.SwingLargeIconKey": new com.jformdesigner.model.SwingIcon( 1, "C:\\DA-Workspace\\NucleiJ\\src\\main\\resources\\at\\ac\\htlhl\\nucleij\\resources\\images\\i32x32\\converter.png" )
+			auxiliary() {
+				"JavaCodeGenerator.customCreate": true
+			}
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 150, 415 )
 		} )
 	}
 }

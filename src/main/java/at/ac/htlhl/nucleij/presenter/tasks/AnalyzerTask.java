@@ -30,6 +30,7 @@ public class AnalyzerTask extends SwingWorker<String, Integer>
 
     protected String doInBackground() throws Exception
     {
+
         for(int i=1; i<=100; i++)
         {
             // Task

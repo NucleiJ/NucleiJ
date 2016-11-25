@@ -19,6 +19,7 @@ import java.awt.event.ActionEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.File;
+import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
@@ -57,7 +58,7 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
         calculateandshowheatmapAction = new CalculateandshowheatmapAction();
         selectroiAction = new SelectroiAction();
 
-
+        // Ausgabe jeder Aenderung
         glScanAnalyzer.addPropertyChangeListener(new PropertyChangeListener() {
             public void propertyChange(PropertyChangeEvent evt) {
                 LOGGER.info("Property name="+evt.getPropertyName()+", oldValue="+evt.getOldValue()+", newValue="+evt.getNewValue());
@@ -103,7 +104,13 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
         public void actionPerformed(ActionEvent e) {
             LOGGER.info("Analyze Action clicked");
 
-            System.out.println("Mach etwas!!\n");
+            //Output Directory erstellen
+            boolean createOutputDirectory = new File(outputpathString).mkdirs();
+            if (!createOutputDirectory) {
+                //TODO Warum Fehler? Gibt es dieses Verzeichnis schon? Dann kein Fehler
+                System.out.println("Error beim Erstellen des Ordners");
+            }
+
             // TODO Action ausprogrammieren
             JFrame parent = ((SingleFrameApplication) Application.getInstance()).getMainFrame();
 
@@ -129,33 +136,76 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
         }
     }
 
+    private JFileChooser createPreparedDirChooser()
+    {
+        JFileChooser chooser = new JFileChooser();
+        chooser.setAcceptAllFileFilterUsed(false);
+        chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        return chooser;
+    }
+
+    private JFileChooser createPreparedFileChooser()
+    {
+        JFileChooser chooser = new JFileChooser();
+        chooser.setAcceptAllFileFilterUsed(false);
+        chooser.setFileFilter(new SuffixFileFilter(FILE_EXTENSION, "*." + FILE_EXTENSION, true));
+        return chooser;
+    }
+
     private void selectPath()
     {
         LOGGER.info("Select Path Action clicked");
 
+
         JFrame parent = ((SingleFrameApplication) Application.getInstance()).getMainFrame();
 
-        JFileChooser chooser = new JFileChooser();
-        if(glScanAnalyzer.getInputpath() != null)
-        {
-            File inputpathFile = new File(glScanAnalyzer.getInputpath());
-            chooser.setCurrentDirectory(inputpathFile);
-        }
-        chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        if(glScanAnalyzer.getType()== "Multi") {
+            JFileChooser chooser = createPreparedDirChooser();
 
-        if (chooser.showOpenDialog(parent) == JFileChooser.APPROVE_OPTION)
-        {
-            inputpathString = chooser.getSelectedFile().getAbsolutePath();
-            outputpathString = inputpathString.concat("\\Output");
-            glScanAnalyzer.setInputpath(inputpathString);
-
-            boolean createOutputDirectory = new File(outputpathString).mkdirs();
-            if (!createOutputDirectory) {
-                //TODO Warum Fehler? Gibt es dieses Verzeichnis schon? Dann kein Fehler
-                System.out.println("Error beim Erstellen des Ordners");
+            if(glScanAnalyzer.getInputpath() != null)   //falls file im path dann wegfiltern
+            {
+                File inputpathFile = new File(glScanAnalyzer.getInputpath());
+                chooser.setCurrentDirectory(inputpathFile);
             }
-            glScanAnalyzer.setOutputpath(outputpathString);
+
+            if (chooser.showOpenDialog(parent) == JFileChooser.APPROVE_OPTION)
+            {
+                inputpathString = chooser.getSelectedFile().getAbsolutePath();
+                glScanAnalyzer.setInputpath(inputpathString);
+
+                outputpathString = inputpathString.concat("\\Output");
+                glScanAnalyzer.setOutputpath(outputpathString);
+            }
         }
+        else if(glScanAnalyzer.getType()== "Single") {
+            JFileChooser chooser = createPreparedFileChooser();
+
+            if(glScanAnalyzer.getInputpath() != null)   //falls file im path dann wegfiltern
+            {
+                File inputpathFile = new File(glScanAnalyzer.getInputpath());
+                chooser.setCurrentDirectory(inputpathFile);
+            }
+
+            if (chooser.showOpenDialog(parent) == JFileChooser.APPROVE_OPTION)
+            {
+                inputpathString = chooser.getSelectedFile().getAbsolutePath();
+                glScanAnalyzer.setInputpath(inputpathString);
+
+                File inputPathFile = new File( inputpathString);
+                outputpathString = inputPathFile.getParent().concat("\\Output");
+                glScanAnalyzer.setOutputpath(outputpathString);
+            }
+        } else {
+            System.out.println("\nERROR");
+        }
+
+        /*
+        boolean createOutputDirectory = new File(outputpathString).mkdirs();
+        if (!createOutputDirectory) {
+            //TODO Warum Fehler? Gibt es dieses Verzeichnis schon? Dann kein Fehler
+            System.out.println("Error beim Erstellen des Ordners");
+        }
+        */
     }
 
     private void changeOutputPath()
