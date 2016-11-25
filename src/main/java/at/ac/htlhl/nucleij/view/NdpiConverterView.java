@@ -2,6 +2,7 @@ package at.ac.htlhl.nucleij.view;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.*;
 import javax.swing.*;
 import javax.swing.event.*;
 
@@ -40,14 +41,13 @@ public class NdpiConverterView extends JPanel {
         binder.bindBeanProperty(NdpiConverter.PROPERTY_INPUTPATH).to(btnImportPath);
         binder.bindBeanProperty(NdpiConverter.PROPERTY_OUTPUTPATH).to(btnOutputPath);
 
-        //binder.bindBeanProperty(NdpiConverter.PROPERTY_TYPE).to(modeComboBox, SingleMode);
-        //binder.bindBeanProperty(NdpiConverter.PROPERTY_TYPE).to(buttonGroupMagnification);
     }
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         createUIComponents();
 
+        ResourceBundle bundle = ResourceBundle.getBundle("at.ac.htlhl.nucleij.resources.i18n.ndpiconverter");
         label23 = new JLabel();
         separator9 = new JPopupMenu.Separator();
         label17 = new JLabel();
@@ -66,24 +66,6 @@ public class NdpiConverterView extends JPanel {
         btnMagnification40 = new JRadioButton();
         btnMagnification10 = new JRadioButton();
         btnConvert = new JButton();
-        btnRoiSelect = new JButton();
-        separator5 = new JPopupMenu.Separator();
-        labelRoiStatus = new JLabel();
-        checkBoxRoi = new JCheckBox();
-        label19 = new JLabel();
-        label28 = new JLabel();
-        separator12 = new JPopupMenu.Separator();
-        checkBoxHeatmap = new JCheckBox();
-        checkBox1 = new JCheckBox();
-        comboBox3 = new JComboBox();
-        labelResolution = new JLabel();
-        spinnerSliderValue = new JSpinner();
-        sliderHeatmap = new JSlider();
-        menu2 = new JMenu();
-        checkBox2 = new JCheckBox();
-        checkBox3 = new JCheckBox();
-        checkBox4 = new JCheckBox();
-        checkBox5 = new JCheckBox();
 
         //======== this ========
         setLayout(new FormLayout(
@@ -165,74 +147,11 @@ public class NdpiConverterView extends JPanel {
         add(btnMagnification10, CC.xy(12, 10));
 
         //---- btnConvert ----
-        btnConvert.setText("Convert");
+        btnConvert.setAction(convertAction);
         add(btnConvert, CC.xy(16, 10));
 
-        //---- btnRoiSelect ----
-        btnRoiSelect.setText("Select ROI");
-        btnRoiSelect.setEnabled(false);
-
-        //---- labelRoiStatus ----
-        labelRoiStatus.setText("Roi succesfull selected!");
-        labelRoiStatus.setEnabled(false);
-
-        //---- checkBoxRoi ----
-        checkBoxRoi.setText("Select Roi");
-
-        //---- label19 ----
-        label19.setText("Set ROI");
-        label19.setFont(label19.getFont().deriveFont(label19.getFont().getStyle() | Font.BOLD));
-
-        //---- label28 ----
-        label28.setText("Output");
-        label28.setFont(label28.getFont().deriveFont(label28.getFont().getStyle() | Font.BOLD));
-
-        //---- checkBoxHeatmap ----
-        checkBoxHeatmap.setText("Heatmap");
-
-        //---- checkBox1 ----
-        checkBox1.setText("Summary:");
-
-        //---- comboBox3 ----
-        comboBox3.setModel(new DefaultComboBoxModel(new String[] {
-            "TXT",
-            "CSV"
-        }));
-
-        //---- labelResolution ----
-        labelResolution.setText("Quality:");
-        labelResolution.setEnabled(false);
-
-        //---- spinnerSliderValue ----
-        spinnerSliderValue.setModel(new SpinnerNumberModel(0, 0, 100, 1));
-
-        //---- sliderHeatmap ----
-        sliderHeatmap.setMinimumSize(new Dimension(20, 16));
-        sliderHeatmap.setPreferredSize(new Dimension(170, 16));
-        sliderHeatmap.setMinorTickSpacing(1);
-        sliderHeatmap.setValue(0);
-        sliderHeatmap.setEnabled(false);
-
-        //======== menu2 ========
-        {
-            menu2.setText("Ausgabe");
-
-            //---- checkBox2 ----
-            checkBox2.setText("#");
-            menu2.add(checkBox2);
-
-            //---- checkBox3 ----
-            checkBox3.setText("X-Coordinates");
-            menu2.add(checkBox3);
-
-            //---- checkBox4 ----
-            checkBox4.setText("Y-Coordinates");
-            menu2.add(checkBox4);
-
-            //---- checkBox5 ----
-            checkBox5.setText("Roundness");
-            menu2.add(checkBox5);
-        }
+        //---- convertAction ----
+        convertAction.putValue(Action.NAME, bundle.getString("NdpiConverterView.convertAction.Name"));
 
         //---- buttonGroupMagnification ----
         ButtonGroup buttonGroupMagnification = new ButtonGroup();
@@ -260,24 +179,6 @@ public class NdpiConverterView extends JPanel {
     private JRadioButton btnMagnification40;
     private JRadioButton btnMagnification10;
     private JButton btnConvert;
-    private JButton btnRoiSelect;
-    private JPopupMenu.Separator separator5;
-    private JLabel labelRoiStatus;
-    private JCheckBox checkBoxRoi;
-    private JLabel label19;
-    private JLabel label28;
-    private JPopupMenu.Separator separator12;
-    private JCheckBox checkBoxHeatmap;
-    private JCheckBox checkBox1;
-    private JComboBox comboBox3;
-    private JLabel labelResolution;
-    private JSpinner spinnerSliderValue;
-    private JSlider sliderHeatmap;
-    private JMenu menu2;
-    private JCheckBox checkBox2;
-    private JCheckBox checkBox3;
-    private JCheckBox checkBox4;
-    private JCheckBox checkBox5;
     private AbstractAction convertAction;
     private AbstractAction outputPathAction;
     private AbstractAction typeAction;

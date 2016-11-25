@@ -1,6 +1,9 @@
-JFDML JFormDesigner: "5.2.5.0.333" Java: "1.8.0_112-release" encoding: "UTF-8"
+JFDML JFormDesigner: "6.0.0.0.51" Java: "1.8.0_112-release" encoding: "UTF-8"
 
 new FormModel {
+	"i18n.bundlePackage": "at.ac.htlhl.nucleij.resources.i18n"
+	"i18n.bundleName": "ndpiconverter"
+	"i18n.keyPrefix": "NdpiConverterView"
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
@@ -163,7 +166,7 @@ new FormModel {
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "btnConvert"
-				"text": "Convert"
+				"action": new FormReference( "convertAction" )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 16
 				"gridY": 10
@@ -172,135 +175,14 @@ new FormModel {
 			"location": new java.awt.Point( 0, 15 )
 			"size": new java.awt.Dimension( 555, 260 )
 		} )
-		add( new FormComponent( "javax.swing.JButton" ) {
-			name: "btnRoiSelect"
-			"text": "Select ROI"
-			"enabled": false
-		}, new FormLayoutConstraints( null ) {
-			"location": new java.awt.Point( 400, 370 )
-		} )
-		add( new FormComponent( "javax.swing.JPopupMenu$Separator" ) {
-			name: "separator5"
-		}, new FormLayoutConstraints( null ) {
-			"location": new java.awt.Point( 85, 360 )
-			"size": new java.awt.Dimension( 417, 4 )
-		} )
-		add( new FormComponent( "javax.swing.JLabel" ) {
-			name: "labelRoiStatus"
-			"text": "Roi succesfull selected!"
-			"enabled": false
-		}, new FormLayoutConstraints( null ) {
-			"location": new java.awt.Point( 160, 380 )
-		} )
-		add( new FormComponent( "javax.swing.JCheckBox" ) {
-			name: "checkBoxRoi"
-			"text": "Select Roi"
-		}, new FormLayoutConstraints( null ) {
-			"location": new java.awt.Point( 20, 375 )
-			"size": new java.awt.Dimension( 139, 24 )
-		} )
-		add( new FormComponent( "javax.swing.JLabel" ) {
-			name: "label19"
-			"text": "Set ROI"
-			"font": new com.jformdesigner.model.SwingDerivedFont( null, 1, 0, false )
-		}, new FormLayoutConstraints( null ) {
-			"location": new java.awt.Point( 0, 355 )
-			"size": new java.awt.Dimension( 75, 18 )
-		} )
-		add( new FormComponent( "javax.swing.JLabel" ) {
-			name: "label28"
-			"text": "Output"
-			"font": new com.jformdesigner.model.SwingDerivedFont( null, 1, 0, false )
-		}, new FormLayoutConstraints( null ) {
-			"location": new java.awt.Point( 10, 425 )
-			"size": new java.awt.Dimension( 75, 18 )
-		} )
-		add( new FormComponent( "javax.swing.JPopupMenu$Separator" ) {
-			name: "separator12"
-		}, new FormLayoutConstraints( null ) {
-			"location": new java.awt.Point( 90, 430 )
-			"size": new java.awt.Dimension( 417, 4 )
-		} )
-		add( new FormComponent( "javax.swing.JCheckBox" ) {
-			name: "checkBoxHeatmap"
-			"text": "Heatmap"
-		}, new FormLayoutConstraints( null ) {
-			"location": new java.awt.Point( 30, 445 )
-			"size": new java.awt.Dimension( 132, 24 )
-		} )
-		add( new FormComponent( "javax.swing.JCheckBox" ) {
-			name: "checkBox1"
-			"text": "Summary:"
-		}, new FormLayoutConstraints( null ) {
-			"location": new java.awt.Point( 30, 475 )
-			"size": new java.awt.Dimension( 132, 24 )
-		} )
-		add( new FormComponent( "javax.swing.JComboBox" ) {
-			name: "comboBox3"
-			"model": new javax.swing.DefaultComboBoxModel {
-				selectedItem: "TXT"
-				addElement( "TXT" )
-				addElement( "CSV" )
-			}
-		}, new FormLayoutConstraints( null ) {
-			"location": new java.awt.Point( 165, 475 )
-			"size": new java.awt.Dimension( 85, 28 )
-		} )
-		add( new FormComponent( "javax.swing.JLabel" ) {
-			name: "labelResolution"
-			"text": "Quality:"
-			"enabled": false
-		}, new FormLayoutConstraints( null ) {
-			"location": new java.awt.Point( 165, 445 )
-			"size": new java.awt.Dimension( 85, 18 )
-		} )
-		add( new FormComponent( "javax.swing.JSpinner" ) {
-			name: "spinnerSliderValue"
-			"model": new javax.swing.SpinnerNumberModel( 0, 0, 100, 1 )
-		}, new FormLayoutConstraints( null ) {
-			"location": new java.awt.Point( 260, 440 )
-			"size": new java.awt.Dimension( 59, 28 )
-		} )
-		add( new FormComponent( "javax.swing.JSlider" ) {
-			name: "sliderHeatmap"
-			"minimumSize": new java.awt.Dimension( 20, 16 )
-			"preferredSize": new java.awt.Dimension( 170, 16 )
-			"minorTickSpacing": 1
-			"value": 0
-			"enabled": false
-		}, new FormLayoutConstraints( null ) {
-			"location": new java.awt.Point( 335, 450 )
-		} )
-		add( new FormContainer( "javax.swing.JMenu", new FormLayoutManager( class javax.swing.JMenu ) ) {
-			name: "menu2"
-			"text": "Ausgabe"
-			add( new FormComponent( "javax.swing.JCheckBox" ) {
-				name: "checkBox2"
-				"text": "#"
-			} )
-			add( new FormComponent( "javax.swing.JCheckBox" ) {
-				name: "checkBox3"
-				"text": "X-Coordinates"
-			} )
-			add( new FormComponent( "javax.swing.JCheckBox" ) {
-				name: "checkBox4"
-				"text": "Y-Coordinates"
-			} )
-			add( new FormComponent( "javax.swing.JCheckBox" ) {
-				name: "checkBox5"
-				"text": "Roundness"
-			} )
-		}, new FormLayoutConstraints( null ) {
-			"location": new java.awt.Point( 260, 475 )
-			"size": new java.awt.Dimension( 105, 23 )
-		} )
 		add( new FormNonVisual( "javax.swing.ButtonGroup" ) {
 			name: "buttonGroupMagnification"
 		}, new FormLayoutConstraints( null ) {
-			"location": new java.awt.Point( 0, 519 )
+			"location": new java.awt.Point( 0, 350 )
 		} )
 		add( new FormNonVisual( "javax.swing.AbstractAction" ) {
 			name: "convertAction"
+			"$action.Name": new FormMessage( null, "NdpiConverterView.convertAction.Name" )
 			auxiliary() {
 				"JavaCodeGenerator.customCreate": true
 			}
