@@ -1,4 +1,4 @@
-JFDML JFormDesigner: "6.0.0.0.51" Java: "1.8.0_112-release" encoding: "UTF-8"
+JFDML JFormDesigner: "6.0.0.0.51" Java: "1.8.0_92" encoding: "UTF-8"
 
 new FormModel {
 	"i18n.bundlePackage": "at.ac.htlhl.nucleij.resources.i18n"
@@ -26,11 +26,24 @@ new FormModel {
 			}, new FormLayoutConstraints( class java.lang.String ) {
 				"value": "North"
 			} )
+			add( new FormContainer( "javax.swing.JTabbedPane", new FormLayoutManager( class javax.swing.JTabbedPane ) ) {
+				name: "tabbedPane1"
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
+					"$columnSpecs": "default, labelcompgap, default"
+					"$rowSpecs": "default, linegap, default, linegap, default"
+				} ) {
+					name: "panel1"
+				}, new FormLayoutConstraints( null ) {
+					"title": "text"
+				} )
+			}, new FormLayoutConstraints( class java.lang.String ) {
+				"value": "Center"
+			} )
 			menuBar: new FormContainer( "javax.swing.JMenuBar", new FormLayoutManager( class javax.swing.JMenuBar ) ) {
 				name: "menuBar1"
 				add( new FormContainer( "javax.swing.JMenu", new FormLayoutManager( class javax.swing.JMenu ) ) {
-					name: "menu1"
-					"text": "File"
+					name: "settingsMenu"
+					"text": new FormMessage( null, "MainFrame.settingsMenu.text" )
 					add( new FormComponent( "javax.swing.JMenuItem" ) {
 						name: "openMenuItem"
 						"text": "text"
@@ -56,8 +69,8 @@ new FormModel {
 					} )
 				} )
 				add( new FormContainer( "javax.swing.JMenu", new FormLayoutManager( class javax.swing.JMenu ) ) {
-					name: "menu2"
-					"text": "Help"
+					name: "helpMenu"
+					"text": new FormMessage( null, "MainFrame.helpMenu.text" )
 					add( new FormComponent( "javax.swing.JMenuItem" ) {
 						name: "aboutMenuItem"
 						"text": "text"

@@ -1,4 +1,4 @@
-JFDML JFormDesigner: "6.0.0.0.51" Java: "1.8.0_112-release" encoding: "UTF-8"
+JFDML JFormDesigner: "6.0.0.0.51" Java: "1.8.0_92" encoding: "UTF-8"
 
 new FormModel {
 	"i18n.bundlePackage": "at.ac.htlhl.nucleij.resources.i18n"
@@ -8,7 +8,7 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
-			"$columnSpecs": "right:59dlu, labelcompgap, 63dlu, labelcompgap, default:grow, labelcompgap, default, labelcompgap, default"
+			"$columnSpecs": "right:59dlu, labelcompgap, 63dlu, labelcompgap, default:grow, labelcompgap, 24dlu, labelcompgap, default, labelcompgap, default"
 			"$rowSpecs": "18dlu, linegap, default, linegap, default, linegap, default, linegap, default, linegap, default, linegap, 16dlu, linegap, 18dlu, linegap, default, linegap, default, linegap, default, linegap, default:grow"
 		} ) {
 			name: "this"
@@ -17,7 +17,7 @@ new FormModel {
 				name: "inputSeparator"
 				"text": new FormMessage( null, "GLScanAnalyzerView.inputSeperator.text" )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridWidth": 9
+				"gridWidth": 11
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "analyzeType"
@@ -66,7 +66,7 @@ new FormModel {
 				"font": new java.awt.Font( "sansserif", 0, 12 )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridY": 7
-				"gridWidth": 9
+				"gridWidth": 11
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "outputpathLabel"
@@ -94,7 +94,7 @@ new FormModel {
 				"text": new FormMessage( null, "GLScanAnalyzerView.heatmapSeperator.text" )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridY": 11
-				"gridWidth": 9
+				"gridWidth": 11
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "calculateandshowheatmapLabel"
@@ -120,17 +120,15 @@ new FormModel {
 				name: "heatmapqualitySlider"
 				"minimum": 1
 				"value": 60
-				addEvent( new FormEvent( "javax.swing.event.ChangeListener", "stateChanged", "heatmapqualitySliderStateChanged", true ) )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 3
 				"gridY": 15
 				"gridWidth": 3
 			} )
-			add( new FormComponent( "javax.swing.JTextField" ) {
-				name: "SliderValue"
+			add( new FormComponent( "javax.swing.JFormattedTextField" ) {
+				name: "heatMapQualityTextField"
 				"background": new com.jformdesigner.model.SwingColor( "ArrowButton.background" )
 				"columns": 3
-				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "SliderValueActionPerformed", true ) )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 7
 				"gridY": 15
@@ -139,7 +137,7 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "heatmapqualityvalueLabel"
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 9
+				"gridX": 11
 				"gridY": 15
 			} )
 			add( new FormComponent( "com.jformdesigner.designer.wrapper.JGoodiesFormsSeparator" ) {
@@ -147,7 +145,7 @@ new FormModel {
 				"text": new FormMessage( null, "GLScanAnalyzerView.roiSeperator.text" )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridY": 17
-				"gridWidth": 9
+				"gridWidth": 11
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "selectroiLabel"
@@ -168,13 +166,13 @@ new FormModel {
 				"text": "text"
 				"action": new FormReference( "analyzeAction" )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 7
+				"gridX": 9
 				"gridY": 21
 				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints RIGHT
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )
-			"size": new java.awt.Dimension( 400, 335 )
+			"size": new java.awt.Dimension( 425, 335 )
 		} )
 		add( new FormNonVisual( "javax.swing.AbstractAction" ) {
 			name: "analyzeAction"

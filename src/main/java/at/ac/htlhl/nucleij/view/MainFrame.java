@@ -21,17 +21,19 @@ public class MainFrame extends JFrame {
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     private JMenuBar menuBar1;
-    private JMenu menu1;
+    private JMenu settingsMenu;
     private JMenuItem openMenuItem;
     private JMenuItem saveMenuItem;
     private JMenuItem newMenuItem;
     private JMenuItem exitMenuItem;
-    private JMenu menu2;
+    private JMenu helpMenu;
     private JMenuItem aboutMenuItem;
     private JToolBar toolBar1;
     private JButton button1;
     private JButton button2;
     private JButton button3;
+    private JTabbedPane tabbedPane1;
+    private JPanel panel1;
     private AbstractAction loadAction;
     private AbstractAction saveAction;
     private AbstractAction aboutAction;
@@ -62,17 +64,19 @@ public class MainFrame extends JFrame {
 
         ResourceBundle bundle = ResourceBundle.getBundle("at.ac.htlhl.nucleij.resources.i18n.mainview");
         menuBar1 = new JMenuBar();
-        menu1 = new JMenu();
+        settingsMenu = new JMenu();
         openMenuItem = new JMenuItem();
         saveMenuItem = new JMenuItem();
         newMenuItem = new JMenuItem();
         exitMenuItem = new JMenuItem();
-        menu2 = new JMenu();
+        helpMenu = new JMenu();
         aboutMenuItem = new JMenuItem();
         toolBar1 = new JToolBar();
         button1 = new JButton();
         button2 = new JButton();
         button3 = new JButton();
+        tabbedPane1 = new JTabbedPane();
+        panel1 = new JPanel();
 
         //======== this ========
         setIconImage(new ImageIcon(getClass().getResource("/at/ac/htlhl/nucleij/resources/images/icon_png_v1.png")).getImage());
@@ -82,43 +86,43 @@ public class MainFrame extends JFrame {
         //======== menuBar1 ========
         {
 
-            //======== menu1 ========
+            //======== settingsMenu ========
             {
-                menu1.setText("File");
+                settingsMenu.setText(bundle.getString("MainFrame.settingsMenu.text"));
 
                 //---- openMenuItem ----
                 openMenuItem.setText("text");
                 openMenuItem.setAction(loadAction);
-                menu1.add(openMenuItem);
+                settingsMenu.add(openMenuItem);
 
                 //---- saveMenuItem ----
                 saveMenuItem.setText("text");
                 saveMenuItem.setAction(saveAction);
-                menu1.add(saveMenuItem);
+                settingsMenu.add(saveMenuItem);
 
                 //---- newMenuItem ----
                 newMenuItem.setText("text");
                 newMenuItem.setAction(newAction);
-                menu1.add(newMenuItem);
-                menu1.addSeparator();
+                settingsMenu.add(newMenuItem);
+                settingsMenu.addSeparator();
 
                 //---- exitMenuItem ----
                 exitMenuItem.setText("text");
                 exitMenuItem.setAction(exitAction);
-                menu1.add(exitMenuItem);
+                settingsMenu.add(exitMenuItem);
             }
-            menuBar1.add(menu1);
+            menuBar1.add(settingsMenu);
 
-            //======== menu2 ========
+            //======== helpMenu ========
             {
-                menu2.setText("Help");
+                helpMenu.setText(bundle.getString("MainFrame.helpMenu.text"));
 
                 //---- aboutMenuItem ----
                 aboutMenuItem.setText("text");
                 aboutMenuItem.setAction(aboutAction);
-                menu2.add(aboutMenuItem);
+                helpMenu.add(aboutMenuItem);
             }
-            menuBar1.add(menu2);
+            menuBar1.add(helpMenu);
         }
         setJMenuBar(menuBar1);
 
@@ -139,6 +143,19 @@ public class MainFrame extends JFrame {
             toolBar1.add(button3);
         }
         contentPane.add(toolBar1, BorderLayout.NORTH);
+
+        //======== tabbedPane1 ========
+        {
+
+            //======== panel1 ========
+            {
+                panel1.setLayout(new FormLayout(
+                    "default, $lcgap, default",
+                    "2*(default, $lgap), default"));
+            }
+            tabbedPane1.addTab("text", panel1);
+        }
+        contentPane.add(tabbedPane1, BorderLayout.CENTER);
         pack();
         setLocationRelativeTo(getOwner());
 

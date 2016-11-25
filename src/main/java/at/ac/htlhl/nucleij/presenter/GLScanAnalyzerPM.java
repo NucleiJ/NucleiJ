@@ -16,6 +16,8 @@ import org.jdesktop.application.SingleFrameApplication;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
@@ -54,6 +56,13 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
         outputpathAction = new OutputpathAction();
         calculateandshowheatmapAction = new CalculateandshowheatmapAction();
         selectroiAction = new SelectroiAction();
+
+
+        glScanAnalyzer.addPropertyChangeListener(new PropertyChangeListener() {
+            public void propertyChange(PropertyChangeEvent evt) {
+                LOGGER.info("Property name="+evt.getPropertyName()+", oldValue="+evt.getOldValue()+", newValue="+evt.getNewValue());
+            }
+        });
 
 
     }
