@@ -44,7 +44,7 @@ new FormModel {
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridY": 5
 			} )
-			add( new FormComponent( "javax.swing.JTextField" ) {
+			add( new FormComponent( "javax.swing.JFormattedTextField" ) {
 				name: "inputpathTextField"
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 3
@@ -74,7 +74,7 @@ new FormModel {
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridY": 9
 			} )
-			add( new FormComponent( "javax.swing.JTextField" ) {
+			add( new FormComponent( "javax.swing.JFormattedTextField" ) {
 				name: "outputpathTextField"
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 3
@@ -126,7 +126,7 @@ new FormModel {
 				"gridWidth": 3
 			} )
 			add( new FormComponent( "javax.swing.JFormattedTextField" ) {
-				name: "heatMapQualityTextField"
+				name: "heatmapqualityTextField"
 				"background": new com.jformdesigner.model.SwingColor( "ArrowButton.background" )
 				"columns": 3
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
@@ -181,7 +181,7 @@ new FormModel {
 				"JavaCodeGenerator.customCreate": true
 			}
 		}, new FormLayoutConstraints( null ) {
-			"location": new java.awt.Point( 310, 515 )
+			"location": new java.awt.Point( 345, 465 )
 		} )
 		add( new FormNonVisual( "javax.swing.AbstractAction" ) {
 			name: "selectpathAction"

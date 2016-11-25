@@ -124,6 +124,8 @@ new FormModel {
 		add( new FormNonVisual( "javax.swing.AbstractAction" ) {
 			name: "enableAnalyzerViewAction"
 			"$action.Name": new FormMessage( null, "MainFrame.enableAnalyzerViewAction.Name" )
+			"$action.SmallIcon": new com.jformdesigner.model.SwingIcon( 1, "C:\\DA-Workspace\\NucleiJ\\src\\main\\resources\\at\\ac\\htlhl\\nucleij\\resources\\images\\i16x16\\analyzer.png" )
+			"$action.SwingLargeIconKey": new com.jformdesigner.model.SwingIcon( 1, "C:\\DA-Workspace\\NucleiJ\\src\\main\\resources\\at\\ac\\htlhl\\nucleij\\resources\\images\\i32x32\\analyzer.png" )
 			auxiliary() {
 				"JavaCodeGenerator.customCreate": true
 			}
@@ -133,6 +135,8 @@ new FormModel {
 		add( new FormNonVisual( "javax.swing.AbstractAction" ) {
 			name: "enableConverterViewAction"
 			"$action.Name": new FormMessage( null, "MainFrame.enableConverterViewAction.Name" )
+			"$action.SmallIcon": new com.jformdesigner.model.SwingIcon( 1, "C:\\DA-Workspace\\NucleiJ\\src\\main\\resources\\at\\ac\\htlhl\\nucleij\\resources\\images\\i16x16\\converter.png" )
+			"$action.SwingLargeIconKey": new com.jformdesigner.model.SwingIcon( 1, "C:\\DA-Workspace\\NucleiJ\\src\\main\\resources\\at\\ac\\htlhl\\nucleij\\resources\\images\\i32x32\\converter.png" )
 			auxiliary() {
 				"JavaCodeGenerator.customCreate": true
 			}

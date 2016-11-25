@@ -171,9 +171,13 @@ public class MainFrame extends JFrame {
 
         //---- enableAnalyzerViewAction ----
         enableAnalyzerViewAction.putValue(Action.NAME, bundle.getString("MainFrame.enableAnalyzerViewAction.Name"));
+        enableAnalyzerViewAction.putValue(Action.SMALL_ICON, new ImageIcon("C:\\DA-Workspace\\NucleiJ\\src\\main\\resources\\at\\ac\\htlhl\\nucleij\\resources\\images\\i16x16\\analyzer.png"));
+        enableAnalyzerViewAction.putValue("SwingLargeIconKey", new ImageIcon("C:\\DA-Workspace\\NucleiJ\\src\\main\\resources\\at\\ac\\htlhl\\nucleij\\resources\\images\\i32x32\\analyzer.png"));
 
         //---- enableConverterViewAction ----
         enableConverterViewAction.putValue(Action.NAME, bundle.getString("MainFrame.enableConverterViewAction.Name"));
+        enableConverterViewAction.putValue(Action.SMALL_ICON, new ImageIcon("C:\\DA-Workspace\\NucleiJ\\src\\main\\resources\\at\\ac\\htlhl\\nucleij\\resources\\images\\i16x16\\converter.png"));
+        enableConverterViewAction.putValue("SwingLargeIconKey", new ImageIcon("C:\\DA-Workspace\\NucleiJ\\src\\main\\resources\\at\\ac\\htlhl\\nucleij\\resources\\images\\i32x32\\converter.png"));
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 

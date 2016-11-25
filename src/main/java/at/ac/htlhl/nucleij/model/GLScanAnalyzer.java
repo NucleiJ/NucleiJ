@@ -86,6 +86,11 @@ public class GLScanAnalyzer extends Model
 
     public void setHeatmapquality(int heatmapquality)
     {
+        if (heatmapquality>100) {
+            heatmapquality=100;
+        } else if (heatmapquality <1) {
+            heatmapquality=1;
+        }
         int oldValue = this.heatmapquality;
         this.heatmapquality = heatmapquality;
         firePropertyChange(PROPERTY_HEATMAPQUALITY, oldValue, heatmapquality);
