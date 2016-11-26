@@ -1,4 +1,4 @@
-![Banner_Projekt_BitbucketBanner.jpg](https://bitbucket.org/repo/nzkjpj/images/4258751751-Banner_Projekt_BitbucketBanner.jpg)
+![Banner_Projekt_BitbucketBanner.jpg](https://bitbucket.org/repo/nzkjpj/images/1148696333-Banner_Projekt_BitbucketBanner.jpg)
 
 # **NucleiJ** #
 
