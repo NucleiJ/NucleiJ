@@ -2,6 +2,8 @@ package at.ac.htlhl.nucleij.presenter;
 
 import at.ac.htlhl.nucleij.model.NdpiConverter;
 import com.jgoodies.binding.PresentationModel;
+import org.jdesktop.application.Application;
+import org.jdesktop.application.SingleFrameApplication;
 
 
 import javax.swing.*;
@@ -87,12 +89,13 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
     }
 
     private class TypeAction extends AbstractAction {
-        public void actionPerformed(ActionEvent actionEvent) {
-
+        public TypeAction() {
         }
 
-        public TypeAction () {
+        public void actionPerformed(ActionEvent e) {
+            LOGGER.info("Analyze Action clicked");
 
+            JFrame parent = ((SingleFrameApplication) Application.getInstance()).getMainFrame();
         }
     }
 

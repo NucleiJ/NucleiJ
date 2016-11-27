@@ -4,7 +4,9 @@ import com.jgoodies.binding.beans.Model;
 import com.jgoodies.forms.layout.ColumnSpec;
 
 /**
- * Created by Stefan on 11.11.2016.
+ *
+ * @author Andreas Mattes
+ * @version 1.0
  */
 public class NdpiConverter extends Model
 {
@@ -15,15 +17,16 @@ public class NdpiConverter extends Model
     public static final String PROPERTY_MAGNIFICATION = "magnification";
 
 
-    public static final Object SINGLE = ColumnSpec.LEFT;
-    public static final Object MULTI = ColumnSpec.RIGHT;
+    public static final String SINGLE = "Single";
+    public static final String MULTI = "Multi";
+    public static final String[] TYPE_CHOICES = {SINGLE, MULTI};
 
     //endregion Constants
 
     //*******************************************************************
     enum Magnification {x40,x10}
 
-    private Object type;
+    private String type;
     private Magnification magnification;
     private String inputpath;
     private String outputpath;
@@ -40,12 +43,12 @@ public class NdpiConverter extends Model
 
     //region Getter&Setter
 
-    public Object getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(Object type) {
-        Object oldValue = this.type;
+    public void setType(String type) {
+        String oldValue = this.type;
         this.type = type;
         firePropertyChange(PROPERTY_TYPE,oldValue,type);
     }

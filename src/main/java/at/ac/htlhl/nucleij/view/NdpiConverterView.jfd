@@ -6,144 +6,113 @@ new FormModel {
 	"i18n.keyPrefix": "NdpiConverterView"
 	contentType: "form/swing"
 	root: new FormRoot {
-		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
-			"$columnSpecs": "labelcompgap, 6dlu, labelcompgap, left:22dlu, labelcompgap, left:18dlu, labelcompgap, left:26dlu, labelcompgap, 30dlu, labelcompgap, 26dlu, labelcompgap, right:24dlu:grow, labelcompgap, right:53dlu:grow, labelcompgap, labelcompgap"
-			"$rowSpecs": "linegap, default, default, 17dlu, default, default, default, unrelgap, default, min, unrelgap, labelcompgap"
-			"$rowGroupIds": "0, 1, 0, 0, 2, 0, 2, 0, 1, 3, 0, 0"
+		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class net.miginfocom.swing.MigLayout ) {
+			"$layoutConstraints": "insets 0,hidemode 3"
+			"$columnConstraints": "rel[13,fill][83,left][39,left][57,left][65,fill][57,fill][52,grow,right][116,grow,right]rel"
+			"$rowConstraints": "rel[sizegroup 1,center]0[center]0[30,center]0[sizegroup 2,center]0[center]0[sizegroup 2,center]unrel[sizegroup 1,center]0[min,sizegroup 3,center]unrel"
 		} ) {
 			name: "this"
 			add( new FormComponent( "javax.swing.JLabel" ) {
-				name: "label23"
-				"text": "General"
+				name: "general"
+				"text": new FormMessage( null, "NdpiConverterView.generalLabel.text" )
 				"font": new com.jformdesigner.model.SwingDerivedFont( null, 1, 0, false )
-			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 2
-				"gridY": 2
-				"gridWidth": 5
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 0 0 2 1,alignx left,growx 0"
+			} )
+			add( new FormComponent( "javax.swing.JSeparator" ) {
+				name: "separator1"
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 2 0 6 1,growx"
 			} )
 			add( new FormComponent( "javax.swing.JPopupMenu$Separator" ) {
 				name: "separator9"
-			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 6
-				"gridY": 2
-				"gridWidth": 11
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 2 0 6 1,growx"
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
-				name: "label17"
-				"text": "Select mode:"
-			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 4
-				"gridY": 3
-				"gridWidth": 5
+				name: "analyzeType"
+				"text": new FormMessage( null, "NdpiConverterView.analyzeTypeLabel.text" )
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 1 1 3 1,alignx left,growx 0"
 			} )
 			add( new FormComponent( "javax.swing.JComboBox" ) {
-				name: "modeComboBox"
+				name: "typeComboBox"
 				"model": new javax.swing.DefaultComboBoxModel {
 					selectedItem: "SingleMode"
 					addElement( "SingleMode" )
 					addElement( "MultiMode" )
 				}
 				"toolTipText": "Select mode"
-			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 10
-				"gridY": 3
-				"gridWidth": 3
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 4 1 2 1"
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
-				name: "label24"
-				"text": "Folder Directory:"
-			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 4
-				"gridY": 4
-				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints LEFT
-				"vAlign": sfield com.jgoodies.forms.layout.CellConstraints CENTER
-				"gridWidth": 5
+				name: "filderDirectory"
+				"text": new FormMessage( null, "NdpiConverterView.inputFolderDirectory.text" )
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 1 2 3 1,align left center,grow 0 0"
 			} )
 			add( new FormComponent( "javax.swing.JTextField" ) {
 				name: "textfieldImportDir"
 				"editable": false
-			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 4
-				"gridY": 5
-				"gridWidth": 9
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 1 3 5 1,growx"
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "btnImportPath"
-				"text": "..."
-			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 14
-				"gridY": 5
-				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints LEFT
+				"action": new FormReference( "inputPathAction" )
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 6 3,alignx left,growx 0"
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
-				name: "labelImportStatus"
-				"text": "Wrong Format"
+				name: "importError"
+				"text": new FormMessage( null, "NdpiConverterView.inputOutputError" )
 				"enabled": false
-			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 16
-				"gridY": 5
-				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints LEFT
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 7 3,alignx left,growx 0"
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
-				name: "label31"
-				"text": "Export folder:"
-			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 4
-				"gridY": 6
-				"vAlign": sfield com.jgoodies.forms.layout.CellConstraints CENTER
-				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints LEFT
-				"gridWidth": 5
+				name: "exportFolder"
+				"text": new FormMessage( null, "NdpiConverterView.outputFolderDirectory" )
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 1 4 3 1,align left center,grow 0 0"
 			} )
 			add( new FormComponent( "javax.swing.JTextField" ) {
 				name: "textfieldExportDir"
 				"editable": false
-			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 4
-				"gridY": 7
-				"gridWidth": 9
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 1 5 5 1,growx"
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "btnOutputPath"
-				"text": "..."
-			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 14
-				"gridY": 7
-				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints LEFT
+				"action": new FormReference( "outputPathAction" )
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 6 5,alignx left,growx 0"
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
-				name: "labelExportStatus"
-				"text": "Wrong location"
+				name: "exportError"
+				"text": new FormMessage( null, "NdpiConverterView.inputOutputError" )
 				"enabled": false
-			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 16
-				"gridY": 7
-				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints LEFT
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 7 5,alignx left,growx 0"
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
-				name: "label25"
-				"text": "Magnification"
+				name: "magnification"
+				"text": new FormMessage( null, "NdpiConverterView.magnificationLabel.text" )
 				"font": new com.jformdesigner.model.SwingDerivedFont( null, 1, 0, false )
-			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 2
-				"gridWidth": 5
-				"gridY": 9
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 0 6 2 1,alignx left,growx 0"
 			} )
 			add( new FormComponent( "javax.swing.JSeparator" ) {
 				name: "separator10"
-			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 8
-				"gridWidth": 9
-				"gridY": 9
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 2 6 6 1,growx"
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
-				name: "labelSetMagnification"
-				"text": "Set Magnification:"
-			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 4
-				"gridY": 10
-				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints LEFT
-				"vAlign": sfield com.jgoodies.forms.layout.CellConstraints CENTER
-				"gridWidth": 3
+				name: "setMagnification"
+				"text": new FormMessage( null, "NdpiConverterView.setMagnificationLabel.text" )
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 1 7 2 1,align left center,grow 0 0"
 			} )
 			add( new FormComponent( "javax.swing.JRadioButton" ) {
 				name: "btnMagnification40"
@@ -151,29 +120,26 @@ new FormModel {
 				"minimumSize": new java.awt.Dimension( 40, 28 )
 				"selected": true
 				"$buttonGroup": new FormReference( "buttonGroupMagnification" )
-			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 10
-				"gridY": 10
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 4 7"
 			} )
 			add( new FormComponent( "javax.swing.JRadioButton" ) {
 				name: "btnMagnification10"
 				"text": "x10"
 				"minimumSize": new java.awt.Dimension( 40, 28 )
 				"$buttonGroup": new FormReference( "buttonGroupMagnification" )
-			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 12
-				"gridY": 10
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 5 7"
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "btnConvert"
 				"action": new FormReference( "convertAction" )
-			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 16
-				"gridY": 10
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 7 7"
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 15 )
-			"size": new java.awt.Dimension( 555, 260 )
+			"size": new java.awt.Dimension( 530, 260 )
 		} )
 		add( new FormNonVisual( "javax.swing.ButtonGroup" ) {
 			name: "buttonGroupMagnification"
@@ -182,7 +148,7 @@ new FormModel {
 		} )
 		add( new FormNonVisual( "javax.swing.AbstractAction" ) {
 			name: "convertAction"
-			"$action.Name": new FormMessage( null, "NdpiConverterView.convertAction.Name" )
+			"$action.Name": new FormMessage( null, "NdpiConverterView.convertAction.name" )
 			auxiliary() {
 				"JavaCodeGenerator.customCreate": true
 			}
@@ -191,6 +157,7 @@ new FormModel {
 		} )
 		add( new FormNonVisual( "javax.swing.AbstractAction" ) {
 			name: "outputPathAction"
+			"$action.Name": new FormMessage( null, "NdpiConverterView.inputOutputPathAction.name" )
 			auxiliary() {
 				"JavaCodeGenerator.customCreate": true
 			}
@@ -207,6 +174,7 @@ new FormModel {
 		} )
 		add( new FormNonVisual( "javax.swing.AbstractAction" ) {
 			name: "inputPathAction"
+			"$action.Name": new FormMessage( null, "NdpiConverterView.inputOutputPathAction.name" )
 			auxiliary() {
 				"JavaCodeGenerator.customCreate": true
 			}
