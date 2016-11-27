@@ -13,7 +13,7 @@ import at.ac.htlhl.nucleij.presenter.MainPM;
 /**
  * @author Schülerlizenz 2016/17
  */
-public class MainFrame extends JFrame {
+public class MainFrameView extends JFrame {
 
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
@@ -39,7 +39,7 @@ public class MainFrame extends JFrame {
 
     private MainPM mainPM;
 
-    public MainFrame(MainPM mainPM)
+    public MainFrameView(MainPM mainPM)
     {
         this.mainPM = mainPM;
 
