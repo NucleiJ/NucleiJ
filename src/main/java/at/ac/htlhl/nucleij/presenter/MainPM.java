@@ -108,7 +108,7 @@ public class MainPM extends PresentationModel<Main>
     private void saveAs()
     {
         System.out.println("Save\n");
-        /*
+
         JFileChooser chooser = createPreparedFileChooser();
         JFrame parent = ((SingleFrameApplication) Application.getInstance()).getMainFrame();
         if (chooser.showSaveDialog(parent) == JFileChooser.APPROVE_OPTION) {
@@ -123,13 +123,13 @@ public class MainPM extends PresentationModel<Main>
                 TaskDialogs.showException(ex);
             }
         }
-        */
+
     }
 
     private void load()
     {
         System.out.println("Load\n");
-        /*
+
         JFileChooser chooser = createPreparedFileChooser();
         JFrame parent = ((SingleFrameApplication) Application.getInstance()).getMainFrame();
         if (chooser.showOpenDialog(parent) == JFileChooser.APPROVE_OPTION)
@@ -141,7 +141,7 @@ public class MainPM extends PresentationModel<Main>
                 TaskDialogs.showException(ex);
             }
         }
-        */
+
     }
 
     private void newClass()

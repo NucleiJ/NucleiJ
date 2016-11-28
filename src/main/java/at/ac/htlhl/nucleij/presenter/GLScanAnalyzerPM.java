@@ -105,7 +105,13 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
             LOGGER.info("Analyze Action clicked");
 
             //Output Directory erstellen
-            boolean createOutputDirectory = new File(outputpathString).mkdirs();
+            boolean createOutputDirectory = false;
+            try {
+                createOutputDirectory = new File(outputpathString).mkdirs();
+            } catch (Exception e1) {
+                System.out.println("Kein Pfad angegeben!");
+                e1.printStackTrace();
+            }
             if (!createOutputDirectory) {
                 //TODO Warum Fehler? Gibt es dieses Verzeichnis schon? Dann kein Fehler
                 System.out.println("Error beim Erstellen des Ordners");
@@ -141,6 +147,7 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
         JFileChooser chooser = new JFileChooser();
         chooser.setAcceptAllFileFilterUsed(false);
         chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        chooser.setDialogTitle("Verzeichnis auswählen"); // TODO Text auslagern
         return chooser;
     }
 
@@ -149,6 +156,7 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
         JFileChooser chooser = new JFileChooser();
         chooser.setAcceptAllFileFilterUsed(false);
         chooser.setFileFilter(new SuffixFileFilter(FILE_EXTENSION, "*." + FILE_EXTENSION, true));
+        chooser.setDialogTitle("File auswählen"); // TODO Text auslagern
         return chooser;
     }
 
