@@ -1,10 +1,11 @@
 package at.ac.htlhl.nucleij.presenter;
 
 import at.ac.htlhl.nucleij.AppContext;
-import at.ac.htlhl.nucleij.NucleiJ;
 import at.ac.htlhl.nucleij.model.GLScanAnalyzer;
 import at.ac.htlhl.nucleij.model.Main;
 import at.ac.htlhl.nucleij.util.SuffixFileFilter;
+import at.ac.htlhl.nucleij.view.GLScanAnalyzerView;
+import at.ac.htlhl.nucleij.view.NdpiConverterView;
 import com.ezware.dialog.task.TaskDialogs;
 import com.jgoodies.binding.PresentationModel;
 import org.jdesktop.application.Application;
@@ -45,6 +46,8 @@ public class MainPM extends PresentationModel<Main>
     private GLScanAnalyzerPM glScanAnalyzerPM;
     private NdpiConverterPM ndpiConverterPM;
 
+    private GLScanAnalyzerView glScanAnalyzerView;
+    private JComponent ndpiConverterView;
 
     public MainPM(Main main)
     {
@@ -104,11 +107,18 @@ public class MainPM extends PresentationModel<Main>
         return enableConverterViewAction;
     }
 
+    public void setGlScanAnalyzerView(GLScanAnalyzerView glScanAnalyzerView) {
+        this.glScanAnalyzerView = glScanAnalyzerView;
+    }
+
+    public void setNdpiConverterView(NdpiConverterView ndpiConverterView) {
+        this.ndpiConverterView = ndpiConverterView;
+    }
 
     private void saveAs()
     {
         System.out.println("Save\n");
-        /*
+
         JFileChooser chooser = createPreparedFileChooser();
         JFrame parent = ((SingleFrameApplication) Application.getInstance()).getMainFrame();
         if (chooser.showSaveDialog(parent) == JFileChooser.APPROVE_OPTION) {
@@ -123,13 +133,13 @@ public class MainPM extends PresentationModel<Main>
                 TaskDialogs.showException(ex);
             }
         }
-        */
+
     }
 
     private void load()
     {
         System.out.println("Load\n");
-        /*
+
         JFileChooser chooser = createPreparedFileChooser();
         JFrame parent = ((SingleFrameApplication) Application.getInstance()).getMainFrame();
         if (chooser.showOpenDialog(parent) == JFileChooser.APPROVE_OPTION)
@@ -141,7 +151,7 @@ public class MainPM extends PresentationModel<Main>
                 TaskDialogs.showException(ex);
             }
         }
-        */
+
     }
 
     private void newClass()
@@ -217,6 +227,10 @@ public class MainPM extends PresentationModel<Main>
         {
             System.out.println("Konvertieren");
             //Macht noch nix!
+            //NucleiJ.getInstance().changeView(NdpiConverterView ndpiConverterView);
+            nucleiJ.changeView(ndpiConverterView);
+            nucleiJ.setCurrentView(1);
+
             // TODO view enablen!
         }
     }
