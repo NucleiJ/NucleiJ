@@ -8,6 +8,7 @@
 * ComponentsExample.java
 * Wert des Slider anzeigbar und änderbar
 * ROI Einstellungen nur sichtbar, wenn SingleMode -> View an PM uebergeben?
+* Watershed Function!
 
 
 ### 2. Zukunftsmusik ###
