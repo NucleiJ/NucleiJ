@@ -43,6 +43,7 @@ new FormModel {
 					addElement( "MultiMode" )
 				}
 				"toolTipText": "Select mode"
+				"action": new FormReference( "typeAction" )
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
 				"value": "cell 4 1 2 1"
 			} )

@@ -98,6 +98,7 @@ public class NdpiConverterView extends JPanel {
             "MultiMode"
         }));
         typeComboBox.setToolTipText("Select mode");
+        typeComboBox.setAction(typeAction);
         add(typeComboBox, "cell 4 1 2 1");
 
         //---- filderDirectory ----

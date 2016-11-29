@@ -58,8 +58,6 @@ public class NucleiJ extends SingleFrameApplication
         Main main = new Main();
         MainPM mainPM = new MainPM(main);
         MainFrameView mainFrame = new MainFrameView(mainPM);
-        //Könnte man die Zeilen 58-60 nicht auch so verkürtzt schreiben wie GLScanAnalyzerView und NdpiConverterView in Zeile 64&65 schreiben?
-        //MainFrameView mainFrame = new MainFrameView(mainPM.getMainPM());
 
         GLScanAnalyzerView glScanAnalyzerView = new GLScanAnalyzerView(mainPM.getGLScanAnalyzerPM(), main.getGLScanAnalyzer());
         NdpiConverterView ndpiConverterView = new NdpiConverterView(mainPM.getNdpiConverterPM());
@@ -68,7 +66,7 @@ public class NucleiJ extends SingleFrameApplication
         getMainFrame().setTitle(resource.getString("Application.id"));
 
         // IMMER AUSKOMMENTIEREN
-        show(ndpiConverterView);
+        //show(ndpiConverterView);
         //show(glScanAnalyzerView);
 
         //if(currentView == 0) {
