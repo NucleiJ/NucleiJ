@@ -64,20 +64,26 @@ public class NucleiJ extends SingleFrameApplication
         GLScanAnalyzerView glScanAnalyzerView = new GLScanAnalyzerView(mainPM.getGLScanAnalyzerPM(), main.getGLScanAnalyzer());
         NdpiConverterView ndpiConverterView = new NdpiConverterView(mainPM.getNdpiConverterPM());
 
+        // die Views ins PM Model "senden"
+        mainPM.setGlScanAnalyzerView(glScanAnalyzerView);
+        mainPM.setNdpiConverterView(ndpiConverterView);
+
         setMainFrame(mainFrame);
         getMainFrame().setTitle(resource.getString("Application.id"));
 
         // IMMER AUSKOMMENTIEREN
-        //show(ndpiConverterView);
         //show(glScanAnalyzerView);
+        //show(ndpiConverterView);
 
+
+        //changeView(ndpiConverterView);
         //if(currentView == 0) {
-        //    show(glScanAnalyzerView);
+        //    changeView(glScanAnalyzerView);
         //    System.out.println("Anylse");
         //}
         //else
         //{
-        //    show(ndpiConverterView);
+        //    changeView(ndpiConverterView);
         //    System.out.println("Converter");
         //}
 
@@ -143,6 +149,11 @@ public class NucleiJ extends SingleFrameApplication
     public static void main(String ... args)
     {
         Application.launch(NucleiJ.class, args);
+    }
+
+    public void changeView(JComponent ndpiConverterView) {
+
+        show(ndpiConverterView);
     }
 
 
