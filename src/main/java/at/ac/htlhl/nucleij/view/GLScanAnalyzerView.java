@@ -169,6 +169,9 @@ public class GLScanAnalyzerView extends JPanel
         //---- inputpathLabel ----
         inputpathLabel.setText(bundle.getString("GLScanAnalyzerView.inputpathLabel.text"));
         add(inputpathLabel, CC.xy(1, 5));
+
+        //---- inputpathTextField ----
+        inputpathTextField.setEditable(false);
         add(inputpathTextField, CC.xywh(3, 5, 3, 1));
 
         //---- inputpathButton ----
@@ -183,6 +186,9 @@ public class GLScanAnalyzerView extends JPanel
         //---- outputpathLabel ----
         outputpathLabel.setText(bundle.getString("GLScanAnalyzerView.outputpathLabel.text"));
         add(outputpathLabel, CC.xy(1, 9));
+
+        //---- outputpathTextField ----
+        outputpathTextField.setEditable(false);
         add(outputpathTextField, CC.xywh(3, 9, 3, 1));
 
         //---- outputpathButton ----
@@ -223,7 +229,6 @@ public class GLScanAnalyzerView extends JPanel
         add(selectroiCheckBox, CC.xy(3, 19));
 
         //---- startAnalyzerButton ----
-        startAnalyzerButton.setText("text");
         startAnalyzerButton.setAction(analyzeAction);
         add(startAnalyzerButton, CC.xy(9, 21, CC.RIGHT, CC.DEFAULT));
 
