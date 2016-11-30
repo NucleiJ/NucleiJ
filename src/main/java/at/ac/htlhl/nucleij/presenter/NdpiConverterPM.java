@@ -15,6 +15,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.event.ActionEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.io.File;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
@@ -35,6 +36,10 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
     private Action inputPathAction;
     private Action typeAction;
     private Action magnificationAction;
+
+    private NdpiConverter ndpiConverter;
+
+    private String path;
 
 
     public NdpiConverterPM(NdpiConverter ndpiConverter)
@@ -77,28 +82,76 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
     }
     //endregion
 
+
+
     private JFileChooser createDirChooser()
     {
+        JFrame parent = ((SingleFrameApplication) Application.getInstance()).getMainFrame();
+
         JFileChooser chooser = new JFileChooser();
         chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-        Action details = chooser.getActionMap().get("viewTypeDetails");
-        details.actionPerformed(null);
+        //Action details = chooser.getActionMap().get("viewTypeDetails");
+        //details.actionPerformed(null);
         chooser.setControlButtonsAreShown(true);
+
+        if (chooser.showOpenDialog(parent) == JFileChooser.APPROVE_OPTION)
+        {
+            path = chooser.getSelectedFile().getAbsolutePath();
+            ndpiConverter.setInputpath(path);
+            ndpiConverter.setOutputpath(path);
+        }
+
         return chooser;
     }
 
     private JFileChooser createFileChooser()
     {
+        JFrame parent = ((SingleFrameApplication) Application.getInstance()).getMainFrame();
+
         JFileChooser chooser = new JFileChooser();
         chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
         chooser.addChoosableFileFilter(tifFilter);
         chooser.addChoosableFileFilter(ndpiFilter);
-        Action details = chooser.getActionMap().get("viewTypeDetails");
-        details.actionPerformed(null);
+        //Action details = chooser.getActionMap().get("viewTypeDetails");
+        //details.actionPerformed(null);
         chooser.setControlButtonsAreShown(true);
+
+        if (chooser.showOpenDialog(parent) == JFileChooser.APPROVE_OPTION)
+        {
+            path = chooser.getSelectedFile().getAbsolutePath();
+            ndpiConverter.setInputpath(path);
+            ndpiConverter.setOutputpath(path);
+            File inputPathFile = new File(path);
+        }
+
         return chooser;
     }
 
+    private void selectPath()
+    {
+        LOGGER.info("Select Path Action clicked");
+
+        if(ndpiConverter.getType().equals("SingleDir") ) {
+            JFileChooser chooser = createDirChooser();
+            chooser.setDialogTitle("Verzeichnis auswählen");
+        }
+        else if(ndpiConverter.getType().equals("SingleFile")) {
+            JFileChooser chooser = createFileChooser();
+            chooser.setDialogTitle("File auswählen");
+        }
+        else if (ndpiConverter.getType().equals("MultiFile")) {
+            JFileChooser chooser = createFileChooser();
+            chooser.setMultiSelectionEnabled(true);
+        }
+        else if (ndpiConverter.getType().equals("MultiDir")) {
+            JFileChooser chooser = createDirChooser();
+            chooser.setMultiSelectionEnabled(true);
+        }
+        else {
+            System.out.println("\nERROR");
+        }
+
+    }
 
     private class ConvertAction extends AbstractAction {
         public void actionPerformed(ActionEvent actionEvent) {
@@ -118,13 +171,23 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
             taskDialog.setCommands(TaskDialog.StandardCommand.CANCEL);
 
             AnalyzerTask analyzerTask = new AnalyzerTask(progressBar, taskDialog);
-            //noinspection Since15
+
             analyzerTask.execute();
 
             taskDialog.show();
         }
 
         public ConvertAction() {
+
+        }
+    }
+
+    private class InputPathAction extends AbstractAction {
+        public void actionPerformed(ActionEvent actionEvent) {
+            selectPath();
+        }
+
+        public InputPathAction () {
 
         }
     }
@@ -139,26 +202,35 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
         }
     }
 
-    private class InputPathAction extends AbstractAction {
-        public void actionPerformed(ActionEvent actionEvent) {
-
-        }
-
-        public InputPathAction () {
-
-        }
-    }
-
-    private class TypeAction extends AbstractAction {
+    /*private class TypeAction extends AbstractAction {
         public TypeAction() {
         }
 
-        public void actionPerformed(ActionEvent e) {
-            LOGGER.info("Analyze Action clicked");
+        public void propertyChangeListener(PropertyChangeEvent e)
 
+        public void actionPerformed(PropertyChangeEvent e) {
+            ndpiConverter.setType(e.getPropertyName());
+            //TODO Auslesen von ComboBox;
+            LOGGER.info("Analyze Action clicked");
             JFrame parent = ((SingleFrameApplication) Application.getInstance()).getMainFrame();
         }
+
+        public void actionPerformed(ActionEvent e) {
+
+        }
+    }*/
+
+    class TypeAction extends AbstractAction implements PropertyChangeListener  {
+        public void propertyChange(PropertyChangeEvent e) {
+            ndpiConverter.setType(e.getPropertyName());
+            LOGGER.info("Type= "+ e.getPropertyName());
+        }
+
+        public void actionPerformed(ActionEvent e) {
+
+        }
     }
+
 
     private class MagnificationAction extends AbstractAction {
         public void actionPerformed(ActionEvent actionEvent) {

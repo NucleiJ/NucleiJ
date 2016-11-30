@@ -1,4 +1,4 @@
-JFDML JFormDesigner: "6.0.0.0.51" Java: "1.8.0_112" encoding: "UTF-8"
+JFDML JFormDesigner: "6.0.0.0.51" Java: "1.8.0_112-release" encoding: "UTF-8"
 
 new FormModel {
 	"i18n.bundlePackage": "at.ac.htlhl.nucleij.resources.i18n"
@@ -38,9 +38,11 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JComboBox" ) {
 				name: "typeComboBox"
 				"model": new javax.swing.DefaultComboBoxModel {
-					selectedItem: "SingleMode"
-					addElement( "SingleMode" )
-					addElement( "MultiMode" )
+					selectedItem: "Single File"
+					addElement( "Single File" )
+					addElement( "Single Dir" )
+					addElement( "Multi File" )
+					addElement( "Multi Dir" )
 				}
 				"toolTipText": "Select mode"
 				"action": new FormReference( "typeAction" )

@@ -73,7 +73,7 @@ public class NucleiJ extends SingleFrameApplication
 
         // IMMER AUSKOMMENTIEREN
         //show(glScanAnalyzerView);
-        //show(ndpiConverterView);
+        show(ndpiConverterView);
 
 
         //changeView(ndpiConverterView);

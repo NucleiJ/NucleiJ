@@ -17,9 +17,11 @@ public class NdpiConverter extends Model
     public static final String PROPERTY_MAGNIFICATION = "magnification";
 
 
-    public static final String SINGLE = "Single";
-    public static final String MULTI = "Multi";
-    public static final String[] TYPE_CHOICES = {SINGLE, MULTI};
+    public static final String SINGLE_FILE = "Single_File";
+    public static final String SINGLE_DIR = "Single_Dir";
+    public static final String MULTI_FILE = "Multi_File";
+    public static final String MULTI_DIR = "Multi_Dir";
+    public static final String[] TYPE_CHOICES = {SINGLE_FILE, MULTI_FILE};
 
     //endregion Constants
 
@@ -35,7 +37,7 @@ public class NdpiConverter extends Model
     {
         super();
 
-        this.type = MULTI;
+        this.type = MULTI_FILE;
         this.inputpath = "";
         this.outputpath = "";
         this.magnification = Magnification.x10;
