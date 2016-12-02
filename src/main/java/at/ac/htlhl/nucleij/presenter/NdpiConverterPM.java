@@ -20,9 +20,6 @@ import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
 
-/**
- * Created by Stefan on 11.11.2016.
- */
 public class NdpiConverterPM extends PresentationModel<NdpiConverter>
 {
     private static final Logger LOGGER = Logger.getLogger(NdpiConverterPM.class.getName());
@@ -131,19 +128,19 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
     {
         LOGGER.info("Select Path Action clicked");
 
-        if(ndpiConverter.getType().equals("SingleDir") ) {
+        if(ndpiConverter.getType().equals("Single Dir") ) {
             JFileChooser chooser = createDirChooser();
             chooser.setDialogTitle("Verzeichnis auswählen");
         }
-        else if(ndpiConverter.getType().equals("SingleFile")) {
+        else if(ndpiConverter.getType().equals("Single File")) {
             JFileChooser chooser = createFileChooser();
             chooser.setDialogTitle("File auswählen");
         }
-        else if (ndpiConverter.getType().equals("MultiFile")) {
+        else if (ndpiConverter.getType().equals("Multi File")) {
             JFileChooser chooser = createFileChooser();
             chooser.setMultiSelectionEnabled(true);
         }
-        else if (ndpiConverter.getType().equals("MultiDir")) {
+        else if (ndpiConverter.getType().equals("Multi Dir")) {
             JFileChooser chooser = createDirChooser();
             chooser.setMultiSelectionEnabled(true);
         }
@@ -184,11 +181,11 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
 
     private class InputPathAction extends AbstractAction {
         public void actionPerformed(ActionEvent actionEvent) {
-            selectPath();
+
         }
 
         public InputPathAction () {
-
+            //selectPath();
         }
     }
 
@@ -202,33 +199,17 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
         }
     }
 
-    /*private class TypeAction extends AbstractAction {
+    private class TypeAction extends AbstractAction {
         public TypeAction() {
         }
 
-        public void propertyChangeListener(PropertyChangeEvent e)
-
-        public void actionPerformed(PropertyChangeEvent e) {
-            ndpiConverter.setType(e.getPropertyName());
+        public void actionPerformed(ActionEvent e) {
+            //ndpiConverter.setType(e.getPropertyName());
             //TODO Auslesen von ComboBox;
             LOGGER.info("Analyze Action clicked");
             JFrame parent = ((SingleFrameApplication) Application.getInstance()).getMainFrame();
         }
 
-        public void actionPerformed(ActionEvent e) {
-
-        }
-    }*/
-
-    class TypeAction extends AbstractAction implements PropertyChangeListener  {
-        public void propertyChange(PropertyChangeEvent e) {
-            ndpiConverter.setType(e.getPropertyName());
-            LOGGER.info("Type= "+ e.getPropertyName());
-        }
-
-        public void actionPerformed(ActionEvent e) {
-
-        }
     }
 
 

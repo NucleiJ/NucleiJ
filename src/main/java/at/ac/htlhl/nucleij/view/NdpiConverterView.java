@@ -94,10 +94,10 @@ public class NdpiConverterView extends JPanel {
 
         //---- typeComboBox ----
         typeComboBox.setModel(new DefaultComboBoxModel(new String[] {
-            "SingleFile",
-            "SingleDir",
-            "MultiFile",
-            "MultiDir"
+            "Single File",
+            "Single Dir",
+            "Multi File",
+            "Multi Dir"
         }));
         typeComboBox.setToolTipText("Select mode");
         typeComboBox.setAction(typeAction);

@@ -11,9 +11,12 @@ import com.ezware.dialog.task.TaskDialogs;
 import org.jdesktop.application.*;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.EventObject;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import de.javasoft.plaf.synthetica.*;
 
 /**
  * Created by Stefan on 11.11.2016.
@@ -122,27 +125,55 @@ public class NucleiJ extends SingleFrameApplication
 
     private void initLookAndFeel()
     {
-        try {
+        EventQueue.invokeLater(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                try
+                {
+                    //UIManager.setLookAndFeel("de.javasoft.plaf.synthetica.SyntheticaStandardLookAndFeel");
+                    //UIManager.setLookAndFeel("com.bulenkov.darcula.DarculaLaf");
+                    //UIManager.setLookAndFeel( "com.seaglasslookandfeel.SeaGlassLookAndFeel" );
+                    //UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+
+                }
+                catch ( Exception e )
+                {
+                    e.printStackTrace();
+                }
+            }
+        } );
+
+
+
+
+
+
             //PlasticLookAndFeel.setPlasticTheme(new SkyBluer());
             //UIManager.setLookAndFeel(new PlasticXPLookAndFeel());
+            //UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            //UIManager.setLookAndFeel("com.seaglasslookandfeel.SeaGlassLookAndFeel");
+        /*try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (UnsupportedLookAndFeelException e) {
+            e.printStackTrace();
+        }*/
 
-            //Nimbus Design
-            for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+        //Nimbus Design
+            /*for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
                     UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
-            }
-        }
-        catch(UnsupportedLookAndFeelException ex) {
-            LOGGER.log(Level.SEVERE, "Look and Feel could not be initialized " + ex.getMessage(), ex);
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
+            }*/
+
     }
 
 
