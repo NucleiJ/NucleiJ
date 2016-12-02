@@ -7,8 +7,11 @@ package at.ac.htlhl.nucleij.view;
 import java.awt.*;
 import java.util.*;
 import javax.swing.*;
+import javax.swing.text.View;
 
 import at.ac.htlhl.nucleij.presenter.MainPM;
+import com.jgoodies.forms.factories.*;
+import com.jgoodies.forms.layout.*;
 
 /**
  * @author Schülerlizenz 2016/17
@@ -39,15 +42,36 @@ public class MainFrameView extends JFrame {
 
     private MainPM mainPM;
 
+    //public MainFrameView(MainPM mainPM, JPanel ndpiConverterView, JPanel glScanAnalyzerView)
     public MainFrameView(MainPM mainPM)
     {
         this.mainPM = mainPM;
+        //this.converterPanel = ndpiConverterView;
+        //this.analyzerPanel  = glScanAnalyzerView;
 
         initComponents();
 
         //mainTabbedPain.setComponentAt(0, new JButton("Hallo"));
 
     }
+/*
+
+    public JPanel getConverterPanel() {
+        return converterPanel;
+    }
+
+    public void setConverterPanel(JPanel converterPanel) {
+        this.converterPanel = converterPanel;
+    }
+
+    public JPanel getAnalyzerPanel() {
+        return analyzerPanel;
+    }
+
+    public void setAnalyzerPanel(JPanel analyzerPanel) {
+        this.analyzerPanel = analyzerPanel;
+    }
+*/
 
     private void createUIComponents() {
         loadAction = (AbstractAction) mainPM.getLoadAction();

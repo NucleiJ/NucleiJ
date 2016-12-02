@@ -1,33 +1,23 @@
 /*
  * Created by JFormDesigner on Fri Nov 11 10:33:34 CET 2016
  */
-
 package at.ac.htlhl.nucleij.view;
 
-import java.awt.*;
-import java.awt.event.*;
-import java.beans.*;
-import java.text.NumberFormat;
-import java.util.*;
-import javax.swing.border.*;
-import javax.swing.event.*;
 import at.ac.htlhl.nucleij.model.GLScanAnalyzer;
 import at.ac.htlhl.nucleij.presenter.GLScanAnalyzerPM;
 import com.jgoodies.binding.adapter.BoundedRangeAdapter;
 import com.jgoodies.binding.adapter.ComboBoxAdapter;
-import com.jgoodies.binding.beans.BeanAdapter;
-import com.jgoodies.binding.beans.PropertyAdapter;
-import com.jgoodies.binding.beans.PropertyConnector;
 import com.jgoodies.binding.binder.Binders;
 import com.jgoodies.binding.binder.PresentationModelBinder;
-import com.jgoodies.binding.value.ConverterFactory;
 import com.jgoodies.binding.value.ValueModel;
-import com.jgoodies.forms.factories.*;
-import com.jgoodies.forms.layout.*;
+import com.jgoodies.forms.factories.Borders;
+import com.jgoodies.forms.factories.CC;
+import com.jgoodies.forms.factories.DefaultComponentFactory;
+import com.jgoodies.forms.layout.FormLayout;
 
 import javax.swing.*;
-
-import static at.ac.htlhl.nucleij.model.GLScanAnalyzer.PROPERTY_FLOAT_VALUE;
+import java.awt.*;
+import java.util.ResourceBundle;
 
 /**
  * @author Schülerlizenz 2016/17
@@ -115,8 +105,10 @@ public class GLScanAnalyzerView extends JPanel
         binder.bindBeanProperty(GLScanAnalyzer.PROPERTY_HEATMAPQUALITY).to(heatmapqualityTextField);
         //TODO Wieso max Value = 101?, in View aber 100, wenn 100 eingestellt, dann 99 in View??
 
-    }
+        // Propertychangelisterner
 
+
+    }
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
@@ -246,4 +238,8 @@ public class GLScanAnalyzerView extends JPanel
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 
+    public void setSliderInvisble()
+    {
+        heatmapqualitySlider.setVisible(false);
+    }
 }

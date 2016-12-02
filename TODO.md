@@ -15,3 +15,4 @@
 * Schriftgröße änderbar (optional zur Laufzeit)
 * Sprache änderbar (optional zur Laufzeit)
 * interaktives Tutorial
+* geschätzte Restdauer anzeigen

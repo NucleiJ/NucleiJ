@@ -58,10 +58,16 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
         calculateandshowheatmapAction = new CalculateandshowheatmapAction();
         selectroiAction = new SelectroiAction();
 
+        setComponentEnabled(GLScanAnalyzer.PROPERTY_HEATMAPQUALITY, getBean().isCalculateandshowheatmap());
+
         // Ausgabe jeder Aenderung
         glScanAnalyzer.addPropertyChangeListener(new PropertyChangeListener() {
             public void propertyChange(PropertyChangeEvent evt) {
                 LOGGER.info("Property name="+evt.getPropertyName()+", oldValue="+evt.getOldValue()+", newValue="+evt.getNewValue());
+                if(GLScanAnalyzer.PROPERTY_CALCULATEANDSHOWHEATMAP.equals(evt.getPropertyName())) {
+                    boolean enabled = evt.getNewValue().toString().toLowerCase().equals("true");
+                    setComponentEnabled(GLScanAnalyzer.PROPERTY_HEATMAPQUALITY, enabled);
+                }
             }
         });
 
@@ -185,7 +191,7 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
                 glScanAnalyzer.setOutputpath(outputpathString);
             }
         }
-        else if(glScanAnalyzer.getType()== "Single") {
+        else if(glScanAnalyzer.getType()== "Single") {              // TODO equals to satt ==
             JFileChooser chooser = createPreparedFileChooser();
 
             if(glScanAnalyzer.getInputpath() != null)   //falls file im path dann wegfiltern
@@ -248,6 +254,8 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
             // Domainobjekt aktualisieren, in Textfeld anzeigen
             glScanAnalyzer.setOutputpath(outputpathString);
         }
+
+
     }
 
     private class SelectpathAction extends AbstractAction

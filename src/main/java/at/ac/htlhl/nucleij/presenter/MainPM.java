@@ -229,7 +229,6 @@ public class MainPM extends PresentationModel<Main>
             //Macht noch nix!
             //NucleiJ.getInstance().changeView(NdpiConverterView ndpiConverterView);
             nucleiJ.changeView(ndpiConverterView);
-            nucleiJ.setCurrentView(1);
 
             // TODO view enablen!
         }

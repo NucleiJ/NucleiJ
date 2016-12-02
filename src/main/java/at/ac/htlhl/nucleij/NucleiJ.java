@@ -8,6 +8,7 @@ import at.ac.htlhl.nucleij.view.GLScanAnalyzerView;
 import at.ac.htlhl.nucleij.view.MainFrameView;
 import at.ac.htlhl.nucleij.view.NdpiConverterView;
 import com.ezware.dialog.task.TaskDialogs;
+import com.jgoodies.looks.plastic.PlasticLookAndFeel;
 import org.jdesktop.application.*;
 
 import javax.swing.*;
@@ -27,8 +28,6 @@ public class NucleiJ extends SingleFrameApplication
 
     // Fields
     private ResourceMap resource;
-    public int currentView;
-
 
     // region Public API
     // ************************************************************************
@@ -57,12 +56,15 @@ public class NucleiJ extends SingleFrameApplication
 
         Main main = new Main();
         MainPM mainPM = new MainPM(main);
-        MainFrameView mainFrame = new MainFrameView(mainPM);
+
         //Könnte man die Zeilen 58-60 nicht auch so verkürtzt schreiben wie GLScanAnalyzerView und NdpiConverterView in Zeile 64&65 schreiben?
         //MainFrameView mainFrame = new MainFrameView(mainPM.getMainPM());
 
         GLScanAnalyzerView glScanAnalyzerView = new GLScanAnalyzerView(mainPM.getGLScanAnalyzerPM(), main.getGLScanAnalyzer());
         NdpiConverterView ndpiConverterView = new NdpiConverterView(mainPM.getNdpiConverterPM());
+
+        //MainFrameView mainFrame = new MainFrameView(mainPM, ndpiConverterView, glScanAnalyzerView);
+        MainFrameView mainFrame = new MainFrameView(mainPM);
 
         // die Views ins PM Model "senden"
         mainPM.setGlScanAnalyzerView(glScanAnalyzerView);
@@ -72,8 +74,9 @@ public class NucleiJ extends SingleFrameApplication
         getMainFrame().setTitle(resource.getString("Application.id"));
 
         // IMMER AUSKOMMENTIEREN
-        //show(glScanAnalyzerView);
-        show(ndpiConverterView);
+        show(glScanAnalyzerView);
+        //show(ndpiConverterView);
+        //show(mainFrame);
 
 
         //changeView(ndpiConverterView);
@@ -184,10 +187,6 @@ public class NucleiJ extends SingleFrameApplication
         {
 
         }
-    }
-
-    public void setCurrentView(int currentView) {
-        this.currentView = currentView;
     }
 
     // endregion
