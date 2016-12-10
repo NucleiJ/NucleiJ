@@ -12,14 +12,12 @@ import com.jgoodies.looks.plastic.PlasticLookAndFeel;
 import org.jdesktop.application.*;
 
 import javax.swing.*;
-import java.awt.*;
 import java.util.EventObject;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
 /**
- * Created by Stefan & Andreas on 11.11.2016.
+ * Created by Stefan on 11.11.2016.
  */
 public class NucleiJ extends SingleFrameApplication
 {
@@ -27,7 +25,6 @@ public class NucleiJ extends SingleFrameApplication
     // ************************************************************************
     public static final NucleiJ nucleiJ = new NucleiJ();
     private static final Logger LOGGER = Logger.getLogger(NucleiJ.class.getName());
-
 
     // Fields
     private ResourceMap resource;
@@ -76,7 +73,6 @@ public class NucleiJ extends SingleFrameApplication
         setMainFrame(mainFrame);
         getMainFrame().setTitle(resource.getString("Application.id"));
 
-
         // IMMER AUSKOMMENTIEREN
         show(glScanAnalyzerView);
         //show(ndpiConverterView);
@@ -95,7 +91,7 @@ public class NucleiJ extends SingleFrameApplication
         //}
 
         // getMainFrame().setResizable(false);
-        addExitListener(new NucleijExitListener());
+        addExitListener(new CarConfiguratorExitListener());
 
     }
 
@@ -129,35 +125,10 @@ public class NucleiJ extends SingleFrameApplication
 
     private void initLookAndFeel()
     {
-        EventQueue.invokeLater(new Runnable()
-        {
-            @Override
-            public void run()
-            {
-                try
-                {
-                    //UIManager.setLookAndFeel("de.javasoft.plaf.synthetica.SyntheticaStandardLookAndFeel");
-                    //UIManager.setLookAndFeel("com.bulenkov.darcula.DarculaLaf");
-                    //UIManager.setLookAndFeel( "com.seaglasslookandfeel.SeaGlassLookAndFeel" );
-                    //UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-
-                }
-                catch ( Exception e )
-                {
-                    e.printStackTrace();
-                }
-            }
-        } );
-
-
-
-
-
-
         try {
             //PlasticLookAndFeel.setPlasticTheme(new SkyBluer());
             //UIManager.setLookAndFeel(new PlasticXPLookAndFeel());
-            PlasticLookAndFeel.set3DEnabled(true);
+
             //Nimbus Design
             for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -175,7 +146,6 @@ public class NucleiJ extends SingleFrameApplication
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-        //SwingUtilities.updateComponentTreeUI();
     }
 
 
@@ -193,7 +163,7 @@ public class NucleiJ extends SingleFrameApplication
     // region Nested classes
     // ************************************************************************
 
-    private class NucleijExitListener implements ExitListener
+    private class CarConfiguratorExitListener implements ExitListener
     {
         public boolean canExit(EventObject e)
         {
