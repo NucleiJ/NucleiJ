@@ -16,3 +16,4 @@
 * Sprache änderbar (optional zur Laufzeit)
 * interaktives Tutorial
 * geschätzte Restdauer anzeigen
+* Test
