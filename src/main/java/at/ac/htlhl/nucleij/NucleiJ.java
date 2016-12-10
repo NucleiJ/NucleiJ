@@ -73,6 +73,7 @@ public class NucleiJ extends SingleFrameApplication
         setMainFrame(mainFrame);
         getMainFrame().setTitle(resource.getString("Application.id"));
 
+
         // IMMER AUSKOMMENTIEREN
         show(glScanAnalyzerView);
         //show(ndpiConverterView);
