@@ -4,22 +4,16 @@ import at.ac.htlhl.nucleij.AppContext;
 import at.ac.htlhl.nucleij.model.GLScanAnalyzer;
 import at.ac.htlhl.nucleij.presenter.tasks.AnalyzerTask;
 import at.ac.htlhl.nucleij.util.SuffixFileFilter;
-import at.ac.htlhl.nucleij.view.GLScanAnalyzerView;
 import com.ezware.dialog.task.TaskDialog;
 import com.jgoodies.binding.PresentationModel;
-import com.jgoodies.binding.adapter.BoundedRangeAdapter;
-import com.jgoodies.binding.beans.BeanAdapter;
-import com.jgoodies.binding.value.ValueModel;
 import org.jdesktop.application.Application;
 import org.jdesktop.application.SingleFrameApplication;
-
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.File;
-import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
@@ -59,6 +53,8 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
         selectroiAction = new SelectroiAction();
 
         setComponentEnabled(GLScanAnalyzer.PROPERTY_HEATMAPQUALITY, getBean().isCalculateandshowheatmap());
+        //setComponentEnabled(GLScanAnalyzer.PROPERT, getBean().isCalculateandshowheatmap());
+
 
         // Ausgabe jeder Aenderung
         glScanAnalyzer.addPropertyChangeListener(new PropertyChangeListener() {
@@ -110,17 +106,20 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
         public void actionPerformed(ActionEvent e) {
             LOGGER.info("Analyze Action clicked");
 
-            //Output Directory erstellen
-            boolean createOutputDirectory = false;
-            try {
-                createOutputDirectory = new File(outputpathString).mkdirs();
-            } catch (Exception e1) {
-                System.out.println("Kein Pfad angegeben!");
-                e1.printStackTrace();
+            File outputpathFile = new File(outputpathString);
+            if (outputpathFile.exists())
+            {
+                System.out.println("Ordner gibts schon");
             }
-            if (!createOutputDirectory) {
-                //TODO Warum Fehler? Gibt es dieses Verzeichnis schon? Dann kein Fehler
-                System.out.println("Error beim Erstellen des Ordners");
+            else if (!outputpathFile.exists())
+            {
+                System.out.println("Ordner wird erstellt");
+                outputpathFile.mkdirs();
+
+            }
+            else
+            {
+                System.out.println("ERROR");
             }
 
             // TODO Action ausprogrammieren
