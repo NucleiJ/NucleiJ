@@ -9,6 +9,8 @@ import at.ac.htlhl.nucleij.view.MainFrameView;
 import at.ac.htlhl.nucleij.view.NdpiConverterView;
 import com.ezware.dialog.task.TaskDialogs;
 import com.jgoodies.looks.plastic.PlasticLookAndFeel;
+import de.javasoft.plaf.synthetica.SyntheticaBlueIceLookAndFeel;
+import de.javasoft.plaf.synthetica.SyntheticaStandardLookAndFeel;
 import org.jdesktop.application.*;
 
 import javax.swing.*;
@@ -125,7 +127,8 @@ public class NucleiJ extends SingleFrameApplication
 
     private void initLookAndFeel()
     {
-        try {
+        //NIMBUS
+        /*try {
             //PlasticLookAndFeel.setPlasticTheme(new SkyBluer());
             //UIManager.setLookAndFeel(new PlasticXPLookAndFeel());
 
@@ -145,7 +148,23 @@ public class NucleiJ extends SingleFrameApplication
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
+        }*/
+
+
+        //UIManager.put("Synthetica.font.scaleFactor", 110);
+        UIManager.put("Synthetica.font.scaleFactor", 110);
+        UIManager.put("Synthetica.slider.hoverAndPressed.enabled", true);
+        //UIManager.put("Synthetica.slider.track.animation.delay", 500);
+
+        try
+        {
+            UIManager.setLookAndFeel(new SyntheticaBlueIceLookAndFeel());
         }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
     }
 
 
