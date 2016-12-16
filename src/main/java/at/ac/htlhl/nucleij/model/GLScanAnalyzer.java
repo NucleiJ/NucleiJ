@@ -14,30 +14,32 @@ public class GLScanAnalyzer extends Model
     // region Constants
     // ************************************************************************
     // Properties
-    public static final String PROPERTY_TYPE = "type";
+
+    /*public static final String PROPERTY_TYPE = "type";
     public static final String PROPERTY_INPUTPATH = "inputpath";
     public static final String PROPERTY_OUTPUTPATH = "outputpath";
+    public static final String PROPERTY_SELECTROI = "selectroi";*/
+
     public static final String PROPERTY_CALCULATEANDSHOWHEATMAP = "calculateandshowheatmap";
     public static final String PROPERTY_HEATMAPQUALITY = "heatmapquality";
-    public static final String PROPERTY_SELECTROI = "selectroi";
-    public static final String PROPERTY_FLOAT_VALUE    = "floatValue";
 
     // endregion
 
-    // TODO Erweiterung von JGoodies Beispiel fuer ObjectChoice
-    public static final String SINGLE   = "Single";
+    /*public static final String SINGLE   = "Single";
     public static final String MULTI    = "Multi";
-    public static final String[] STRING_CHOICES = { SINGLE, MULTI };
+    public static final String[] STRING_CHOICES = { SINGLE, MULTI };*/
 
     // region Fields
     // ************************************************************************
 
-    private String type;
+    /*private String type;
     private String inputpath;
     private String outputpath;
+    private boolean selectroi;*/
+
     private int heatmapquality;
     private boolean calculateandshowheatmap;
-    private boolean selectroi;
+
     // endregion
 
 
@@ -45,40 +47,17 @@ public class GLScanAnalyzer extends Model
     {
         super();
 
-        this.type = MULTI;
+        /*this.type = MULTI;
         this.inputpath = "";
         this.outputpath = "";
+        this.selectroi = false;*/
+
         this.heatmapquality = 60;
         this.calculateandshowheatmap = false;
-        this.selectroi = false;
     }
 
     // region Getter and Setter
     // ************************************************************************
-    public String getInputpath()
-    {
-        return inputpath;
-    }
-
-    public void setInputpath(String inputpath)
-    {
-        String oldValue = this.inputpath;
-        this.inputpath = inputpath;
-        firePropertyChange(PROPERTY_INPUTPATH, oldValue, inputpath);
-    }
-
-    public String getOutputpath()
-    {
-        return outputpath;
-    }
-
-    public void setOutputpath(String outputpath)
-    {
-        String oldValue = this.outputpath;
-        this.outputpath = outputpath;
-        firePropertyChange(PROPERTY_OUTPUTPATH, oldValue, outputpath);
-    }
-
     public int getHeatmapquality()
     {
         return heatmapquality;
@@ -107,6 +86,33 @@ public class GLScanAnalyzer extends Model
         firePropertyChange(PROPERTY_CALCULATEANDSHOWHEATMAP, oldValue, calculateandshowheatmap);
     }
 
+    /*
+    public String getInputpath()
+    {
+        return inputpath;
+    }
+
+    public void setInputpath(String inputpath)
+    {
+        String oldValue = this.inputpath;
+        this.inputpath = inputpath;
+        firePropertyChange(PROPERTY_INPUTPATH, oldValue, inputpath);
+    }
+
+    public String getOutputpath()
+    {
+        return outputpath;
+    }
+
+    public void setOutputpath(String outputpath)
+    {
+        String oldValue = this.outputpath;
+        this.outputpath = outputpath;
+        firePropertyChange(PROPERTY_OUTPUTPATH, oldValue, outputpath);
+    }
+
+
+
     public boolean isSelectroi()
     {
         return selectroi;
@@ -127,6 +133,10 @@ public class GLScanAnalyzer extends Model
         this.type = type;
         firePropertyChange(PROPERTY_TYPE, oldValue, type);
     }
+
+
+
+    */
 
     // endregion
 }

@@ -18,6 +18,7 @@ import com.jgoodies.forms.layout.FormLayout;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ResourceBundle;
+import net.miginfocom.swing.*;
 
 /**
  * @author Schülerlizenz 2016/17
@@ -28,16 +29,6 @@ public class GLScanAnalyzerView extends JPanel
     // region Fields
     // ************************************************************************
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    private JComponent inputSeparator;
-    private JLabel analyzeType;
-    private JComboBox typeComboBox;
-    private JLabel inputpathLabel;
-    private JFormattedTextField inputpathTextField;
-    private JButton inputpathButton;
-    private JComponent outputSeperator;
-    private JLabel outputpathLabel;
-    private JFormattedTextField outputpathTextField;
-    private JButton outputpathButton;
     private JComponent heatmapSeparator;
     private JLabel calculateandshowheatmapLabel;
     private JCheckBox calculateandshowheatmapCheckBox;
@@ -47,12 +38,11 @@ public class GLScanAnalyzerView extends JPanel
     private JLabel heatmapqualityvalueLabel;
     private JComponent roiSeperator;
     private JLabel selectroiLabel;
-    private JCheckBox selectroiCheckBox;
+    private JButton deleteRoiButton;
+    private JFormattedTextField selectRoiTextField;
+    private JButton selectRoiButton;
     private JButton startAnalyzerButton;
     private AbstractAction analyzeAction;
-    private AbstractAction selectpathAction;
-    private AbstractAction typeAction;
-    private AbstractAction outputpathAction;
     private AbstractAction calculateandshowheatmapAction;
     private AbstractAction selectroiAction;
     private AbstractAction changeheatmapqualityAction;
@@ -74,32 +64,33 @@ public class GLScanAnalyzerView extends JPanel
 
         initBinding();
 
-        outputpathTextField.setEditable(false);
+        //outputpathTextField.setEditable(false);
     }
 
     private void createUIComponents()
     {
         analyzeAction = (AbstractAction) glScanAnalyzerPM.getAnalyzeAction();
-        selectpathAction= (AbstractAction) glScanAnalyzerPM.getSelectpathAction();
-        typeAction = (AbstractAction) glScanAnalyzerPM.getTypeAction();
-        outputpathAction  = (AbstractAction) glScanAnalyzerPM.getOutputpathAction();
         calculateandshowheatmapAction = (AbstractAction) glScanAnalyzerPM.getCalculateandshowheatmapAction();
         selectroiAction = (AbstractAction) glScanAnalyzerPM.getSelectroiAction();
 
+        /*selectpathAction= (AbstractAction) glScanAnalyzerPM.getSelectpathAction();
+        typeAction = (AbstractAction) glScanAnalyzerPM.getTypeAction();
+        outputpathAction  = (AbstractAction) glScanAnalyzerPM.getOutputpathAction();*/
     }
 
     private void initBinding()
     {
+        /*//ALTES BINDING
         PresentationModelBinder binder = Binders.binderFor(glScanAnalyzerPM);
         binder.bindBeanProperty(GLScanAnalyzer.PROPERTY_INPUTPATH).to(inputpathTextField);
         binder.bindBeanProperty(GLScanAnalyzer.PROPERTY_OUTPUTPATH).to(outputpathTextField);
-        binder.bindBeanProperty(GLScanAnalyzer.PROPERTY_CALCULATEANDSHOWHEATMAP).to(calculateandshowheatmapCheckBox);
         binder.bindBeanProperty(GLScanAnalyzer.PROPERTY_SELECTROI).to(selectroiCheckBox);
-
-
         ValueModel typeValueModel =  glScanAnalyzerPM.getComponentModel(GLScanAnalyzer.PROPERTY_TYPE);
         ComboBoxAdapter comboBoxAdapter = new ComboBoxAdapter(GLScanAnalyzer.STRING_CHOICES, typeValueModel);
-        typeComboBox.setModel(comboBoxAdapter);
+        typeComboBox.setModel(comboBoxAdapter);*/
+
+        PresentationModelBinder binder = Binders.binderFor(glScanAnalyzerPM);
+        binder.bindBeanProperty(GLScanAnalyzer.PROPERTY_CALCULATEANDSHOWHEATMAP).to(calculateandshowheatmapCheckBox);
 
         // Property: HeatMapQuality
         ValueModel heatmapQualityValueModel = glScanAnalyzerPM.getModel(GLScanAnalyzer.PROPERTY_HEATMAPQUALITY);
@@ -107,7 +98,6 @@ public class GLScanAnalyzerView extends JPanel
         binder.bindBeanProperty(GLScanAnalyzer.PROPERTY_HEATMAPQUALITY).to(heatmapqualityTextField);
         //TODO Wieso max Value = 101?, in View aber 100, wenn 100 eingestellt, dann 99 in View??
 
-        // Propertychangelisterner
 
 
     }
@@ -118,16 +108,6 @@ public class GLScanAnalyzerView extends JPanel
 
         ResourceBundle bundle = ResourceBundle.getBundle("at.ac.htlhl.nucleij.resources.i18n.glscananalyzerview");
         DefaultComponentFactory compFactory = DefaultComponentFactory.getInstance();
-        inputSeparator = compFactory.createSeparator(bundle.getString("GLScanAnalyzerView.inputSeperator.text"));
-        analyzeType = new JLabel();
-        typeComboBox = new JComboBox();
-        inputpathLabel = new JLabel();
-        inputpathTextField = new JFormattedTextField();
-        inputpathButton = new JButton();
-        outputSeperator = compFactory.createSeparator(bundle.getString("GLScanAnalyzerView.outputSeperator.text"));
-        outputpathLabel = new JLabel();
-        outputpathTextField = new JFormattedTextField();
-        outputpathButton = new JButton();
         heatmapSeparator = compFactory.createSeparator(bundle.getString("GLScanAnalyzerView.heatmapSeperator.text"));
         calculateandshowheatmapLabel = new JLabel();
         calculateandshowheatmapCheckBox = new JCheckBox();
@@ -137,106 +117,67 @@ public class GLScanAnalyzerView extends JPanel
         heatmapqualityvalueLabel = new JLabel();
         roiSeperator = compFactory.createSeparator(bundle.getString("GLScanAnalyzerView.roiSeperator.text"));
         selectroiLabel = new JLabel();
-        selectroiCheckBox = new JCheckBox();
+        deleteRoiButton = new JButton();
+        selectRoiTextField = new JFormattedTextField();
+        selectRoiButton = new JButton();
         startAnalyzerButton = new JButton();
 
         //======== this ========
         setBorder(Borders.DIALOG);
         setLayout(new FormLayout(
-            "right:59dlu, $lcgap, 63dlu, $lcgap, default:grow, $lcgap, 24dlu, 2*($lcgap, default)",
-            "18dlu, 5*($lgap, default), $lgap, 16dlu, $lgap, 18dlu, 3*($lgap, default), $lgap, default:grow"));
-        add(inputSeparator, CC.xywh(1, 1, 11, 1));
-
-        //---- analyzeType ----
-        analyzeType.setText(bundle.getString("GLScanAnalyzerView.analyzetypeLabel.text"));
-        add(analyzeType, CC.xy(1, 3));
-
-        //---- typeComboBox ----
-        typeComboBox.setModel(new DefaultComboBoxModel(new String[] {
-            "SingleMode",
-            "MultiMode"
-        }));
-        typeComboBox.setSelectedIndex(1);
-        typeComboBox.setAction(typeAction);
-        add(typeComboBox, CC.xy(3, 3));
-
-        //---- inputpathLabel ----
-        inputpathLabel.setText(bundle.getString("GLScanAnalyzerView.inputpathLabel.text"));
-        add(inputpathLabel, CC.xy(1, 5));
-
-        //---- inputpathTextField ----
-        inputpathTextField.setEditable(false);
-        add(inputpathTextField, CC.xywh(3, 5, 3, 1));
-
-        //---- inputpathButton ----
-        inputpathButton.setText("text");
-        inputpathButton.setAction(selectpathAction);
-        add(inputpathButton, CC.xy(7, 5, CC.LEFT, CC.DEFAULT));
-
-        //---- outputSeperator ----
-        outputSeperator.setFont(new Font("sansserif", Font.PLAIN, 12));
-        add(outputSeperator, CC.xywh(1, 7, 11, 1));
-
-        //---- outputpathLabel ----
-        outputpathLabel.setText(bundle.getString("GLScanAnalyzerView.outputpathLabel.text"));
-        add(outputpathLabel, CC.xy(1, 9));
-
-        //---- outputpathTextField ----
-        outputpathTextField.setEditable(false);
-        add(outputpathTextField, CC.xywh(3, 9, 3, 1));
-
-        //---- outputpathButton ----
-        outputpathButton.setAction(outputpathAction);
-        add(outputpathButton, CC.xy(7, 9, CC.LEFT, CC.DEFAULT));
-        add(heatmapSeparator, CC.xywh(1, 11, 11, 1));
+            "right:59dlu, $lcgap, default, $lcgap, 63dlu, $lcgap, pref:grow, $lcgap, 24dlu, 2*($lcgap, pref)",
+            "pref, $lgap, 16dlu, $lgap, 18dlu, 3*($lgap, pref), $lgap, pref:grow"));
+        add(heatmapSeparator, CC.xywh(1, 1, 13, 1));
 
         //---- calculateandshowheatmapLabel ----
         calculateandshowheatmapLabel.setText(bundle.getString("GLScanAnalyzerView.calculateandshowheatmapLabel"));
-        add(calculateandshowheatmapLabel, CC.xy(1, 13));
+        add(calculateandshowheatmapLabel, CC.xy(1, 3));
 
         //---- calculateandshowheatmapCheckBox ----
         calculateandshowheatmapCheckBox.setAction(calculateandshowheatmapAction);
-        add(calculateandshowheatmapCheckBox, CC.xy(3, 13));
+        add(calculateandshowheatmapCheckBox, CC.xy(3, 3));
 
         //---- heatmapqualityLabel ----
         heatmapqualityLabel.setText(bundle.getString("GLScanAnalyzerView.heatmapqualityLabel.text"));
-        add(heatmapqualityLabel, CC.xy(1, 15));
+        add(heatmapqualityLabel, CC.xy(1, 5));
 
         //---- heatmapqualitySlider ----
         heatmapqualitySlider.setMinimum(1);
         heatmapqualitySlider.setValue(60);
-        add(heatmapqualitySlider, CC.xywh(3, 15, 3, 1));
+        add(heatmapqualitySlider, CC.xywh(3, 5, 5, 1));
 
         //---- heatmapqualityTextField ----
         heatmapqualityTextField.setBackground(UIManager.getColor("ArrowButton.background"));
         heatmapqualityTextField.setColumns(3);
-        add(heatmapqualityTextField, CC.xy(7, 15, CC.LEFT, CC.DEFAULT));
-        add(heatmapqualityvalueLabel, CC.xy(11, 15));
-        add(roiSeperator, CC.xywh(1, 17, 11, 1));
+        add(heatmapqualityTextField, CC.xy(9, 5, CC.LEFT, CC.DEFAULT));
+        add(heatmapqualityvalueLabel, CC.xy(13, 5));
+        add(roiSeperator, CC.xywh(1, 7, 13, 1));
 
         //---- selectroiLabel ----
         selectroiLabel.setText(bundle.getString("GLScanAnalyzerView.selectroiLabel"));
-        add(selectroiLabel, CC.xy(1, 19));
+        add(selectroiLabel, CC.xy(1, 9));
 
-        //---- selectroiCheckBox ----
-        selectroiCheckBox.setAction(selectroiAction);
-        add(selectroiCheckBox, CC.xy(3, 19));
+        //---- deleteRoiButton ----
+        deleteRoiButton.setText(bundle.getString("GLScanAnalyzerView.deleteRoiButton.text"));
+        add(deleteRoiButton, CC.xy(3, 9));
+
+        //---- selectRoiTextField ----
+        selectRoiTextField.setEditable(false);
+        add(selectRoiTextField, CC.xywh(5, 9, 3, 1));
+
+        //---- selectRoiButton ----
+        selectRoiButton.setAction(selectroiAction);
+        add(selectRoiButton, CC.xy(9, 9));
 
         //---- startAnalyzerButton ----
         startAnalyzerButton.setAction(analyzeAction);
-        add(startAnalyzerButton, CC.xy(9, 21, CC.RIGHT, CC.DEFAULT));
+        add(startAnalyzerButton, CC.xy(11, 11, CC.RIGHT, CC.DEFAULT));
 
         //---- analyzeAction ----
         analyzeAction.putValue(Action.NAME, bundle.getString("GLScanAnalyzerView.analyzeAction.Name"));
 
-        //---- selectpathAction ----
-        selectpathAction.putValue(Action.NAME, bundle.getString("GLScanAnalyzerView.selectpathAction.Name"));
-
-        //---- typeAction ----
-        typeAction.putValue(Action.NAME, bundle.getString("GLScanAnalyzerView.analyzetypeLabel.text"));
-
-        //---- outputpathAction ----
-        outputpathAction.putValue(Action.NAME, bundle.getString("GLScanAnalyzerView.outputpathAction.Name"));
+        //---- selectroiAction ----
+        selectroiAction.putValue(Action.NAME, bundle.getString("GLScanAnalyzerView.Dialog.Name"));
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 

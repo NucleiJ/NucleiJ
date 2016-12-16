@@ -8,115 +8,38 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
-			"$columnSpecs": "right:59dlu, labelcompgap, 63dlu, labelcompgap, default:grow, labelcompgap, 24dlu, labelcompgap, default, labelcompgap, default"
-			"$rowSpecs": "18dlu, linegap, default, linegap, default, linegap, default, linegap, default, linegap, default, linegap, 16dlu, linegap, 18dlu, linegap, default, linegap, default, linegap, default, linegap, default:grow"
+			"$columnSpecs": "right:59dlu, labelcompgap, default, labelcompgap, 63dlu, labelcompgap, pref:grow, labelcompgap, 24dlu, labelcompgap, pref, labelcompgap, pref"
+			"$rowSpecs": "pref, linegap, 16dlu, linegap, 18dlu, linegap, pref, linegap, pref, linegap, pref, linegap, pref:grow"
 		} ) {
 			name: "this"
 			"border": sfield com.jgoodies.forms.factories.Borders DIALOG_BORDER
 			add( new FormComponent( "com.jformdesigner.designer.wrapper.JGoodiesFormsSeparator" ) {
-				name: "inputSeparator"
-				"text": new FormMessage( null, "GLScanAnalyzerView.inputSeperator.text" )
-			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridWidth": 11
-			} )
-			add( new FormComponent( "javax.swing.JLabel" ) {
-				name: "analyzeType"
-				"text": new FormMessage( null, "GLScanAnalyzerView.analyzetypeLabel.text" )
-			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridY": 3
-			} )
-			add( new FormComponent( "javax.swing.JComboBox" ) {
-				name: "typeComboBox"
-				"model": new javax.swing.DefaultComboBoxModel {
-					selectedItem: "SingleMode"
-					addElement( "SingleMode" )
-					addElement( "MultiMode" )
-				}
-				"selectedIndex": 1
-				"action": new FormReference( "typeAction" )
-			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 3
-				"gridY": 3
-			} )
-			add( new FormComponent( "javax.swing.JLabel" ) {
-				name: "inputpathLabel"
-				"text": new FormMessage( null, "GLScanAnalyzerView.inputpathLabel.text" )
-			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridY": 5
-			} )
-			add( new FormComponent( "javax.swing.JFormattedTextField" ) {
-				name: "inputpathTextField"
-				"editable": false
-			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 3
-				"gridY": 5
-				"gridWidth": 3
-			} )
-			add( new FormComponent( "javax.swing.JButton" ) {
-				name: "inputpathButton"
-				"text": "text"
-				"action": new FormReference( "selectpathAction" )
-			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 7
-				"gridY": 5
-				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints LEFT
-			} )
-			add( new FormComponent( "com.jformdesigner.designer.wrapper.JGoodiesFormsSeparator" ) {
-				name: "outputSeperator"
-				"text": new FormMessage( null, "GLScanAnalyzerView.outputSeperator.text" )
-				"font": new java.awt.Font( "sansserif", 0, 12 )
-			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridY": 7
-				"gridWidth": 11
-			} )
-			add( new FormComponent( "javax.swing.JLabel" ) {
-				name: "outputpathLabel"
-				"text": new FormMessage( null, "GLScanAnalyzerView.outputpathLabel.text" )
-			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridY": 9
-			} )
-			add( new FormComponent( "javax.swing.JFormattedTextField" ) {
-				name: "outputpathTextField"
-				"editable": false
-			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 3
-				"gridY": 9
-				"gridWidth": 3
-			} )
-			add( new FormComponent( "javax.swing.JButton" ) {
-				name: "outputpathButton"
-				"action": new FormReference( "outputpathAction" )
-			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 7
-				"gridY": 9
-				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints LEFT
-			} )
-			add( new FormComponent( "com.jformdesigner.designer.wrapper.JGoodiesFormsSeparator" ) {
 				name: "heatmapSeparator"
 				"text": new FormMessage( null, "GLScanAnalyzerView.heatmapSeperator.text" )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridY": 11
-				"gridWidth": 11
+				"gridX": 1
+				"gridWidth": 13
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "calculateandshowheatmapLabel"
 				"text": new FormMessage( null, "GLScanAnalyzerView.calculateandshowheatmapLabel" )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 1
-				"gridY": 13
+				"gridY": 3
 			} )
 			add( new FormComponent( "javax.swing.JCheckBox" ) {
 				name: "calculateandshowheatmapCheckBox"
 				"action": new FormReference( "calculateandshowheatmapAction" )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 3
-				"gridY": 13
+				"gridY": 3
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "heatmapqualityLabel"
 				"text": new FormMessage( null, "GLScanAnalyzerView.heatmapqualityLabel.text" )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridY": 15
+				"gridX": 1
+				"gridY": 5
 			} )
 			add( new FormComponent( "javax.swing.JSlider" ) {
 				name: "heatmapqualitySlider"
@@ -124,56 +47,72 @@ new FormModel {
 				"value": 60
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 3
-				"gridY": 15
-				"gridWidth": 3
+				"gridY": 5
+				"gridWidth": 5
 			} )
 			add( new FormComponent( "javax.swing.JFormattedTextField" ) {
 				name: "heatmapqualityTextField"
 				"background": new com.jformdesigner.model.SwingColor( "ArrowButton.background" )
 				"columns": 3
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 7
-				"gridY": 15
+				"gridX": 9
+				"gridY": 5
 				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints LEFT
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "heatmapqualityvalueLabel"
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 11
-				"gridY": 15
+				"gridX": 13
+				"gridY": 5
 			} )
 			add( new FormComponent( "com.jformdesigner.designer.wrapper.JGoodiesFormsSeparator" ) {
 				name: "roiSeperator"
 				"text": new FormMessage( null, "GLScanAnalyzerView.roiSeperator.text" )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridY": 17
-				"gridWidth": 11
+				"gridX": 1
+				"gridY": 7
+				"gridWidth": 13
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "selectroiLabel"
 				"text": new FormMessage( null, "GLScanAnalyzerView.selectroiLabel" )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 1
-				"gridY": 19
+				"gridY": 9
 			} )
-			add( new FormComponent( "javax.swing.JCheckBox" ) {
-				name: "selectroiCheckBox"
-				"action": new FormReference( "selectroiAction" )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "deleteRoiButton"
+				"text": new FormMessage( null, "GLScanAnalyzerView.deleteRoiButton.text" )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 3
-				"gridY": 19
+				"gridY": 9
+			} )
+			add( new FormComponent( "javax.swing.JFormattedTextField" ) {
+				name: "selectRoiTextField"
+				"editable": false
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 5
+				"gridY": 9
+				"gridWidth": 3
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "selectRoiButton"
+				"action": new FormReference( "selectroiAction" )
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 9
+				"gridY": 9
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "startAnalyzerButton"
 				"action": new FormReference( "analyzeAction" )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 9
-				"gridY": 21
+				"gridX": 11
+				"gridY": 11
 				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints RIGHT
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )
-			"size": new java.awt.Dimension( 425, 335 )
+			"size": new java.awt.Dimension( 485, 335 )
 		} )
 		add( new FormNonVisual( "javax.swing.AbstractAction" ) {
 			name: "analyzeAction"
@@ -185,33 +124,6 @@ new FormModel {
 			"location": new java.awt.Point( 345, 465 )
 		} )
 		add( new FormNonVisual( "javax.swing.AbstractAction" ) {
-			name: "selectpathAction"
-			"$action.Name": new FormMessage( null, "GLScanAnalyzerView.selectpathAction.Name" )
-			auxiliary() {
-				"JavaCodeGenerator.customCreate": true
-			}
-		}, new FormLayoutConstraints( null ) {
-			"location": new java.awt.Point( 0, 415 )
-		} )
-		add( new FormNonVisual( "javax.swing.AbstractAction" ) {
-			name: "typeAction"
-			"$action.Name": new FormMessage( null, "GLScanAnalyzerView.analyzetypeLabel.text" )
-			auxiliary() {
-				"JavaCodeGenerator.customCreate": true
-			}
-		}, new FormLayoutConstraints( null ) {
-			"location": new java.awt.Point( 0, 365 )
-		} )
-		add( new FormNonVisual( "javax.swing.AbstractAction" ) {
-			name: "outputpathAction"
-			"$action.Name": new FormMessage( null, "GLScanAnalyzerView.outputpathAction.Name" )
-			auxiliary() {
-				"JavaCodeGenerator.customCreate": true
-			}
-		}, new FormLayoutConstraints( null ) {
-			"location": new java.awt.Point( 0, 465 )
-		} )
-		add( new FormNonVisual( "javax.swing.AbstractAction" ) {
 			name: "calculateandshowheatmapAction"
 			auxiliary() {
 				"JavaCodeGenerator.customCreate": true
@@ -221,6 +133,7 @@ new FormModel {
 		} )
 		add( new FormNonVisual( "javax.swing.AbstractAction" ) {
 			name: "selectroiAction"
+			"$action.Name": new FormMessage( null, "GLScanAnalyzerView.Dialog.Name" )
 			auxiliary() {
 				"JavaCodeGenerator.customCreate": true
 			}

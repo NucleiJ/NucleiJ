@@ -26,19 +26,21 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
     // Constants
     // ************************************************************************
     private static final Logger LOGGER = Logger.getLogger(GLScanAnalyzerPM.class.getName());
-    public static final String FILE_EXTENSION			= "nucleij";
+    //public static final String FILE_EXTENSION			= "nucleij";
+
+
+    /*private Action selectpathAction;
+    private Action typeAction;
+    private Action outputpathAction;*/
 
     private Action analyzeAction;
-    private Action selectpathAction;
-    private Action typeAction;
-    private Action outputpathAction;
     private Action calculateandshowheatmapAction;
     private Action selectroiAction;
 
     private GLScanAnalyzer glScanAnalyzer;
 
-    private String inputpathString;
-    private String outputpathString;
+    /*private String inputpathString;
+    private String outputpathString;*/
 
     public GLScanAnalyzerPM(GLScanAnalyzer glScanAnalyzer) {
         super(glScanAnalyzer);
@@ -46,11 +48,12 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
         this.glScanAnalyzer = glScanAnalyzer;
 
         analyzeAction = new AnalyzeAction();
-        selectpathAction = new SelectpathAction();
-        typeAction = new TypeAction();
-        outputpathAction = new OutputpathAction();
         calculateandshowheatmapAction = new CalculateandshowheatmapAction();
         selectroiAction = new SelectroiAction();
+
+        /*selectpathAction = new SelectpathAction();
+        typeAction = new TypeAction();
+        outputpathAction = new OutputpathAction();*/
 
         setComponentEnabled(GLScanAnalyzer.PROPERTY_HEATMAPQUALITY, getBean().isCalculateandshowheatmap());
         //setComponentEnabled(GLScanAnalyzer.PROPERT, getBean().isCalculateandshowheatmap());
@@ -74,20 +77,7 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
         return analyzeAction;
     }
 
-    public Action getSelectpathAction()
-    {
-        return selectpathAction;
-    }
 
-    public Action getTypeAction()
-    {
-        return typeAction;
-    }
-
-    public Action getOutputpathAction()
-    {
-        return outputpathAction;
-    }
 
     public Action getCalculateandshowheatmapAction()
     {
@@ -106,7 +96,7 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
         public void actionPerformed(ActionEvent e) {
             LOGGER.info("Analyze Action clicked");
 
-            File outputpathFile = new File(outputpathString);
+            /*File outputpathFile = new File(outputpathString);
             if (outputpathFile.exists())
             {
                 System.out.println("Ordner gibts schon");
@@ -120,7 +110,7 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
             else
             {
                 System.out.println("ERROR");
-            }
+            }*/
 
             // TODO Action ausprogrammieren
             JFrame parent = ((SingleFrameApplication) Application.getInstance()).getMainFrame();
@@ -145,6 +135,24 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
 
             taskDialog.show();
         }
+    }
+
+
+/*
+
+    public Action getSelectpathAction()
+    {
+        return selectpathAction;
+    }
+
+    public Action getTypeAction()
+    {
+        return typeAction;
+    }
+
+    public Action getOutputpathAction()
+    {
+        return outputpathAction;
     }
 
     private JFileChooser createPreparedDirChooser()
@@ -212,13 +220,15 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
             System.out.println("\nERROR");
         }
 
-        /*
+        */
+/*
         boolean createOutputDirectory = new File(outputpathString).mkdirs();
         if (!createOutputDirectory) {
             //TODO Warum Fehler? Gibt es dieses Verzeichnis schon? Dann kein Fehler
             System.out.println("Error beim Erstellen des Ordners");
         }
-        */
+        *//*
+
     }
 
     private void changeOutputPath()
@@ -292,6 +302,8 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
 
         }
     }
+*/
+
 
     private class CalculateandshowheatmapAction extends AbstractAction
     {
@@ -320,8 +332,9 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
         public void actionPerformed(ActionEvent e) {
 
             // Radiobox toggled von selber, Domainobject aendert sich von selber
-            glScanAnalyzer.setSelectroi(glScanAnalyzer.isSelectroi());
-            System.out.println(glScanAnalyzer.isSelectroi());
+
+            //glScanAnalyzer.setSelectroi(glScanAnalyzer.isSelectroi());
+            //System.out.println(glScanAnalyzer.isSelectroi());
         }
     }
 
