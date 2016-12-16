@@ -125,7 +125,7 @@ public class GLScanAnalyzerView extends JPanel
         //======== this ========
         setBorder(Borders.DIALOG);
         setLayout(new FormLayout(
-            "right:59dlu, $lcgap, default, $lcgap, 63dlu, $lcgap, pref:grow, $lcgap, 24dlu, 2*($lcgap, pref)",
+            "right:59dlu, $lcgap, 13dlu, $lcgap, 63dlu, $lcgap, pref:grow, $lcgap, 24dlu, 2*($lcgap, pref)",
             "pref, $lgap, 16dlu, $lgap, 18dlu, 3*($lgap, pref), $lgap, pref:grow"));
         add(heatmapSeparator, CC.xywh(1, 1, 13, 1));
 
@@ -158,7 +158,8 @@ public class GLScanAnalyzerView extends JPanel
         add(selectroiLabel, CC.xy(1, 9));
 
         //---- deleteRoiButton ----
-        deleteRoiButton.setText(bundle.getString("GLScanAnalyzerView.deleteRoiButton.text"));
+        deleteRoiButton.setIcon(new ImageIcon(getClass().getResource("/at/ac/htlhl/nucleij/resources/images/i16x16/process-stop.png")));
+        deleteRoiButton.setBorderPainted(false);
         add(deleteRoiButton, CC.xy(3, 9));
 
         //---- selectRoiTextField ----

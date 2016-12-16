@@ -7,17 +7,10 @@
 
 * JDirectoryChooser
 * Bindinings 
-* Renaming Variables
-* Formularlayout
-* New weiter rauf
-* Beenden kein Icon
-* Toolbar aktualisieren
-* Einstellungen -> File
 
 * NDPI oder TIF erkennnen 
 * TIF found? ausgrauen falls nicht gebraucht
 
-* Layout 
 * Erben Property = Mattes Property (Input & Outputpath)
 * Sythetica LaF anschreiben
 

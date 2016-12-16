@@ -1,4 +1,4 @@
-JFDML JFormDesigner: "6.0.0.0.51" Java: "1.8.0_102" encoding: "UTF-8"
+JFDML JFormDesigner: "6.0.0.0.58" Java: "1.8.0_112" encoding: "UTF-8"
 
 new FormModel {
 	"i18n.bundlePackage": "at.ac.htlhl.nucleij.resources.i18n"
@@ -8,6 +8,7 @@ new FormModel {
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class java.awt.BorderLayout ) ) {
 			name: "this"
 			"iconImage": new com.jformdesigner.model.SwingIcon( 0, "/at/ac/htlhl/nucleij/resources/images/icon_png_v1.png" )
+			"minimumSize": new java.awt.Dimension( 750, 600 )
 			add( new FormContainer( "javax.swing.JToolBar", new FormLayoutManager( class javax.swing.JToolBar ) ) {
 				name: "toolBar1"
 				"floatable": false
@@ -77,7 +78,7 @@ new FormModel {
 			}
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 10, 0 )
-			"size": new java.awt.Dimension( 400, 300 )
+			"size": new java.awt.Dimension( 615, 310 )
 		} )
 		add( new FormNonVisual( "javax.swing.AbstractAction" ) {
 			name: "loadAction"
@@ -115,8 +116,8 @@ new FormModel {
 		add( new FormNonVisual( "javax.swing.AbstractAction" ) {
 			name: "exitAction"
 			"$action.Name": new FormMessage( null, "MainFrame.exitAction.Name" )
-			"$action.SwingLargeIconKey": new com.jformdesigner.model.SwingIcon( 0, "/at/ac/htlhl/nucleij/resources/images/i32x32/process-stop.png" )
-			"$action.SmallIcon": new com.jformdesigner.model.SwingIcon( 0, "/at/ac/htlhl/nucleij/resources/images/i16x16/process-stop.png" )
+			"$action.SwingLargeIconKey": sfield com.jformdesigner.model.FormObject NULL_VALUE
+			"$action.SmallIcon": sfield com.jformdesigner.model.FormObject NULL_VALUE
 			auxiliary() {
 				"JavaCodeGenerator.customCreate": true
 			}

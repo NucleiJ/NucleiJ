@@ -111,6 +111,7 @@ public class MainFrameView extends JFrame {
 
         //======== this ========
         setIconImage(new ImageIcon(getClass().getResource("/at/ac/htlhl/nucleij/resources/images/icon_png_v1.png")).getImage());
+        setMinimumSize(new Dimension(750, 600));
         Container contentPane = getContentPane();
         contentPane.setLayout(new BorderLayout());
 
@@ -202,8 +203,8 @@ public class MainFrameView extends JFrame {
 
         //---- exitAction ----
         exitAction.putValue(Action.NAME, bundle.getString("MainFrame.exitAction.Name"));
-        exitAction.putValue(Action.LARGE_ICON_KEY, new ImageIcon(getClass().getResource("/at/ac/htlhl/nucleij/resources/images/i32x32/process-stop.png")));
-        exitAction.putValue(Action.SMALL_ICON, new ImageIcon(getClass().getResource("/at/ac/htlhl/nucleij/resources/images/i16x16/process-stop.png")));
+        exitAction.putValue(Action.LARGE_ICON_KEY, null);
+        exitAction.putValue(Action.SMALL_ICON, null);
 
         //---- newAction ----
         newAction.putValue(Action.NAME, bundle.getString("MainFrame.newAction.Name"));

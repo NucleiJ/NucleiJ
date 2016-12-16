@@ -8,7 +8,7 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
-			"$columnSpecs": "right:59dlu, labelcompgap, default, labelcompgap, 63dlu, labelcompgap, pref:grow, labelcompgap, 24dlu, labelcompgap, pref, labelcompgap, pref"
+			"$columnSpecs": "right:59dlu, labelcompgap, 13dlu, labelcompgap, 63dlu, labelcompgap, pref:grow, labelcompgap, 24dlu, labelcompgap, pref, labelcompgap, pref"
 			"$rowSpecs": "pref, linegap, 16dlu, linegap, 18dlu, linegap, pref, linegap, pref, linegap, pref, linegap, pref:grow"
 		} ) {
 			name: "this"
@@ -82,7 +82,8 @@ new FormModel {
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "deleteRoiButton"
-				"text": new FormMessage( null, "GLScanAnalyzerView.deleteRoiButton.text" )
+				"icon": new com.jformdesigner.model.SwingIcon( 0, "/at/ac/htlhl/nucleij/resources/images/i16x16/process-stop.png" )
+				"borderPainted": false
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 3
 				"gridY": 9
