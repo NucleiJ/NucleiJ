@@ -49,22 +49,20 @@ public class NdpiConverterView extends JPanel {
 
         ResourceBundle bundle = ResourceBundle.getBundle("at.ac.htlhl.nucleij.resources.i18n.ndpiconverter");
         DefaultComponentFactory compFactory = DefaultComponentFactory.getInstance();
-        separator3 = compFactory.createSeparator("Input");
+        separator3 = compFactory.createSeparator(bundle.getString("NdpiConverterView.InputSeperator.text"));
         analyzeTypeLabel = new JLabel();
         typeComboBox = new JComboBox();
         folderDirectoryLabel = new JLabel();
         inputDirTextField = new JTextField();
         inputPathButton = new JButton();
-        inputErrorLabel = new JLabel();
-        separator4 = compFactory.createSeparator("Output");
+        separator4 = compFactory.createSeparator(bundle.getString("NdpiConverterView.OutputSeperator.Text"));
         label1 = new JLabel();
         checkBox1 = new JCheckBox();
         textField1 = new JTextField();
         exportFolder = new JLabel();
         outputDirTextField = new JTextField();
         outputPathButton = new JButton();
-        exportErrorLabel = new JLabel();
-        separator2 = compFactory.createSeparator("Magnification");
+        separator2 = compFactory.createSeparator(bundle.getString("NdpiConverterView.MagnificationSeperator.text"));
         setMagnificationLabel = new JLabel();
         panel1 = new JPanel();
         magnification40Button = new JRadioButton();
@@ -75,10 +73,10 @@ public class NdpiConverterView extends JPanel {
         //======== this ========
         setBorder(Borders.DIALOG);
         setLayout(new FormLayout(
-            "right:59dlu, $lcgap, right:15dlu, $lcgap, 63dlu, $lcgap, 31dlu:grow, $lcgap, 24dlu, $lcgap, default, $lcgap, pref",
+            "right:59dlu, $lcgap, right:15dlu, $lcgap, 63dlu, $lcgap, 31dlu:grow, $lcgap, 24dlu, $lcgap, default",
             "18dlu, $lgap, pref, $lgap, 18dlu, 2*($lgap, default), 3*($lgap, pref)"));
         ((FormLayout)getLayout()).setRowGroups(new int[][] {{1, 7, 11, 13}, {4, 8}});
-        add(separator3, CC.xywh(1, 1, 13, 1));
+        add(separator3, CC.xywh(1, 1, 11, 1));
 
         //---- analyzeTypeLabel ----
         analyzeTypeLabel.setText(bundle.getString("NdpiConverterView.analyzeTypeLabel.text"));
@@ -105,22 +103,18 @@ public class NdpiConverterView extends JPanel {
 
         //---- inputPathButton ----
         inputPathButton.setAction(inputPathAction);
+        inputPathButton.setActionCommand(bundle.getString("NdpiConverterView.inputOutputPathAction.name"));
         add(inputPathButton, CC.xy(9, 5, CC.LEFT, CC.DEFAULT));
-
-        //---- inputErrorLabel ----
-        inputErrorLabel.setText(bundle.getString("NdpiConverterView.inputOutputError"));
-        inputErrorLabel.setEnabled(false);
-        add(inputErrorLabel, CC.xy(11, 5, CC.LEFT, CC.DEFAULT));
-        add(separator4, CC.xywh(1, 7, 13, 1));
+        add(separator4, CC.xywh(1, 7, 11, 1));
 
         //---- label1 ----
-        label1.setText("Custom Name:");
+        label1.setText(bundle.getString("NdpiConverterView.customNameLabel.text"));
         add(label1, CC.xy(1, 9));
         add(checkBox1, CC.xy(3, 9));
         add(textField1, CC.xywh(5, 9, 3, 1));
 
         //---- exportFolder ----
-        exportFolder.setText(bundle.getString("NdpiConverterView.outputFolderDirectory"));
+        exportFolder.setText(bundle.getString("NdpiConverterView.OutputFolder.text"));
         add(exportFolder, CC.xy(1, 11, CC.RIGHT, CC.CENTER));
 
         //---- outputDirTextField ----
@@ -129,13 +123,9 @@ public class NdpiConverterView extends JPanel {
 
         //---- outputPathButton ----
         outputPathButton.setAction(outputPathAction);
+        outputPathButton.setActionCommand(bundle.getString("NdpiConverterView.inputOutputPathAction.name"));
         add(outputPathButton, CC.xy(9, 11, CC.LEFT, CC.DEFAULT));
-
-        //---- exportErrorLabel ----
-        exportErrorLabel.setText(bundle.getString("NdpiConverterView.inputOutputError"));
-        exportErrorLabel.setEnabled(false);
-        add(exportErrorLabel, CC.xy(11, 11, CC.LEFT, CC.DEFAULT));
-        add(separator2, CC.xywh(1, 13, 13, 1));
+        add(separator2, CC.xywh(1, 13, 11, 1));
 
         //---- setMagnificationLabel ----
         setMagnificationLabel.setText(bundle.getString("NdpiConverterView.setMagnificationLabel.text"));
@@ -193,7 +183,6 @@ public class NdpiConverterView extends JPanel {
     private JLabel folderDirectoryLabel;
     private JTextField inputDirTextField;
     private JButton inputPathButton;
-    private JLabel inputErrorLabel;
     private JComponent separator4;
     private JLabel label1;
     private JCheckBox checkBox1;
@@ -201,7 +190,6 @@ public class NdpiConverterView extends JPanel {
     private JLabel exportFolder;
     private JTextField outputDirTextField;
     private JButton outputPathButton;
-    private JLabel exportErrorLabel;
     private JComponent separator2;
     private JLabel setMagnificationLabel;
     private JPanel panel1;

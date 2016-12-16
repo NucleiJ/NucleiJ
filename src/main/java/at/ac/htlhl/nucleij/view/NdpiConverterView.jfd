@@ -7,7 +7,7 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
-			"$columnSpecs": "right:59dlu, labelcompgap, right:15dlu, labelcompgap, 63dlu, labelcompgap, 31dlu:grow, labelcompgap, 24dlu, labelcompgap, default, labelcompgap, pref"
+			"$columnSpecs": "right:59dlu, labelcompgap, right:15dlu, labelcompgap, 63dlu, labelcompgap, 31dlu:grow, labelcompgap, 24dlu, labelcompgap, default"
 			"$rowSpecs": "18dlu, linegap, pref, linegap, 18dlu, linegap, default, linegap, default, linegap, pref, linegap, pref, linegap, pref"
 			"$rowGroupIds": "1, 0, 0, 2, 0, 0, 1, 2, 0, 0, 1, 3, 1, 0, 0"
 		} ) {
@@ -15,9 +15,9 @@ new FormModel {
 			"border": sfield com.jgoodies.forms.factories.Borders DIALOG_BORDER
 			add( new FormComponent( "com.jformdesigner.designer.wrapper.JGoodiesFormsSeparator" ) {
 				name: "separator3"
-				"text": "Input"
+				"text": new FormMessage( null, "NdpiConverterView.InputSeperator.text" )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridWidth": 13
+				"gridWidth": 11
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "analyzeTypeLabel"
@@ -60,30 +60,22 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "inputPathButton"
 				"action": new FormReference( "inputPathAction" )
+				"actionCommand": new FormMessage( null, "NdpiConverterView.inputOutputPathAction.name" )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 9
 				"gridY": 5
 				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints LEFT
 			} )
-			add( new FormComponent( "javax.swing.JLabel" ) {
-				name: "inputErrorLabel"
-				"text": new FormMessage( null, "NdpiConverterView.inputOutputError" )
-				"enabled": false
-			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 11
-				"gridY": 5
-				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints LEFT
-			} )
 			add( new FormComponent( "com.jformdesigner.designer.wrapper.JGoodiesFormsSeparator" ) {
 				name: "separator4"
-				"text": "Output"
+				"text": new FormMessage( null, "NdpiConverterView.OutputSeperator.Text" )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridY": 7
-				"gridWidth": 13
+				"gridWidth": 11
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "label1"
-				"text": "Custom Name:"
+				"text": new FormMessage( null, "NdpiConverterView.customNameLabel.text" )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 1
 				"gridY": 9
@@ -103,7 +95,7 @@ new FormModel {
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "exportFolder"
-				"text": new FormMessage( null, "NdpiConverterView.outputFolderDirectory" )
+				"text": new FormMessage( null, "NdpiConverterView.OutputFolder.text" )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridY": 11
 				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints RIGHT
@@ -120,26 +112,18 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "outputPathButton"
 				"action": new FormReference( "outputPathAction" )
+				"actionCommand": new FormMessage( null, "NdpiConverterView.inputOutputPathAction.name" )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 9
 				"gridY": 11
 				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints LEFT
 			} )
-			add( new FormComponent( "javax.swing.JLabel" ) {
-				name: "exportErrorLabel"
-				"text": new FormMessage( null, "NdpiConverterView.inputOutputError" )
-				"enabled": false
-			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 11
-				"gridY": 11
-				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints LEFT
-			} )
 			add( new FormComponent( "com.jformdesigner.designer.wrapper.JGoodiesFormsSeparator" ) {
 				name: "separator2"
-				"text": "Magnification"
+				"text": new FormMessage( null, "NdpiConverterView.MagnificationSeperator.text" )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridY": 13
-				"gridWidth": 13
+				"gridWidth": 11
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "setMagnificationLabel"
@@ -193,7 +177,7 @@ new FormModel {
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 15 )
-			"size": new java.awt.Dimension( 435, 295 )
+			"size": new java.awt.Dimension( 450, 295 )
 		} )
 		add( new FormNonVisual( "javax.swing.ButtonGroup" ) {
 			name: "buttonGroupMagnification"
