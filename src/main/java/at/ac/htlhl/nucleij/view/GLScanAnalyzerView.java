@@ -37,8 +37,8 @@ public class GLScanAnalyzerView extends JPanel
     private JFormattedTextField heatmapqualityTextField;
     private JComponent roiSeperator;
     private JLabel selectroiLabel;
-    private JButton deleteRoiButton;
     private JFormattedTextField selectRoiTextField;
+    private JButton deleteRoiButton;
     private JButton selectRoiButton;
     private JButton startAnalyzerButton;
     private AbstractAction analyzeAction;
@@ -115,15 +115,15 @@ public class GLScanAnalyzerView extends JPanel
         heatmapqualityTextField = new JFormattedTextField();
         roiSeperator = compFactory.createSeparator(bundle.getString("GLScanAnalyzerView.roiSeperator.text"));
         selectroiLabel = new JLabel();
-        deleteRoiButton = new JButton();
         selectRoiTextField = new JFormattedTextField();
+        deleteRoiButton = new JButton();
         selectRoiButton = new JButton();
         startAnalyzerButton = new JButton();
 
         //======== this ========
         setBorder(Borders.DIALOG);
         setLayout(new FormLayout(
-            "right:68dlu, $lcgap, 13dlu, $lcgap, 63dlu, $lcgap, pref:grow, $lcgap, 24dlu, $lcgap, pref",
+            "right:68dlu, $lcgap, 63dlu, $lcgap, pref:grow, $lcgap, default, $lcgap, 24dlu, $lcgap, pref",
             "pref, $lgap, 16dlu, $lgap, 18dlu, 3*($lgap, pref)"));
         add(heatmapSeparator, CC.xywh(1, 1, 11, 1));
 
@@ -154,14 +154,14 @@ public class GLScanAnalyzerView extends JPanel
         selectroiLabel.setText(bundle.getString("GLScanAnalyzerView.selectroiLabel"));
         add(selectroiLabel, CC.xy(1, 9));
 
+        //---- selectRoiTextField ----
+        selectRoiTextField.setEditable(false);
+        add(selectRoiTextField, CC.xywh(3, 9, 3, 1));
+
         //---- deleteRoiButton ----
         deleteRoiButton.setIcon(new ImageIcon(getClass().getResource("/at/ac/htlhl/nucleij/resources/images/i16x16/process-stop.png")));
         deleteRoiButton.setBorderPainted(false);
-        add(deleteRoiButton, CC.xy(3, 9));
-
-        //---- selectRoiTextField ----
-        selectRoiTextField.setEditable(false);
-        add(selectRoiTextField, CC.xywh(5, 9, 3, 1));
+        add(deleteRoiButton, CC.xy(7, 9));
 
         //---- selectRoiButton ----
         selectRoiButton.setAction(selectroiAction);
@@ -169,7 +169,7 @@ public class GLScanAnalyzerView extends JPanel
 
         //---- startAnalyzerButton ----
         startAnalyzerButton.setAction(analyzeAction);
-        add(startAnalyzerButton, CC.xywh(5, 11, 3, 1, CC.LEFT, CC.DEFAULT));
+        add(startAnalyzerButton, CC.xywh(3, 11, 3, 1, CC.LEFT, CC.DEFAULT));
 
         //---- analyzeAction ----
         analyzeAction.putValue(Action.NAME, bundle.getString("GLScanAnalyzerView.analyzeAction.Name"));

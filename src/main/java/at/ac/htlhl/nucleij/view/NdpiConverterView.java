@@ -57,7 +57,6 @@ public class NdpiConverterView extends JPanel {
         inputPathButton = new JButton();
         separator4 = compFactory.createSeparator(bundle.getString("NdpiConverterView.OutputSeperator.Text"));
         label1 = new JLabel();
-        checkBox1 = new JCheckBox();
         textField1 = new JTextField();
         exportFolder = new JLabel();
         outputDirTextField = new JTextField();
@@ -72,10 +71,10 @@ public class NdpiConverterView extends JPanel {
         //======== this ========
         setBorder(Borders.DIALOG);
         setLayout(new FormLayout(
-            "right:68dlu, $lcgap, 13dlu, $lcgap, 63dlu, $lcgap, 31dlu:grow, $lcgap, 24dlu, $lcgap, default",
+            "right:68dlu, $lcgap, 63dlu, $lcgap, 31dlu:grow, $lcgap, 24dlu, $lcgap, default",
             "18dlu, $lgap, pref, $lgap, 18dlu, 2*($lgap, default), 3*($lgap, pref)"));
         ((FormLayout)getLayout()).setRowGroups(new int[][] {{1, 7, 11, 13}, {4, 8}});
-        add(separator3, CC.xywh(1, 1, 11, 1));
+        add(separator3, CC.xywh(1, 1, 9, 1));
 
         //---- analyzeTypeLabel ----
         analyzeTypeLabel.setText(bundle.getString("NdpiConverterView.analyzeTypeLabel.text"));
@@ -90,7 +89,7 @@ public class NdpiConverterView extends JPanel {
         }));
         typeComboBox.setToolTipText("Select mode");
         typeComboBox.setAction(typeAction);
-        add(typeComboBox, CC.xy(5, 3));
+        add(typeComboBox, CC.xy(3, 3));
 
         //---- folderDirectoryLabel ----
         folderDirectoryLabel.setText(bundle.getString("NdpiConverterView.inputFolderDirectory.text"));
@@ -98,19 +97,18 @@ public class NdpiConverterView extends JPanel {
 
         //---- inputDirTextField ----
         inputDirTextField.setEditable(false);
-        add(inputDirTextField, CC.xywh(5, 5, 3, 1));
+        add(inputDirTextField, CC.xywh(3, 5, 3, 1));
 
         //---- inputPathButton ----
         inputPathButton.setAction(inputPathAction);
         inputPathButton.setActionCommand(bundle.getString("NdpiConverterView.inputOutputPathAction.name"));
-        add(inputPathButton, CC.xy(9, 5, CC.LEFT, CC.DEFAULT));
-        add(separator4, CC.xywh(1, 7, 11, 1));
+        add(inputPathButton, CC.xy(7, 5, CC.LEFT, CC.DEFAULT));
+        add(separator4, CC.xywh(1, 7, 9, 1));
 
         //---- label1 ----
         label1.setText(bundle.getString("NdpiConverterView.customNameLabel.text"));
         add(label1, CC.xy(1, 9));
-        add(checkBox1, CC.xy(3, 9));
-        add(textField1, CC.xywh(5, 9, 5, 1));
+        add(textField1, CC.xywh(3, 9, 5, 1));
 
         //---- exportFolder ----
         exportFolder.setText(bundle.getString("NdpiConverterView.OutputFolder.text"));
@@ -118,13 +116,13 @@ public class NdpiConverterView extends JPanel {
 
         //---- outputDirTextField ----
         outputDirTextField.setEditable(false);
-        add(outputDirTextField, CC.xywh(5, 11, 3, 1));
+        add(outputDirTextField, CC.xywh(3, 11, 3, 1));
 
         //---- outputPathButton ----
         outputPathButton.setAction(outputPathAction);
         outputPathButton.setActionCommand(bundle.getString("NdpiConverterView.inputOutputPathAction.name"));
-        add(outputPathButton, CC.xy(9, 11, CC.LEFT, CC.DEFAULT));
-        add(separator2, CC.xywh(1, 13, 11, 1));
+        add(outputPathButton, CC.xy(7, 11, CC.LEFT, CC.DEFAULT));
+        add(separator2, CC.xywh(1, 13, 9, 1));
 
         //---- setMagnificationLabel ----
         setMagnificationLabel.setText(bundle.getString("NdpiConverterView.setMagnificationLabel.text"));
@@ -152,7 +150,7 @@ public class NdpiConverterView extends JPanel {
             magnification5Button.setMinimumSize(new Dimension(40, 28));
             panel1.add(magnification5Button, CC.xy(5, 1));
         }
-        add(panel1, CC.xywh(5, 15, 3, 1));
+        add(panel1, CC.xywh(3, 15, 3, 1));
 
         //---- convertAction ----
         convertAction.putValue(Action.NAME, bundle.getString("NdpiConverterView.convertAction.name"));
@@ -180,7 +178,6 @@ public class NdpiConverterView extends JPanel {
     private JButton inputPathButton;
     private JComponent separator4;
     private JLabel label1;
-    private JCheckBox checkBox1;
     private JTextField textField1;
     private JLabel exportFolder;
     private JTextField outputDirTextField;
