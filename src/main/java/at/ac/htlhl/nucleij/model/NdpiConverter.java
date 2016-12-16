@@ -17,11 +17,10 @@ public class NdpiConverter extends Model
     public static final String PROPERTY_MAGNIFICATION = "magnification";
 
 
-    public static final String SINGLE_FILE = "Single_File";
-    public static final String SINGLE_DIR = "Single_Dir";
-    public static final String MULTI_FILE = "Multi_File";
-    public static final String MULTI_DIR = "Multi_Dir";
-    public static final String[] TYPE_CHOICES = {SINGLE_FILE, MULTI_FILE};
+    public static final String SINGLE_FILE = "Single File";
+    public static final String SINGLE_DIR = "Single Dir";
+    public static final String MULTI_FILE = "Multi File";
+    public static final String[] TYPE_CHOICES = {SINGLE_FILE, SINGLE_DIR, MULTI_FILE};
 
     //endregion Constants
 

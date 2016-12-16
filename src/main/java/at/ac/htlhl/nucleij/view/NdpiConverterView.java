@@ -1,10 +1,8 @@
 package at.ac.htlhl.nucleij.view;
 
 import java.awt.*;
-import java.awt.event.*;
 import java.util.*;
 import javax.swing.*;
-import javax.swing.event.*;
 
 import at.ac.htlhl.nucleij.model.NdpiConverter;
 import at.ac.htlhl.nucleij.presenter.NdpiConverterPM;
@@ -16,11 +14,7 @@ import com.jgoodies.forms.factories.*;
 import com.jgoodies.forms.layout.*;
 import net.miginfocom.swing.*;
 
-/**
- * @author Schülerlizenz 2016/17
- */
 public class NdpiConverterView extends JPanel {
-
     private NdpiConverterPM ndpiConverterPM;
 
     public NdpiConverterView(NdpiConverterPM ndpiConverterPM)
@@ -41,13 +35,12 @@ public class NdpiConverterView extends JPanel {
 
     public void initBindings() {
         PresentationModelBinder binder = Binders.binderFor(ndpiConverterPM);
-        binder.bindBeanProperty(NdpiConverter.PROPERTY_INPUTPATH).to(btnImportPath);
-        binder.bindBeanProperty(NdpiConverter.PROPERTY_OUTPUTPATH).to(btnOutputPath);
+        binder.bindBeanProperty(NdpiConverter.PROPERTY_INPUTPATH).to(inputDirTextField);
+        binder.bindBeanProperty(NdpiConverter.PROPERTY_OUTPUTPATH).to(outputDirTextField);
 
         ValueModel typeValueModel =  ndpiConverterPM.getComponentModel(NdpiConverter.PROPERTY_TYPE);
         ComboBoxAdapter comboBoxAdapter = new ComboBoxAdapter(NdpiConverter.TYPE_CHOICES, typeValueModel);
         typeComboBox.setModel(comboBoxAdapter);
-
     }
 
     private void initComponents() {
@@ -55,42 +48,41 @@ public class NdpiConverterView extends JPanel {
         createUIComponents();
 
         ResourceBundle bundle = ResourceBundle.getBundle("at.ac.htlhl.nucleij.resources.i18n.ndpiconverter");
-        general = new JLabel();
-        separator1 = new JSeparator();
-        separator9 = new JPopupMenu.Separator();
-        analyzeType = new JLabel();
+        DefaultComponentFactory compFactory = DefaultComponentFactory.getInstance();
+        separator3 = compFactory.createSeparator("Input");
+        analyzeTypeLabel = new JLabel();
         typeComboBox = new JComboBox();
-        filderDirectory = new JLabel();
-        textfieldImportDir = new JTextField();
-        btnImportPath = new JButton();
-        importError = new JLabel();
+        folderDirectoryLabel = new JLabel();
+        inputDirTextField = new JTextField();
+        inputPathButton = new JButton();
+        inputErrorLabel = new JLabel();
+        separator4 = compFactory.createSeparator("Output");
+        label1 = new JLabel();
+        checkBox1 = new JCheckBox();
+        textField1 = new JTextField();
         exportFolder = new JLabel();
-        textfieldExportDir = new JTextField();
-        btnOutputPath = new JButton();
-        exportError = new JLabel();
-        magnification = new JLabel();
-        separator10 = new JSeparator();
-        setMagnification = new JLabel();
-        btnMagnification40 = new JRadioButton();
-        btnMagnification10 = new JRadioButton();
-        btnConvert = new JButton();
+        outputDirTextField = new JTextField();
+        outputPathButton = new JButton();
+        exportErrorLabel = new JLabel();
+        separator2 = compFactory.createSeparator("Magnification");
+        setMagnificationLabel = new JLabel();
+        panel1 = new JPanel();
+        magnification40Button = new JRadioButton();
+        magnification10Button = new JRadioButton();
+        magnification5Button = new JRadioButton();
+        convertButton = new JButton();
 
         //======== this ========
-        setLayout(new MigLayout(
-            "insets 0,hidemode 3",
-            "rel[13,fill][83,left][39,left][57,left][65,fill][57,fill][52,grow,right][116,grow,right]rel",
-            "rel[sizegroup 1,center]0[center]0[30,center]0[sizegroup 2,center]0[center]0[sizegroup 2,center]unrel[sizegroup 1,center]0[min,sizegroup 3,center]unrel"));
+        setBorder(Borders.DIALOG);
+        setLayout(new FormLayout(
+            "right:59dlu, $lcgap, right:15dlu, $lcgap, 63dlu, $lcgap, 31dlu:grow, $lcgap, 24dlu, $lcgap, default, $lcgap, pref",
+            "18dlu, $lgap, pref, $lgap, 18dlu, 2*($lgap, default), 3*($lgap, pref)"));
+        ((FormLayout)getLayout()).setRowGroups(new int[][] {{1, 7, 11, 13}, {4, 8}});
+        add(separator3, CC.xywh(1, 1, 13, 1));
 
-        //---- general ----
-        general.setText(bundle.getString("NdpiConverterView.generalLabel.text"));
-        general.setFont(general.getFont().deriveFont(general.getFont().getStyle() | Font.BOLD));
-        add(general, "cell 0 0 2 1,alignx left,growx 0");
-        add(separator1, "cell 2 0 6 1,growx");
-        add(separator9, "cell 2 0 6 1,growx");
-
-        //---- analyzeType ----
-        analyzeType.setText(bundle.getString("NdpiConverterView.analyzeTypeLabel.text"));
-        add(analyzeType, "cell 1 1 3 1,alignx left,growx 0");
+        //---- analyzeTypeLabel ----
+        analyzeTypeLabel.setText(bundle.getString("NdpiConverterView.analyzeTypeLabel.text"));
+        add(analyzeTypeLabel, CC.xy(1, 3, CC.RIGHT, CC.DEFAULT));
 
         //---- typeComboBox ----
         typeComboBox.setModel(new DefaultComboBoxModel(new String[] {
@@ -101,66 +93,81 @@ public class NdpiConverterView extends JPanel {
         }));
         typeComboBox.setToolTipText("Select mode");
         typeComboBox.setAction(typeAction);
-        add(typeComboBox, "cell 4 1 2 1");
+        add(typeComboBox, CC.xy(5, 3));
 
-        //---- filderDirectory ----
-        filderDirectory.setText(bundle.getString("NdpiConverterView.inputFolderDirectory.text"));
-        add(filderDirectory, "cell 1 2 3 1,align left center,grow 0 0");
+        //---- folderDirectoryLabel ----
+        folderDirectoryLabel.setText(bundle.getString("NdpiConverterView.inputFolderDirectory.text"));
+        add(folderDirectoryLabel, CC.xy(1, 5, CC.RIGHT, CC.CENTER));
 
-        //---- textfieldImportDir ----
-        textfieldImportDir.setEditable(false);
-        add(textfieldImportDir, "cell 1 3 5 1,growx");
+        //---- inputDirTextField ----
+        inputDirTextField.setEditable(false);
+        add(inputDirTextField, CC.xywh(5, 5, 3, 1));
 
-        //---- btnImportPath ----
-        btnImportPath.setAction(inputPathAction);
-        add(btnImportPath, "cell 6 3,alignx left,growx 0");
+        //---- inputPathButton ----
+        inputPathButton.setAction(inputPathAction);
+        add(inputPathButton, CC.xy(9, 5, CC.LEFT, CC.DEFAULT));
 
-        //---- importError ----
-        importError.setText(bundle.getString("NdpiConverterView.inputOutputError"));
-        importError.setEnabled(false);
-        add(importError, "cell 7 3,alignx left,growx 0");
+        //---- inputErrorLabel ----
+        inputErrorLabel.setText(bundle.getString("NdpiConverterView.inputOutputError"));
+        inputErrorLabel.setEnabled(false);
+        add(inputErrorLabel, CC.xy(11, 5, CC.LEFT, CC.DEFAULT));
+        add(separator4, CC.xywh(1, 7, 13, 1));
+
+        //---- label1 ----
+        label1.setText("Custom Name:");
+        add(label1, CC.xy(1, 9));
+        add(checkBox1, CC.xy(3, 9));
+        add(textField1, CC.xywh(5, 9, 3, 1));
 
         //---- exportFolder ----
         exportFolder.setText(bundle.getString("NdpiConverterView.outputFolderDirectory"));
-        add(exportFolder, "cell 1 4 3 1,align left center,grow 0 0");
+        add(exportFolder, CC.xy(1, 11, CC.RIGHT, CC.CENTER));
 
-        //---- textfieldExportDir ----
-        textfieldExportDir.setEditable(false);
-        add(textfieldExportDir, "cell 1 5 5 1,growx");
+        //---- outputDirTextField ----
+        outputDirTextField.setEditable(false);
+        add(outputDirTextField, CC.xywh(5, 11, 3, 1));
 
-        //---- btnOutputPath ----
-        btnOutputPath.setAction(outputPathAction);
-        add(btnOutputPath, "cell 6 5,alignx left,growx 0");
+        //---- outputPathButton ----
+        outputPathButton.setAction(outputPathAction);
+        add(outputPathButton, CC.xy(9, 11, CC.LEFT, CC.DEFAULT));
 
-        //---- exportError ----
-        exportError.setText(bundle.getString("NdpiConverterView.inputOutputError"));
-        exportError.setEnabled(false);
-        add(exportError, "cell 7 5,alignx left,growx 0");
+        //---- exportErrorLabel ----
+        exportErrorLabel.setText(bundle.getString("NdpiConverterView.inputOutputError"));
+        exportErrorLabel.setEnabled(false);
+        add(exportErrorLabel, CC.xy(11, 11, CC.LEFT, CC.DEFAULT));
+        add(separator2, CC.xywh(1, 13, 13, 1));
 
-        //---- magnification ----
-        magnification.setText(bundle.getString("NdpiConverterView.magnificationLabel.text"));
-        magnification.setFont(magnification.getFont().deriveFont(magnification.getFont().getStyle() | Font.BOLD));
-        add(magnification, "cell 0 6 2 1,alignx left,growx 0");
-        add(separator10, "cell 2 6 6 1,growx");
+        //---- setMagnificationLabel ----
+        setMagnificationLabel.setText(bundle.getString("NdpiConverterView.setMagnificationLabel.text"));
+        add(setMagnificationLabel, CC.xywh(1, 15, 3, 1, CC.RIGHT, CC.CENTER));
 
-        //---- setMagnification ----
-        setMagnification.setText(bundle.getString("NdpiConverterView.setMagnificationLabel.text"));
-        add(setMagnification, "cell 1 7 2 1,align left center,grow 0 0");
+        //======== panel1 ========
+        {
+            panel1.setLayout(new FormLayout(
+                "2*(default:grow, $lcgap), default:grow",
+                "default"));
 
-        //---- btnMagnification40 ----
-        btnMagnification40.setText("x40");
-        btnMagnification40.setMinimumSize(new Dimension(40, 28));
-        btnMagnification40.setSelected(true);
-        add(btnMagnification40, "cell 4 7");
+            //---- magnification40Button ----
+            magnification40Button.setText("x40");
+            magnification40Button.setMinimumSize(new Dimension(40, 28));
+            magnification40Button.setSelected(true);
+            panel1.add(magnification40Button, CC.xy(1, 1));
 
-        //---- btnMagnification10 ----
-        btnMagnification10.setText("x10");
-        btnMagnification10.setMinimumSize(new Dimension(40, 28));
-        add(btnMagnification10, "cell 5 7");
+            //---- magnification10Button ----
+            magnification10Button.setText("x10");
+            magnification10Button.setMinimumSize(new Dimension(40, 28));
+            panel1.add(magnification10Button, CC.xy(3, 1));
 
-        //---- btnConvert ----
-        btnConvert.setAction(convertAction);
-        add(btnConvert, "cell 7 7");
+            //---- magnification5Button ----
+            magnification5Button.setText("x5");
+            magnification5Button.setMinimumSize(new Dimension(40, 28));
+            panel1.add(magnification5Button, CC.xy(5, 1));
+        }
+        add(panel1, CC.xywh(5, 15, 3, 1));
+
+        //---- convertButton ----
+        convertButton.setAction(convertAction);
+        add(convertButton, CC.xywh(9, 15, 3, 1));
 
         //---- convertAction ----
         convertAction.putValue(Action.NAME, bundle.getString("NdpiConverterView.convertAction.name"));
@@ -173,31 +180,35 @@ public class NdpiConverterView extends JPanel {
 
         //---- buttonGroupMagnification ----
         ButtonGroup buttonGroupMagnification = new ButtonGroup();
-        buttonGroupMagnification.add(btnMagnification40);
-        buttonGroupMagnification.add(btnMagnification10);
+        buttonGroupMagnification.add(magnification40Button);
+        buttonGroupMagnification.add(magnification10Button);
+        buttonGroupMagnification.add(magnification5Button);
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    private JLabel general;
-    private JSeparator separator1;
-    private JPopupMenu.Separator separator9;
-    private JLabel analyzeType;
+    private JComponent separator3;
+    private JLabel analyzeTypeLabel;
     private JComboBox typeComboBox;
-    private JLabel filderDirectory;
-    private JTextField textfieldImportDir;
-    private JButton btnImportPath;
-    private JLabel importError;
+    private JLabel folderDirectoryLabel;
+    private JTextField inputDirTextField;
+    private JButton inputPathButton;
+    private JLabel inputErrorLabel;
+    private JComponent separator4;
+    private JLabel label1;
+    private JCheckBox checkBox1;
+    private JTextField textField1;
     private JLabel exportFolder;
-    private JTextField textfieldExportDir;
-    private JButton btnOutputPath;
-    private JLabel exportError;
-    private JLabel magnification;
-    private JSeparator separator10;
-    private JLabel setMagnification;
-    private JRadioButton btnMagnification40;
-    private JRadioButton btnMagnification10;
-    private JButton btnConvert;
+    private JTextField outputDirTextField;
+    private JButton outputPathButton;
+    private JLabel exportErrorLabel;
+    private JComponent separator2;
+    private JLabel setMagnificationLabel;
+    private JPanel panel1;
+    private JRadioButton magnification40Button;
+    private JRadioButton magnification10Button;
+    private JRadioButton magnification5Button;
+    private JButton convertButton;
     private AbstractAction convertAction;
     private AbstractAction outputPathAction;
     private AbstractAction typeAction;

@@ -1,4 +1,4 @@
-JFDML JFormDesigner: "6.0.0.0.51" Java: "1.8.0_112" encoding: "UTF-8"
+JFDML JFormDesigner: "6.0.0.0.51" Java: "1.8.0_102" encoding: "UTF-8"
 
 new FormModel {
 	"i18n.bundlePackage": "at.ac.htlhl.nucleij.resources.i18n"
@@ -12,13 +12,26 @@ new FormModel {
 				name: "toolBar1"
 				"floatable": false
 				add( new FormComponent( "javax.swing.JButton" ) {
-					name: "analyzeButton"
-					"action": new FormReference( "enableAnalyzerViewAction" )
+					name: "button1"
+					"text": "New"
+					"action": new FormReference( "newAction" )
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
-					name: "convertButton"
-					"text": "Convert"
-					"action": new FormReference( "enableConverterViewAction" )
+					name: "button2"
+					"text": "Open..."
+					"action": new FormReference( "loadAction" )
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "button3"
+					"text": "Save"
+					"action": new FormReference( "saveAction" )
+				} )
+				add( new FormComponent( "com.jformdesigner.designer.wrapper.HSpacer" ) {
+					name: "hSpacer1"
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "analyzeButton"
+					"action": new FormReference( "enableAnalyzerViewAction" )
 				} )
 			}, new FormLayoutConstraints( class java.lang.String ) {
 				"value": "North"
@@ -29,6 +42,11 @@ new FormModel {
 					name: "settingsMenu"
 					"text": new FormMessage( null, "MainFrame.settingsMenu.text" )
 					add( new FormComponent( "javax.swing.JMenuItem" ) {
+						name: "newMenuItem"
+						"text": "text"
+						"action": new FormReference( "newAction" )
+					} )
+					add( new FormComponent( "javax.swing.JMenuItem" ) {
 						name: "openMenuItem"
 						"text": "text"
 						"action": new FormReference( "loadAction" )
@@ -37,11 +55,6 @@ new FormModel {
 						name: "saveMenuItem"
 						"text": "text"
 						"action": new FormReference( "saveAction" )
-					} )
-					add( new FormComponent( "javax.swing.JMenuItem" ) {
-						name: "newMenuItem"
-						"text": "text"
-						"action": new FormReference( "newAction" )
 					} )
 					add( new FormComponent( "javax.swing.JPopupMenu$Separator" ) {
 						name: "separator1"
@@ -124,8 +137,8 @@ new FormModel {
 		add( new FormNonVisual( "javax.swing.AbstractAction" ) {
 			name: "enableAnalyzerViewAction"
 			"$action.Name": new FormMessage( null, "MainFrame.enableAnalyzerViewAction.Name" )
-			"$action.SmallIcon": new com.jformdesigner.model.SwingIcon( 1, "C:\\DA-Workspace\\NucleiJ\\src\\main\\resources\\at\\ac\\htlhl\\nucleij\\resources\\images\\i16x16\\analyzer.png" )
-			"$action.SwingLargeIconKey": new com.jformdesigner.model.SwingIcon( 1, "C:\\DA-Workspace\\NucleiJ\\src\\main\\resources\\at\\ac\\htlhl\\nucleij\\resources\\images\\i32x32\\analyzer.png" )
+			"$action.SmallIcon": new com.jformdesigner.model.SwingIcon( 0, "/at/ac/htlhl/nucleij/resources/images/i16x16/analyzer.png" )
+			"$action.SwingLargeIconKey": new com.jformdesigner.model.SwingIcon( 0, "/at/ac/htlhl/nucleij/resources/images/i32x32/analyzer.png" )
 			auxiliary() {
 				"JavaCodeGenerator.customCreate": true
 			}
@@ -135,8 +148,8 @@ new FormModel {
 		add( new FormNonVisual( "javax.swing.AbstractAction" ) {
 			name: "enableConverterViewAction"
 			"$action.Name": new FormMessage( null, "MainFrame.enableConverterViewAction.Name" )
-			"$action.SmallIcon": new com.jformdesigner.model.SwingIcon( 1, "C:\\DA-Workspace\\NucleiJ\\src\\main\\resources\\at\\ac\\htlhl\\nucleij\\resources\\images\\i16x16\\converter.png" )
-			"$action.SwingLargeIconKey": new com.jformdesigner.model.SwingIcon( 1, "C:\\DA-Workspace\\NucleiJ\\src\\main\\resources\\at\\ac\\htlhl\\nucleij\\resources\\images\\i32x32\\converter.png" )
+			"$action.SmallIcon": new com.jformdesigner.model.SwingIcon( 0, "/at/ac/htlhl/nucleij/resources/images/i16x16/converter.png" )
+			"$action.SwingLargeIconKey": new com.jformdesigner.model.SwingIcon( 0, "/at/ac/htlhl/nucleij/resources/images/i32x32/converter.png" )
 			auxiliary() {
 				"JavaCodeGenerator.customCreate": true
 			}

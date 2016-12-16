@@ -46,6 +46,8 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
     {
         super(ndpiConverter);
 
+        this.ndpiConverter = ndpiConverter;
+
         convertAction = new ConvertAction();
         exportPathAction = new ExportPathAction();
         inputPathAction = new InputPathAction();
@@ -131,21 +133,18 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
     {
         LOGGER.info("Select Path Action clicked");
 
-        if(ndpiConverter.getType().equals("SingleDir") ) {
+        if(ndpiConverter.getType().equals(NdpiConverter.SINGLE_DIR) ) {
             JFileChooser chooser = createDirChooser();
             chooser.setDialogTitle("Verzeichnis auswählen");
         }
-        else if(ndpiConverter.getType().equals("SingleFile")) {
+        else if(ndpiConverter.getType().equals(NdpiConverter.SINGLE_FILE)) {
             JFileChooser chooser = createFileChooser();
             chooser.setDialogTitle("File auswählen");
         }
-        else if (ndpiConverter.getType().equals("MultiFile")) {
-            JFileChooser chooser = createFileChooser();
-            chooser.setMultiSelectionEnabled(true);
-        }
-        else if (ndpiConverter.getType().equals("MultiDir")) {
+        else if (ndpiConverter.getType().equals(NdpiConverter.MULTI_FILE)) {
             JFileChooser chooser = createDirChooser();
             chooser.setMultiSelectionEnabled(true);
+            chooser.setDialogTitle("Mehrere Files auswählen");
         }
         else {
             System.out.println("\nERROR");
@@ -183,13 +182,16 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
     }
 
     private class InputPathAction extends AbstractAction {
+
+        public InputPathAction () {
+            super();
+        }
+
         public void actionPerformed(ActionEvent actionEvent) {
             selectPath();
         }
 
-        public InputPathAction () {
 
-        }
     }
 
     private class ExportPathAction extends AbstractAction {

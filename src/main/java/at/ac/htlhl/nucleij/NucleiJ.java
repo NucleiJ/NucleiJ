@@ -60,13 +60,10 @@ public class NucleiJ extends SingleFrameApplication
         Main main = new Main();
         MainPM mainPM = new MainPM(main);
 
-        //Könnte man die Zeilen 58-60 nicht auch so verkürtzt schreiben wie GLScanAnalyzerView und NdpiConverterView in Zeile 64&65 schreiben?
-        //MainFrameView mainFrame = new MainFrameView(mainPM.getMainPM());
 
         GLScanAnalyzerView glScanAnalyzerView = new GLScanAnalyzerView(mainPM.getGLScanAnalyzerPM(), main.getGLScanAnalyzer());
         NdpiConverterView ndpiConverterView = new NdpiConverterView(mainPM.getNdpiConverterPM());
 
-        //MainFrameView mainFrame = new MainFrameView(mainPM, ndpiConverterView, glScanAnalyzerView);
         MainFrameView mainFrame = new MainFrameView(mainPM);
 
         // die Views ins PM Model "senden"
@@ -76,24 +73,8 @@ public class NucleiJ extends SingleFrameApplication
         setMainFrame(mainFrame);
         getMainFrame().setTitle(resource.getString("Application.id"));
 
-        // IMMER AUSKOMMENTIEREN
         CombinedView combinedView = new CombinedView(ndpiConverterView, glScanAnalyzerView);
         show(combinedView);
-        // show(glScanAnalyzerView);
-        //show(ndpiConverterView);
-        //show(mainFrame);
-
-
-        //changeView(ndpiConverterView);
-        //if(currentView == 0) {
-        //    changeView(glScanAnalyzerView);
-        //    System.out.println("Anylse");
-        //}
-        //else
-        //{
-        //    changeView(ndpiConverterView);
-        //    System.out.println("Converter");
-        //}
 
         // getMainFrame().setResizable(false);
         addExitListener(new CarConfiguratorExitListener());
