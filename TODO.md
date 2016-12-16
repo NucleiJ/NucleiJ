@@ -19,6 +19,7 @@
 
 * Layout 
 * Erben Property = Mattes Property (Input & Outputpath)
+* Sythetica LaF anschreiben
 
 
 # TO-DO Liste #
