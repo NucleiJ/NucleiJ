@@ -111,7 +111,7 @@ public class MainFrameView extends JFrame {
 
         //======== this ========
         setIconImage(new ImageIcon(getClass().getResource("/at/ac/htlhl/nucleij/resources/images/icon_png_v1.png")).getImage());
-        setMinimumSize(new Dimension(750, 600));
+        setMinimumSize(new Dimension(600, 600));
         Container contentPane = getContentPane();
         contentPane.setLayout(new BorderLayout());
 
@@ -176,6 +176,9 @@ public class MainFrameView extends JFrame {
             button3.setText("Save");
             button3.setAction(saveAction);
             toolBar1.add(button3);
+
+            //---- hSpacer1 ----
+            hSpacer1.setOpaque(false);
             toolBar1.add(hSpacer1);
 
             //---- analyzeButton ----

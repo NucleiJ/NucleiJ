@@ -35,7 +35,6 @@ public class GLScanAnalyzerView extends JPanel
     private JLabel heatmapqualityLabel;
     private JSlider heatmapqualitySlider;
     private JFormattedTextField heatmapqualityTextField;
-    private JLabel heatmapqualityvalueLabel;
     private JComponent roiSeperator;
     private JLabel selectroiLabel;
     private JButton deleteRoiButton;
@@ -114,7 +113,6 @@ public class GLScanAnalyzerView extends JPanel
         heatmapqualityLabel = new JLabel();
         heatmapqualitySlider = new JSlider();
         heatmapqualityTextField = new JFormattedTextField();
-        heatmapqualityvalueLabel = new JLabel();
         roiSeperator = compFactory.createSeparator(bundle.getString("GLScanAnalyzerView.roiSeperator.text"));
         selectroiLabel = new JLabel();
         deleteRoiButton = new JButton();
@@ -125,9 +123,9 @@ public class GLScanAnalyzerView extends JPanel
         //======== this ========
         setBorder(Borders.DIALOG);
         setLayout(new FormLayout(
-            "right:59dlu, $lcgap, 13dlu, $lcgap, 63dlu, $lcgap, pref:grow, $lcgap, 24dlu, 2*($lcgap, pref)",
-            "pref, $lgap, 16dlu, $lgap, 18dlu, 3*($lgap, pref), $lgap, pref:grow"));
-        add(heatmapSeparator, CC.xywh(1, 1, 13, 1));
+            "right:68dlu, $lcgap, 13dlu, $lcgap, 63dlu, $lcgap, pref:grow, $lcgap, 24dlu, $lcgap, pref",
+            "pref, $lgap, 16dlu, $lgap, 18dlu, 3*($lgap, pref)"));
+        add(heatmapSeparator, CC.xywh(1, 1, 11, 1));
 
         //---- calculateandshowheatmapLabel ----
         calculateandshowheatmapLabel.setText(bundle.getString("GLScanAnalyzerView.calculateandshowheatmapLabel"));
@@ -150,8 +148,7 @@ public class GLScanAnalyzerView extends JPanel
         heatmapqualityTextField.setBackground(UIManager.getColor("ArrowButton.background"));
         heatmapqualityTextField.setColumns(3);
         add(heatmapqualityTextField, CC.xy(9, 5, CC.LEFT, CC.DEFAULT));
-        add(heatmapqualityvalueLabel, CC.xy(13, 5));
-        add(roiSeperator, CC.xywh(1, 7, 13, 1));
+        add(roiSeperator, CC.xywh(1, 7, 11, 1));
 
         //---- selectroiLabel ----
         selectroiLabel.setText(bundle.getString("GLScanAnalyzerView.selectroiLabel"));
@@ -172,7 +169,7 @@ public class GLScanAnalyzerView extends JPanel
 
         //---- startAnalyzerButton ----
         startAnalyzerButton.setAction(analyzeAction);
-        add(startAnalyzerButton, CC.xy(11, 11, CC.RIGHT, CC.DEFAULT));
+        add(startAnalyzerButton, CC.xywh(5, 11, 3, 1, CC.LEFT, CC.DEFAULT));
 
         //---- analyzeAction ----
         analyzeAction.putValue(Action.NAME, bundle.getString("GLScanAnalyzerView.analyzeAction.Name"));

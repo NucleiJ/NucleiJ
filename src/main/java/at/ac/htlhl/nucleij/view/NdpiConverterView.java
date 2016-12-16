@@ -68,12 +68,11 @@ public class NdpiConverterView extends JPanel {
         magnification40Button = new JRadioButton();
         magnification10Button = new JRadioButton();
         magnification5Button = new JRadioButton();
-        convertButton = new JButton();
 
         //======== this ========
         setBorder(Borders.DIALOG);
         setLayout(new FormLayout(
-            "right:59dlu, $lcgap, right:15dlu, $lcgap, 63dlu, $lcgap, 31dlu:grow, $lcgap, 24dlu, $lcgap, default",
+            "right:68dlu, $lcgap, 13dlu, $lcgap, 63dlu, $lcgap, 31dlu:grow, $lcgap, 24dlu, $lcgap, default",
             "18dlu, $lgap, pref, $lgap, 18dlu, 2*($lgap, default), 3*($lgap, pref)"));
         ((FormLayout)getLayout()).setRowGroups(new int[][] {{1, 7, 11, 13}, {4, 8}});
         add(separator3, CC.xywh(1, 1, 11, 1));
@@ -111,7 +110,7 @@ public class NdpiConverterView extends JPanel {
         label1.setText(bundle.getString("NdpiConverterView.customNameLabel.text"));
         add(label1, CC.xy(1, 9));
         add(checkBox1, CC.xy(3, 9));
-        add(textField1, CC.xywh(5, 9, 3, 1));
+        add(textField1, CC.xywh(5, 9, 5, 1));
 
         //---- exportFolder ----
         exportFolder.setText(bundle.getString("NdpiConverterView.OutputFolder.text"));
@@ -129,7 +128,7 @@ public class NdpiConverterView extends JPanel {
 
         //---- setMagnificationLabel ----
         setMagnificationLabel.setText(bundle.getString("NdpiConverterView.setMagnificationLabel.text"));
-        add(setMagnificationLabel, CC.xywh(1, 15, 3, 1, CC.RIGHT, CC.CENTER));
+        add(setMagnificationLabel, CC.xy(1, 15, CC.RIGHT, CC.CENTER));
 
         //======== panel1 ========
         {
@@ -154,10 +153,6 @@ public class NdpiConverterView extends JPanel {
             panel1.add(magnification5Button, CC.xy(5, 1));
         }
         add(panel1, CC.xywh(5, 15, 3, 1));
-
-        //---- convertButton ----
-        convertButton.setAction(convertAction);
-        add(convertButton, CC.xywh(9, 15, 3, 1));
 
         //---- convertAction ----
         convertAction.putValue(Action.NAME, bundle.getString("NdpiConverterView.convertAction.name"));
@@ -196,7 +191,6 @@ public class NdpiConverterView extends JPanel {
     private JRadioButton magnification40Button;
     private JRadioButton magnification10Button;
     private JRadioButton magnification5Button;
-    private JButton convertButton;
     private AbstractAction convertAction;
     private AbstractAction outputPathAction;
     private AbstractAction typeAction;

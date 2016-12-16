@@ -8,7 +8,7 @@ new FormModel {
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class java.awt.BorderLayout ) ) {
 			name: "this"
 			"iconImage": new com.jformdesigner.model.SwingIcon( 0, "/at/ac/htlhl/nucleij/resources/images/icon_png_v1.png" )
-			"minimumSize": new java.awt.Dimension( 750, 600 )
+			"minimumSize": new java.awt.Dimension( 600, 600 )
 			add( new FormContainer( "javax.swing.JToolBar", new FormLayoutManager( class javax.swing.JToolBar ) ) {
 				name: "toolBar1"
 				"floatable": false
@@ -29,6 +29,7 @@ new FormModel {
 				} )
 				add( new FormComponent( "com.jformdesigner.designer.wrapper.HSpacer" ) {
 					name: "hSpacer1"
+					"opaque": false
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "analyzeButton"

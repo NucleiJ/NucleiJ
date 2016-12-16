@@ -8,8 +8,8 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
-			"$columnSpecs": "right:59dlu, labelcompgap, 13dlu, labelcompgap, 63dlu, labelcompgap, pref:grow, labelcompgap, 24dlu, labelcompgap, pref, labelcompgap, pref"
-			"$rowSpecs": "pref, linegap, 16dlu, linegap, 18dlu, linegap, pref, linegap, pref, linegap, pref, linegap, pref:grow"
+			"$columnSpecs": "right:68dlu, labelcompgap, 13dlu, labelcompgap, 63dlu, labelcompgap, pref:grow, labelcompgap, 24dlu, labelcompgap, pref"
+			"$rowSpecs": "pref, linegap, 16dlu, linegap, 18dlu, linegap, pref, linegap, pref, linegap, pref"
 		} ) {
 			name: "this"
 			"border": sfield com.jgoodies.forms.factories.Borders DIALOG_BORDER
@@ -18,7 +18,7 @@ new FormModel {
 				"text": new FormMessage( null, "GLScanAnalyzerView.heatmapSeperator.text" )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 1
-				"gridWidth": 13
+				"gridWidth": 11
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "calculateandshowheatmapLabel"
@@ -59,19 +59,13 @@ new FormModel {
 				"gridY": 5
 				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints LEFT
 			} )
-			add( new FormComponent( "javax.swing.JLabel" ) {
-				name: "heatmapqualityvalueLabel"
-			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 13
-				"gridY": 5
-			} )
 			add( new FormComponent( "com.jformdesigner.designer.wrapper.JGoodiesFormsSeparator" ) {
 				name: "roiSeperator"
 				"text": new FormMessage( null, "GLScanAnalyzerView.roiSeperator.text" )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 1
 				"gridY": 7
-				"gridWidth": 13
+				"gridWidth": 11
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "selectroiLabel"
@@ -107,13 +101,14 @@ new FormModel {
 				name: "startAnalyzerButton"
 				"action": new FormReference( "analyzeAction" )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 11
+				"gridX": 5
 				"gridY": 11
-				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints RIGHT
+				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints LEFT
+				"gridWidth": 3
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )
-			"size": new java.awt.Dimension( 485, 335 )
+			"size": new java.awt.Dimension( 485, 200 )
 		} )
 		add( new FormNonVisual( "javax.swing.AbstractAction" ) {
 			name: "analyzeAction"
