@@ -1,12 +1,32 @@
+* http://launch4j.sourceforge.net/
+* http://www.jrsoftware.org/isinfo.php
+JAR erstellen
+Jar to exe
+Setup
+
+
+JDirectoryChooser
+Bindinings 
+Renaming Variables
+Formularlayout
+New weiter rauf
+Beenden kein Icon
+Toolbar aktualisieren
+Einstellungen -> File
+
+NDPI oder TIF erkennnen 
+TIF found? ausgrauen falls nicht gebraucht
+
+Layout 
+Erben Property = Mattes Property (Input & Outputpath)
+
+
 # TO-DO Liste #
 
 ## Stefan Erben ##
 
 ### 1. Erweiterungen: ###
 * Custom Create von Slider und Textfeld?
-* Slider und Kombobox binden
-* ComponentsExample.java
-* Wert des Slider anzeigbar und änderbar
 * ROI Einstellungen nur sichtbar, wenn SingleMode -> View an PM uebergeben?
 * Watershed Function!
 

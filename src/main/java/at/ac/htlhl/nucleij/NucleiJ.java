@@ -4,6 +4,7 @@ import at.ac.htlhl.nucleij.model.Main;
 import at.ac.htlhl.nucleij.presenter.MainPM;
 import at.ac.htlhl.nucleij.util.logging.ConsoleHandler;
 import at.ac.htlhl.nucleij.util.logging.ConsoleOutFormatter;
+import at.ac.htlhl.nucleij.view.CombinedView;
 import at.ac.htlhl.nucleij.view.GLScanAnalyzerView;
 import at.ac.htlhl.nucleij.view.MainFrameView;
 import at.ac.htlhl.nucleij.view.NdpiConverterView;
@@ -76,7 +77,9 @@ public class NucleiJ extends SingleFrameApplication
         getMainFrame().setTitle(resource.getString("Application.id"));
 
         // IMMER AUSKOMMENTIEREN
-        //show(glScanAnalyzerView);
+        CombinedView combinedView = new CombinedView(ndpiConverterView, glScanAnalyzerView);
+        show(combinedView);
+        // show(glScanAnalyzerView);
         //show(ndpiConverterView);
         //show(mainFrame);
 
