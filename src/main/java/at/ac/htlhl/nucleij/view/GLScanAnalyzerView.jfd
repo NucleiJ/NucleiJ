@@ -84,8 +84,9 @@ new FormModel {
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "deleteRoiButton"
-				"icon": new com.jformdesigner.model.SwingIcon( 0, "/at/ac/htlhl/nucleij/resources/images/i16x16/process-stop.png" )
 				"borderPainted": false
+				"action": new FormReference( "deleteroiAction" )
+				"icon": new com.jformdesigner.model.SwingIcon( 0, "/at/ac/htlhl/nucleij/resources/images/i16x16/process-stop.png" )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 7
 				"gridY": 9
@@ -143,6 +144,15 @@ new FormModel {
 			}
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 155, 465 )
+		} )
+		add( new FormNonVisual( "javax.swing.AbstractAction" ) {
+			name: "deleteroiAction"
+			"$action.SmallIcon": new com.jformdesigner.model.SwingIcon( 0, "/at/ac/htlhl/nucleij/resources/images/i16x16/process-stop.png" )
+			auxiliary() {
+				"JavaCodeGenerator.customCreate": true
+			}
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 250, 415 )
 		} )
 	}
 }

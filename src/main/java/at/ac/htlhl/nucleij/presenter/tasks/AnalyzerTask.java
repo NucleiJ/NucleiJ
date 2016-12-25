@@ -1,8 +1,13 @@
 package at.ac.htlhl.nucleij.presenter.tasks;
 
+import at.ac.htlhl.nucleij.model.GLScanAnalyzer;
+import at.ac.htlhl.nucleij.model.NdpiConverter;
+import at.ac.htlhl.nucleij.presenter.analyzing.MainAnalyzer;
 import com.ezware.dialog.task.TaskDialog;
+import ij.plugin.filter.PlugInFilter;
 
 import javax.swing.*;
+import java.io.File;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,22 +24,68 @@ public class AnalyzerTask extends SwingWorker<String, Integer>
 
     private JProgressBar progressBar;
     private TaskDialog taskDialog;
+    private GLScanAnalyzer glScanAnalyzer;
+    private NdpiConverter ndpiConverter;
 
-    public AnalyzerTask(JProgressBar progressBar, TaskDialog taskDialog)
+    private String dateiname;
+
+    public AnalyzerTask(JProgressBar progressBar, TaskDialog taskDialog, GLScanAnalyzer glScanAnalyzer, NdpiConverter ndpiConverter)
     {
         super();
 
         this.progressBar = progressBar;
         this.taskDialog = taskDialog;
+        this.glScanAnalyzer = glScanAnalyzer;
+        this.ndpiConverter = ndpiConverter;
     }
 
     protected String doInBackground() throws Exception
     {
 
+
         for(int i=1; i<=100; i++)
         {
             // Task
-            Thread.sleep(20);
+            if (i == 1)
+            {
+
+                MainAnalyzer mainAnalyzer = new MainAnalyzer(glScanAnalyzer, ndpiConverter);
+
+                //Stapelfunktion!!
+                int gefundeneneElemente = 0;
+
+                String choosenDirectory = ndpiConverter.getInputpath();
+
+                File folder = new File(choosenDirectory.concat("\\"));
+                File[] listOfFiles = folder.listFiles();
+
+                for (int k = 0; k < listOfFiles.length; k++) {
+                    if (listOfFiles[k].isFile()) {
+                        if (listOfFiles[k].getName().endsWith("tif") == true) {
+                            gefundeneneElemente++;
+                        }
+                    }
+                }
+                int plus = 100/gefundeneneElemente;
+
+                for (int k = 0; k < listOfFiles.length; k++) {
+                    if (listOfFiles[k].isFile()) {
+
+                        String dateiname = listOfFiles[k].getName();
+                        if (dateiname.endsWith("tif") == true) {
+                            gefundeneneElemente++;
+                            mainAnalyzer.setDateiname(dateiname);
+                            mainAnalyzer.run(null);
+                            i = i + plus-1;
+                            publish(i);
+                        }
+                    }
+                }
+
+
+
+            }
+
             publish(i);
         }
         return "Finished";
@@ -60,4 +111,9 @@ public class AnalyzerTask extends SwingWorker<String, Integer>
         taskDialog.setVisible(false);
 
     }
+
+    public String getDateiname() {
+        return dateiname;
+    }
+
 }

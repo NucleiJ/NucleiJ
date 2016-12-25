@@ -169,9 +169,9 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
             taskDialog.setFixedComponent(progressBar);
             taskDialog.setCommands(TaskDialog.StandardCommand.CANCEL);
 
-            AnalyzerTask analyzerTask = new AnalyzerTask(progressBar, taskDialog);
+            //AnalyzerTask analyzerTask = new AnalyzerTask(progressBar, taskDialog, calculateandshowheatmap);
 
-            analyzerTask.execute();
+            //analyzerTask.execute();
 
             taskDialog.show();
         }

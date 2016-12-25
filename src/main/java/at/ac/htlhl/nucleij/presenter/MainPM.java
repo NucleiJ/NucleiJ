@@ -53,7 +53,7 @@ public class MainPM extends PresentationModel<Main>
     {
         super(main);
 
-        glScanAnalyzerPM = new GLScanAnalyzerPM(main.getGLScanAnalyzer());
+        glScanAnalyzerPM = new GLScanAnalyzerPM(main.getGLScanAnalyzer(), main.getNdpiConverter());
         ndpiConverterPM = new NdpiConverterPM(main.getNdpiConverter());
 
 

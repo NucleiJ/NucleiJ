@@ -2,6 +2,7 @@ package at.ac.htlhl.nucleij.presenter;
 
 import at.ac.htlhl.nucleij.AppContext;
 import at.ac.htlhl.nucleij.model.GLScanAnalyzer;
+import at.ac.htlhl.nucleij.model.NdpiConverter;
 import at.ac.htlhl.nucleij.presenter.tasks.AnalyzerTask;
 import at.ac.htlhl.nucleij.util.SuffixFileFilter;
 import com.ezware.dialog.task.TaskDialog;
@@ -36,28 +37,33 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
     private Action analyzeAction;
     private Action calculateandshowheatmapAction;
     private Action selectroiAction;
+    private Action deleteroiAction;
 
     private GLScanAnalyzer glScanAnalyzer;
+    private NdpiConverter ndpiConverter;
 
     /*private String inputpathString;
     private String outputpathString;*/
 
-    public GLScanAnalyzerPM(GLScanAnalyzer glScanAnalyzer) {
+    public GLScanAnalyzerPM(GLScanAnalyzer glScanAnalyzer, NdpiConverter ndpiConverter) {
         super(glScanAnalyzer);
 
         this.glScanAnalyzer = glScanAnalyzer;
+        this.ndpiConverter = ndpiConverter;
 
         analyzeAction = new AnalyzeAction();
         calculateandshowheatmapAction = new CalculateandshowheatmapAction();
         selectroiAction = new SelectroiAction();
+        deleteroiAction = new DeleteroiAction();
 
         /*selectpathAction = new SelectpathAction();
         typeAction = new TypeAction();
         outputpathAction = new OutputpathAction();*/
 
         setComponentEnabled(GLScanAnalyzer.PROPERTY_HEATMAPQUALITY, getBean().isCalculateandshowheatmap());
-        //setComponentEnabled(GLScanAnalyzer.PROPERT, getBean().isCalculateandshowheatmap());
+        //setComponentEnabled(GLScanAnalyzer.PROPERTY, getBean().isCalculateandshowheatmap());
 
+        setComponentEnabled(GLScanAnalyzer.PROPERTY_ROIAREA, false);
 
         // Ausgabe jeder Aenderung
         glScanAnalyzer.addPropertyChangeListener(new PropertyChangeListener() {
@@ -77,7 +83,9 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
         return analyzeAction;
     }
 
-
+    public Action getDeleteroiAction() {
+        return deleteroiAction;
+    }
 
     public Action getCalculateandshowheatmapAction()
     {
@@ -128,14 +136,78 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
             taskDialog.setFixedComponent(progressBar);
             taskDialog.setCommands(TaskDialog.StandardCommand.CANCEL);
 
-
-            AnalyzerTask analyzerTask = new AnalyzerTask(progressBar, taskDialog);
+            boolean calculateandshowheatmap = glScanAnalyzer.isCalculateandshowheatmap();
+            AnalyzerTask analyzerTask = new AnalyzerTask(progressBar, taskDialog, glScanAnalyzer, ndpiConverter);
             //noinspection Since15
             analyzerTask.execute();
 
             taskDialog.show();
         }
     }
+
+    private class CalculateandshowheatmapAction extends AbstractAction
+    {
+        public CalculateandshowheatmapAction()
+        {
+
+        }
+
+        public void actionPerformed(ActionEvent e) {
+
+            // Radiobox toggled von selber, Domainobject aendert sich von selber
+            glScanAnalyzer.setCalculateandshowheatmap(glScanAnalyzer.isCalculateandshowheatmap());
+            System.out.println(glScanAnalyzer.isCalculateandshowheatmap());
+
+            // TODO Slider sichtbar machen
+
+        }
+    }
+
+    private class DeleteroiAction extends AbstractAction
+    {
+        public DeleteroiAction()
+        {
+
+        }
+        public void actionPerformed(ActionEvent e){
+            glScanAnalyzer.setRoiarea("");
+        }
+    }
+
+    private class SelectroiAction extends AbstractAction
+    {
+        public SelectroiAction() {
+
+        }
+
+        public void actionPerformed(ActionEvent e) {
+
+            // Radiobox toggled von selber, Domainobject aendert sich von selber
+            System.out.println("\nSelect the ROI");
+            glScanAnalyzer.setRoiarea("10|30|100|200");
+            //glScanAnalyzer.setSelectroi(glScanAnalyzer.isSelectroi());
+            //System.out.println(glScanAnalyzer.isSelectroi());
+        }
+    }
+
+    //region additional Methods for simple Funtions:
+    private static boolean deleteDirectory(File directory) {
+        if(directory.exists()){
+            File[] files = directory.listFiles();
+            if(null!=files){
+                for(int i=0; i<files.length; i++) {
+                    if(files[i].isDirectory()) {
+                        deleteDirectory(files[i]);
+                    }
+                    else {
+                        files[i].delete();
+                    }
+                }
+            }
+        }
+        return(directory.delete());
+    }
+
 
 
 /*
@@ -220,14 +292,11 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
             System.out.println("\nERROR");
         }
 
-        */
-/*
         boolean createOutputDirectory = new File(outputpathString).mkdirs();
         if (!createOutputDirectory) {
             //TODO Warum Fehler? Gibt es dieses Verzeichnis schon? Dann kein Fehler
             System.out.println("Error beim Erstellen des Ordners");
         }
-        *//*
 
     }
 
@@ -303,58 +372,6 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
         }
     }
 */
-
-
-    private class CalculateandshowheatmapAction extends AbstractAction
-    {
-        public CalculateandshowheatmapAction()
-        {
-
-        }
-
-        public void actionPerformed(ActionEvent e) {
-
-            // Radiobox toggled von selber, Domainobject aendert sich von selber
-            glScanAnalyzer.setCalculateandshowheatmap(glScanAnalyzer.isCalculateandshowheatmap());
-            System.out.println(glScanAnalyzer.isCalculateandshowheatmap());
-
-            // TODO Slider sichtbar machen
-
-        }
-    }
-
-    private class SelectroiAction extends AbstractAction
-    {
-        public SelectroiAction() {
-
-        }
-
-        public void actionPerformed(ActionEvent e) {
-
-            // Radiobox toggled von selber, Domainobject aendert sich von selber
-
-            //glScanAnalyzer.setSelectroi(glScanAnalyzer.isSelectroi());
-            //System.out.println(glScanAnalyzer.isSelectroi());
-        }
-    }
-
-    //region additional Methods for simple Funtions:
-    private static boolean deleteDirectory(File directory) {
-        if(directory.exists()){
-            File[] files = directory.listFiles();
-            if(null!=files){
-                for(int i=0; i<files.length; i++) {
-                    if(files[i].isDirectory()) {
-                        deleteDirectory(files[i]);
-                    }
-                    else {
-                        files[i].delete();
-                    }
-                }
-            }
-        }
-        return(directory.delete());
-    }
 
     //endregion:
 }

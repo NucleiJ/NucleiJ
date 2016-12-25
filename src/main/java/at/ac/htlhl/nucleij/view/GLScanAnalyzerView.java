@@ -45,6 +45,7 @@ public class GLScanAnalyzerView extends JPanel
     private AbstractAction calculateandshowheatmapAction;
     private AbstractAction selectroiAction;
     private AbstractAction changeheatmapqualityAction;
+    private AbstractAction deleteroiAction;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 
     private GLScanAnalyzerPM glScanAnalyzerPM;
@@ -71,6 +72,7 @@ public class GLScanAnalyzerView extends JPanel
         analyzeAction = (AbstractAction) glScanAnalyzerPM.getAnalyzeAction();
         calculateandshowheatmapAction = (AbstractAction) glScanAnalyzerPM.getCalculateandshowheatmapAction();
         selectroiAction = (AbstractAction) glScanAnalyzerPM.getSelectroiAction();
+        deleteroiAction = (AbstractAction) glScanAnalyzerPM.getDeleteroiAction();
 
         /*selectpathAction= (AbstractAction) glScanAnalyzerPM.getSelectpathAction();
         typeAction = (AbstractAction) glScanAnalyzerPM.getTypeAction();
@@ -90,6 +92,7 @@ public class GLScanAnalyzerView extends JPanel
 
         PresentationModelBinder binder = Binders.binderFor(glScanAnalyzerPM);
         binder.bindBeanProperty(GLScanAnalyzer.PROPERTY_CALCULATEANDSHOWHEATMAP).to(calculateandshowheatmapCheckBox);
+        binder.bindBeanProperty(GLScanAnalyzer.PROPERTY_ROIAREA).to(selectRoiTextField);
 
         // Property: HeatMapQuality
         ValueModel heatmapQualityValueModel = glScanAnalyzerPM.getModel(GLScanAnalyzer.PROPERTY_HEATMAPQUALITY);
@@ -159,8 +162,9 @@ public class GLScanAnalyzerView extends JPanel
         add(selectRoiTextField, CC.xywh(3, 9, 3, 1));
 
         //---- deleteRoiButton ----
-        deleteRoiButton.setIcon(new ImageIcon(getClass().getResource("/at/ac/htlhl/nucleij/resources/images/i16x16/process-stop.png")));
         deleteRoiButton.setBorderPainted(false);
+        deleteRoiButton.setAction(deleteroiAction);
+        deleteRoiButton.setIcon(new ImageIcon(getClass().getResource("/at/ac/htlhl/nucleij/resources/images/i16x16/process-stop.png")));
         add(deleteRoiButton, CC.xy(7, 9));
 
         //---- selectRoiButton ----
@@ -176,6 +180,9 @@ public class GLScanAnalyzerView extends JPanel
 
         //---- selectroiAction ----
         selectroiAction.putValue(Action.NAME, bundle.getString("GLScanAnalyzerView.Dialog.Name"));
+
+        //---- deleteroiAction ----
+        deleteroiAction.putValue(Action.SMALL_ICON, new ImageIcon(getClass().getResource("/at/ac/htlhl/nucleij/resources/images/i16x16/process-stop.png")));
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 
