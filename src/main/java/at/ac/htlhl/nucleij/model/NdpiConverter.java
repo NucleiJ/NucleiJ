@@ -85,6 +85,6 @@ public class NdpiConverter extends Model
     }
 
 
-    //endregion Gerrer&Setter
+    //endregion Getter&Setter
 
 }
