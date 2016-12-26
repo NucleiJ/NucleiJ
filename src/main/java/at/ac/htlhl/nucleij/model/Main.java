@@ -24,8 +24,8 @@ public class Main extends Model
     {
         super();
 
-        glScanAnalyzer = new GLScanAnalyzer();
         ndpiConverter = new NdpiConverter();
+        glScanAnalyzer = new GLScanAnalyzer(ndpiConverter);
     }
 
     // Getters

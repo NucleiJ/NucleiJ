@@ -33,28 +33,36 @@ public class GLScanAnalyzer extends Model
     // region Fields
     // ************************************************************************
 
-    /*private String type;
-    private String inputpath;
-    private String outputpath;
+    /*
     private boolean selectroi;*/
 
+    //eigene Werte
+    private NdpiConverter ndpiConverter;
     private int heatmapquality;
     private boolean calculateandshowheatmap;
     private String roiarea;
+
+    //von Andi uebernommen
+    private String inputpath;
+    private String outputpath;
+    private String type;
     // endregion
 
 
-    public GLScanAnalyzer()
+    public GLScanAnalyzer(NdpiConverter ndpiConverter)
     {
         super();
 
-        /*this.type = MULTI;
-        this.inputpath = "";
-        this.outputpath = "";
-        this.selectroi = false;*/
+        this.ndpiConverter = ndpiConverter;
+
+        //this.selectroi = false;
 
         this.heatmapquality = 60;
         this.calculateandshowheatmap = false;
+
+        this.inputpath = "";
+        this.outputpath = "";
+        this.type = ndpiConverter.getType();
     }
 
     // region Getter and Setter
@@ -97,33 +105,24 @@ public class GLScanAnalyzer extends Model
         firePropertyChange(PROPERTY_ROIAREA, oldValue, roiarea);
     }
 
-    /*
+
     public String getInputpath()
     {
-        return inputpath;
-    }
-
-    public void setInputpath(String inputpath)
-    {
-        String oldValue = this.inputpath;
-        this.inputpath = inputpath;
-        firePropertyChange(PROPERTY_INPUTPATH, oldValue, inputpath);
+        return ndpiConverter.getInputpath();
     }
 
     public String getOutputpath()
     {
-        return outputpath;
-    }
-
-    public void setOutputpath(String outputpath)
-    {
-        String oldValue = this.outputpath;
-        this.outputpath = outputpath;
-        firePropertyChange(PROPERTY_OUTPUTPATH, oldValue, outputpath);
+        return ndpiConverter.getOutputpath();
     }
 
 
+    public String getType() {
+        return ndpiConverter.getType();
+    }
 
+
+    /*
     public boolean isSelectroi()
     {
         return selectroi;
@@ -133,16 +132,6 @@ public class GLScanAnalyzer extends Model
         boolean oldValue = this.selectroi;
         this.selectroi = selectroi;
         firePropertyChange(PROPERTY_SELECTROI, oldValue, selectroi);
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        String oldValue = this.type;
-        this.type = type;
-        firePropertyChange(PROPERTY_TYPE, oldValue, type);
     }
 
 

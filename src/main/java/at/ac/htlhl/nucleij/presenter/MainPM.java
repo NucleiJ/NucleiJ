@@ -3,6 +3,7 @@ package at.ac.htlhl.nucleij.presenter;
 import at.ac.htlhl.nucleij.AppContext;
 import at.ac.htlhl.nucleij.model.GLScanAnalyzer;
 import at.ac.htlhl.nucleij.model.Main;
+import at.ac.htlhl.nucleij.model.NdpiConverter;
 import at.ac.htlhl.nucleij.util.SuffixFileFilter;
 import at.ac.htlhl.nucleij.view.GLScanAnalyzerView;
 import at.ac.htlhl.nucleij.view.NdpiConverterView;
@@ -54,7 +55,7 @@ public class MainPM extends PresentationModel<Main>
         super(main);
 
         glScanAnalyzerPM = new GLScanAnalyzerPM(main.getGLScanAnalyzer(), main.getNdpiConverter());
-        ndpiConverterPM = new NdpiConverterPM(main.getNdpiConverter());
+        ndpiConverterPM = new NdpiConverterPM(main.getNdpiConverter(), glScanAnalyzerPM);
 
 
         loadAction = new LoadAction();
@@ -156,7 +157,8 @@ public class MainPM extends PresentationModel<Main>
 
     private void newClass()
     {
-        glScanAnalyzerPM.setBean(new GLScanAnalyzer());
+        ndpiConverterPM.setBean(new NdpiConverter());
+        glScanAnalyzerPM.setBean(new GLScanAnalyzer(ndpiConverterPM.getBean()));
         System.out.println("Neu gedrueckt\n");
     }
 

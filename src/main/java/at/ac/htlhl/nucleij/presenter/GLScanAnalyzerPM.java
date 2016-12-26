@@ -18,6 +18,8 @@ import java.io.File;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
+import static at.ac.htlhl.nucleij.model.NdpiConverter.SINGLE_FILE;
+
 /**
  *
  * @author Stefan Erben
@@ -64,6 +66,7 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
         //setComponentEnabled(GLScanAnalyzer.PROPERTY, getBean().isCalculateandshowheatmap());
 
         setComponentEnabled(GLScanAnalyzer.PROPERTY_ROIAREA, false);
+        setComponentVisible(GLScanAnalyzer.PROPERTY_ROIAREA, false);
 
         // Ausgabe jeder Aenderung
         glScanAnalyzer.addPropertyChangeListener(new PropertyChangeListener() {
@@ -73,10 +76,23 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
                     boolean enabled = evt.getNewValue().toString().toLowerCase().equals("true");
                     setComponentEnabled(GLScanAnalyzer.PROPERTY_HEATMAPQUALITY, enabled);
                 }
+
+                // TODO ROI ein und ausblenden
+                if(NdpiConverter.PROPERTY_TYPE.equals(evt.getPropertyName())) {
+                    boolean enabled = evt.getNewValue().toString().toLowerCase().equals(SINGLE_FILE.toLowerCase());
+                    System.out.println(enabled);
+                    setComponentEnabled(GLScanAnalyzer.PROPERTY_ROIAREA, enabled);
+                    setComponentVisible(GLScanAnalyzer.PROPERTY_ROIAREA, enabled);
+                }
             }
         });
 
 
+    }
+
+    public void setROIvisible(boolean enabled)
+    {
+        setComponentVisible(GLScanAnalyzer.PROPERTY_ROIAREA, enabled);
     }
 
     public Action getAnalyzeAction() {
@@ -137,7 +153,7 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
             taskDialog.setCommands(TaskDialog.StandardCommand.CANCEL);
 
             boolean calculateandshowheatmap = glScanAnalyzer.isCalculateandshowheatmap();
-            AnalyzerTask analyzerTask = new AnalyzerTask(progressBar, taskDialog, glScanAnalyzer, ndpiConverter);
+            AnalyzerTask analyzerTask = new AnalyzerTask(progressBar, taskDialog, glScanAnalyzer);
             //noinspection Since15
             analyzerTask.execute();
 
@@ -149,7 +165,7 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
     {
         public CalculateandshowheatmapAction()
         {
-
+            super();
         }
 
         public void actionPerformed(ActionEvent e) {
@@ -167,7 +183,7 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
     {
         public DeleteroiAction()
         {
-
+            super();
         }
         public void actionPerformed(ActionEvent e){
             glScanAnalyzer.setRoiarea("");
@@ -177,7 +193,7 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
     private class SelectroiAction extends AbstractAction
     {
         public SelectroiAction() {
-
+            super();
         }
 
         public void actionPerformed(ActionEvent e) {

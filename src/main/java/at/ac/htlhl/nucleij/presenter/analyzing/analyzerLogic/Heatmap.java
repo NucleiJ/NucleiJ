@@ -145,6 +145,7 @@ public class Heatmap
 
 		// LUT anwenden
 		//IJ.run(heatmapTmp, "Red/Green", "");
+		// TODO projectpath!
 		IJ.run("LUT... ", "open=C:\\DA-Workspace\\NucleiJ_Analyzer\\lut\\RedGreenErben.lut");
 
 		//wieviel pixel sind auf 255?
@@ -256,7 +257,7 @@ public class Heatmap
 
 
 
-		//TODO es fehlt das alte wait und dan LUT einstellen
+		//TODO es fehlt das alte wait und dann LUT einstellen
 
 		//Speichern der Heatmap
 		String resultsFilename = filename.replaceFirst("[.][^.]+$", "") + "_Heatmap.tif";		//Neuen Filenamen festlegen
@@ -287,6 +288,7 @@ public class Heatmap
 
 		graphics.setColor(Color.GREEN);
 		graphics.setFont(new Font("Arial Black", Font.BOLD, heatmapWidth/50));
+		//noinspection Since15
 		int schriftgroesse = Math.toIntExact((long) (lenghtLegend - 35));
 		if (schriftgroesse < 5)
 		{

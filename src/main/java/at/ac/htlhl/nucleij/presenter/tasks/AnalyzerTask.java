@@ -1,7 +1,6 @@
 package at.ac.htlhl.nucleij.presenter.tasks;
 
 import at.ac.htlhl.nucleij.model.GLScanAnalyzer;
-import at.ac.htlhl.nucleij.model.NdpiConverter;
 import at.ac.htlhl.nucleij.presenter.analyzing.MainAnalyzer;
 import com.ezware.dialog.task.TaskDialog;
 import ij.plugin.filter.PlugInFilter;
@@ -25,18 +24,14 @@ public class AnalyzerTask extends SwingWorker<String, Integer>
     private JProgressBar progressBar;
     private TaskDialog taskDialog;
     private GLScanAnalyzer glScanAnalyzer;
-    private NdpiConverter ndpiConverter;
 
-    private String dateiname;
-
-    public AnalyzerTask(JProgressBar progressBar, TaskDialog taskDialog, GLScanAnalyzer glScanAnalyzer, NdpiConverter ndpiConverter)
+    public AnalyzerTask(JProgressBar progressBar, TaskDialog taskDialog, GLScanAnalyzer glScanAnalyzer)
     {
         super();
 
         this.progressBar = progressBar;
         this.taskDialog = taskDialog;
         this.glScanAnalyzer = glScanAnalyzer;
-        this.ndpiConverter = ndpiConverter;
     }
 
     protected String doInBackground() throws Exception
@@ -49,12 +44,12 @@ public class AnalyzerTask extends SwingWorker<String, Integer>
             if (i == 1)
             {
 
-                MainAnalyzer mainAnalyzer = new MainAnalyzer(glScanAnalyzer, ndpiConverter);
+                MainAnalyzer mainAnalyzer = new MainAnalyzer(glScanAnalyzer);
 
                 //Stapelfunktion!!
                 int gefundeneneElemente = 0;
 
-                String choosenDirectory = ndpiConverter.getInputpath();
+                String choosenDirectory = glScanAnalyzer.getInputpath();
 
                 File folder = new File(choosenDirectory.concat("\\"));
                 File[] listOfFiles = folder.listFiles();
@@ -111,9 +106,4 @@ public class AnalyzerTask extends SwingWorker<String, Integer>
         taskDialog.setVisible(false);
 
     }
-
-    public String getDateiname() {
-        return dateiname;
-    }
-
 }

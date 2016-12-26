@@ -1,6 +1,7 @@
 package at.ac.htlhl.nucleij.presenter;
 
 import at.ac.htlhl.nucleij.AppContext;
+import at.ac.htlhl.nucleij.model.GLScanAnalyzer;
 import at.ac.htlhl.nucleij.model.NdpiConverter;
 import at.ac.htlhl.nucleij.presenter.tasks.AnalyzerTask;
 import at.ac.htlhl.nucleij.util.SuffixFileFilter;
@@ -18,6 +19,8 @@ import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
+
+import static at.ac.htlhl.nucleij.model.NdpiConverter.SINGLE_FILE;
 
 
 /**
@@ -38,15 +41,17 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
     private Action magnificationAction;
 
     private NdpiConverter ndpiConverter;
+    private GLScanAnalyzerPM glScanAnalyzerPM;
 
     private String path;
 
 
-    public NdpiConverterPM(NdpiConverter ndpiConverter)
+    public NdpiConverterPM(NdpiConverter ndpiConverter, final GLScanAnalyzerPM glScanAnalyzerPM)
     {
         super(ndpiConverter);
 
         this.ndpiConverter = ndpiConverter;
+        this.glScanAnalyzerPM = glScanAnalyzerPM;
 
         convertAction = new ConvertAction();
         exportPathAction = new ExportPathAction();
@@ -58,6 +63,15 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
         ndpiConverter.addPropertyChangeListener(new PropertyChangeListener() {
             public void propertyChange(PropertyChangeEvent evt) {
                 LOGGER.info("Property name="+evt.getPropertyName()+", oldValue="+evt.getOldValue()+", newValue="+evt.getNewValue());
+
+                // TODO ROI ein und ausblenden
+                if(NdpiConverter.PROPERTY_TYPE.equals(evt.getPropertyName())) {
+                    boolean enabled = evt.getNewValue().toString().toLowerCase().equals(SINGLE_FILE.toLowerCase());
+                    System.out.println(enabled);
+                    //setComponentEnabled(GLScanAnalyzer.PROPERTY_ROIAREA, enabled);
+                    //setComponentVisible(GLScanAnalyzer.PROPERTY_ROIAREA, enabled);
+                    glScanAnalyzerPM.setROIvisible(enabled);
+                }
             }
         });
     }

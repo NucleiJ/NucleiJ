@@ -18,12 +18,12 @@ import java.io.IOException;
 
 public class Exporter
 {
-	public String newDirectoryname = null;
+	private String newDirectoryname = "";
 
 	//setValue
-	public void setnewDirectoryname(String uebergebenerString)
+	public void setnewDirectoryname(String newDirectoryname)
 	{
-		newDirectoryname = uebergebenerString;
+		this.newDirectoryname = newDirectoryname;
 
 	}
 
@@ -34,10 +34,10 @@ public class Exporter
 
 	}
 
-
 	public void csvSummary (String resultzeile, String path)
 	{
-		String exportReport = path + newDirectoryname + "\\" + "Results.csv";
+		//String exportReport = path + newDirectoryname + "\\" + "Results.csv";
+		String exportReport = path.concat(newDirectoryname).concat("\\").concat("Results.csv");
 
 		File reportfile = new File(exportReport);
 		try {
@@ -54,7 +54,6 @@ public class Exporter
 			e.printStackTrace();
 		}
 		BufferedWriter writeSummary = new BufferedWriter(fw);
-
 		try {
 			writeSummary.write(resultzeile);
 		} catch (IOException e) {
@@ -96,11 +95,11 @@ public class Exporter
 	 */
 	public void results(String resultzeile, String filename, String path)
 	{
-
 		// In Textdatei exportieren
-		String ReportFilename = filename.replaceFirst("[.][^.]+$", "") + "_Results.txt";		//Neuen Filenamen festlegen
+		String ReportFilename = filename.replaceFirst("[.][^.]+$", "").concat("_Results.txt");		//Neuen Filenamen festlegen
     	
-    	String exportReport = path + newDirectoryname + "\\" + ReportFilename;
+    	//String exportReport = path + newDirectoryname + "\\" + ReportFilename;
+		String exportReport = path.concat(newDirectoryname).concat("\\").concat(ReportFilename);
      	
      	File reportfile = new File(exportReport);
         try {
@@ -162,8 +161,6 @@ public class Exporter
 	 */
 	public void summary(String summaryStack, String path, String todayTimeStamp)
 	{
-		System.out.println();
-		
 		if (summaryStack != null)			//Error Handling
 		{
 			String logInhalt = summaryStack;

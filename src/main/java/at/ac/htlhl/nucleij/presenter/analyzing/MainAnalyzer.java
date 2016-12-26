@@ -1,13 +1,10 @@
 package at.ac.htlhl.nucleij.presenter.analyzing;
 
 import at.ac.htlhl.nucleij.model.GLScanAnalyzer;
-import at.ac.htlhl.nucleij.model.NdpiConverter;
 import at.ac.htlhl.nucleij.presenter.analyzing.analyzerLogic.*;
-import at.ac.htlhl.nucleij.presenter.tasks.AnalyzerTask;
 import ij.IJ;
 import ij.ImagePlus;
 import ij.Prefs;
-import ij.gui.GenericDialog;
 import ij.gui.Roi;
 import ij.gui.WaitForUserDialog;
 import ij.measure.ResultsTable;
@@ -24,13 +21,11 @@ import java.util.Arrays;
 public class MainAnalyzer implements PlugInFilter {
 
 	private GLScanAnalyzer glScanAnalyzer;
-	private NdpiConverter ndpiConverter;
 	private String radiobox = "Nothing";
 	private String dateiname;
 
-	public MainAnalyzer(GLScanAnalyzer glScanAnalyzer, NdpiConverter ndpiConverter) {
+	public MainAnalyzer(GLScanAnalyzer glScanAnalyzer) {
 		this.glScanAnalyzer = glScanAnalyzer;
-		this.ndpiConverter = ndpiConverter;
 
 		System.out.println("Ich werde ausgefuehrt");
 	}
@@ -71,7 +66,7 @@ public class MainAnalyzer implements PlugInFilter {
 		getUserInput();
 
 		//Pfad Abfrage
-		path.setValue(ndpiConverter.getInputpath().concat("\\"));
+		path.setValue(glScanAnalyzer.getInputpath().concat("\\"));
 
 		//einen Ordner erstellen:
 		startExporter.setnewDirectoryname("Output");  //TODO andis textfield auslesen wenn es property gibt
