@@ -36,7 +36,7 @@ public class AnalyzerTask extends SwingWorker<String, Integer>
 
     protected String doInBackground() throws Exception
     {
-
+        MainAnalyzer mainAnalyzer = new MainAnalyzer(glScanAnalyzer);
 
         for(int i=1; i<=100; i++)
         {
@@ -44,7 +44,7 @@ public class AnalyzerTask extends SwingWorker<String, Integer>
             if (i == 1)
             {
 
-                MainAnalyzer mainAnalyzer = new MainAnalyzer(glScanAnalyzer);
+
 
                 //Stapelfunktion!!
                 int gefundeneneElemente = 0;
@@ -76,13 +76,15 @@ public class AnalyzerTask extends SwingWorker<String, Integer>
                         }
                     }
                 }
-
-
-
             }
 
             publish(i);
+
         }
+
+        // am Ende Summarys ausgeben
+        mainAnalyzer.createSummary();
+
         return "Finished";
     }
 
