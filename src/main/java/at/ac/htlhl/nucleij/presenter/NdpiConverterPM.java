@@ -1,10 +1,7 @@
 package at.ac.htlhl.nucleij.presenter;
 
 import at.ac.htlhl.nucleij.AppContext;
-import at.ac.htlhl.nucleij.model.GLScanAnalyzer;
 import at.ac.htlhl.nucleij.model.NdpiConverter;
-import at.ac.htlhl.nucleij.presenter.tasks.AnalyzerTask;
-import at.ac.htlhl.nucleij.util.SuffixFileFilter;
 import com.ezware.dialog.task.TaskDialog;
 import com.jgoodies.binding.PresentationModel;
 import org.jdesktop.application.Application;
@@ -16,7 +13,6 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.event.ActionEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.io.File;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
@@ -31,8 +27,8 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
     private static final Logger LOGGER = Logger.getLogger(NdpiConverterPM.class.getName());
     public static final String FILE_EXTENSION = "nucleij";
 
-    FileNameExtensionFilter ndpiFilter = new FileNameExtensionFilter("NanoZoomerDigitalPathologyImage (.ndpi)","ndpi");
-    FileNameExtensionFilter tifFilter = new FileNameExtensionFilter("TaggedImageFile (.tif)","tif");
+    FileNameExtensionFilter ndpiFilter = new FileNameExtensionFilter("Nano Zoomer Digital Pathology Image (.ndpi)","ndpi");
+    FileNameExtensionFilter tifFilter = new FileNameExtensionFilter("Tagged Image File (.tif)","tif");
 
     private Action convertAction;
     private Action exportPathAction;
@@ -100,68 +96,39 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
 
 
 
-    private JFileChooser createDirChooser()
-    {
-        JFrame parent = ((SingleFrameApplication) Application.getInstance()).getMainFrame();
-
-        JFileChooser chooser = new JFileChooser();
-        chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-        //Action details = chooser.getActionMap().get("viewTypeDetails");
-        //details.actionPerformed(null);
-        chooser.setControlButtonsAreShown(true);
-
-        if (chooser.showOpenDialog(parent) == JFileChooser.APPROVE_OPTION)
-        {
-            path = chooser.getSelectedFile().getAbsolutePath();
-            ndpiConverter.setInputpath(path);
-            ndpiConverter.setOutputpath(path);
-        }
-
-        return chooser;
-    }
-
-    private JFileChooser createFileChooser()
-    {
-        JFrame parent = ((SingleFrameApplication) Application.getInstance()).getMainFrame();
-
-        JFileChooser chooser = new JFileChooser();
-        chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-        chooser.addChoosableFileFilter(tifFilter);
-        chooser.addChoosableFileFilter(ndpiFilter);
-        //Action details = chooser.getActionMap().get("viewTypeDetails");
-        //details.actionPerformed(null);
-        chooser.setControlButtonsAreShown(true);
-
-        if (chooser.showOpenDialog(parent) == JFileChooser.APPROVE_OPTION)
-        {
-            path = chooser.getSelectedFile().getAbsolutePath();
-            ndpiConverter.setInputpath(path);
-            ndpiConverter.setOutputpath(path);
-            File inputPathFile = new File(path);
-        }
-
-        return chooser;
-    }
-
-    private void selectPath()
+    private void createFileChooser()
     {
         LOGGER.info("Select Path Action clicked");
+        JFileChooser chooser = new JFileChooser();
 
         if(ndpiConverter.getType().equals(NdpiConverter.SINGLE_DIR) ) {
-            JFileChooser chooser = createDirChooser();
+            chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+            chooser.setControlButtonsAreShown(true);
             chooser.setDialogTitle("Verzeichnis auswählen");
         }
         else if(ndpiConverter.getType().equals(NdpiConverter.SINGLE_FILE)) {
-            JFileChooser chooser = createFileChooser();
-            chooser.setDialogTitle("File auswählen");
+            chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+            chooser.addChoosableFileFilter(tifFilter);
+            chooser.addChoosableFileFilter(ndpiFilter);
+            chooser.setControlButtonsAreShown(true);
+            chooser.setDialogTitle("Datei auswählen");
         }
         else if (ndpiConverter.getType().equals(NdpiConverter.MULTI_FILE)) {
-            JFileChooser chooser = createDirChooser();
+            chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+            chooser.setControlButtonsAreShown(true);
             chooser.setMultiSelectionEnabled(true);
-            chooser.setDialogTitle("Mehrere Files auswählen");
+            chooser.setDialogTitle("Mehrere Dateien auswählen");
         }
         else {
             System.out.println("\nERROR");
+        }
+
+        JFrame parent = ((SingleFrameApplication) Application.getInstance()).getMainFrame();
+        if (chooser.showOpenDialog(parent) == JFileChooser.APPROVE_OPTION)
+        {
+            path = chooser.getSelectedFile().getAbsolutePath();
+            ndpiConverter.setInputpath(path);
+            ndpiConverter.setOutputpath(path);
         }
 
     }
@@ -202,7 +169,7 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
         }
 
         public void actionPerformed(ActionEvent actionEvent) {
-            selectPath();
+            createFileChooser();
         }
 
 
