@@ -37,6 +37,7 @@ public class NdpiConverterView extends JPanel {
         PresentationModelBinder binder = Binders.binderFor(ndpiConverterPM);
         binder.bindBeanProperty(NdpiConverter.PROPERTY_INPUTPATH).to(inputDirTextField);
         binder.bindBeanProperty(NdpiConverter.PROPERTY_OUTPUTPATH).to(outputDirTextField);
+        binder.bindBeanProperty(NdpiConverter.PROPERTY_OUTPUTPATH).to(directoryNameTextField);
 
         ValueModel typeValueModel =  ndpiConverterPM.getComponentModel(NdpiConverter.PROPERTY_TYPE);
         ComboBoxAdapter comboBoxAdapter = new ComboBoxAdapter(NdpiConverter.TYPE_CHOICES, typeValueModel);
@@ -57,7 +58,7 @@ public class NdpiConverterView extends JPanel {
         inputPathButton = new JButton();
         separator4 = compFactory.createSeparator(bundle.getString("NdpiConverterView.OutputSeperator.Text"));
         label1 = new JLabel();
-        textField1 = new JTextField();
+        directoryNameTextField = new JTextField();
         exportFolder = new JLabel();
         outputDirTextField = new JTextField();
         outputPathButton = new JButton();
@@ -108,7 +109,7 @@ public class NdpiConverterView extends JPanel {
         //---- label1 ----
         label1.setText(bundle.getString("NdpiConverterView.customNameLabel.text"));
         add(label1, CC.xy(1, 9));
-        add(textField1, CC.xywh(3, 9, 5, 1));
+        add(directoryNameTextField, CC.xywh(3, 9, 5, 1));
 
         //---- exportFolder ----
         exportFolder.setText(bundle.getString("NdpiConverterView.OutputFolder.text"));
@@ -178,7 +179,7 @@ public class NdpiConverterView extends JPanel {
     private JButton inputPathButton;
     private JComponent separator4;
     private JLabel label1;
-    private JTextField textField1;
+    private JTextField directoryNameTextField;
     private JLabel exportFolder;
     private JTextField outputDirTextField;
     private JButton outputPathButton;

@@ -39,8 +39,6 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
     private NdpiConverter ndpiConverter;
     private GLScanAnalyzerPM glScanAnalyzerPM;
 
-    private String path;
-
 
     public NdpiConverterPM(NdpiConverter ndpiConverter, final GLScanAnalyzerPM glScanAnalyzerPM)
     {
@@ -126,9 +124,9 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
         JFrame parent = ((SingleFrameApplication) Application.getInstance()).getMainFrame();
         if (chooser.showOpenDialog(parent) == JFileChooser.APPROVE_OPTION)
         {
-            path = chooser.getSelectedFile().getAbsolutePath();
-            ndpiConverter.setInputpath(path);
-            ndpiConverter.setOutputpath(path);
+            ndpiConverter.setInputpath(chooser.getSelectedFile().getAbsolutePath());
+            ndpiConverter.setOutputpath(chooser.getSelectedFile().getAbsolutePath());
+
         }
 
     }

@@ -1,4 +1,4 @@
-JFDML JFormDesigner: "6.0.0.0.58" Java: "1.8.0_112" encoding: "UTF-8"
+JFDML JFormDesigner: "6.0.0.0.63" Java: "1.8.0_112-release" encoding: "UTF-8"
 
 new FormModel {
 	"i18n.bundlePackage": "at.ac.htlhl.nucleij.resources.i18n"
@@ -81,7 +81,7 @@ new FormModel {
 				"gridY": 9
 			} )
 			add( new FormComponent( "javax.swing.JTextField" ) {
-				name: "textField1"
+				name: "directoryNameTextField"
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 3
 				"gridY": 9

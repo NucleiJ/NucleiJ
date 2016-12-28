@@ -82,6 +82,12 @@ public class NdpiConverter extends Model
         String oldValue = this.outputpath;
         this.outputpath = outputpath;
         firePropertyChange(PROPERTY_OUTPUTPATH,oldValue,outputpath);
+
+        /*int position = outputpath.lastIndexOf( '/' );
+        outputpath = outputpath.substring(position+1);
+        //firePropertyChange(PROPERTY_OUTPUTPATH, oldValue,outputpath);     //Wenn nicht auskommentiert, wird in beiden Textfeldern der entgültige Output-Name angezeigt
+        */
+        //TODO dass im directoryNameTextField nur benutzerdefinierter Name angezeigt wird und im outputFolderTextField gleich der Pfad sich mitaktualisiert
     }
 
 
