@@ -56,6 +56,12 @@ public class MainAnalyzer implements PlugInFilter {
 	Exporter startExporter = new Exporter();
 	PictureCharacteristics properties = new PictureCharacteristics();
 
+	public void createSummary()
+	{
+		startExporter.summary(summaryStack.getString(), path.getValue(), today.getCurrentTimeStamp());
+		startExporter.csvSummary(csvSummaryStack.getString(), path.getValue());
+	}
+
 	public int setup(String arg, ImagePlus imp) {
 		//Beim Start wird kein geladenes Bild benoetigt
 		return NO_IMAGE_REQUIRED;
@@ -135,8 +141,8 @@ public class MainAnalyzer implements PlugInFilter {
 			IJ.run("Close");
 
 		}
-		startExporter.summary(summaryStack.getString(), path.getValue(), today.getCurrentTimeStamp());
-		startExporter.csvSummary(csvSummaryStack.getString(), path.getValue());
+		//startExporter.summary(summaryStack.getString(), path.getValue(), today.getCurrentTimeStamp());
+		//startExporter.csvSummary(csvSummaryStack.getString(), path.getValue());
 
 		//System.out.println("\nAnzahl der gefundenen Elemente: " + gefundeneneElemente);
 
