@@ -20,7 +20,7 @@ import static at.ac.htlhl.nucleij.model.NdpiConverter.SINGLE_FILE;
 
 
 /**
- * Created by Stefan on 11.11.2016.
+ * Created by Stefan & Andreas on 11.11.2016.
  */
 public class NdpiConverterPM extends PresentationModel<NdpiConverter>
 {
@@ -126,7 +126,6 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
         {
             ndpiConverter.setInputpath(chooser.getSelectedFile().getAbsolutePath());
             ndpiConverter.setOutputpath(chooser.getSelectedFile().getAbsolutePath());
-
         }
 
     }
@@ -213,12 +212,12 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
     }
 
 
-    private class MagnificationAction extends AbstractAction {
-        public void actionPerformed(ActionEvent actionEvent) {
-
+    class MagnificationAction extends AbstractAction implements PropertyChangeListener {
+        public void propertyChange(PropertyChangeEvent e) {
+            ndpiConverter.setMagnification(e.getPropertyName());
         }
 
-        public MagnificationAction () {
+        public void actionPerformed(ActionEvent e) {
 
         }
     }

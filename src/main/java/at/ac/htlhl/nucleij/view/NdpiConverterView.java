@@ -39,6 +39,15 @@ public class NdpiConverterView extends JPanel {
         binder.bindBeanProperty(NdpiConverter.PROPERTY_OUTPUTPATH).to(outputDirTextField);
         binder.bindBeanProperty(NdpiConverter.PROPERTY_OUTPUTPATH).to(directoryNameTextField);
 
+        binder.bindBeanProperty(NdpiConverter.PROPERTY_MAGNIFICATION).to(magnification40Button);
+        binder.bindBeanProperty(NdpiConverter.PROPERTY_MAGNIFICATION).to(magnification10Button);
+        binder.bindBeanProperty(NdpiConverter.PROPERTY_MAGNIFICATION).to(magnification5Button);
+        /* Lentzsch:
+        binder.bindBeanProperty(PROPERTY_INT_CHOICE).to(leftIntRadio,   LEFT_INTEGER);
+        binder.bindBeanProperty(PROPERTY_INT_CHOICE).to(centerIntRadio, CENTER_INTEGER);
+        binder.bindBeanProperty(PROPERTY_INT_CHOICE).to(rightIntRadio,  RIGHT_INTEGER);
+         */
+
         ValueModel typeValueModel =  ndpiConverterPM.getComponentModel(NdpiConverter.PROPERTY_TYPE);
         ComboBoxAdapter comboBoxAdapter = new ComboBoxAdapter(NdpiConverter.TYPE_CHOICES, typeValueModel);
         typeComboBox.setModel(comboBoxAdapter);

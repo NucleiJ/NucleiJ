@@ -25,10 +25,10 @@ public class NdpiConverter extends Model
     //endregion Constants
 
     //*******************************************************************
-    enum Magnification {x40,x10}
+    //enum Magnification {x40,x10}
 
     private String type;
-    private Magnification magnification;
+    private String magnification;
     private String inputpath;
     private String outputpath;
 
@@ -39,7 +39,7 @@ public class NdpiConverter extends Model
         this.type = MULTI_FILE;
         this.inputpath = "";
         this.outputpath = "";
-        this.magnification = Magnification.x10;
+        this.magnification = "x10";
     }
 
     //region Getter&Setter
@@ -54,12 +54,12 @@ public class NdpiConverter extends Model
         firePropertyChange(PROPERTY_TYPE,oldValue,type);
     }
 
-    public Magnification getMagnification() {
+    public String getMagnification() {
         return magnification;
     }
 
-    public void setMagnification(Magnification magnification) {
-        Magnification oldValue = this.magnification;
+    public void setMagnification(String magnification) {
+        String oldValue = this.magnification;
         this.magnification = magnification;
         firePropertyChange(PROPERTY_MAGNIFICATION,oldValue,magnification);
     }
