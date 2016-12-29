@@ -22,6 +22,11 @@ public class NdpiConverter extends Model
     public static final String MULTI_FILE = "Multi File";
     public static final String[] TYPE_CHOICES = {SINGLE_FILE, SINGLE_DIR, MULTI_FILE};
 
+    public static final String MAG_X5 = "x5";
+    public static final String MAG_X10 = "x10";
+    public static final String MAG_X40 = "x40";
+    public static final String[] MAG_CHOICES = {MAG_X5, MAG_X10, MAG_X40};
+
     //endregion Constants
 
     //*******************************************************************

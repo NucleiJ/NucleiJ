@@ -7,6 +7,7 @@ import javax.swing.*;
 import at.ac.htlhl.nucleij.model.NdpiConverter;
 import at.ac.htlhl.nucleij.presenter.NdpiConverterPM;
 import com.jgoodies.binding.adapter.ComboBoxAdapter;
+import com.jgoodies.binding.adapter.RadioButtonAdapter;
 import com.jgoodies.binding.binder.Binders;
 import com.jgoodies.binding.binder.PresentationModelBinder;
 import com.jgoodies.binding.value.ValueModel;
@@ -47,6 +48,12 @@ public class NdpiConverterView extends JPanel {
         binder.bindBeanProperty(PROPERTY_INT_CHOICE).to(centerIntRadio, CENTER_INTEGER);
         binder.bindBeanProperty(PROPERTY_INT_CHOICE).to(rightIntRadio,  RIGHT_INTEGER);
          */
+
+        // TIPP (S): RadioButtonAdapter
+        //ValueModel magnificationModel = ndpiConverterPM.getComponentModel(NdpiConverter.PROPERTY_MAGNIFICATION);
+        //RadioButtonAdapter radioButtonAdapter = new RadioButtonAdapter(magnificationModel, NdpiConverter.MAG_CHOICES);
+        //magnification5Button.setModel(radioButtonAdapter);
+
 
         ValueModel typeValueModel =  ndpiConverterPM.getComponentModel(NdpiConverter.PROPERTY_TYPE);
         ComboBoxAdapter comboBoxAdapter = new ComboBoxAdapter(NdpiConverter.TYPE_CHOICES, typeValueModel);

@@ -23,11 +23,12 @@ public class MainAnalyzer implements PlugInFilter {
 	private GLScanAnalyzer glScanAnalyzer;
 	private String radiobox = "Nothing";
 	private String dateiname;
+	private StringAdder summaryStack;
+	private StringAdder csvSummaryStack;
 
 	public MainAnalyzer(GLScanAnalyzer glScanAnalyzer) {
 		this.glScanAnalyzer = glScanAnalyzer;
 
-		System.out.println("Ich werde ausgefuehrt");
 	}
 
 	public void setDateiname(String dateiname) {
@@ -44,8 +45,8 @@ public class MainAnalyzer implements PlugInFilter {
 
 	//Create Objektes
 
-	StringAdder summaryStack = new StringAdder();
-	StringAdder csvSummaryStack = new StringAdder();
+	//StringAdder summaryStack = new StringAdder();
+	//StringAdder csvSummaryStack = new StringAdder();
 	StringTransfer resultStack = new StringTransfer();
 	Timestamp today = new Timestamp();
 	MeasureSettings settings = new MeasureSettings();
@@ -60,6 +61,12 @@ public class MainAnalyzer implements PlugInFilter {
 	{
 		startExporter.summary(summaryStack.getString(), path.getValue(), today.getCurrentTimeStamp());
 		startExporter.csvSummary(csvSummaryStack.getString(), path.getValue());
+	}
+
+	public void setSummaryStacks(StringAdder summaryStack, StringAdder csvSummaryStack)
+	{
+		this.summaryStack = summaryStack;
+		this.csvSummaryStack = csvSummaryStack;
 	}
 
 	public int setup(String arg, ImagePlus imp) {

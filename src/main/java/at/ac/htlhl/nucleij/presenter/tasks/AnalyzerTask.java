@@ -2,6 +2,7 @@ package at.ac.htlhl.nucleij.presenter.tasks;
 
 import at.ac.htlhl.nucleij.model.GLScanAnalyzer;
 import at.ac.htlhl.nucleij.presenter.analyzing.MainAnalyzer;
+import at.ac.htlhl.nucleij.presenter.analyzing.analyzerLogic.StringAdder;
 import com.ezware.dialog.task.TaskDialog;
 import ij.plugin.filter.PlugInFilter;
 
@@ -63,6 +64,11 @@ public class AnalyzerTask extends SwingWorker<String, Integer>
                 }
                 int plus = 100/gefundeneneElemente;
 
+
+                StringAdder summaryStack = new StringAdder();
+                StringAdder csvSummaryStack = new StringAdder();
+                mainAnalyzer.setSummaryStacks(summaryStack, csvSummaryStack);
+
                 for (int k = 0; k < listOfFiles.length; k++) {
                     if (listOfFiles[k].isFile()) {
 
@@ -77,6 +83,7 @@ public class AnalyzerTask extends SwingWorker<String, Integer>
                     }
                 }
             }
+            mainAnalyzer.createSummary();
 
             publish(i);
 

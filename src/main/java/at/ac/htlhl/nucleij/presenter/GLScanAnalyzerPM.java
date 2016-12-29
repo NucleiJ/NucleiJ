@@ -4,7 +4,7 @@ import at.ac.htlhl.nucleij.AppContext;
 import at.ac.htlhl.nucleij.model.GLScanAnalyzer;
 import at.ac.htlhl.nucleij.model.NdpiConverter;
 import at.ac.htlhl.nucleij.presenter.tasks.AnalyzerTask;
-import at.ac.htlhl.nucleij.util.SuffixFileFilter;
+import at.ac.htlhl.nucleij.presenter.tasks.RoiTask;
 import com.ezware.dialog.task.TaskDialog;
 import com.jgoodies.binding.PresentationModel;
 import org.jdesktop.application.Application;
@@ -201,6 +201,10 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
             // Radiobox toggled von selber, Domainobject aendert sich von selber
             System.out.println("\nSelect the ROI");
             glScanAnalyzer.setRoiarea("10|30|100|200");
+
+            RoiTask test = new RoiTask(glScanAnalyzer);
+            test.setROI();
+
             //glScanAnalyzer.setSelectroi(glScanAnalyzer.isSelectroi());
             //System.out.println(glScanAnalyzer.isSelectroi());
         }
