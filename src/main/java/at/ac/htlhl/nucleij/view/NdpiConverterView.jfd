@@ -8,7 +8,7 @@ new FormModel {
 	root: new FormRoot {
 		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
 			"$columnSpecs": "right:68dlu, labelcompgap, 63dlu, labelcompgap, 31dlu:grow, labelcompgap, 24dlu, labelcompgap, default"
-			"$rowSpecs": "18dlu, linegap, pref, linegap, 18dlu, linegap, default, linegap, default, linegap, pref, linegap, pref, linegap, pref"
+			"$rowSpecs": "18dlu, linegap, pref, linegap, 18dlu, linegap, default, linegap, default, linegap, pref, linegap, pref, linegap, 17dlu"
 			"$rowGroupIds": "1, 0, 0, 2, 0, 0, 1, 2, 0, 0, 1, 3, 1, 0, 0"
 		} ) {
 			name: "this"
@@ -28,13 +28,6 @@ new FormModel {
 			} )
 			add( new FormComponent( "javax.swing.JComboBox" ) {
 				name: "typeComboBox"
-				"model": new javax.swing.DefaultComboBoxModel {
-					selectedItem: "Single File"
-					addElement( "Single File" )
-					addElement( "Single Dir" )
-					addElement( "Multi File" )
-					addElement( "Multi Dir" )
-				}
 				"toolTipText": "Select mode"
 				"action": new FormReference( "typeAction" )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
@@ -81,7 +74,7 @@ new FormModel {
 				"gridY": 9
 			} )
 			add( new FormComponent( "javax.swing.JTextField" ) {
-				name: "directoryNameTextField"
+				name: "customDirNameTextField"
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 3
 				"gridY": 9
@@ -129,15 +122,16 @@ new FormModel {
 			} )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
 				"$columnSpecs": "default:grow, labelcompgap, default:grow, labelcompgap, default:grow"
-				"$rowSpecs": "default"
+				"$rowSpecs": "top:default:grow"
 			} ) {
 				name: "panel1"
 				add( new FormComponent( "javax.swing.JRadioButton" ) {
 					name: "magnification40Button"
-					"text": "x40"
 					"minimumSize": new java.awt.Dimension( 40, 28 )
-					"selected": true
 					"$buttonGroup": new FormReference( "buttonGroupMagnification" )
+					"selected": true
+					"actionCommand": "x40"
+					"text": "x40"
 				}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) )
 				add( new FormComponent( "javax.swing.JRadioButton" ) {
 					name: "magnification10Button"
@@ -176,7 +170,7 @@ new FormModel {
 				"JavaCodeGenerator.customCreate": true
 			}
 		}, new FormLayoutConstraints( null ) {
-			"location": new java.awt.Point( 155, 350 )
+			"location": new java.awt.Point( 295, 400 )
 		} )
 		add( new FormNonVisual( "javax.swing.AbstractAction" ) {
 			name: "outputPathAction"
@@ -185,7 +179,7 @@ new FormModel {
 				"JavaCodeGenerator.customCreate": true
 			}
 		}, new FormLayoutConstraints( null ) {
-			"location": new java.awt.Point( 240, 350 )
+			"location": new java.awt.Point( 415, 350 )
 		} )
 		add( new FormNonVisual( "javax.swing.AbstractAction" ) {
 			name: "typeAction"
@@ -193,7 +187,7 @@ new FormModel {
 				"JavaCodeGenerator.customCreate": true
 			}
 		}, new FormLayoutConstraints( null ) {
-			"location": new java.awt.Point( 350, 350 )
+			"location": new java.awt.Point( 200, 350 )
 		} )
 		add( new FormNonVisual( "javax.swing.AbstractAction" ) {
 			name: "inputPathAction"
@@ -202,7 +196,7 @@ new FormModel {
 				"JavaCodeGenerator.customCreate": true
 			}
 		}, new FormLayoutConstraints( null ) {
-			"location": new java.awt.Point( 420, 350 )
+			"location": new java.awt.Point( 290, 350 )
 		} )
 		add( new FormNonVisual( "javax.swing.AbstractAction" ) {
 			name: "magnificationAction"
@@ -210,7 +204,16 @@ new FormModel {
 				"JavaCodeGenerator.customCreate": true
 			}
 		}, new FormLayoutConstraints( null ) {
-			"location": new java.awt.Point( 520, 350 )
+			"location": new java.awt.Point( 140, 400 )
+		} )
+		add( new FormNonVisual( "javax.swing.AbstractAction" ) {
+			name: "customPathAction"
+			"$action.Name": "Type path in here..."
+			auxiliary() {
+				"JavaCodeGenerator.customCreate": true
+			}
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 400 )
 		} )
 	}
 }

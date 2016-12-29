@@ -13,7 +13,6 @@ import com.jgoodies.binding.binder.PresentationModelBinder;
 import com.jgoodies.binding.value.ValueModel;
 import com.jgoodies.forms.factories.*;
 import com.jgoodies.forms.layout.*;
-import net.miginfocom.swing.*;
 
 public class NdpiConverterView extends JPanel {
     private NdpiConverterPM ndpiConverterPM;
@@ -27,33 +26,25 @@ public class NdpiConverterView extends JPanel {
     }
 
     private void createUIComponents() {
-        convertAction = (AbstractAction) ndpiConverterPM.getConvertAction();
-        outputPathAction = (AbstractAction) ndpiConverterPM.getOutputPathAction();
         typeAction = (AbstractAction) ndpiConverterPM.getTypeAction();
         inputPathAction = (AbstractAction) ndpiConverterPM.getInputPathAction();
+        outputPathAction = (AbstractAction) ndpiConverterPM.getOutputPathAction();
+        customPathAction = (AbstractAction) ndpiConverterPM.getCustomPathAction();
         magnificationAction = (AbstractAction) ndpiConverterPM.getMagnificationAction();
+        convertAction = (AbstractAction) ndpiConverterPM.getConvertAction();
+
     }
 
     public void initBindings() {
         PresentationModelBinder binder = Binders.binderFor(ndpiConverterPM);
         binder.bindBeanProperty(NdpiConverter.PROPERTY_INPUTPATH).to(inputDirTextField);
         binder.bindBeanProperty(NdpiConverter.PROPERTY_OUTPUTPATH).to(outputDirTextField);
-        binder.bindBeanProperty(NdpiConverter.PROPERTY_OUTPUTPATH).to(directoryNameTextField);
+        binder.bindBeanProperty(NdpiConverter.PROPERTY_CUSTOMPATH).to(customDirNameTextField);
 
-        binder.bindBeanProperty(NdpiConverter.PROPERTY_MAGNIFICATION).to(magnification40Button);
-        binder.bindBeanProperty(NdpiConverter.PROPERTY_MAGNIFICATION).to(magnification10Button);
-        binder.bindBeanProperty(NdpiConverter.PROPERTY_MAGNIFICATION).to(magnification5Button);
-        /* Lentzsch:
-        binder.bindBeanProperty(PROPERTY_INT_CHOICE).to(leftIntRadio,   LEFT_INTEGER);
-        binder.bindBeanProperty(PROPERTY_INT_CHOICE).to(centerIntRadio, CENTER_INTEGER);
-        binder.bindBeanProperty(PROPERTY_INT_CHOICE).to(rightIntRadio,  RIGHT_INTEGER);
-         */
-
-        // TIPP (S): RadioButtonAdapter
-        //ValueModel magnificationModel = ndpiConverterPM.getComponentModel(NdpiConverter.PROPERTY_MAGNIFICATION);
-        //RadioButtonAdapter radioButtonAdapter = new RadioButtonAdapter(magnificationModel, NdpiConverter.MAG_CHOICES);
-        //magnification5Button.setModel(radioButtonAdapter);
-
+        ValueModel magnificationModel = ndpiConverterPM.getModel(NdpiConverter.PROPERTY_MAGNIFICATION);
+        magnification40Button.setModel(new RadioButtonAdapter(magnificationModel, NdpiConverter.MAG_X40));
+        magnification10Button.setModel(new RadioButtonAdapter(magnificationModel, NdpiConverter.MAG_X10));
+        magnification5Button.setModel(new RadioButtonAdapter(magnificationModel, NdpiConverter.MAG_X5));
 
         ValueModel typeValueModel =  ndpiConverterPM.getComponentModel(NdpiConverter.PROPERTY_TYPE);
         ComboBoxAdapter comboBoxAdapter = new ComboBoxAdapter(NdpiConverter.TYPE_CHOICES, typeValueModel);
@@ -74,7 +65,7 @@ public class NdpiConverterView extends JPanel {
         inputPathButton = new JButton();
         separator4 = compFactory.createSeparator(bundle.getString("NdpiConverterView.OutputSeperator.Text"));
         label1 = new JLabel();
-        directoryNameTextField = new JTextField();
+        customDirNameTextField = new JTextField();
         exportFolder = new JLabel();
         outputDirTextField = new JTextField();
         outputPathButton = new JButton();
@@ -89,7 +80,7 @@ public class NdpiConverterView extends JPanel {
         setBorder(Borders.DIALOG);
         setLayout(new FormLayout(
             "right:68dlu, $lcgap, 63dlu, $lcgap, 31dlu:grow, $lcgap, 24dlu, $lcgap, default",
-            "18dlu, $lgap, pref, $lgap, 18dlu, 2*($lgap, default), 3*($lgap, pref)"));
+            "18dlu, $lgap, pref, $lgap, 18dlu, 2*($lgap, default), 2*($lgap, pref), $lgap, 17dlu"));
         ((FormLayout)getLayout()).setRowGroups(new int[][] {{1, 7, 11, 13}, {4, 8}});
         add(separator3, CC.xywh(1, 1, 9, 1));
 
@@ -98,12 +89,6 @@ public class NdpiConverterView extends JPanel {
         add(analyzeTypeLabel, CC.xy(1, 3, CC.RIGHT, CC.DEFAULT));
 
         //---- typeComboBox ----
-        typeComboBox.setModel(new DefaultComboBoxModel(new String[] {
-            "Single File",
-            "Single Dir",
-            "Multi File",
-            "Multi Dir"
-        }));
         typeComboBox.setToolTipText("Select mode");
         typeComboBox.setAction(typeAction);
         add(typeComboBox, CC.xy(3, 3));
@@ -125,7 +110,7 @@ public class NdpiConverterView extends JPanel {
         //---- label1 ----
         label1.setText(bundle.getString("NdpiConverterView.customNameLabel.text"));
         add(label1, CC.xy(1, 9));
-        add(directoryNameTextField, CC.xywh(3, 9, 5, 1));
+        add(customDirNameTextField, CC.xywh(3, 9, 5, 1));
 
         //---- exportFolder ----
         exportFolder.setText(bundle.getString("NdpiConverterView.OutputFolder.text"));
@@ -149,12 +134,12 @@ public class NdpiConverterView extends JPanel {
         {
             panel1.setLayout(new FormLayout(
                 "2*(default:grow, $lcgap), default:grow",
-                "default"));
+                "top:default:grow"));
 
             //---- magnification40Button ----
-            magnification40Button.setText("x40");
             magnification40Button.setMinimumSize(new Dimension(40, 28));
             magnification40Button.setSelected(true);
+            magnification40Button.setText("x40");
             panel1.add(magnification40Button, CC.xy(1, 1));
 
             //---- magnification10Button ----
@@ -178,6 +163,9 @@ public class NdpiConverterView extends JPanel {
         //---- inputPathAction ----
         inputPathAction.putValue(Action.NAME, bundle.getString("NdpiConverterView.inputOutputPathAction.name"));
 
+        //---- customPathAction ----
+        customPathAction.putValue(Action.NAME, "Type path in here...");
+
         //---- buttonGroupMagnification ----
         ButtonGroup buttonGroupMagnification = new ButtonGroup();
         buttonGroupMagnification.add(magnification40Button);
@@ -195,7 +183,7 @@ public class NdpiConverterView extends JPanel {
     private JButton inputPathButton;
     private JComponent separator4;
     private JLabel label1;
-    private JTextField directoryNameTextField;
+    private JTextField customDirNameTextField;
     private JLabel exportFolder;
     private JTextField outputDirTextField;
     private JButton outputPathButton;
@@ -210,5 +198,6 @@ public class NdpiConverterView extends JPanel {
     private AbstractAction typeAction;
     private AbstractAction inputPathAction;
     private AbstractAction magnificationAction;
+    private AbstractAction customPathAction;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

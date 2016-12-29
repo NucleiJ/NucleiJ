@@ -3,6 +3,8 @@ package at.ac.htlhl.nucleij.model;
 import com.jgoodies.binding.beans.Model;
 import com.jgoodies.forms.layout.ColumnSpec;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Andreas Mattes
@@ -11,39 +13,40 @@ import com.jgoodies.forms.layout.ColumnSpec;
 public class NdpiConverter extends Model
 {
     //region Constants
-    public static final String PROPERTY_TYPE = "type";
-    public static final String PROPERTY_INPUTPATH = "inputpath";
-    public static final String PROPERTY_OUTPUTPATH = "outputpath";
-    public static final String PROPERTY_MAGNIFICATION = "magnification";
+    public static final String PROPERTY_TYPE            = "type";
+    public static final String PROPERTY_INPUTPATH       = "inputpath";
+    public static final String PROPERTY_OUTPUTPATH      = "outputpath";
+    public static final String PROPERTY_CUSTOMPATH      = "custompath";
+    public static final String PROPERTY_MAGNIFICATION   = "magnification";
 
+    public static final String SINGLE_FILE  = "Single File";
+    public static final String SINGLE_DIR   = "Single Dir";
+    public static final String MULTI_FILE   = "Multi File";
+    public static final String AUTO_MODE  = "Auto Mode - Test";
+    public static final String[] TYPE_CHOICES = {SINGLE_FILE, SINGLE_DIR, MULTI_FILE, AUTO_MODE};
 
-    public static final String SINGLE_FILE = "Single File";
-    public static final String SINGLE_DIR = "Single Dir";
-    public static final String MULTI_FILE = "Multi File";
-    public static final String[] TYPE_CHOICES = {SINGLE_FILE, SINGLE_DIR, MULTI_FILE};
-
-    public static final String MAG_X5 = "x5";
-    public static final String MAG_X10 = "x10";
-    public static final String MAG_X40 = "x40";
+    public static final String MAG_X5   = "x5";
+    public static final String MAG_X10  = "x10";
+    public static final String MAG_X40  = "x40";
     public static final String[] MAG_CHOICES = {MAG_X5, MAG_X10, MAG_X40};
 
     //endregion Constants
 
     //*******************************************************************
-    //enum Magnification {x40,x10}
-
     private String type;
     private String magnification;
     private String inputpath;
     private String outputpath;
+    private String custompath;
 
     public NdpiConverter()
     {
         super();
 
-        this.type = MULTI_FILE;
+        this.type = SINGLE_FILE;
         this.inputpath = "";
         this.outputpath = "";
+        this.custompath = "";
         this.magnification = "x10";
     }
 
@@ -92,10 +95,19 @@ public class NdpiConverter extends Model
         outputpath = outputpath.substring(position+1);
         //firePropertyChange(PROPERTY_OUTPUTPATH, oldValue,outputpath);     //Wenn nicht auskommentiert, wird in beiden Textfeldern der entgültige Output-Name angezeigt
         */
+
         //TODO dass im directoryNameTextField nur benutzerdefinierter Name angezeigt wird und im outputFolderTextField gleich der Pfad sich mitaktualisiert
     }
 
+    public String getCustompath() {
+        return custompath;
+    }
 
+    public void setCustompath(String custompath) {
+        String oldValue = this.custompath;
+        this.custompath = custompath;
+        firePropertyChange(PROPERTY_CUSTOMPATH,oldValue,custompath);
+    }
     //endregion Getter&Setter
 
 }
