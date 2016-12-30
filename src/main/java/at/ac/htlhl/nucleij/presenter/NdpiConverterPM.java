@@ -16,6 +16,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.io.File;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
@@ -112,17 +113,18 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
 
         //TODO IDEE: Nur einen Filechooser mit setFileSelectionMode FILES_AND_DIRECTORIES und dann erkennen was gewählt wurde
         //TODO Bei mehreren gewählten Datein/Verzeichnissen den übergeordneten Ordner im InputPath Feld anzeigen (Oder 1.Datei mit "und X weitere Dateien" dran)
-        if(ndpiConverter.getType().equals(NdpiConverter.SINGLE_DIR) ) {
-            chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-            chooser.setControlButtonsAreShown(true);
-            chooser.setDialogTitle("Verzeichnis auswählen");
-        }
-        else if(ndpiConverter.getType().equals(NdpiConverter.SINGLE_FILE)) {
+
+        if(ndpiConverter.getType().equals(NdpiConverter.SINGLE_FILE)) {
             chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
             chooser.addChoosableFileFilter(tifFilter);
             chooser.addChoosableFileFilter(ndpiFilter);
             chooser.setControlButtonsAreShown(true);
             chooser.setDialogTitle("Datei auswählen");
+        }
+        else if(ndpiConverter.getType().equals(NdpiConverter.SINGLE_DIR) ) {
+            chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+            chooser.setControlButtonsAreShown(true);
+            chooser.setDialogTitle("Verzeichnis auswählen");
         }
         else if (ndpiConverter.getType().equals(NdpiConverter.MULTI_FILE)) {
             chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
@@ -164,6 +166,46 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
                 ndpiConverter.setCustompath(chooser.getSelectedFile().getName());
                 ndpiConverter.setInputpath(chooser.getSelectedFile().getAbsolutePath());
                 ndpiConverter.setOutputpath(chooser.getSelectedFile().getAbsolutePath());
+
+                //TODO Extension: String extension = chooser.getTypeDescription(File);
+                //Andere Methode: String extension = file.getName().substring(file.getName().lastIndexOf(".")+1,file.getName().length());
+                if(ndpiConverter.getType().equals(NdpiConverter.SINGLE_FILE)) {
+                    //File file = chooser.getSelectedFile();
+                    LOGGER.info("1 File in Folder '" + chooser.getCurrentDirectory().getName() +"' found");
+                }
+
+                else if(ndpiConverter.getType().equals(NdpiConverter.SINGLE_DIR)) {
+                    int numberOfFiles = 0;
+                    int numberOfFolder = 0;
+                    File[] filesInDirectory = chooser.getSelectedFile().listFiles();
+
+                    for (File file : filesInDirectory ) {
+                        System.out.println(file.getName());
+                        if (file.isFile()) {
+                            numberOfFiles ++;
+                        }
+                        else if (file.isDirectory()) {
+                            numberOfFolder ++;
+                        }
+                    }
+                    LOGGER.info(numberOfFiles + " Files & " + numberOfFolder + " Dirs in Folder '" + chooser.getSelectedFile().getName() +"' found");
+
+                }
+                else if (ndpiConverter.getType().equals(NdpiConverter.MULTI_FILE)) {
+                    int numberOfFiles = 0;
+                    File[] filesInDirectory = chooser.getSelectedFiles();
+
+                    for (File file : filesInDirectory ) {
+                        System.out.println(file.getName());
+                        if (file.isFile()) {
+                            numberOfFiles ++;
+                        }
+                    }
+                    LOGGER.info(numberOfFiles + " Files in Folder '" + chooser.getSelectedFile().getName() +"' found");
+                }
+
+
+
             }
         }
     }
@@ -171,9 +213,8 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
     class CustomPathAction extends AbstractAction implements PropertyChangeListener {
         public void propertyChange(PropertyChangeEvent e) {
             ndpiConverter.setCustompath(e.getPropertyName());
-            String outputPath = ndpiConverter.getOutputpath();
-            int position = outputPath.lastIndexOf( '/' );
-            String path = outputPath.substring(0,position+1);
+            int position = ndpiConverter.getOutputpath().lastIndexOf( '/' );
+            String path = ndpiConverter.getOutputpath().substring(0,position+1);
             ndpiConverter.setOutputpath(path.concat(e.getPropertyName()));
             //TODO Wenn CustomPathTextField geändert wird soll outputPath aktualisiert werden
         }

@@ -32,7 +32,6 @@ public class NdpiConverterView extends JPanel {
         customPathAction = (AbstractAction) ndpiConverterPM.getCustomPathAction();
         magnificationAction = (AbstractAction) ndpiConverterPM.getMagnificationAction();
         convertAction = (AbstractAction) ndpiConverterPM.getConvertAction();
-
     }
 
     public void initBindings() {
