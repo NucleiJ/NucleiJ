@@ -6,13 +6,9 @@
 
 
 * JDirectoryChooser
-* Bindinings 
 
 * NDPI oder TIF erkennnen 
 * TIF found? ausgrauen falls nicht gebraucht
-
-* Erben Property = Mattes Property (Input & Outputpath)
-* Sythetica LaF anschreiben
 
 
 # TO-DO Liste #

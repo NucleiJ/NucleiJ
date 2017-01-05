@@ -36,6 +36,7 @@ public class RoiTask
 
     public String setROI()
     {
+        System.out.println(IJ.getFullVersion());
         System.out.println("set gestartet");
         ImagePlus bild = IJ.openImage(glScanAnalyzer.getInputpath());
         bild.show();
