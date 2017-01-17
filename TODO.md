@@ -1,7 +1,5 @@
-* http://launch4j.sourceforge.net/
 * http://www.jrsoftware.org/isinfo.php
-* JAR erstellen
-* Jar to exe
+
 * Setup
 
 
