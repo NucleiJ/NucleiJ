@@ -4,9 +4,11 @@ import at.ac.htlhl.nucleij.AppContext;
 import at.ac.htlhl.nucleij.model.GLScanAnalyzer;
 import at.ac.htlhl.nucleij.model.Main;
 import at.ac.htlhl.nucleij.model.NdpiConverter;
+import at.ac.htlhl.nucleij.presenter.tasks.ConverterTask;
 import at.ac.htlhl.nucleij.util.SuffixFileFilter;
 import at.ac.htlhl.nucleij.view.GLScanAnalyzerView;
 import at.ac.htlhl.nucleij.view.NdpiConverterView;
+import com.ezware.dialog.task.TaskDialog;
 import com.ezware.dialog.task.TaskDialogs;
 import com.jgoodies.binding.PresentationModel;
 import org.jdesktop.application.Application;
@@ -16,12 +18,13 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.IOException;
+import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
 import static at.ac.htlhl.nucleij.NucleiJ.nucleiJ;
 
 /**
- * Created by Stefan on 11.11.2016.
+ * Created by Stefan & Andreas on 11.11.2016.
  */
 public class MainPM extends PresentationModel<Main>
 {
@@ -40,10 +43,12 @@ public class MainPM extends PresentationModel<Main>
     private Action aboutAction;
     private Action exitAction;
     private Action newAction;
-    private Action enableAnalyzerViewAction;
+    private Action startAction;
     private Action enableConverterViewAction;
 
     // References to sub presentation models
+    private NdpiConverter ndpiConverter;
+
     private GLScanAnalyzerPM glScanAnalyzerPM;
     private NdpiConverterPM ndpiConverterPM;
 
@@ -63,7 +68,7 @@ public class MainPM extends PresentationModel<Main>
         aboutAction = new AboutAction();
         exitAction = new ExitAction();
         newAction = new newAction();
-        enableAnalyzerViewAction = new enableAnalyzerViewAction();
+        startAction = new startAction();
         enableConverterViewAction = new enableConverterViewAction();
     }
 
@@ -100,8 +105,8 @@ public class MainPM extends PresentationModel<Main>
         return newAction;
     }
 
-    public Action getEnableAnalyzerViewAction() {
-        return enableAnalyzerViewAction;
+    public Action getStartAction() {
+        return startAction;
     }
 
     public Action getEnableConverterViewAction() {
@@ -213,13 +218,32 @@ public class MainPM extends PresentationModel<Main>
         }
     }
 
-    private class enableAnalyzerViewAction extends AbstractAction
+    private class startAction extends AbstractAction
     {
         public void actionPerformed(ActionEvent e)
         {
-            System.out.println("Analyzen");
+            System.out.println("Starten");
             //Macht noch nix!
             // TODO view enablen!
+
+            ndpiConverter = new NdpiConverter();
+
+            JFrame parent = ((SingleFrameApplication) Application.getInstance()).getMainFrame();
+            ResourceBundle resourceBundle = AppContext.getInstance().getResourceBundle();
+
+            TaskDialog taskDialog = new TaskDialog(parent, resourceBundle.getString("TuningDialog.title"));
+
+            JProgressBar progressBar = new JProgressBar(0,100);
+            progressBar.setStringPainted(true);
+            progressBar.setValue(0);
+            taskDialog.setInstruction(resourceBundle.getString("TuningDialog.instructionMessage"));
+            taskDialog.setText(resourceBundle.getString("TuningDialog.text"));
+            taskDialog.setFixedComponent(progressBar);
+            taskDialog.setCommands(TaskDialog.StandardCommand.CANCEL);
+
+            ConverterTask converterTask = new ConverterTask(progressBar, taskDialog, ndpiConverter);
+            converterTask.execute();
+
         }
     }
 

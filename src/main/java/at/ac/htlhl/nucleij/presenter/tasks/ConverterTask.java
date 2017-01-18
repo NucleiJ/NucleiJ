@@ -1,5 +1,7 @@
 package at.ac.htlhl.nucleij.presenter.tasks;
 
+import at.ac.htlhl.nucleij.model.NdpiConverter;
+import at.ac.htlhl.nucleij.presenter.converter.MainConverter;
 import com.ezware.dialog.task.TaskDialog;
 
 import javax.swing.*;
@@ -14,21 +16,29 @@ public class ConverterTask extends SwingWorker<String, Integer>
     private static final Logger LOGGER = Logger.getLogger(AnalyzerTask.class.getName());
     private JProgressBar progressBar;
     private TaskDialog taskDialog;
+    private MainConverter mainConverter;
+    private NdpiConverter ndpiConverter;
 
-    public ConverterTask(JProgressBar progressBar, TaskDialog taskDialog)
+    public ConverterTask(JProgressBar progressBar, TaskDialog taskDialog, NdpiConverter ndpiConverter)
     {
         super();
 
         this.progressBar = progressBar;
         this.taskDialog = taskDialog;
+        this.ndpiConverter = ndpiConverter;
+
+        mainConverter = new MainConverter(ndpiConverter);
     }
 
     protected String doInBackground() throws Exception {
-        for(int i=1; i<=100; i++) {
+        LOGGER.log(Level.INFO, "Converting Process started!");
+        mainConverter.startConverter();
+
+        /*for(int i=1; i<=100; i++) {
             // Task
             Thread.sleep(10);
             publish(i);
-        }
+        }*/
         return null;
     }
 

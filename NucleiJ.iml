@@ -45,6 +45,7 @@
         <jarDirectory url="file://$MODULE_DIR$/lib" recursive="false" type="SOURCES" />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="Maven: gov.nih.imagej:imagej:1.47" level="project" />
     <orderEntry type="library" name="Maven: com.jgoodies:jgoodies-forms:1.8.0" level="project" />
     <orderEntry type="library" name="Maven: com.jgoodies:jgoodies-common:1.8.0" level="project" />
     <orderEntry type="library" name="Maven: com.jgoodies:jgoodies-binding:2.13.0" level="project" />

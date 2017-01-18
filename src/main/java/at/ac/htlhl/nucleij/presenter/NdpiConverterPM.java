@@ -2,6 +2,7 @@ package at.ac.htlhl.nucleij.presenter;
 
 import at.ac.htlhl.nucleij.AppContext;
 import at.ac.htlhl.nucleij.model.NdpiConverter;
+import at.ac.htlhl.nucleij.presenter.tasks.ConverterTask;
 import com.ezware.dialog.task.TaskDialog;
 import com.jgoodies.binding.PresentationModel;
 import org.jdesktop.application.Application;
@@ -266,10 +267,10 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
             taskDialog.setFixedComponent(progressBar);
             taskDialog.setCommands(TaskDialog.StandardCommand.CANCEL);
 
-            //AnalyzerTask analyzerTask = new AnalyzerTask(progressBar, taskDialog, calculateandshowheatmap);
-            //analyzerTask.execute();
+            ConverterTask converterTask = new ConverterTask(progressBar, taskDialog, ndpiConverter);
+            converterTask.execute();
 
-            taskDialog.show();
+            //taskDialog.show();
         }
 
         public ConvertAction() {
