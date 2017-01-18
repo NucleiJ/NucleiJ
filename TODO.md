@@ -1,8 +1,3 @@
-* http://www.jrsoftware.org/isinfo.php
-
-* Setup
-
-
 * JDirectoryChooser
 
 * NDPI oder TIF erkennnen 

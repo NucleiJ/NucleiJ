@@ -173,10 +173,12 @@ public class GLScanAnalyzerView extends JPanel
 
         //---- startAnalyzerButton ----
         startAnalyzerButton.setAction(analyzeAction);
-        add(startAnalyzerButton, CC.xywh(3, 11, 3, 1, CC.LEFT, CC.DEFAULT));
+        add(startAnalyzerButton, CC.xywh(5, 11, 5, 1));
 
         //---- analyzeAction ----
         analyzeAction.putValue(Action.NAME, bundle.getString("GLScanAnalyzerView.analyzeAction.Name"));
+        analyzeAction.putValue(Action.SMALL_ICON, new ImageIcon(getClass().getResource("/at/ac/htlhl/nucleij/resources/images/i16x16/analyzer.png")));
+        analyzeAction.putValue(Action.LARGE_ICON_KEY, new ImageIcon(getClass().getResource("/at/ac/htlhl/nucleij/resources/images/i32x32/analyzer.png")));
 
         //---- selectroiAction ----
         selectroiAction.putValue(Action.NAME, bundle.getString("GLScanAnalyzerView.Dialog.Name"));
