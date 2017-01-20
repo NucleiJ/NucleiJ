@@ -14,6 +14,8 @@ import ij.process.ImageProcessor;
 
 import java.io.File;
 import java.math.RoundingMode;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.DecimalFormat;
 import java.util.Arrays;
 
@@ -79,10 +81,24 @@ public class MainAnalyzer implements PlugInFilter {
 		getUserInput();
 
 		//Pfad Abfrage
-		path.setValue(glScanAnalyzer.getInputpath().concat("\\"));
+		File originalPath = new File(glScanAnalyzer.getInputpath().toString());
+
+		boolean isDirectory = originalPath.isDirectory(); // Check if it's a directory
+		boolean isFile =      originalPath.isFile();      // Check if it's a regular file
+
+		if(isDirectory)
+		{
+			path.setValue(originalPath.toString().concat("\\"));
+		}
+		else if (isFile)
+		{
+			path.setValue(originalPath.toString().substring(0,originalPath.toString().lastIndexOf(File.separator)));
+		}
+		System.out.println(path.getValue());
+
 
 		//einen Ordner erstellen:
-		startExporter.setnewDirectoryname("Output");  //TODO andis textfield auslesen wenn es property gibt
+		startExporter.setnewDirectoryname("\\Output");  //TODO andis textfield auslesen wenn es property gibt
 		boolean success = new File(path.getValue() + startExporter.getnewDirectoryname()).mkdirs();
 		if (!success) {
 			// Directory creation failed
@@ -95,9 +111,11 @@ public class MainAnalyzer implements PlugInFilter {
 
 		//Invisible setzen??
 
+		Path absoulterPfad = Paths.get(dateiname);
+		file.setValue(absoulterPfad.getFileName().toString());
+		//String pfad = path.getValue() + dateiname;
+		String pfad = dateiname;
 
-		file.setValue(dateiname);
-		String pfad = path.getValue() + dateiname;
 		System.out.println("Derzeit wird folgende Datei verarbeitet:" + pfad);
 
 		//ist Scan in x10 oder x40 Aufloesung? -> Umrechnungsfaktor px=um

@@ -38,38 +38,48 @@ public class AnalyzerTask extends SwingWorker<String, Integer>
     protected String doInBackground() throws Exception
     {
         MainAnalyzer mainAnalyzer = new MainAnalyzer(glScanAnalyzer);
+        List<String> tifFileList = glScanAnalyzer.getTifList();
 
         for(int i=1; i<=100; i++)
         {
             // Task
             if (i == 1)
             {
-
-
-
                 //Stapelfunktion!!
                 int gefundeneneElemente = 0;
 
                 String choosenDirectory = glScanAnalyzer.getInputpath();
 
-                File folder = new File(choosenDirectory.concat("\\"));
-                File[] listOfFiles = folder.listFiles();
-
-                for (int k = 0; k < listOfFiles.length; k++) {
-                    if (listOfFiles[k].isFile()) {
-                        if (listOfFiles[k].getName().endsWith("tif") == true) {
-                            gefundeneneElemente++;
-                        }
+                for (String tifListElement : tifFileList) {
+                    if(tifListElement.endsWith(".tif"))
+                    {
+                        gefundeneneElemente++;
                     }
                 }
-                int plus = 100/gefundeneneElemente;
 
+
+                int plus = 100/gefundeneneElemente;
 
                 StringAdder summaryStack = new StringAdder();
                 StringAdder csvSummaryStack = new StringAdder();
                 mainAnalyzer.setSummaryStacks(summaryStack, csvSummaryStack);
 
+                for (String tifListElement : tifFileList)
+                {
+                    if (tifListElement.endsWith(".tif") == true)
+                    {
+                        mainAnalyzer.setDateiname(tifListElement);
+                        System.out.println("\n****************\n"+tifListElement+"\n********************");
+                        mainAnalyzer.run(null);
+                        i = i + plus-1;
+                        publish(i);
+                    }
+                }
+
+
+                /*
                 for (int k = 0; k < listOfFiles.length; k++) {
+
                     if (listOfFiles[k].isFile()) {
 
                         String dateiname = listOfFiles[k].getName();
@@ -82,6 +92,7 @@ public class AnalyzerTask extends SwingWorker<String, Integer>
                         }
                     }
                 }
+                 */
             }
             mainAnalyzer.createSummary();
 

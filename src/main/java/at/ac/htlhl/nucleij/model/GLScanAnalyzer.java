@@ -3,6 +3,8 @@ package at.ac.htlhl.nucleij.model;
 import com.jgoodies.binding.beans.Model;
 import com.jgoodies.forms.layout.ColumnSpec;
 
+import java.util.List;
+
 /**
  *
  * @author Stefan Erben
@@ -46,6 +48,10 @@ public class GLScanAnalyzer extends Model
     private String inputpath;
     private String outputpath;
     private String type;
+
+    //Listen fuer Pfade der zu verarbeitenden arbeiten
+    private List<String> ndpiList;
+    private List<String> tifList;
     // endregion
 
 
@@ -63,6 +69,32 @@ public class GLScanAnalyzer extends Model
         this.inputpath = "";
         this.outputpath = "";
         this.type = ndpiConverter.getType();
+    }
+
+    public List<String> getNdpiList() {
+        return ndpiList;
+    }
+
+    public void setNdpiList(List<String> ndpiList) {
+        this.ndpiList = ndpiList;
+    }
+
+    public void addNdpiToList(String path)
+    {
+        ndpiList.add(path);
+    }
+
+    public List<String> getTifList() {
+        return tifList;
+    }
+
+    public void setTifList(List<String> tifList) {
+        this.tifList = tifList;
+    }
+
+    public void addTifToList(String path)
+    {
+        tifList.add(path);
     }
 
     // region Getter and Setter

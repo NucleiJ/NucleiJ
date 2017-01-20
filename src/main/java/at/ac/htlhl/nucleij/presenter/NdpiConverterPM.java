@@ -1,12 +1,8 @@
 package at.ac.htlhl.nucleij.presenter;
 
-import at.ac.htlhl.nucleij.AppContext;
+import at.ac.htlhl.nucleij.model.GLScanAnalyzer;
 import at.ac.htlhl.nucleij.model.NdpiConverter;
-import at.ac.htlhl.nucleij.presenter.tasks.ControllerTask;
-import at.ac.htlhl.nucleij.presenter.tasks.ConverterTask;
-import com.ezware.dialog.task.TaskDialog;
 import com.jgoodies.binding.PresentationModel;
-import fr.in2p3.imnc.ndpitools.NDPIToolsOpenTIFFPlugin;
 import org.jdesktop.application.Application;
 import org.jdesktop.application.SingleFrameApplication;
 
@@ -19,7 +15,6 @@ import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
 import static at.ac.htlhl.nucleij.model.NdpiConverter.SINGLE_FILE;
@@ -45,14 +40,16 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
     private Action convertAction;
 
     private NdpiConverter ndpiConverter;
+    private GLScanAnalyzer glScanAnalyzer;
     private GLScanAnalyzerPM glScanAnalyzerPM;
 
 
-    public NdpiConverterPM(NdpiConverter ndpiConverter, final GLScanAnalyzerPM glScanAnalyzerPM)
+    public NdpiConverterPM(NdpiConverter ndpiConverter, GLScanAnalyzer glScanAnalyzer, final GLScanAnalyzerPM glScanAnalyzerPM)
     {
         super(ndpiConverter);
 
         this.ndpiConverter = ndpiConverter;
+        this.glScanAnalyzer = glScanAnalyzer;
         this.glScanAnalyzerPM = glScanAnalyzerPM;
 
         typeAction = new TypeAction();
@@ -258,10 +255,11 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
                     }
                     System.out.println();
                     LOGGER.info(numberNdpiFiles + " NDPI-Files & " + numberTifFiles + " TIF-Files in Folder '"+ chooser.getCurrentDirectory().getName() +"' found" + "\n");
-                    ControllerTask controllerTask = new ControllerTask();
 
-                    controllerTask.setNdpiList(ndpiFileList);
-                    controllerTask.setTifList(tifFileList);
+                    glScanAnalyzer.setNdpiList(ndpiFileList);
+                    glScanAnalyzer.setTifList(tifFileList);
+
+
 
                     //Würde den Controller starten (Startet automatisch)
                     //controllerTask.main();

@@ -4,6 +4,7 @@ import at.ac.htlhl.nucleij.AppContext;
 import at.ac.htlhl.nucleij.model.GLScanAnalyzer;
 import at.ac.htlhl.nucleij.model.NdpiConverter;
 import at.ac.htlhl.nucleij.presenter.tasks.AnalyzerTask;
+import at.ac.htlhl.nucleij.presenter.tasks.ConverterTask;
 import at.ac.htlhl.nucleij.presenter.tasks.RoiTask;
 import com.ezware.dialog.task.TaskDialog;
 import com.jgoodies.binding.PresentationModel;
@@ -120,26 +121,12 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
         public void actionPerformed(ActionEvent e) {
             LOGGER.info("Analyze Action clicked");
 
-            /*File outputpathFile = new File(outputpathString);
-            if (outputpathFile.exists())
-            {
-                System.out.println("Ordner gibts schon");
-            }
-            else if (!outputpathFile.exists())
-            {
-                System.out.println("Ordner wird erstellt");
-                outputpathFile.mkdirs();
+            //TODO: WICHTIG: Liste in glscanner model erstellen, nach analyze
+            //converter starten, scheuen ob was in der liste ist, danch analyzer starten, liste abarbeiten
 
-            }
-            else
-            {
-                System.out.println("ERROR");
-            }*/
-
-            // TODO Action ausprogrammieren
+            // ********************************************************************************
+            // Converter:
             JFrame parent = ((SingleFrameApplication) Application.getInstance()).getMainFrame();
-
-
             ResourceBundle resourceBundle = AppContext.getInstance().getResourceBundle();
 
             TaskDialog taskDialog = new TaskDialog(parent, resourceBundle.getString("TuningDialog.title"));
@@ -152,12 +139,34 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
             taskDialog.setFixedComponent(progressBar);
             taskDialog.setCommands(TaskDialog.StandardCommand.CANCEL);
 
-            boolean calculateandshowheatmap = glScanAnalyzer.isCalculateandshowheatmap();
-            AnalyzerTask analyzerTask = new AnalyzerTask(progressBar, taskDialog, glScanAnalyzer);
+            ConverterTask converterTask = new ConverterTask(progressBar, taskDialog, ndpiConverter, glScanAnalyzer);
+            //noinspection Since15
+            converterTask.execute();
+
+            taskDialog.show();
+
+            // ********************************************************************************
+            //Analyzer Task
+
+            JFrame parentAnalyzer = ((SingleFrameApplication) Application.getInstance()).getMainFrame();
+            ResourceBundle resourceBundleAnalyzer = AppContext.getInstance().getResourceBundle();
+
+            TaskDialog taskDialogAnalyzer = new TaskDialog(parentAnalyzer, resourceBundleAnalyzer.getString("TuningDialog.title"));
+
+            JProgressBar progressBarAnalyzer = new JProgressBar(0,100);
+            progressBarAnalyzer.setStringPainted(true);
+            progressBarAnalyzer.setValue(0);
+            taskDialogAnalyzer.setInstruction(resourceBundleAnalyzer.getString("TuningDialog.instructionMessage"));
+            taskDialogAnalyzer.setText(resourceBundleAnalyzer.getString("TuningDialog.text"));
+            taskDialogAnalyzer.setFixedComponent(progressBarAnalyzer);
+            taskDialogAnalyzer.setCommands(TaskDialog.StandardCommand.CANCEL);
+
+            AnalyzerTask analyzerTask = new AnalyzerTask(progressBarAnalyzer, taskDialogAnalyzer, glScanAnalyzer);
             //noinspection Since15
             analyzerTask.execute();
 
-            taskDialog.show();
+            taskDialogAnalyzer.show();
+
         }
     }
 

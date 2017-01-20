@@ -1,5 +1,6 @@
 package at.ac.htlhl.nucleij.presenter.tasks;
 
+import at.ac.htlhl.nucleij.model.GLScanAnalyzer;
 import at.ac.htlhl.nucleij.model.NdpiConverter;
 import com.ezware.dialog.task.TaskDialog;
 import ij.IJ;
@@ -15,18 +16,18 @@ public class ConverterTask extends SwingWorker<String, Integer> {
     private JProgressBar progressBar;
     private TaskDialog taskDialog;
     private NdpiConverter ndpiConverter;
+    private GLScanAnalyzer glScanAnalyzer;
     private List<String> ndpiFileList;
     private List<String> tifFileList;
-    private ControllerTask controllerTask;
 
 
-    public ConverterTask(JProgressBar progressBar, TaskDialog taskDialog, NdpiConverter ndpiConverter, ControllerTask controllerTask) {
+    public ConverterTask(JProgressBar progressBar, TaskDialog taskDialog, NdpiConverter ndpiConverter, GLScanAnalyzer glScanAnalyzer) {
         super();
 
         this.progressBar = progressBar;
         this.taskDialog = taskDialog;
         this.ndpiConverter = ndpiConverter;
-        this.controllerTask = controllerTask;
+        this.glScanAnalyzer = glScanAnalyzer;
     }
 
     protected String doInBackground() throws Exception {
@@ -35,7 +36,7 @@ public class ConverterTask extends SwingWorker<String, Integer> {
         int counter = 0;
         LOGGER.log(Level.INFO, "Converting Process started!");
 
-        ndpiFileList = controllerTask.getNdpiList();
+        ndpiFileList = glScanAnalyzer.getNdpiList();
 
         for (String ndpiListElement : ndpiFileList) {
             counter++;
@@ -76,6 +77,8 @@ public class ConverterTask extends SwingWorker<String, Integer> {
 
         IJ.run("Custom extract to TIFF / Mosaic...", command);
 
-        controllerTask.addToList(filePath.replace(".ndpi", "_").concat(magnification).concat("_z0.tif"));
+        // WICHTIG, wenn hier .tif angehaengt wird dann findet der analyzer die datei, kann sie aber nicht abarbeiten
+        // es funktioniert zwar alles, aber die progress bar passt dann nicht mehr. Deswegen absichtlich hier falsche: .tiff
+        glScanAnalyzer.addTifToList(filePath.replace(".ndpi", "_").concat(magnification).concat("_z0.tiff"));
     }
 }
