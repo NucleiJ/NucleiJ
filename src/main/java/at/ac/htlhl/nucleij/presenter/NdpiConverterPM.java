@@ -5,17 +5,12 @@ import at.ac.htlhl.nucleij.model.NdpiConverter;
 import at.ac.htlhl.nucleij.presenter.tasks.ConverterTask;
 import com.ezware.dialog.task.TaskDialog;
 import com.jgoodies.binding.PresentationModel;
-import fr.in2p3.imnc.ndpitools.NDPIToolsOpenTIFFPlugin;
 import org.jdesktop.application.Application;
 import org.jdesktop.application.SingleFrameApplication;
-
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.File;
@@ -234,6 +229,8 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
                         }
                     }
                     LOGGER.info(numberOfFiles + " Files in Folder '" + chooser.getSelectedFile().getName() +"' found");
+
+
                 }
 
 

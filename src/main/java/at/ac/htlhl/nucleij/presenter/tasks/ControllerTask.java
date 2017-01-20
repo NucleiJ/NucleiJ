@@ -21,15 +21,16 @@ public class ControllerTask
 
             if (!filename.equals(null))
             {
-                System.out.println(filename);
+                System.out.println("erhaltene Liste:" + filename);
 
+                if(filename.endsWith(".ndpi"))
+                {
+                    System.out.println("NDPI gefunden!");
+                    //NDPI KONVERTER Starten
+                }
                 //ndpiList[numberOfFiles] = filename;
                 numberOfFiles++;
-                // file.getName().endet mit ndpi:
-                //if ()
-                {
-                    //start konverter
-                }
+
             }
         }
     }
