@@ -210,8 +210,26 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
                 else if (ndpiConverter.getType().equals(NdpiConverter.AUTO_MODE)) {
                     int numberTifFiles = 0;
                     int numberNdpiFiles = 0;
+                    boolean isFile = true;
+
+                    File testPath = chooser.getSelectedFile();
+
+
+                    if (testPath.isFile()) {
+                        System.out.println("File gefunden");
+                        isFile = true;
+                    }
+                    testPath = chooser.getCurrentDirectory();
+                    if (testPath.isDirectory()) {
+                        isFile = false;
+                    }
+
+                    System.out.println("Es ist " + isFile);
+
+
 
                     File[] filesInDirectory = chooser.getSelectedFiles();
+                    //File[] filesInDirectory = chooser.getCurrentDirectory().listFiles();
 
                     List<String> ndpiFileList = new ArrayList<String>();
                     List<String> tifFileList = new ArrayList<String>();

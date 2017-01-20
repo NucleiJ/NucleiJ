@@ -31,10 +31,6 @@ new FormModel {
 					name: "hSpacer1"
 					"opaque": false
 				} )
-				add( new FormComponent( "javax.swing.JButton" ) {
-					name: "analyzeButton"
-					"action": new FormReference( "startAction" )
-				} )
 			}, new FormLayoutConstraints( class java.lang.String ) {
 				"value": "North"
 			} )
@@ -135,17 +131,6 @@ new FormModel {
 			}
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 10, 365 )
-		} )
-		add( new FormNonVisual( "javax.swing.AbstractAction" ) {
-			name: "startAction"
-			"$action.Name": new FormMessage( null, "MainFrame.startAction.Name" )
-			"$action.SmallIcon": new com.jformdesigner.model.SwingIcon( 0, "/at/ac/htlhl/nucleij/resources/images/i16x16/analyzer.png" )
-			"$action.SwingLargeIconKey": new com.jformdesigner.model.SwingIcon( 0, "/at/ac/htlhl/nucleij/resources/images/i32x32/analyzer.png" )
-			auxiliary() {
-				"JavaCodeGenerator.customCreate": true
-			}
-		}, new FormLayoutConstraints( null ) {
-			"location": new java.awt.Point( 150, 365 )
 		} )
 		add( new FormNonVisual( "javax.swing.AbstractAction" ) {
 			name: "enableConverterViewAction"

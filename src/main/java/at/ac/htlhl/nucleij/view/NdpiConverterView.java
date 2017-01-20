@@ -138,6 +138,7 @@ public class NdpiConverterView extends JPanel {
             //---- magnification40Button ----
             magnification40Button.setMinimumSize(new Dimension(40, 28));
             magnification40Button.setSelected(true);
+            magnification40Button.setActionCommand("x40");
             magnification40Button.setText("x40");
             panel1.add(magnification40Button, CC.xy(1, 1));
 

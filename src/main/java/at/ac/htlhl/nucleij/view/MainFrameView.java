@@ -30,13 +30,11 @@ public class MainFrameView extends JFrame {
     private JButton button2;
     private JButton button3;
     private JPanel hSpacer1;
-    private JButton analyzeButton;
     private AbstractAction loadAction;
     private AbstractAction saveAction;
     private AbstractAction aboutAction;
     private AbstractAction exitAction;
     private AbstractAction newAction;
-    private AbstractAction startAction;
     private AbstractAction enableConverterViewAction;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 
@@ -79,7 +77,6 @@ public class MainFrameView extends JFrame {
         aboutAction = (AbstractAction) mainPM.getAboutAction();
         exitAction = (AbstractAction) mainPM.getExitAction();
         newAction = (AbstractAction) mainPM.getNewAction();
-        startAction = (AbstractAction) mainPM.getStartAction();
         enableConverterViewAction = (AbstractAction) mainPM.getEnableConverterViewAction();
     }
 
@@ -103,7 +100,6 @@ public class MainFrameView extends JFrame {
         button2 = new JButton();
         button3 = new JButton();
         hSpacer1 = new JPanel(null);
-        analyzeButton = new JButton();
 
         //======== this ========
         setIconImage(new ImageIcon(getClass().getResource("/at/ac/htlhl/nucleij/resources/images/icon_png_v1.png")).getImage());
@@ -176,10 +172,6 @@ public class MainFrameView extends JFrame {
             //---- hSpacer1 ----
             hSpacer1.setOpaque(false);
             toolBar1.add(hSpacer1);
-
-            //---- analyzeButton ----
-            analyzeButton.setAction(startAction);
-            toolBar1.add(analyzeButton);
         }
         contentPane.add(toolBar1, BorderLayout.NORTH);
         pack();
@@ -209,11 +201,6 @@ public class MainFrameView extends JFrame {
         newAction.putValue(Action.NAME, bundle.getString("MainFrame.newAction.Name"));
         newAction.putValue(Action.SMALL_ICON, new ImageIcon(getClass().getResource("/at/ac/htlhl/nucleij/resources/images/i16x16/document-new.png")));
         newAction.putValue(Action.LARGE_ICON_KEY, new ImageIcon(getClass().getResource("/at/ac/htlhl/nucleij/resources/images/i32x32/document-new.png")));
-
-        //---- startAction ----
-        startAction.putValue(Action.NAME, bundle.getString("MainFrame.startAction.Name"));
-        startAction.putValue(Action.SMALL_ICON, new ImageIcon(getClass().getResource("/at/ac/htlhl/nucleij/resources/images/i16x16/analyzer.png")));
-        startAction.putValue(Action.LARGE_ICON_KEY, new ImageIcon(getClass().getResource("/at/ac/htlhl/nucleij/resources/images/i32x32/analyzer.png")));
 
         //---- enableConverterViewAction ----
         enableConverterViewAction.putValue(Action.NAME, bundle.getString("MainFrame.enableConverterViewAction.Name"));
