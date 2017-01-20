@@ -1,67 +1,58 @@
 package at.ac.htlhl.nucleij.presenter.tasks;
 
 
+import at.ac.htlhl.nucleij.AppContext;
+import at.ac.htlhl.nucleij.presenter.converter.MainConverter;
+import com.ezware.dialog.task.TaskDialog;
+import com.sun.javafx.scene.layout.region.Margins;
+import org.jdesktop.application.Application;
+import org.jdesktop.application.SingleFrameApplication;
+
+import javax.swing.*;
 import java.io.File;
+import java.util.List;
+import java.util.ResourceBundle;
 
 /**
  * Created by Stefan on 20.01.2017.
  */
 public class ControllerTask
 {
+    private List<String> tifList;
+    private List<String> ndpiList;
+
     public ControllerTask()
     {
         super();
     }
 
-    public void main(String[] tifList, String[] ndpiList)
+    public void main()
     {
-        int numberOfFiles = 0;
 
-        for (String filename : ndpiList ) {
+        //TODO Start des Converters!!!
+        // Converter liefert namen des convertierte Files zurück
+        // ConverterTask converterTask = new ConverterTask(controllertask);
 
-            if (!filename.equals(null))
-            {
-                System.out.println("erhaltene Liste:" + filename);
+        // Anhängen an TIF-Liste!
+    }
 
-                if(filename.endsWith(".ndpi"))
-                {
-                    System.out.println("NDPI gefunden!");
-                    //NDPI KONVERTER Starten, absoluten Pfad übergeben
+    public void addToList(String filename) {
+        tifList.add(filename);
+    }
 
-                    //absoluten Pfad an die Tif liste anhaengen
-                    for(int i=0; i<tifList.length-1; i++)
-                    {
-                        boolean newFileinserted = false;
-                        do {
-                            if(tifList[i].equals(null))
-                            {
-                                tifList[i] = "INSERTED"+filename;
-                                newFileinserted = true;
-                            }
-                        }while(!newFileinserted);
+    public List<String> getTifList() {
+        return tifList;
+    }
 
-                    }
-                }
-                else if (filename.endsWith(".tif"))
-                {
-                    System.out.println("TIF gefunden!");
-                }
-                else
-                {
-                    System.out.println("Anderes File gefunden!");
-                }
-                //ndpiList[numberOfFiles] = filename;
-                numberOfFiles++;
+    public void setTifList(List<String> tifList) {
+        this.tifList = tifList;
+    }
 
-            }
-        }
+    public List<String> getNdpiList() {
+        return ndpiList;
+    }
 
-
-        for (String tifName : tifList ) {
-
-            if (tifName != null) {
-                System.out.println("erhaltene Liste:" + tifName);
-            }
-        }
+    public void setNdpiList(List<String> ndpiList) {
+        this.ndpiList = ndpiList;
     }
 }

@@ -20,6 +20,7 @@ import java.awt.event.KeyListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.File;
+import java.io.ObjectInput;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -224,10 +225,10 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
 
                     for (File file : filesInDirectory ) {
                         if (file.isFile()) {
-                            if (chooser.getName().endsWith(".ndpi")) {
+                            if (file.getName().endsWith(".ndpi")) {
                                 ndpiFileList.add(file.getAbsolutePath());
                             }
-                            else if (chooser.getName().endsWith(".tif")) {
+                            else if (file.getName().endsWith(".tif")) {
                                 tifFileList.add(file.getAbsolutePath());
                             }
                             else {
@@ -244,6 +245,14 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
                         }
                     }
 
+                    // List interation
+                    /*for (int i = 0; i < ndpiFileList.size(); i++) {
+                        System.out.println(ndpiFileList.get(i));
+                    }
+                    ndpiFileList.forEach((temp) -> {
+                        System.out.println(temp);
+                    });*/
+
                     System.out.println("\nTIF-Files:");
                     for (String string : tifFileList) {
                         if (string != null) {
@@ -254,7 +263,12 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
                     System.out.println();
                     LOGGER.info(numberNdpiFiles + " NDPI-Files & " + numberTifFiles + " TIF-Files in Folder '"+ chooser.getCurrentDirectory().getName() +"' found" + "\n");
                     ControllerTask controllerTask = new ControllerTask();
-                    controllerTask.main(tifFileList, ndpiFileList);
+
+                    controllerTask.setNdpiList(ndpiFileList);
+                    controllerTask.setTifList(tifFileList);
+
+                    //Würde den Controller starten (Startet automatisch)
+                    //controllerTask.main();
                 }
             }
         }
@@ -319,7 +333,6 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
             ConverterTask converterTask = new ConverterTask(progressBar, taskDialog, ndpiConverter);
             converterTask.execute();
 
-            //taskDialog.show();
         }
 
         public ConvertAction() {
