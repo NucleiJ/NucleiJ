@@ -241,8 +241,8 @@ public class MainPM extends PresentationModel<Main>
             taskDialog.setFixedComponent(progressBar);
             taskDialog.setCommands(TaskDialog.StandardCommand.CANCEL);
 
-            ConverterTask converterTask = new ConverterTask(progressBar, taskDialog, ndpiConverter);
-            converterTask.execute();
+            //ConverterTask converterTask = new ConverterTask(progressBar, taskDialog, ndpiConverter);
+            //converterTask.execute();
 
         }
     }

@@ -14,13 +14,9 @@ import org.jdesktop.application.SingleFrameApplication;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.File;
-import java.io.ObjectInput;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -317,21 +313,7 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
 
     private class ConvertAction extends AbstractAction {
         public void actionPerformed(ActionEvent actionEvent) {
-            JFrame parent = ((SingleFrameApplication) Application.getInstance()).getMainFrame();
-            ResourceBundle resourceBundle = AppContext.getInstance().getResourceBundle();
 
-            TaskDialog taskDialog = new TaskDialog(parent, resourceBundle.getString("TuningDialog.title"));
-
-            JProgressBar progressBar = new JProgressBar(0,100);
-            progressBar.setStringPainted(true);
-            progressBar.setValue(0);
-            taskDialog.setInstruction(resourceBundle.getString("TuningDialog.instructionMessage"));
-            taskDialog.setText(resourceBundle.getString("TuningDialog.text"));
-            taskDialog.setFixedComponent(progressBar);
-            taskDialog.setCommands(TaskDialog.StandardCommand.CANCEL);
-
-            ConverterTask converterTask = new ConverterTask(progressBar, taskDialog, ndpiConverter);
-            converterTask.execute();
 
         }
 

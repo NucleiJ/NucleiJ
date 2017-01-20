@@ -1,15 +1,11 @@
 package at.ac.htlhl.nucleij.presenter.tasks;
 
-
 import at.ac.htlhl.nucleij.AppContext;
-import at.ac.htlhl.nucleij.presenter.converter.MainConverter;
 import com.ezware.dialog.task.TaskDialog;
-import com.sun.javafx.scene.layout.region.Margins;
 import org.jdesktop.application.Application;
 import org.jdesktop.application.SingleFrameApplication;
 
 import javax.swing.*;
-import java.io.File;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -28,6 +24,21 @@ public class ControllerTask
 
     public void main()
     {
+        JFrame parent = ((SingleFrameApplication) Application.getInstance()).getMainFrame();
+        ResourceBundle resourceBundle = AppContext.getInstance().getResourceBundle();
+
+        TaskDialog taskDialog = new TaskDialog(parent, resourceBundle.getString("TuningDialog.title"));
+
+        JProgressBar progressBar = new JProgressBar(0,100);
+        progressBar.setStringPainted(true);
+        progressBar.setValue(0);
+        taskDialog.setInstruction(resourceBundle.getString("TuningDialog.instructionMessage"));
+        taskDialog.setText(resourceBundle.getString("TuningDialog.text"));
+        taskDialog.setFixedComponent(progressBar);
+        taskDialog.setCommands(TaskDialog.StandardCommand.CANCEL);
+
+        ConverterTask converterTask = new ConverterTask(progressBar, taskDialog, ndpiConverter);
+        converterTask.execute();
 
         //TODO Start des Converters!!!
         // Converter liefert namen des convertierte Files zurück
