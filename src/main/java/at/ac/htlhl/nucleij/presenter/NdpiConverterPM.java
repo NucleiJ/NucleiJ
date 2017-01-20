@@ -5,6 +5,7 @@ import at.ac.htlhl.nucleij.model.NdpiConverter;
 import at.ac.htlhl.nucleij.presenter.tasks.ConverterTask;
 import com.ezware.dialog.task.TaskDialog;
 import com.jgoodies.binding.PresentationModel;
+import fr.in2p3.imnc.ndpitools.NDPIToolsOpenTIFFPlugin;
 import org.jdesktop.application.Application;
 import org.jdesktop.application.SingleFrameApplication;
 
@@ -135,6 +136,14 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
             chooser.setMultiSelectionEnabled(true);
             chooser.setDialogTitle("Mehrere Dateien auswählen");
         }
+        else if (ndpiConverter.getType().equals(NdpiConverter.AUTO_MODE)) {
+            chooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+            chooser.addChoosableFileFilter(tifFilter);
+            chooser.addChoosableFileFilter(ndpiFilter);
+            chooser.setControlButtonsAreShown(true);
+            chooser.setMultiSelectionEnabled(true);
+            chooser.setDialogTitle("Dateien Auswählen");
+        }
         else {
             System.out.println("\nERROR");
         }
@@ -198,8 +207,30 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
 
                     for (File file : filesInDirectory ) {
                         System.out.println(file.getName());
+                    }
+                    LOGGER.info(numberOfFiles + " Files in Folder '" + chooser.getSelectedFile().getName() +"' found");
+                }
+
+                else if (ndpiConverter.getType().equals(NdpiConverter.AUTO_MODE)) {
+                    int numberOfFiles = 0;
+
+                    File[] filesInDirectory = chooser.getSelectedFiles();
+                    String[] ndpiFileList = new String[1000];
+
+                    System.out.println("\nAlte Liste GEMISCHT:");
+                    for (File file : filesInDirectory ) {
+                        System.out.println(file.getAbsolutePath());
+
                         if (file.isFile()) {
-                            numberOfFiles ++;
+                            ndpiFileList[numberOfFiles] = file.getAbsolutePath();
+                            numberOfFiles++;
+                        }
+                    }
+                    System.out.println("\nNeue Liste NUR FILES:");
+
+                    for (String string : ndpiFileList) {
+                        if (string != null) {
+                            System.out.println(string);
                         }
                     }
                     LOGGER.info(numberOfFiles + " Files in Folder '" + chooser.getSelectedFile().getName() +"' found");
