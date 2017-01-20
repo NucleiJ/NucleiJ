@@ -214,6 +214,7 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
 
                 else if (ndpiConverter.getType().equals(NdpiConverter.AUTO_MODE)) {
                     int numberOfFiles = 0;
+                    String extension = "";
 
                     File[] filesInDirectory = chooser.getSelectedFiles();
                     String[] ndpiFileList = new String[1000];
@@ -221,7 +222,17 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
 
                     for (File file : filesInDirectory ) {
                         if (file.isFile()) {
-                            ndpiFileList[numberOfFiles] = file.getAbsolutePath();
+                            extension = chooser.getTypeDescription(file);
+                            if (extension.equals("ndpi")) {
+                                ndpiFileList[numberOfFiles] = file.getAbsolutePath();
+                            }
+                            else if (extension.equals("tif")) {
+                                tiffFileList[numberOfFiles] = file.getAbsolutePath();
+                            }
+                            else {
+                                LOGGER.warning("Not supported file extension for file " + file.getName());
+                            }
+
                             numberOfFiles++;
                         }
                     }
@@ -233,7 +244,7 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
                         }
                     }
                     //TODO NDPI und TIF filtern
-                    LOGGER.info(numberOfFiles + " Files in Folder '" + chooser.getSelectedFile().getName() +"' found");
+                    LOGGER.info(numberOfFiles + " Files in Folder '" + chooser.getCurrentDirectory().getName() +"' found");
                     ControllerTask controllerTask = new ControllerTask();
                     controllerTask.main(tiffFileList, ndpiFileList);
                 }
