@@ -20,6 +20,8 @@ import java.awt.event.KeyListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
@@ -72,7 +74,7 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
                 // TODO ROI ein und ausblenden
                 if(NdpiConverter.PROPERTY_TYPE.equals(evt.getPropertyName())) {
                     boolean enabled = evt.getNewValue().toString().toLowerCase().equals(SINGLE_FILE.toLowerCase());
-                    System.out.println(enabled);
+                    //System.out.println(enabled);
                     //setComponentEnabled(GLScanAnalyzer.PROPERTY_ROIAREA, enabled);
                     //setComponentVisible(GLScanAnalyzer.PROPERTY_ROIAREA, enabled);
                     glScanAnalyzerPM.setROIvisible(enabled);
@@ -106,7 +108,6 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
         return convertAction;
     }
     //endregion
-
 
 
     private JFileChooser createFileChooser()
@@ -213,40 +214,47 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
                 }
 
                 else if (ndpiConverter.getType().equals(NdpiConverter.AUTO_MODE)) {
-                    int numberOfFiles = 0;
-                    String extension = "";
+                    int numberTifFiles = 0;
+                    int numberNdpiFiles = 0;
 
                     File[] filesInDirectory = chooser.getSelectedFiles();
-                    String[] ndpiFileList = new String[1000];
-                    String[] tiffFileList = new String[1000];
+
+                    List<String> ndpiFileList = new ArrayList<String>();
+                    List<String> tifFileList = new ArrayList<String>();
 
                     for (File file : filesInDirectory ) {
                         if (file.isFile()) {
-                            extension = chooser.getTypeDescription(file);
-                            if (extension.equals("ndpi")) {
-                                ndpiFileList[numberOfFiles] = file.getAbsolutePath();
+                            if (chooser.getName().endsWith(".ndpi")) {
+                                ndpiFileList.add(file.getAbsolutePath());
                             }
-                            else if (extension.equals("tif")) {
-                                tiffFileList[numberOfFiles] = file.getAbsolutePath();
+                            else if (chooser.getName().endsWith(".tif")) {
+                                tifFileList.add(file.getAbsolutePath());
                             }
                             else {
                                 LOGGER.warning("Not supported file extension for file " + file.getName());
                             }
-
-                            numberOfFiles++;
                         }
                     }
-                    System.out.println("\nNeue Liste NUR FILES:");
 
+                    System.out.println("\nNDPI-Files:");
                     for (String string : ndpiFileList) {
                         if (string != null) {
+                            numberNdpiFiles++;
                             System.out.println(string);
                         }
                     }
-                    //TODO NDPI und TIF filtern
-                    LOGGER.info(numberOfFiles + " Files in Folder '" + chooser.getCurrentDirectory().getName() +"' found");
+
+                    System.out.println("\nTIF-Files:");
+                    for (String string : tifFileList) {
+                        if (string != null) {
+                            numberTifFiles++;
+                            System.out.println(string);
+                        }
+                    }
+                    System.out.println();
+                    LOGGER.info(numberNdpiFiles + " NDPI-Files & " + numberTifFiles + " TIF-Files in Folder '"+ chooser.getCurrentDirectory().getName() +"' found" + "\n");
                     ControllerTask controllerTask = new ControllerTask();
-                    controllerTask.main(tiffFileList, ndpiFileList);
+                    controllerTask.main(tifFileList, ndpiFileList);
                 }
             }
         }

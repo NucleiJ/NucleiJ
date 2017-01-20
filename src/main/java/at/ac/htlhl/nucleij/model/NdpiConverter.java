@@ -43,7 +43,7 @@ public class NdpiConverter extends Model
     {
         super();
 
-        this.type = SINGLE_FILE;
+        this.type = AUTO_MODE;
         this.inputpath = "";
         this.outputpath = "";
         this.custompath = "";
