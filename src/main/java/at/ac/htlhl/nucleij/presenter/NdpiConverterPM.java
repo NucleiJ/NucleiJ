@@ -2,15 +2,21 @@ package at.ac.htlhl.nucleij.presenter;
 
 import at.ac.htlhl.nucleij.AppContext;
 import at.ac.htlhl.nucleij.model.NdpiConverter;
+import at.ac.htlhl.nucleij.presenter.tasks.ControllerTask;
 import at.ac.htlhl.nucleij.presenter.tasks.ConverterTask;
 import com.ezware.dialog.task.TaskDialog;
 import com.jgoodies.binding.PresentationModel;
+import fr.in2p3.imnc.ndpitools.NDPIToolsOpenTIFFPlugin;
 import org.jdesktop.application.Application;
 import org.jdesktop.application.SingleFrameApplication;
+
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.File;
@@ -211,11 +217,9 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
 
                     File[] filesInDirectory = chooser.getSelectedFiles();
                     String[] ndpiFileList = new String[1000];
+                    String[] tiffFileList = new String[1000];
 
-                    System.out.println("\nAlte Liste GEMISCHT:");
                     for (File file : filesInDirectory ) {
-                        System.out.println(file.getAbsolutePath());
-
                         if (file.isFile()) {
                             ndpiFileList[numberOfFiles] = file.getAbsolutePath();
                             numberOfFiles++;
@@ -228,13 +232,11 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
                             System.out.println(string);
                         }
                     }
+                    //TODO NDPI und TIF filtern
                     LOGGER.info(numberOfFiles + " Files in Folder '" + chooser.getSelectedFile().getName() +"' found");
-
-
+                    ControllerTask controllerTask = new ControllerTask();
+                    controllerTask.main(tiffFileList, ndpiFileList);
                 }
-
-
-
             }
         }
     }
