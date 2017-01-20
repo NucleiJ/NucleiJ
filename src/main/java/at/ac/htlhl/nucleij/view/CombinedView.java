@@ -31,8 +31,11 @@ public class CombinedView extends JPanel
         //======== this ========
         setLayout(new MigLayout(
             "hidemode 3",
+            // columns
             "[grow,fill]",
-            "[grow][grow]"));
+            // rows
+            "[grow]" +
+            "[grow]"));
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 }
