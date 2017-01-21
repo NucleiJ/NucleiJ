@@ -1,6 +1,4 @@
-* JDirectoryChooser
 
-* NDPI oder TIF erkennnen 
 * TIF found? ausgrauen falls nicht gebraucht
 
 
@@ -9,6 +7,7 @@
 ## Stefan Erben ##
 
 ### 1. Erweiterungen: ###
+* Error/Warning Dialoge: http://docs.oracle.com/javase/tutorial/uiswing/components/dialog.html
 * Custom Create von Slider und Textfeld?
 * ROI Einstellungen nur sichtbar, wenn SingleMode -> View an PM uebergeben?
 * Watershed Function!

@@ -17,6 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
+import static at.ac.htlhl.nucleij.model.NdpiConverter.MAG_X10;
+import static at.ac.htlhl.nucleij.model.NdpiConverter.MAG_X5;
 import static at.ac.htlhl.nucleij.model.NdpiConverter.SINGLE_FILE;
 
 
@@ -72,6 +74,18 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
                     //setComponentEnabled(GLScanAnalyzer.PROPERTY_ROIAREA, enabled);
                     //setComponentVisible(GLScanAnalyzer.PROPERTY_ROIAREA, enabled);
                     glScanAnalyzerPM.setROIvisible(enabled);
+                }
+
+                if(NdpiConverter.PROPERTY_MAGNIFICATION.equals(evt.getPropertyName()))
+                {
+                    if(evt.getNewValue().toString().toLowerCase().equals(MAG_X5.toLowerCase()))
+                    {
+                        JOptionPane.showMessageDialog(((SingleFrameApplication) Application.getInstance()).getMainFrame(),
+                                "This magnification is currently not aviable!",
+                                "Error",
+                                JOptionPane.ERROR_MESSAGE);
+                        ndpiConverter.setMagnification(MAG_X10);
+                    }
                 }
             }
         });
@@ -277,7 +291,11 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
                     glScanAnalyzer.setNdpiList(ndpiFileList);
                     glScanAnalyzer.setTifList(tifFileList);
 
-
+                    // Informations Dialog:
+                    JOptionPane.showMessageDialog(((SingleFrameApplication) Application.getInstance()).getMainFrame(),
+                            "Files selected!",
+                            "NucleiJ - Information",
+                            JOptionPane.PLAIN_MESSAGE);
 
                     //Würde den Controller starten (Startet automatisch)
                     //controllerTask.main();

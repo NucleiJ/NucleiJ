@@ -79,6 +79,12 @@ public class ConverterTask extends SwingWorker<String, Integer> {
 
         // WICHTIG, wenn hier .tif angehaengt wird dann findet der analyzer die datei, kann sie aber nicht abarbeiten
         // es funktioniert zwar alles, aber die progress bar passt dann nicht mehr. Deswegen absichtlich hier falsche: .tiff
+        // ebenfalls ist das wait nur da, um die dauer fuer den konvertiervorgang zu simulieren
+        try {
+            Thread.sleep(1000);                 //1000 milliseconds
+        } catch(InterruptedException ex) {
+            Thread.currentThread().interrupt();
+        }
         glScanAnalyzer.addTifToList(filePath.replace(".ndpi", "_").concat(magnification).concat("_z0.tiff"));
     }
 }

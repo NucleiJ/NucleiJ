@@ -126,24 +126,24 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
 
             // ********************************************************************************
             // Converter:
-            JFrame parent = ((SingleFrameApplication) Application.getInstance()).getMainFrame();
-            ResourceBundle resourceBundle = AppContext.getInstance().getResourceBundle();
+            JFrame parentConverter = ((SingleFrameApplication) Application.getInstance()).getMainFrame();
+            ResourceBundle resourceBundleConverter = AppContext.getInstance().getResourceBundle();
 
-            TaskDialog taskDialog = new TaskDialog(parent, resourceBundle.getString("TuningDialog.title"));
+            TaskDialog taskDialogConverter = new TaskDialog(parentConverter, resourceBundleConverter.getString("ConverterDialog.title"));
 
-            JProgressBar progressBar = new JProgressBar(0,100);
-            progressBar.setStringPainted(true);
-            progressBar.setValue(0);
-            taskDialog.setInstruction(resourceBundle.getString("TuningDialog.instructionMessage"));
-            taskDialog.setText(resourceBundle.getString("TuningDialog.text"));
-            taskDialog.setFixedComponent(progressBar);
-            taskDialog.setCommands(TaskDialog.StandardCommand.CANCEL);
+            JProgressBar progressBarConverter = new JProgressBar(0,100);
+            progressBarConverter.setStringPainted(true);
+            progressBarConverter.setValue(0);
+            taskDialogConverter.setInstruction(resourceBundleConverter.getString("ConverterDialog.instructionMessage"));
+            taskDialogConverter.setText(resourceBundleConverter.getString("ConverterDialog.text"));
+            taskDialogConverter.setFixedComponent(progressBarConverter);
+            taskDialogConverter.setCommands(TaskDialog.StandardCommand.CANCEL);
 
-            ConverterTask converterTask = new ConverterTask(progressBar, taskDialog, ndpiConverter, glScanAnalyzer);
+            ConverterTask converterTask = new ConverterTask(progressBarConverter, taskDialogConverter, ndpiConverter, glScanAnalyzer);
             //noinspection Since15
             converterTask.execute();
 
-            taskDialog.show();
+            taskDialogConverter.show();
 
             // ********************************************************************************
             //Analyzer Task
@@ -151,13 +151,13 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
             JFrame parentAnalyzer = ((SingleFrameApplication) Application.getInstance()).getMainFrame();
             ResourceBundle resourceBundleAnalyzer = AppContext.getInstance().getResourceBundle();
 
-            TaskDialog taskDialogAnalyzer = new TaskDialog(parentAnalyzer, resourceBundleAnalyzer.getString("TuningDialog.title"));
+            TaskDialog taskDialogAnalyzer = new TaskDialog(parentAnalyzer, resourceBundleAnalyzer.getString("AnalyzerDialog.title"));
 
             JProgressBar progressBarAnalyzer = new JProgressBar(0,100);
             progressBarAnalyzer.setStringPainted(true);
             progressBarAnalyzer.setValue(0);
-            taskDialogAnalyzer.setInstruction(resourceBundleAnalyzer.getString("TuningDialog.instructionMessage"));
-            taskDialogAnalyzer.setText(resourceBundleAnalyzer.getString("TuningDialog.text"));
+            taskDialogAnalyzer.setInstruction(resourceBundleAnalyzer.getString("AnalyzerDialog.instructionMessage"));
+            taskDialogAnalyzer.setText(resourceBundleAnalyzer.getString("AnalyzerDialog.text"));
             taskDialogAnalyzer.setFixedComponent(progressBarAnalyzer);
             taskDialogAnalyzer.setCommands(TaskDialog.StandardCommand.CANCEL);
 

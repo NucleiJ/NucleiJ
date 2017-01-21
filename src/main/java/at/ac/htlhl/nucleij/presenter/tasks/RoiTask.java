@@ -8,6 +8,8 @@ import ij.ImagePlus;
 import ij.gui.PolygonRoi;
 import ij.gui.Roi;
 import ij.gui.WaitForUserDialog;
+import org.jdesktop.application.Application;
+import org.jdesktop.application.SingleFrameApplication;
 
 import javax.swing.*;
 import java.awt.*;
@@ -36,6 +38,11 @@ public class RoiTask
 
     public String setROI()
     {
+        JOptionPane.showMessageDialog(((SingleFrameApplication) Application.getInstance()).getMainFrame(),
+                "This feature is currently not working!",
+                "Warning",
+                JOptionPane.WARNING_MESSAGE);
+
         System.out.println(IJ.getFullVersion());
         System.out.println("set gestartet");
         ImagePlus bild = IJ.openImage(glScanAnalyzer.getInputpath());

@@ -11,6 +11,7 @@ import at.ac.htlhl.nucleij.view.NdpiConverterView;
 import com.ezware.dialog.task.TaskDialog;
 import com.ezware.dialog.task.TaskDialogs;
 import com.jgoodies.binding.PresentationModel;
+import com.sun.org.apache.xpath.internal.functions.FuncFalse;
 import org.jdesktop.application.Application;
 import org.jdesktop.application.SingleFrameApplication;
 
@@ -121,6 +122,29 @@ public class MainPM extends PresentationModel<Main>
         this.ndpiConverterView = ndpiConverterView;
     }
 
+    private void showAbout()
+    {
+        System.out.println("About Action gestartet:\n");
+
+        // IDEEN: JDialog
+
+        JFrame parentConverter = ((SingleFrameApplication) Application.getInstance()).getMainFrame();
+        ResourceBundle resourceBundleConverter = AppContext.getInstance().getResourceBundle();
+
+        JLabel text = new JLabel("www.htl-hl.ac.at", JLabel.RIGHT);
+
+
+        TaskDialog taskDialogAbout = new TaskDialog(parentConverter, resourceBundleConverter.getString("AboutDialog.title"));
+        taskDialogAbout.setInstruction(resourceBundleConverter.getString("AboutDialog.instructionMessage"));
+        taskDialogAbout.setText(resourceBundleConverter.getString("AboutDialog.text"));
+        taskDialogAbout.setFixedComponent(text);
+
+        taskDialogAbout.setCommands(TaskDialog.StandardCommand.CANCEL);
+        taskDialogAbout.setIcon(TaskDialog.StandardIcon.INFO);
+
+        taskDialogAbout.show();
+    }
+
     private void saveAs()
     {
         System.out.println("Save\n");
@@ -199,6 +223,7 @@ public class MainPM extends PresentationModel<Main>
         public void actionPerformed(ActionEvent e)
         {
             LOGGER.info("About Action clicked");
+            showAbout();
         }
     }
 

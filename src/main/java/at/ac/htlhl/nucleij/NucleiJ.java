@@ -1,7 +1,6 @@
 package at.ac.htlhl.nucleij;
 
 import at.ac.htlhl.nucleij.model.Main;
-import at.ac.htlhl.nucleij.model.NdpiConverter;
 import at.ac.htlhl.nucleij.presenter.MainPM;
 import at.ac.htlhl.nucleij.util.logging.ConsoleHandler;
 import at.ac.htlhl.nucleij.util.logging.ConsoleOutFormatter;
@@ -10,9 +9,7 @@ import at.ac.htlhl.nucleij.view.GLScanAnalyzerView;
 import at.ac.htlhl.nucleij.view.MainFrameView;
 import at.ac.htlhl.nucleij.view.NdpiConverterView;
 import com.ezware.dialog.task.TaskDialogs;
-import com.jgoodies.looks.plastic.PlasticLookAndFeel;
 import de.javasoft.plaf.synthetica.SyntheticaBlueIceLookAndFeel;
-import de.javasoft.plaf.synthetica.SyntheticaStandardLookAndFeel;
 import org.jdesktop.application.*;
 
 import javax.swing.*;
