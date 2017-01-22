@@ -268,7 +268,7 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
                         }
                     }
 
-                    //Git test
+                    //Git test 2
 
                     for (File file : filesInDirectory ) {
                         if (file.isFile()) {
