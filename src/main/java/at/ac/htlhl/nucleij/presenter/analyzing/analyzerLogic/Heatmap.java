@@ -267,10 +267,6 @@ public class Heatmap
 		IJ.saveAs(heatmapTmp, "Tif", exportHeatmap);
 	    System.out.print("\n\nHeatmap exportiert...\n");
 	    System.out.print(exportHeatmap);
-  		
-
-
-		// Text erstellen
 
 		//TODO besseres format damit immer gleich viele stellen agezeigt werden
 

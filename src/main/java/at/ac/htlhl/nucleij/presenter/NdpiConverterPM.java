@@ -57,7 +57,6 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
         typeAction = new TypeAction();
         inputPathAction = new InputPathAction();
         outputPathAction = new ExportPathAction();
-        customPathAction = new CustomPathAction();
         magnificationAction = new MagnificationAction();
         convertAction = new ConvertAction();
 
@@ -86,6 +85,26 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
                                 JOptionPane.ERROR_MESSAGE);
                         ndpiConverter.setMagnification(MAG_X10);
                     }
+                }
+
+                if(NdpiConverter.PROPERTY_INPUTPATH.equals(evt.getPropertyName()))
+                {
+                    File originalPath = new File(glScanAnalyzer.getInputpath().toString());
+
+                    boolean isDirectory = originalPath.isDirectory(); // Check if it's a directory
+                    boolean isFile =      originalPath.isFile();      // Check if it's a regular file
+
+                    if(isDirectory)
+                    {
+                        System.out.println("###Bin ein Ordner");
+                        ndpiConverter.setOutputpath(ndpiConverter.getInputpath().concat("\\Output"));
+                    }
+                    else if (isFile)
+                    {
+                        System.out.println("###Bin ein File:" + originalPath.toString().substring(0,originalPath.toString().lastIndexOf(File.separator)).concat("\\Output"));
+                        ndpiConverter.setOutputpath(originalPath.toString().substring(0,originalPath.toString().lastIndexOf(File.separator)).concat("\\Output"));
+                    }
+
                 }
             }
         });
@@ -183,9 +202,8 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
 
             if (chooser.showOpenDialog(parent) == JFileChooser.APPROVE_OPTION)
             {
-                ndpiConverter.setCustompath(chooser.getSelectedFile().getName());
                 ndpiConverter.setInputpath(chooser.getSelectedFile().getAbsolutePath());
-                ndpiConverter.setOutputpath(chooser.getSelectedFile().getAbsolutePath());
+                ndpiConverter.setOutputpath(chooser.getSelectedFile().getAbsolutePath().concat("\\Output"));
 
                 //TODO Extension: String extension = chooser.getTypeDescription(File);
                 //Andere Methode: String extension = file.getName().substring(file.getName().lastIndexOf(".")+1,file.getName().length());
@@ -304,19 +322,6 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
         }
     }
 
-    class CustomPathAction extends AbstractAction implements PropertyChangeListener {
-        public void propertyChange(PropertyChangeEvent e) {
-            ndpiConverter.setCustompath(e.getPropertyName());
-            int position = ndpiConverter.getOutputpath().lastIndexOf( '/' );
-            String path = ndpiConverter.getOutputpath().substring(0,position+1);
-            ndpiConverter.setOutputpath(path.concat(e.getPropertyName()));
-            //TODO Wenn CustomPathTextField geändert wird soll outputPath aktualisiert werden
-        }
-
-        public void actionPerformed(ActionEvent e) {
-
-        }
-    }
 
     private class ExportPathAction extends AbstractAction {
         public ExportPathAction() {
@@ -329,7 +334,6 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
 
             if (chooser.showOpenDialog(parent) == JFileChooser.APPROVE_OPTION)
             {
-                ndpiConverter.setCustompath(chooser.getSelectedFile().getName());
                 ndpiConverter.setOutputpath(chooser.getSelectedFile().getAbsolutePath());
             }
         }

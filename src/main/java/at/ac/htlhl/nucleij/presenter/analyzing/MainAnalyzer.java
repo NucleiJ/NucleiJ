@@ -86,10 +86,12 @@ public class MainAnalyzer implements PlugInFilter {
 
 		if(isDirectory)
 		{
+			System.out.println("Bin ein Ordner");
 			path.setValue(originalPath.toString().concat("\\"));
 		}
 		else if (isFile)
 		{
+			System.out.println("Bin ein File");
 			path.setValue(originalPath.toString().substring(0,originalPath.toString().lastIndexOf(File.separator)));
 		}
 		System.out.println(path.getValue());

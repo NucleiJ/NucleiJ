@@ -64,6 +64,7 @@ public class GLScanAnalyzerView extends JPanel
 
         initBinding();
 
+
         //outputpathTextField.setEditable(false);
     }
 

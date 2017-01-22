@@ -16,13 +16,12 @@ public class NdpiConverter extends Model
     public static final String PROPERTY_TYPE            = "type";
     public static final String PROPERTY_INPUTPATH       = "inputpath";
     public static final String PROPERTY_OUTPUTPATH      = "outputpath";
-    public static final String PROPERTY_CUSTOMPATH      = "custompath";
     public static final String PROPERTY_MAGNIFICATION   = "magnification";
 
     public static final String SINGLE_FILE  = "Single File";
-    public static final String SINGLE_DIR   = "Single Dir";
+    public static final String SINGLE_DIR   = "Single Directory";
     public static final String MULTI_FILE   = "Multi File";
-    public static final String AUTO_MODE  = "Auto Mode - Test";
+    public static final String AUTO_MODE  = "Auto File";
     public static final String[] TYPE_CHOICES = {SINGLE_FILE, SINGLE_DIR, MULTI_FILE, AUTO_MODE};
 
     public static final String MAG_X5   = "x5";
@@ -99,15 +98,6 @@ public class NdpiConverter extends Model
         //TODO dass im directoryNameTextField nur benutzerdefinierter Name angezeigt wird und im outputFolderTextField gleich der Pfad sich mitaktualisiert
     }
 
-    public String getCustompath() {
-        return custompath;
-    }
-
-    public void setCustompath(String custompath) {
-        String oldValue = this.custompath;
-        this.custompath = custompath;
-        firePropertyChange(PROPERTY_CUSTOMPATH,oldValue,custompath);
-    }
     //endregion Getter&Setter
 
 }
