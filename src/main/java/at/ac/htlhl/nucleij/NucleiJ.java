@@ -171,7 +171,7 @@ public class NucleiJ extends SingleFrameApplication
             JFrame parent = ((SingleFrameApplication) getContext().getApplication()).getMainFrame();
 
             // Confirmation Dialog
-            if(TaskDialogs.isConfirmed( parent, "Are you sure you want to quit?", "There are some changed data sets ..."))
+            if(TaskDialogs.isConfirmed( parent, "Wollen Sie wirklich beenden?", "Falls Vorgänge noch nicht abgeschlossen sind,\nkönnen diese fehlerhaft beendet werden! ..."))
             {
                 return true;
             }
