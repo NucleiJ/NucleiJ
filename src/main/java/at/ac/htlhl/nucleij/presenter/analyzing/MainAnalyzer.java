@@ -25,8 +25,11 @@ public class MainAnalyzer implements PlugInFilter {
 	private GLScanAnalyzer glScanAnalyzer;
 	private String radiobox = "Nothing";
 	private String dateiname;
-	private StringAdder summaryStack;
-	private StringAdder csvSummaryStack;
+
+	private String csvSummaryString = "";
+
+	StringAdder summaryStack = new StringAdder();
+	StringAdder csvSummaryStack = new StringAdder();
 
 	public MainAnalyzer(GLScanAnalyzer glScanAnalyzer) {
 		this.glScanAnalyzer = glScanAnalyzer;
@@ -65,11 +68,6 @@ public class MainAnalyzer implements PlugInFilter {
 		startExporter.csvSummary(csvSummaryStack.getString(), path.getValue());
 	}
 
-	public void setSummaryStacks(StringAdder summaryStack, StringAdder csvSummaryStack)
-	{
-		this.summaryStack = summaryStack;
-		this.csvSummaryStack = csvSummaryStack;
-	}
 
 	public int setup(String arg, ImagePlus imp) {
 		//Beim Start wird kein geladenes Bild benoetigt
@@ -383,6 +381,7 @@ public class MainAnalyzer implements PlugInFilter {
 	}
 
 	public void getUserInput() {
+		// TODO je nach vergroesserung waehlen
 		PIXEL_SIZE = "8";
 
 		if (glScanAnalyzer.getRoiarea() == null) {
@@ -446,7 +445,7 @@ public class MainAnalyzer implements PlugInFilter {
 		}
 
 		//Filter anwenden und wieder zu RGB Bild zurueckwandeln
-		if (x10 == true) {
+		if (x10) {
 			IJ.run(markiert, "Median...", "radius=1");
 		} else {
 			IJ.run(markiert, "Median...", "radius=3");
@@ -460,9 +459,6 @@ public class MainAnalyzer implements PlugInFilter {
 
 	//Ausgabe der Zellkern Informationen
 	public void outputCellnucleiInfo(double counter, double perim_arith, double area_all, double area_min, double area_max, double area_arith, double median, double found_particles) {
-		//Titel des Scans: originalFilename
-		// anzahl der _ (30 - length) / 2)
-		// for 1 bis anzahl der _, ausgeben *
 
 		String ueberschrift = "";
 		int lenghtFilename = file.getValue().length();
@@ -497,7 +493,6 @@ public class MainAnalyzer implements PlugInFilter {
 
 		//Ausgabe in String -> Summary-File
 		String summaryString = "";
-		String csvSummaryString = "";
 		summaryString = summaryString + "\n\n" + ueberschrift + "\nFound nuclei:\t\t\t\t" + intcounter + "\nAdditional measured values:\n";
 
 

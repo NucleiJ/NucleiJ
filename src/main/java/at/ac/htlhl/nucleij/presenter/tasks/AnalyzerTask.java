@@ -60,9 +60,9 @@ public class AnalyzerTask extends SwingWorker<String, Integer>
 
                 int plus = 100/gefundeneneElemente;
 
-                StringAdder summaryStack = new StringAdder();
-                StringAdder csvSummaryStack = new StringAdder();
-                mainAnalyzer.setSummaryStacks(summaryStack, csvSummaryStack);
+                //StringAdder summaryStack = new StringAdder();
+                //StringAdder csvSummaryStack = new StringAdder();
+                //mainAnalyzer.setSummaryStacks(summaryStack, csvSummaryStack);
 
                 for (String tifListElement : tifFileList)
                 {
