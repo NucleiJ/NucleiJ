@@ -89,7 +89,9 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
 
                 if(NdpiConverter.PROPERTY_INPUTPATH.equals(evt.getPropertyName()))
                 {
-                    File originalPath = new File(glScanAnalyzer.getInputpath().toString());
+                    //File originalPath = new File(glScanAnalyzer.getInputpath().toString());
+                    File originalPath = new File(ndpiConverter.getInputpath().toString());
+
 
                     boolean isDirectory = originalPath.isDirectory(); // Check if it's a directory
                     boolean isFile =      originalPath.isFile();      // Check if it's a regular file
@@ -205,8 +207,6 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
                 ndpiConverter.setInputpath(chooser.getSelectedFile().getAbsolutePath());
                 ndpiConverter.setOutputpath(chooser.getSelectedFile().getAbsolutePath().concat("\\Output"));
 
-                //TODO Extension: String extension = chooser.getTypeDescription(File);
-                //Andere Methode: String extension = file.getName().substring(file.getName().lastIndexOf(".")+1,file.getName().length());
                 if(ndpiConverter.getType().equals(NdpiConverter.SINGLE_FILE)) {
                     //File file = chooser.getSelectedFile();
                     LOGGER.info("1 File in Folder '" + chooser.getCurrentDirectory().getName() +"' found");
@@ -240,31 +240,18 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
                 }
 
                 else if (ndpiConverter.getType().equals(NdpiConverter.AUTO_MODE)) {
-                    int numberTifFiles = 0;
-                    int numberNdpiFiles = 0;
-                    boolean isFile = true;
-
-                    File testPath = chooser.getSelectedFile();
-
-
-                    if (testPath.isFile()) {
-                        System.out.println("File gefunden");
-                        isFile = true;
-                    }
-                    testPath = chooser.getCurrentDirectory();
-                    if (testPath.isDirectory()) {
-                        isFile = false;
-                    }
-
-                    System.out.println("Es ist " + isFile);
-
-
-
-                    File[] filesInDirectory = chooser.getSelectedFiles();
-                    //File[] filesInDirectory = chooser.getCurrentDirectory().listFiles();
-
                     List<String> ndpiFileList = new ArrayList<String>();
                     List<String> tifFileList = new ArrayList<String>();
+                    int numberTifFiles = 0;
+                    int numberNdpiFiles = 0;
+                    File[] filesInDirectory = new File[0];
+
+                    if (chooser.getSelectedFile().isFile()) {
+                        filesInDirectory = chooser.getSelectedFiles();
+                    }
+                    else if (chooser.getSelectedFile().isDirectory()) {
+                        filesInDirectory = chooser.getSelectedFile().listFiles();
+                    }
 
                     for (File file : filesInDirectory ) {
                         if (file.isFile()) {
@@ -288,13 +275,6 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
                         }
                     }
 
-                    // List interation
-                    /*for (int i = 0; i < ndpiFileList.size(); i++) {
-                        System.out.println(ndpiFileList.get(i));
-                    }
-                    ndpiFileList.forEach((temp) -> {
-                        System.out.println(temp);
-                    });*/
 
                     System.out.println("\nTIF-Files:");
                     for (String string : tifFileList) {
@@ -311,8 +291,11 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
 
                     // Informations Dialog:
                     JOptionPane.showMessageDialog(((SingleFrameApplication) Application.getInstance()).getMainFrame(),
-                            "Files selected!",
-                            "NucleiJ - Information",
+                            "Successfully selected:" +
+                                    "\n" + "NDPI-Files: " + numberNdpiFiles +
+                                    "\n" + "TIF-Files: " + numberTifFiles +
+                                    "\n\n" + "Directory: " + chooser.getCurrentDirectory(),
+                            "File-Selection successful!",
                             JOptionPane.PLAIN_MESSAGE);
 
                     //Würde den Controller starten (Startet automatisch)
@@ -342,6 +325,7 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
     class MagnificationAction extends AbstractAction implements PropertyChangeListener {
         public void propertyChange(PropertyChangeEvent e) {
             ndpiConverter.setMagnification(e.getPropertyName());
+            LOGGER.info("Magnification= "+ e.getPropertyName());
         }
 
         public void actionPerformed(ActionEvent e) {
