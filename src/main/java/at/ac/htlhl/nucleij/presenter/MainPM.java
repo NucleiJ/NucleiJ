@@ -45,7 +45,6 @@ public class MainPM extends PresentationModel<Main>
     private Action exitAction;
     private Action newAction;
     private Action startAction;
-    private Action enableConverterViewAction;
 
     // References to sub presentation models
     private NdpiConverter ndpiConverter;
@@ -70,7 +69,6 @@ public class MainPM extends PresentationModel<Main>
         exitAction = new ExitAction();
         newAction = new newAction();
         startAction = new startAction();
-        enableConverterViewAction = new enableConverterViewAction();
     }
 
     public GLScanAnalyzerPM getGLScanAnalyzerPM()
@@ -108,10 +106,6 @@ public class MainPM extends PresentationModel<Main>
 
     public Action getStartAction() {
         return startAction;
-    }
-
-    public Action getEnableConverterViewAction() {
-        return enableConverterViewAction;
     }
 
     public void setGlScanAnalyzerView(GLScanAnalyzerView glScanAnalyzerView) {

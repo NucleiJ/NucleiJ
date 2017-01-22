@@ -35,7 +35,6 @@ public class MainFrameView extends JFrame {
     private AbstractAction aboutAction;
     private AbstractAction exitAction;
     private AbstractAction newAction;
-    private AbstractAction enableConverterViewAction;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 
     private MainPM mainPM;
@@ -77,7 +76,6 @@ public class MainFrameView extends JFrame {
         aboutAction = (AbstractAction) mainPM.getAboutAction();
         exitAction = (AbstractAction) mainPM.getExitAction();
         newAction = (AbstractAction) mainPM.getNewAction();
-        enableConverterViewAction = (AbstractAction) mainPM.getEnableConverterViewAction();
     }
 
 
@@ -201,11 +199,6 @@ public class MainFrameView extends JFrame {
         newAction.putValue(Action.NAME, bundle.getString("MainFrame.newAction.Name"));
         newAction.putValue(Action.SMALL_ICON, new ImageIcon(getClass().getResource("/at/ac/htlhl/nucleij/resources/images/i16x16/document-new.png")));
         newAction.putValue(Action.LARGE_ICON_KEY, new ImageIcon(getClass().getResource("/at/ac/htlhl/nucleij/resources/images/i32x32/document-new.png")));
-
-        //---- enableConverterViewAction ----
-        enableConverterViewAction.putValue(Action.NAME, bundle.getString("MainFrame.enableConverterViewAction.Name"));
-        enableConverterViewAction.putValue(Action.SMALL_ICON, new ImageIcon(getClass().getResource("/at/ac/htlhl/nucleij/resources/images/i16x16/converter.png")));
-        enableConverterViewAction.putValue(Action.LARGE_ICON_KEY, new ImageIcon(getClass().getResource("/at/ac/htlhl/nucleij/resources/images/i32x32/converter.png")));
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 

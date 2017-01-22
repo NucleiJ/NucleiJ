@@ -1,4 +1,4 @@
-JFDML JFormDesigner: "6.0.0.0.51" Java: "1.8.0_102" encoding: "UTF-8"
+JFDML JFormDesigner: "6.0.0.0.71" Java: "1.8.0_112-release" encoding: "UTF-8"
 
 new FormModel {
 	"i18n.bundlePackage": "at.ac.htlhl.nucleij.resources.i18n"
@@ -131,17 +131,6 @@ new FormModel {
 			}
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 10, 365 )
-		} )
-		add( new FormNonVisual( "javax.swing.AbstractAction" ) {
-			name: "enableConverterViewAction"
-			"$action.Name": new FormMessage( null, "MainFrame.enableConverterViewAction.Name" )
-			"$action.SmallIcon": new com.jformdesigner.model.SwingIcon( 0, "/at/ac/htlhl/nucleij/resources/images/i16x16/converter.png" )
-			"$action.SwingLargeIconKey": new com.jformdesigner.model.SwingIcon( 0, "/at/ac/htlhl/nucleij/resources/images/i32x32/converter.png" )
-			auxiliary() {
-				"JavaCodeGenerator.customCreate": true
-			}
-		}, new FormLayoutConstraints( null ) {
-			"location": new java.awt.Point( 150, 415 )
 		} )
 	}
 }
