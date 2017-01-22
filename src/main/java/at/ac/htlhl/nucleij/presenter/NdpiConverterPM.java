@@ -240,17 +240,32 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
                 }
 
                 else if (ndpiConverter.getType().equals(NdpiConverter.AUTO_MODE)) {
-                    List<String> ndpiFileList = new ArrayList<String>();
-                    List<String> tifFileList = new ArrayList<String>();
+                    List<String> ndpiFileList = new ArrayList<>();
+                    List<String> tifFileList = new ArrayList<>();
+                    File[] filesInDirectory = new File[0];
+                    boolean moreThanOneFolder = false;
                     int numberTifFiles = 0;
                     int numberNdpiFiles = 0;
-                    File[] filesInDirectory = new File[0];
+
 
                     if (chooser.getSelectedFile().isFile()) {
                         filesInDirectory = chooser.getSelectedFiles();
                     }
                     else if (chooser.getSelectedFile().isDirectory()) {
                         filesInDirectory = chooser.getSelectedFile().listFiles();
+
+
+                        //Checken ob mehr als ein Ordner ausgewählt wurde (Beta)
+                        int numberOfFolders = 0;
+                        File[] moreFolders = chooser.getSelectedFiles();
+                        for (File file : moreFolders ) {
+                            if (file.isDirectory()) {
+                                numberOfFolders++;
+                            }
+                        }
+                        if (numberOfFolders > 1) {
+                            moreThanOneFolder = true;
+                        }
                     }
 
                     for (File file : filesInDirectory ) {
@@ -262,7 +277,7 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
                                 tifFileList.add(file.getAbsolutePath());
                             }
                             else {
-                                LOGGER.warning("Not supported file extension for file " + file.getName());
+                                LOGGER.warning("Invalid file extension '" + file.getName().substring(file.getName().indexOf(".")) + "' for file '" + file.getName() + "'");
                             }
                         }
                     }
@@ -289,14 +304,26 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
                     glScanAnalyzer.setNdpiList(ndpiFileList);
                     glScanAnalyzer.setTifList(tifFileList);
 
-                    // Informations Dialog:
-                    JOptionPane.showMessageDialog(((SingleFrameApplication) Application.getInstance()).getMainFrame(),
-                            "Successfully selected:" +
-                                    "\n" + "NDPI-Files: " + numberNdpiFiles +
-                                    "\n" + "TIF-Files: " + numberTifFiles +
-                                    "\n\n" + "Directory: " + chooser.getCurrentDirectory(),
-                            "File-Selection successful!",
-                            JOptionPane.PLAIN_MESSAGE);
+
+                    if (moreThanOneFolder) {
+                        JOptionPane.showMessageDialog(((SingleFrameApplication) Application.getInstance()).getMainFrame(),
+                                "Only one folder allowed!" +
+                                        "\n" + "Selected first folder '" + chooser.getSelectedFile().getName() + "':" +
+                                        "\n\n" + "NDPI-Files: " + numberNdpiFiles +
+                                        "\n" + "TIF-Files: " + numberTifFiles +
+                                        "\n\n" + "Directory: " + chooser.getCurrentDirectory(),
+                                "File-Selection successful!",
+                                JOptionPane.PLAIN_MESSAGE);
+                    }
+                    else {
+                        JOptionPane.showMessageDialog(((SingleFrameApplication) Application.getInstance()).getMainFrame(),
+                                "Successfully selected:" +
+                                        "\n\n" + "NDPI-Files: " + numberNdpiFiles +
+                                        "\n" + "TIF-Files: " + numberTifFiles +
+                                        "\n\n" + "Directory: " + chooser.getCurrentDirectory(),
+                                "File-Selection successful!",
+                                JOptionPane.PLAIN_MESSAGE);
+                    }
 
                     //Würde den Controller starten (Startet automatisch)
                     //controllerTask.main();
