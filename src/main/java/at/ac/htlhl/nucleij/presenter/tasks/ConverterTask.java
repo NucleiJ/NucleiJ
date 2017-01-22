@@ -6,6 +6,10 @@ import com.ezware.dialog.task.TaskDialog;
 import ij.IJ;
 
 import javax.swing.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -68,6 +72,25 @@ public class ConverterTask extends SwingWorker<String, Integer> {
     }
 
     private void startConverter(String filePath) {
+        //Test fuer Consoleneingabe:
+        File file = new File("lib/ndpi-converter/ndpi-converter.jar");
+        String absolutePathofNdpiJar = file.getAbsolutePath();
+        System.out.println(absolutePathofNdpiJar);
+
+        try {
+            //Process p = Runtime.getRuntime().exec("java -jar " + absolutePathofNdpiJar + " -i 2 -c lzw -s \"C:\\Users\\Stefan\\Desktop\\Medizin Projekt\\Bilder\\stapel\\test.ndpi\"");
+            Process p = Runtime.getRuntime().exec("java -jar " + absolutePathofNdpiJar + " -i 2 -c lzw -s \"" + filePath +"");
+            BufferedReader in = new BufferedReader(
+                    new InputStreamReader(p.getInputStream()));
+            String line = null;
+            while ((line = in.readLine()) != null) {
+                System.out.println(line);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        /*
         String magnification = ndpiConverter.getMagnification();
         //String directory = ndpiConverter.getInputpath();
         String command = ("no=[%]").replace("%", filePath);
@@ -76,15 +99,9 @@ public class ConverterTask extends SwingWorker<String, Integer> {
         command = command + magnification + " extract_images_with_z-offset_0";
 
         IJ.run("Custom extract to TIFF / Mosaic...", command);
+        */
 
-        // WICHTIG, wenn hier .tif angehaengt wird dann findet der analyzer die datei, kann sie aber nicht abarbeiten
-        // es funktioniert zwar alles, aber die progress bar passt dann nicht mehr. Deswegen absichtlich hier falsche: .tiff
-        // ebenfalls ist das wait nur da, um die dauer fuer den konvertiervorgang zu simulieren
-        try {
-            Thread.sleep(1000);                 //1000 milliseconds
-        } catch(InterruptedException ex) {
-            Thread.currentThread().interrupt();
-        }
-        glScanAnalyzer.addTifToList(filePath.replace(".ndpi", "_").concat(magnification).concat("_z0.tiff"));
+        // TODO Die files liegen im ordner converted. von da in den parent ordner verschieben. danach leeren ordner loeschen. neue files in tif liste
+        //glScanAnalyzer.addTifToList(filePath.replace(".ndpi", "_").concat(magnification).concat("_z0.tiff"));
     }
 }
