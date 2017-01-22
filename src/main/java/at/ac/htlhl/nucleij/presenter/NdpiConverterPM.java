@@ -205,7 +205,7 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
             if (chooser.showOpenDialog(parent) == JFileChooser.APPROVE_OPTION)
             {
                 ndpiConverter.setInputpath(chooser.getSelectedFile().getAbsolutePath());
-                ndpiConverter.setOutputpath(chooser.getSelectedFile().getAbsolutePath().concat("\\Output"));
+                //ndpiConverter.setOutputpath(chooser.getSelectedFile().getAbsolutePath().concat("\\Output"));
 
                 if(ndpiConverter.getType().equals(NdpiConverter.SINGLE_FILE)) {
                     //File file = chooser.getSelectedFile();

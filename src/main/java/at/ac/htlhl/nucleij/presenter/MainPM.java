@@ -123,7 +123,7 @@ public class MainPM extends PresentationModel<Main>
         //Test fuer Consoleneingabe:
 
         try {
-            Process p = Runtime.getRuntime().exec("java -jar C:\\\\Users\\\\Stefan\\\\Downloads\\\\ndpi-to-ome-tiff-converter-v1.5\\\\ndpi-converter.jar -i 2 -c lzw -s \"C:\\\\Users\\\\Stefan\\\\Desktop\\\\Medizin Projekt\\\\Bilder\\\\stapel\\\\test.ndpi\"");
+            Process p = Runtime.getRuntime().exec("java -jar C:\\Users\\Stefan\\Downloads\\ndpi-to-ome-tiff-converter-v1.5\\ndpi-converter.jar -i 2 -c lzw -s \"C:\\Users\\Stefan\\Desktop\\Medizin Projekt\\Bilder\\stapel\\test.ndpi\"");
             BufferedReader in = new BufferedReader(
                     new InputStreamReader(p.getInputStream()));
             String line = null;
