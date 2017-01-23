@@ -46,7 +46,7 @@ public class ConverterTask extends SwingWorker<String, Integer> {
 
         ndpiFileList = glScanAnalyzer.getNdpiList();
 
-        for (String temp : ndpiFileList) {
+        for (String ndpiListElement : ndpiFileList) {
             counter++;
         }
         add = 100/counter;
@@ -72,7 +72,6 @@ public class ConverterTask extends SwingWorker<String, Integer> {
         super.done();
         LOGGER.log(Level.INFO, "Done");
         taskDialog.setVisible(false);
-
     }
 
     private void startConverter(String filePath) {
@@ -83,7 +82,22 @@ public class ConverterTask extends SwingWorker<String, Integer> {
         System.out.println(absolutePathofNdpiJar);
 
         try {
-            Process p = Runtime.getRuntime().exec("java -jar \"" + absolutePathofNdpiJar + "\" -i 2 -c lzw -s \"" + filePath +"\" \"" + outputpath.getParent().toString() + "\"");
+            Process p;
+            if (ndpiConverter.getMagnification().equals(NdpiConverter.MAG_X10)) {
+                p = Runtime.getRuntime().exec("java -jar \"" + absolutePathofNdpiJar + "\" -i 2 -c lzw -s \"" + filePath +"\" \"" + outputpath.getParent().toString() + "\"");
+            }
+            else if(ndpiConverter.getMagnification().equals(NdpiConverter.MAG_X40)) {
+                p = Runtime.getRuntime().exec("java -jar \"" + absolutePathofNdpiJar + "\" -i 1 -c lzw -s \"" + filePath +"\" \"" + outputpath.getParent().toString() + "\"");
+            }
+            else {
+                p = Runtime.getRuntime().exec("java -jar \"" + absolutePathofNdpiJar + "\" -i 2 -c lzw -s \"" + filePath +"\" \"" + outputpath.getParent().toString() + "\"");
+                LOGGER.info("Magnification error: set to Std. 10x Magnification");
+            }
+
+            //Process p = Runtime.getRuntime().exec("java -jar " + absolutePathofNdpiJar + " -i 2 -c lzw -s \"" + filePath);
+            //Process p = Runtime.getRuntime().exec("java -jar \" "+ absolutePathofNdpiJar +"\" -i 2 -c lzw -s \"C:\\Users\\Stefan\\Desktop\\Medizin Projekt\\Bilder\\stapel\\test.ndpi\" \"C:\\Users\\Stefan\\Desktop\\Medizin Projekt\\Bilder\\stapel\" ");
+            //java -jar "C:\Users\Stefan\Downloads\ndpi-to-ome-tiff-converter-v1.5\ndpi-converter.jar" -i 2 -c lzw -s "C:\Users\Stefan\Desktop\Medizin Projekt\Bilder\stapel\test.ndpi" "C:\Users\Stefan\Desktop\Medizin Projekt\Bilder\stapel"
+
             BufferedReader in = new BufferedReader(
                     new InputStreamReader(p.getInputStream()));
             String line = null;
@@ -103,4 +117,3 @@ public class ConverterTask extends SwingWorker<String, Integer> {
         glScanAnalyzer.addTifToList(newTifListElement);
     }
 }
-
