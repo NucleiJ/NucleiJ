@@ -4,23 +4,19 @@ import at.ac.htlhl.nucleij.AppContext;
 import at.ac.htlhl.nucleij.model.GLScanAnalyzer;
 import at.ac.htlhl.nucleij.model.Main;
 import at.ac.htlhl.nucleij.model.NdpiConverter;
-import at.ac.htlhl.nucleij.presenter.tasks.ConverterTask;
 import at.ac.htlhl.nucleij.util.SuffixFileFilter;
 import at.ac.htlhl.nucleij.view.GLScanAnalyzerView;
 import at.ac.htlhl.nucleij.view.NdpiConverterView;
 import com.ezware.dialog.task.TaskDialog;
 import com.ezware.dialog.task.TaskDialogs;
 import com.jgoodies.binding.PresentationModel;
-import com.sun.org.apache.xpath.internal.functions.FuncFalse;
 import org.jdesktop.application.Application;
 import org.jdesktop.application.SingleFrameApplication;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
 

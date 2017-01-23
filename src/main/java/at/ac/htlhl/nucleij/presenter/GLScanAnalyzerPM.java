@@ -3,8 +3,7 @@ package at.ac.htlhl.nucleij.presenter;
 import at.ac.htlhl.nucleij.AppContext;
 import at.ac.htlhl.nucleij.model.GLScanAnalyzer;
 import at.ac.htlhl.nucleij.model.NdpiConverter;
-import at.ac.htlhl.nucleij.presenter.tasks.AnalyzerTask;
-import at.ac.htlhl.nucleij.presenter.tasks.ConverterTask;
+import at.ac.htlhl.nucleij.presenter.tasks.AnalyzerConverterTask;
 import at.ac.htlhl.nucleij.presenter.tasks.RoiTask;
 import com.ezware.dialog.task.TaskDialog;
 import com.jgoodies.binding.PresentationModel;
@@ -117,6 +116,7 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
 
             // ********************************************************************************
             // Converter:
+            /*
             JFrame parentConverter = ((SingleFrameApplication) Application.getInstance()).getMainFrame();
             ResourceBundle resourceBundleConverter = AppContext.getInstance().getResourceBundle();
 
@@ -135,6 +135,7 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
             converterTask.execute();
 
             taskDialogConverter.show();
+            */
 
             // ********************************************************************************
             //Analyzer Task
@@ -142,21 +143,26 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
             JFrame parentAnalyzer = ((SingleFrameApplication) Application.getInstance()).getMainFrame();
             ResourceBundle resourceBundleAnalyzer = AppContext.getInstance().getResourceBundle();
 
-            TaskDialog taskDialogAnalyzer = new TaskDialog(parentAnalyzer, resourceBundleAnalyzer.getString("AnalyzerDialog.title"));
+            //TaskDialog taskDialogAnalyzer = new TaskDialog(parentAnalyzer, resourceBundleAnalyzer.getString("AnalyzerConverterDialog.title"));
+            TaskDialog taskDialogAnalyzerConverter = new TaskDialog(parentAnalyzer, resourceBundleAnalyzer.getString("AnalyzerConverterDialog.title"));
 
             JProgressBar progressBarAnalyzer = new JProgressBar(0,100);
             progressBarAnalyzer.setStringPainted(true);
             progressBarAnalyzer.setValue(0);
-            taskDialogAnalyzer.setInstruction(resourceBundleAnalyzer.getString("AnalyzerDialog.instructionMessage"));
-            taskDialogAnalyzer.setText(resourceBundleAnalyzer.getString("AnalyzerDialog.text"));
-            taskDialogAnalyzer.setFixedComponent(progressBarAnalyzer);
-            taskDialogAnalyzer.setCommands(TaskDialog.StandardCommand.CANCEL);
+            taskDialogAnalyzerConverter.setInstruction(resourceBundleAnalyzer.getString("AnalyzerConverterDialog.instructionMessage"));
+            taskDialogAnalyzerConverter.setText(resourceBundleAnalyzer.getString("AnalyzerConverterDialog.text"));
+            taskDialogAnalyzerConverter.setFixedComponent(progressBarAnalyzer);
+            taskDialogAnalyzerConverter.setCommands(TaskDialog.StandardCommand.CANCEL);
 
-            AnalyzerTask analyzerTask = new AnalyzerTask(progressBarAnalyzer, taskDialogAnalyzer, glScanAnalyzer);
-            //noinspection Since15
-            analyzerTask.execute();
+            //AnalyzerTask analyzerTask = new AnalyzerTask(progressBarAnalyzer, taskDialogAnalyzerConverter, glScanAnalyzer);
 
-            taskDialogAnalyzer.show();
+            AnalyzerConverterTask analyzerConverterTask = new AnalyzerConverterTask(progressBarAnalyzer, taskDialogAnalyzerConverter, ndpiConverter, glScanAnalyzer);
+            analyzerConverterTask.execute();
+            taskDialogAnalyzerConverter.show();
+
+            //analyzerTask.execute();
+
+            //taskDialogAnalyzer.show();
 
         }
     }

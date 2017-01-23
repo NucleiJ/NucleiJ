@@ -112,7 +112,6 @@ public class AnalyzerTask extends SwingWorker<String, Integer>
         for(int value : chunks)
         {
             progressBar.setValue(value);
-            //LOGGER.log(Level.INFO, "Value: " + value);
         }
     }
 

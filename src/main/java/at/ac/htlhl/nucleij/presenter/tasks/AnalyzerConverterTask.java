@@ -2,58 +2,76 @@ package at.ac.htlhl.nucleij.presenter.tasks;
 
 import at.ac.htlhl.nucleij.model.GLScanAnalyzer;
 import at.ac.htlhl.nucleij.model.NdpiConverter;
+import at.ac.htlhl.nucleij.presenter.analyzing.MainAnalyzer;
 import com.ezware.dialog.task.TaskDialog;
-import ij.IJ;
 
 import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
-public class ConverterTask extends SwingWorker<String, Integer> {
-    private static final Logger LOGGER = Logger.getLogger(AnalyzerTask.class.getName());
+/**
+ * Created by andreas on 23.01.17.
+ */
+public class AnalyzerConverterTask extends SwingWorker<String, Integer>
+{
+    private static final Logger LOGGER = Logger.getLogger(AnalyzerConverterTask.class.getName());
     private JProgressBar progressBar;
     private TaskDialog taskDialog;
-    private NdpiConverter ndpiConverter;
     private GLScanAnalyzer glScanAnalyzer;
+    private NdpiConverter ndpiConverter;
     private List<String> ndpiFileList;
+    private List<String> tifFileList;
 
-    public ConverterTask(JProgressBar progressBar, TaskDialog taskDialog, NdpiConverter ndpiConverter, GLScanAnalyzer glScanAnalyzer) {
-        super();
-
+    public AnalyzerConverterTask(JProgressBar progressBar, TaskDialog taskDialog, NdpiConverter ndpiConverter, GLScanAnalyzer glScanAnalyzer)
+    {
         this.progressBar = progressBar;
         this.taskDialog = taskDialog;
         this.ndpiConverter = ndpiConverter;
         this.glScanAnalyzer = glScanAnalyzer;
     }
 
+
+    @Override
     protected String doInBackground() throws Exception {
+        MainAnalyzer mainAnalyzer = new MainAnalyzer(glScanAnalyzer);
+        tifFileList = glScanAnalyzer.getTifList();
+        ndpiFileList = glScanAnalyzer.getNdpiList();
         int i = 0;
         int add;
         int counter = 0;
-        LOGGER.log(Level.INFO, "Converting Process started!");
 
-        ndpiFileList = glScanAnalyzer.getNdpiList();
+        for (String tifListElement : tifFileList) {
+            counter++;
+        }
 
         for (String ndpiListElement : ndpiFileList) {
             counter++;
         }
-        add = 100/counter;
+
+        add = counter/100;
 
         for (String ndpiListElement : ndpiFileList) {
             startConverter(ndpiListElement);
             publish(i+add);
         }
 
-        return null;
+        for (String tifListElement : tifFileList)
+        {
+            mainAnalyzer.setDateiname(tifListElement);
+            System.out.println("\n****************\n"+tifListElement+"\n********************");
+            mainAnalyzer.run(null);
+            publish(i+add);
+        }
+        mainAnalyzer.createSummary();
+        return "Finished";
     }
+
+
 
     @Override
     protected void process(List<Integer> chunks) {
@@ -67,8 +85,12 @@ public class ConverterTask extends SwingWorker<String, Integer> {
     protected void done() {
         super.done();
         LOGGER.log(Level.INFO, "Done");
+        progressBar.setValue(100);
         taskDialog.setVisible(false);
     }
+
+
+
 
     private void startConverter(String filePath) {
         //Test fuer Consoleneingabe:
