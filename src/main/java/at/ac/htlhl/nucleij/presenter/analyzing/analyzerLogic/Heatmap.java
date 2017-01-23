@@ -146,6 +146,8 @@ public class Heatmap
 		// LUT anwenden
 		//IJ.run(heatmapTmp, "Red/Green", "");
 		// TODO projectpath!
+
+
 		IJ.run("LUT... ", "open=C:\\DA-Workspace\\NucleiJ_Analyzer\\lut\\RedGreenErben.lut");
 
 		//wieviel pixel sind auf 255?

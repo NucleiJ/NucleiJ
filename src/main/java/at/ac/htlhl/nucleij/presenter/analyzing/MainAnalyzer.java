@@ -131,6 +131,8 @@ public class MainAnalyzer implements PlugInFilter {
 		imp.show();
 		//imp.hide();
 
+		//Test comment fuer neuen Brnach
+
 		//set Measurements Properties
 		settings.setMeasurementProporties(imp, distance);
 
