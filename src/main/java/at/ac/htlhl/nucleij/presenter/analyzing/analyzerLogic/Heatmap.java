@@ -143,10 +143,12 @@ public class Heatmap
   		String befehl = "value=%";
   		String value = String.valueOf(faktorfloat);
 
-		// LUT anwenden
-		//IJ.run(heatmapTmp, "Red/Green", "");
 		// TODO projectpath!
-		IJ.run("LUT... ", "open=C:\\DA-Workspace\\NucleiJ_Analyzer\\lut\\RedGreenErben.lut");
+		File file = new File("div/lut/RedGreenErben.lut");
+		String absolutePathofLUT = file.getAbsolutePath();
+		System.out.println(absolutePathofLUT);
+
+		IJ.run("LUT... ", "open=".concat(absolutePathofLUT));
 
 		//wieviel pixel sind auf 255?
 		int heatmapWidth = heatmap_ip.getWidth();
