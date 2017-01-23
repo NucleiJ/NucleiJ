@@ -109,61 +109,27 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
         }
 
         public void actionPerformed(ActionEvent e) {
-            LOGGER.info("Analyze Action clicked");
-
             //TODO: WICHTIG: Liste in glscanner model erstellen, nach analyze
             //converter starten, scheuen ob was in der liste ist, danch analyzer starten, liste abarbeiten
 
-            // ********************************************************************************
-            // Converter:
-            /*
-            JFrame parentConverter = ((SingleFrameApplication) Application.getInstance()).getMainFrame();
-            ResourceBundle resourceBundleConverter = AppContext.getInstance().getResourceBundle();
-
-            TaskDialog taskDialogConverter = new TaskDialog(parentConverter, resourceBundleConverter.getString("ConverterDialog.title"));
-
-            JProgressBar progressBarConverter = new JProgressBar(0,100);
-            progressBarConverter.setStringPainted(true);
-            progressBarConverter.setValue(0);
-            taskDialogConverter.setInstruction(resourceBundleConverter.getString("ConverterDialog.instructionMessage"));
-            taskDialogConverter.setText(resourceBundleConverter.getString("ConverterDialog.text"));
-            taskDialogConverter.setFixedComponent(progressBarConverter);
-            taskDialogConverter.setCommands(TaskDialog.StandardCommand.CANCEL);
-
-            ConverterTask converterTask = new ConverterTask(progressBarConverter, taskDialogConverter, ndpiConverter, glScanAnalyzer);
-            //noinspection Since15
-            converterTask.execute();
-
-            taskDialogConverter.show();
-            */
-
-            // ********************************************************************************
-            //Analyzer Task
-
-            JFrame parentAnalyzer = ((SingleFrameApplication) Application.getInstance()).getMainFrame();
+            // *******************************************************************************
+            //Analyzer & Converter Task
+            JFrame parentAnalyzerConverter = ((SingleFrameApplication) Application.getInstance()).getMainFrame();
             ResourceBundle resourceBundleAnalyzer = AppContext.getInstance().getResourceBundle();
 
-            //TaskDialog taskDialogAnalyzer = new TaskDialog(parentAnalyzer, resourceBundleAnalyzer.getString("AnalyzerConverterDialog.title"));
-            TaskDialog taskDialogAnalyzerConverter = new TaskDialog(parentAnalyzer, resourceBundleAnalyzer.getString("AnalyzerConverterDialog.title"));
+            TaskDialog taskDialogAnalyzerConverter = new TaskDialog(parentAnalyzerConverter, resourceBundleAnalyzer.getString("AnalyzerConverterDialog.title"));
 
-            JProgressBar progressBarAnalyzer = new JProgressBar(0,100);
-            progressBarAnalyzer.setStringPainted(true);
-            progressBarAnalyzer.setValue(0);
+            JProgressBar progressBarAnalyzerConverter = new JProgressBar(0,100);
+            progressBarAnalyzerConverter.setStringPainted(true);
+            progressBarAnalyzerConverter.setValue(0);
             taskDialogAnalyzerConverter.setInstruction(resourceBundleAnalyzer.getString("AnalyzerConverterDialog.instructionMessage"));
             taskDialogAnalyzerConverter.setText(resourceBundleAnalyzer.getString("AnalyzerConverterDialog.text"));
-            taskDialogAnalyzerConverter.setFixedComponent(progressBarAnalyzer);
+            taskDialogAnalyzerConverter.setFixedComponent(progressBarAnalyzerConverter);
             taskDialogAnalyzerConverter.setCommands(TaskDialog.StandardCommand.CANCEL);
 
-            //AnalyzerTask analyzerTask = new AnalyzerTask(progressBarAnalyzer, taskDialogAnalyzerConverter, glScanAnalyzer);
-
-            AnalyzerConverterTask analyzerConverterTask = new AnalyzerConverterTask(progressBarAnalyzer, taskDialogAnalyzerConverter, ndpiConverter, glScanAnalyzer);
+            AnalyzerConverterTask analyzerConverterTask = new AnalyzerConverterTask(progressBarAnalyzerConverter, taskDialogAnalyzerConverter, ndpiConverter, glScanAnalyzer);
             analyzerConverterTask.execute();
             taskDialogAnalyzerConverter.show();
-
-            //analyzerTask.execute();
-
-            //taskDialogAnalyzer.show();
-
         }
     }
 

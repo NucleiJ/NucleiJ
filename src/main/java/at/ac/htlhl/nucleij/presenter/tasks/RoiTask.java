@@ -25,7 +25,7 @@ public class RoiTask
 {
     // Constants
     // ************************************************************************
-    private static final Logger LOGGER = Logger.getLogger(AnalyzerTask.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(AnalyzerConverterTask.class.getName());
 
     private GLScanAnalyzer glScanAnalyzer;
 

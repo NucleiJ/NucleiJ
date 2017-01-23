@@ -257,11 +257,7 @@ public class MainPM extends PresentationModel<Main>
             taskDialog.setText(resourceBundle.getString("TuningDialog.text"));
             taskDialog.setFixedComponent(progressBar);
             taskDialog.setCommands(TaskDialog.StandardCommand.CANCEL);
-
-            //ConverterTask converterTask = new ConverterTask(progressBar, taskDialog, ndpiConverter);
-            //converterTask.execute();
-
-        }
+                    }
     }
 
     private class enableConverterViewAction extends AbstractAction

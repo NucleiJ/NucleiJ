@@ -17,6 +17,7 @@ import java.util.logging.Logger;
 /**
  * Created by andreas on 23.01.17.
  */
+
 public class AnalyzerConverterTask extends SwingWorker<String, Integer>
 {
     private static final Logger LOGGER = Logger.getLogger(AnalyzerConverterTask.class.getName());
@@ -24,8 +25,6 @@ public class AnalyzerConverterTask extends SwingWorker<String, Integer>
     private TaskDialog taskDialog;
     private GLScanAnalyzer glScanAnalyzer;
     private NdpiConverter ndpiConverter;
-    private List<String> ndpiFileList;
-    private List<String> tifFileList;
 
     public AnalyzerConverterTask(JProgressBar progressBar, TaskDialog taskDialog, NdpiConverter ndpiConverter, GLScanAnalyzer glScanAnalyzer)
     {
@@ -39,8 +38,8 @@ public class AnalyzerConverterTask extends SwingWorker<String, Integer>
     @Override
     protected String doInBackground() throws Exception {
         MainAnalyzer mainAnalyzer = new MainAnalyzer(glScanAnalyzer);
-        tifFileList = glScanAnalyzer.getTifList();
-        ndpiFileList = glScanAnalyzer.getNdpiList();
+        List<String> tifFileList = glScanAnalyzer.getTifList();
+        List<String> ndpiFileList = glScanAnalyzer.getNdpiList();
         int i = 0;
         int add;
         int counter = 0;
@@ -89,12 +88,7 @@ public class AnalyzerConverterTask extends SwingWorker<String, Integer>
         taskDialog.setVisible(false);
     }
 
-
-
-
     private void startConverter(String filePath) {
-        //Test fuer Consoleneingabe:
-
         File outputpath = new File(ndpiConverter.getOutputpath());
 
         File file = new File("lib/ndpi-converter/ndpi-converter.jar");
@@ -114,10 +108,6 @@ public class AnalyzerConverterTask extends SwingWorker<String, Integer>
                 LOGGER.info("Magnification error: set to Std. 10x Magnification");
             }
 
-            //Process p = Runtime.getRuntime().exec("java -jar " + absolutePathofNdpiJar + " -i 2 -c lzw -s \"" + filePath);
-            //Process p = Runtime.getRuntime().exec("java -jar \" "+ absolutePathofNdpiJar +"\" -i 2 -c lzw -s \"C:\\Users\\Stefan\\Desktop\\Medizin Projekt\\Bilder\\stapel\\test.ndpi\" \"C:\\Users\\Stefan\\Desktop\\Medizin Projekt\\Bilder\\stapel\" ");
-            //java -jar "C:\Users\Stefan\Downloads\ndpi-to-ome-tiff-converter-v1.5\ndpi-converter.jar" -i 2 -c lzw -s "C:\Users\Stefan\Desktop\Medizin Projekt\Bilder\stapel\test.ndpi" "C:\Users\Stefan\Desktop\Medizin Projekt\Bilder\stapel"
-
             BufferedReader in = new BufferedReader(
                     new InputStreamReader(p.getInputStream()));
             String line = null;
@@ -128,19 +118,7 @@ public class AnalyzerConverterTask extends SwingWorker<String, Integer>
             e.printStackTrace();
         }
 
-        /*
-        String magnification = ndpiConverter.getMagnification();
-        //String directory = ndpiConverter.getInputpath();
-        String command = ("no=[%]").replace("%", filePath);
-        command += " format_of_split_images=[TIFF with LZW compression] make_mosaic=never mosaic_pieces_format=[TIFF with JPEG compression] requested_jpeg_compression=75 mosaic_pieces_overlap=0.000000 mosaic_pieces_overlap_unit=pixels size_limit_on_each_mosaic_piece=1024 width_of_each_mosaic_piece_in_pixels=0 height_of_each_mosaic_piece_in_pixels=0 ";
-        magnification = "extract_images_at_magnification_%".replace("%", magnification);
-        command = command + magnification + " extract_images_with_z-offset_0";
-
-        IJ.run("Custom extract to TIFF / Mosaic...", command);
-        */
-
         // TODO neue files in tif liste
-
         String renameFileName = "_".concat(ndpiConverter.getMagnification().toLowerCase().concat(".ome.tif"));
         String newTifListElement = filePath.replace(".ndpi", renameFileName);
         System.out.println("Der Filename nach dem Konvertieren ist:" + newTifListElement);
