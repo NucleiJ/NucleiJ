@@ -9,6 +9,7 @@
 * Speichern/Einlesen von Einstellungen
 * Jason File (.nucleij)
 * SwingWorker zusammenlegen zu einem
+* eigene Prozessnamen
 
 
 ### 2. Zukunftsmusik ###

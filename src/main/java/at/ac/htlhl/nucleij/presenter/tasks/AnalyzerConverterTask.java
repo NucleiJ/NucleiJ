@@ -2,61 +2,78 @@ package at.ac.htlhl.nucleij.presenter.tasks;
 
 import at.ac.htlhl.nucleij.model.GLScanAnalyzer;
 import at.ac.htlhl.nucleij.model.NdpiConverter;
+import at.ac.htlhl.nucleij.presenter.analyzing.MainAnalyzer;
 import com.ezware.dialog.task.TaskDialog;
-import ij.IJ;
-import org.jdesktop.application.Application;
-import org.jdesktop.application.SingleFrameApplication;
 
 import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Created by andreas on 23.01.17.
+ */
 
-public class ConverterTask extends SwingWorker<String, Integer> {
-    private static final Logger LOGGER = Logger.getLogger(AnalyzerTask.class.getName());
+public class AnalyzerConverterTask extends SwingWorker<String, Integer>
+{
+    private static final Logger LOGGER = Logger.getLogger(AnalyzerConverterTask.class.getName());
     private JProgressBar progressBar;
     private TaskDialog taskDialog;
-    private NdpiConverter ndpiConverter;
     private GLScanAnalyzer glScanAnalyzer;
-    private List<String> ndpiFileList;
-    private List<String> tifFileList;
+    private NdpiConverter ndpiConverter;
 
-
-    public ConverterTask(JProgressBar progressBar, TaskDialog taskDialog, NdpiConverter ndpiConverter, GLScanAnalyzer glScanAnalyzer) {
-        super();
-
+    public AnalyzerConverterTask(JProgressBar progressBar, TaskDialog taskDialog, NdpiConverter ndpiConverter, GLScanAnalyzer glScanAnalyzer)
+    {
         this.progressBar = progressBar;
         this.taskDialog = taskDialog;
         this.ndpiConverter = ndpiConverter;
         this.glScanAnalyzer = glScanAnalyzer;
     }
 
-    protected String doInBackground() throws Exception {
-        int i = 0;
-        int add;
-        int counter = 0;
-        LOGGER.log(Level.INFO, "Converting Process started!");
 
-        ndpiFileList = glScanAnalyzer.getNdpiList();
+    @Override
+    protected String doInBackground() throws Exception {
+        MainAnalyzer mainAnalyzer = new MainAnalyzer(glScanAnalyzer);
+        List<String> tifFileList = glScanAnalyzer.getTifList();
+        List<String> ndpiFileList = glScanAnalyzer.getNdpiList();
+        int i = 0;
+        float currentStatus = 0;
+        float add;
+        float counter = 0;
 
         for (String ndpiListElement : ndpiFileList) {
             counter++;
         }
-        add = 100/counter;
+        counter=counter*2;
 
-        for (String ndpiListElement : ndpiFileList) {
-            startConverter(ndpiListElement);
-            publish(i+add);
+        for (String tifListElement : tifFileList) {
+            counter++;
         }
 
-        return null;
+        add = 100/counter;
+
+        // Konvertieren & an TifListe anhängen
+        for (String ndpiListElement : ndpiFileList) {
+            startConverter(ndpiListElement);
+            currentStatus = currentStatus + add;
+            publish(Math.round(currentStatus));
+        }
+
+        // Analysieren
+        for (String tifListElement : tifFileList)
+        {
+            mainAnalyzer.setDateiname(tifListElement);
+            System.out.println("\n****************\n"+tifListElement+"\n********************");
+            mainAnalyzer.run(null);
+            currentStatus = currentStatus + add;
+            publish(Math.round(currentStatus));
+        }
+        mainAnalyzer.createSummary();
+        return "Finished";
     }
 
     @Override
@@ -71,6 +88,7 @@ public class ConverterTask extends SwingWorker<String, Integer> {
     protected void done() {
         super.done();
         LOGGER.log(Level.INFO, "Done");
+        progressBar.setValue(100);
         taskDialog.setVisible(false);
     }
 
@@ -94,10 +112,6 @@ public class ConverterTask extends SwingWorker<String, Integer> {
                 LOGGER.info("Magnification error: set to Std. 10x Magnification");
             }
 
-            //Process p = Runtime.getRuntime().exec("java -jar " + absolutePathofNdpiJar + " -i 2 -c lzw -s \"" + filePath);
-            //Process p = Runtime.getRuntime().exec("java -jar \" "+ absolutePathofNdpiJar +"\" -i 2 -c lzw -s \"C:\\Users\\Stefan\\Desktop\\Medizin Projekt\\Bilder\\stapel\\test.ndpi\" \"C:\\Users\\Stefan\\Desktop\\Medizin Projekt\\Bilder\\stapel\" ");
-            //java -jar "C:\Users\Stefan\Downloads\ndpi-to-ome-tiff-converter-v1.5\ndpi-converter.jar" -i 2 -c lzw -s "C:\Users\Stefan\Desktop\Medizin Projekt\Bilder\stapel\test.ndpi" "C:\Users\Stefan\Desktop\Medizin Projekt\Bilder\stapel"
-
             BufferedReader in = new BufferedReader(
                     new InputStreamReader(p.getInputStream()));
             String line = null;
@@ -106,11 +120,9 @@ public class ConverterTask extends SwingWorker<String, Integer> {
             }
         } catch (IOException e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(((SingleFrameApplication) Application.getInstance()).getMainFrame(),
-                    "Fehler beim Konvertieren: ","NucleiJ-Error",
-                    JOptionPane.ERROR_MESSAGE);
         }
 
+        // TODO neue files in tif liste
         String renameFileName = "_".concat(ndpiConverter.getMagnification().toLowerCase().concat(".ome.tif"));
         String newTifListElement = filePath.replace(".ndpi", renameFileName);
         System.out.println("Der Filename nach dem Konvertieren ist:" + newTifListElement);

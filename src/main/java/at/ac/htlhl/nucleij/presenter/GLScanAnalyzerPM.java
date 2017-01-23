@@ -3,8 +3,7 @@ package at.ac.htlhl.nucleij.presenter;
 import at.ac.htlhl.nucleij.AppContext;
 import at.ac.htlhl.nucleij.model.GLScanAnalyzer;
 import at.ac.htlhl.nucleij.model.NdpiConverter;
-import at.ac.htlhl.nucleij.presenter.tasks.AnalyzerTask;
-import at.ac.htlhl.nucleij.presenter.tasks.ConverterTask;
+import at.ac.htlhl.nucleij.presenter.tasks.AnalyzerConverterTask;
 import at.ac.htlhl.nucleij.presenter.tasks.RoiTask;
 import com.ezware.dialog.task.TaskDialog;
 import com.jgoodies.binding.PresentationModel;
@@ -110,54 +109,27 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
         }
 
         public void actionPerformed(ActionEvent e) {
-            LOGGER.info("Analyze Action clicked");
-
             //TODO: WICHTIG: Liste in glscanner model erstellen, nach analyze
             //converter starten, scheuen ob was in der liste ist, danch analyzer starten, liste abarbeiten
 
-            // ********************************************************************************
-            // Converter:
-            JFrame parentConverter = ((SingleFrameApplication) Application.getInstance()).getMainFrame();
-            ResourceBundle resourceBundleConverter = AppContext.getInstance().getResourceBundle();
-
-            TaskDialog taskDialogConverter = new TaskDialog(parentConverter, resourceBundleConverter.getString("ConverterDialog.title"));
-
-            JProgressBar progressBarConverter = new JProgressBar(0,100);
-            progressBarConverter.setStringPainted(true);
-            progressBarConverter.setValue(0);
-            taskDialogConverter.setInstruction(resourceBundleConverter.getString("ConverterDialog.instructionMessage"));
-            taskDialogConverter.setText(resourceBundleConverter.getString("ConverterDialog.text"));
-            taskDialogConverter.setFixedComponent(progressBarConverter);
-            taskDialogConverter.setCommands(TaskDialog.StandardCommand.CANCEL);
-
-            ConverterTask converterTask = new ConverterTask(progressBarConverter, taskDialogConverter, ndpiConverter, glScanAnalyzer);
-            //noinspection Since15
-            converterTask.execute();
-
-            taskDialogConverter.show();
-
-            // ********************************************************************************
-            //Analyzer Task
-
-            JFrame parentAnalyzer = ((SingleFrameApplication) Application.getInstance()).getMainFrame();
+            // *******************************************************************************
+            //Analyzer & Converter Task
+            JFrame parentAnalyzerConverter = ((SingleFrameApplication) Application.getInstance()).getMainFrame();
             ResourceBundle resourceBundleAnalyzer = AppContext.getInstance().getResourceBundle();
 
-            TaskDialog taskDialogAnalyzer = new TaskDialog(parentAnalyzer, resourceBundleAnalyzer.getString("AnalyzerDialog.title"));
+            TaskDialog taskDialogAnalyzerConverter = new TaskDialog(parentAnalyzerConverter, resourceBundleAnalyzer.getString("AnalyzerConverterDialog.title"));
 
-            JProgressBar progressBarAnalyzer = new JProgressBar(0,100);
-            progressBarAnalyzer.setStringPainted(true);
-            progressBarAnalyzer.setValue(0);
-            taskDialogAnalyzer.setInstruction(resourceBundleAnalyzer.getString("AnalyzerDialog.instructionMessage"));
-            taskDialogAnalyzer.setText(resourceBundleAnalyzer.getString("AnalyzerDialog.text"));
-            taskDialogAnalyzer.setFixedComponent(progressBarAnalyzer);
-            taskDialogAnalyzer.setCommands(TaskDialog.StandardCommand.CANCEL);
+            JProgressBar progressBarAnalyzerConverter = new JProgressBar(0,100);
+            progressBarAnalyzerConverter.setStringPainted(true);
+            progressBarAnalyzerConverter.setValue(0);
+            taskDialogAnalyzerConverter.setInstruction(resourceBundleAnalyzer.getString("AnalyzerConverterDialog.instructionMessage"));
+            taskDialogAnalyzerConverter.setText(resourceBundleAnalyzer.getString("AnalyzerConverterDialog.text"));
+            taskDialogAnalyzerConverter.setFixedComponent(progressBarAnalyzerConverter);
+            taskDialogAnalyzerConverter.setCommands(TaskDialog.StandardCommand.CANCEL);
 
-            AnalyzerTask analyzerTask = new AnalyzerTask(progressBarAnalyzer, taskDialogAnalyzer, glScanAnalyzer);
-            //noinspection Since15
-            analyzerTask.execute();
-
-            taskDialogAnalyzer.show();
-
+            AnalyzerConverterTask analyzerConverterTask = new AnalyzerConverterTask(progressBarAnalyzerConverter, taskDialogAnalyzerConverter, ndpiConverter, glScanAnalyzer);
+            analyzerConverterTask.execute();
+            taskDialogAnalyzerConverter.show();
         }
     }
 
