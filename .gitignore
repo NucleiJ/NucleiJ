@@ -1,4 +1,6 @@
 .idea/
-div
+div/icons
+div/jgoodies-doc
+div/launch4j
 target/
 /lib/ndpi-converter/ndpi-converter.jar

@@ -10,6 +10,7 @@
 * Jason File (.nucleij)
 * SwingWorker zusammenlegen zu einem
 * eigene Prozessnamen
+* Cancel soll wirklich beenden
 
 
 ### 2. Zukunftsmusik ###
