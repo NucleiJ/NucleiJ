@@ -4,6 +4,8 @@ import at.ac.htlhl.nucleij.model.GLScanAnalyzer;
 import at.ac.htlhl.nucleij.model.NdpiConverter;
 import com.ezware.dialog.task.TaskDialog;
 import ij.IJ;
+import org.jdesktop.application.Application;
+import org.jdesktop.application.SingleFrameApplication;
 
 import javax.swing.*;
 import java.io.BufferedReader;
@@ -44,7 +46,7 @@ public class ConverterTask extends SwingWorker<String, Integer> {
 
         ndpiFileList = glScanAnalyzer.getNdpiList();
 
-        for (String ndpiListElement : ndpiFileList) {
+        for (String temp : ndpiFileList) {
             counter++;
         }
         add = 100/counter;
@@ -74,8 +76,6 @@ public class ConverterTask extends SwingWorker<String, Integer> {
     }
 
     private void startConverter(String filePath) {
-        //Test fuer Consoleneingabe:
-
         File outputpath = new File(ndpiConverter.getOutputpath());
 
         File file = new File("lib/ndpi-converter/ndpi-converter.jar");
@@ -83,11 +83,7 @@ public class ConverterTask extends SwingWorker<String, Integer> {
         System.out.println(absolutePathofNdpiJar);
 
         try {
-            //Process p = Runtime.getRuntime().exec("java -jar " + absolutePathofNdpiJar + " -i 2 -c lzw -s \"" + filePath);
             Process p = Runtime.getRuntime().exec("java -jar \"" + absolutePathofNdpiJar + "\" -i 2 -c lzw -s \"" + filePath +"\" \"" + outputpath.getParent().toString() + "\"");
-            //Process p = Runtime.getRuntime().exec("java -jar \" "+ absolutePathofNdpiJar +"\" -i 2 -c lzw -s \"C:\\Users\\Stefan\\Desktop\\Medizin Projekt\\Bilder\\stapel\\test.ndpi\" \"C:\\Users\\Stefan\\Desktop\\Medizin Projekt\\Bilder\\stapel\" ");
-            //java -jar "C:\Users\Stefan\Downloads\ndpi-to-ome-tiff-converter-v1.5\ndpi-converter.jar" -i 2 -c lzw -s "C:\Users\Stefan\Desktop\Medizin Projekt\Bilder\stapel\test.ndpi" "C:\Users\Stefan\Desktop\Medizin Projekt\Bilder\stapel"
-
             BufferedReader in = new BufferedReader(
                     new InputStreamReader(p.getInputStream()));
             String line = null;
@@ -96,20 +92,10 @@ public class ConverterTask extends SwingWorker<String, Integer> {
             }
         } catch (IOException e) {
             e.printStackTrace();
+            JOptionPane.showMessageDialog(((SingleFrameApplication) Application.getInstance()).getMainFrame(),
+                    "Fehler beim Konvertieren: ","NucleiJ-Error",
+                    JOptionPane.ERROR_MESSAGE);
         }
-
-        /*
-        String magnification = ndpiConverter.getMagnification();
-        //String directory = ndpiConverter.getInputpath();
-        String command = ("no=[%]").replace("%", filePath);
-        command += " format_of_split_images=[TIFF with LZW compression] make_mosaic=never mosaic_pieces_format=[TIFF with JPEG compression] requested_jpeg_compression=75 mosaic_pieces_overlap=0.000000 mosaic_pieces_overlap_unit=pixels size_limit_on_each_mosaic_piece=1024 width_of_each_mosaic_piece_in_pixels=0 height_of_each_mosaic_piece_in_pixels=0 ";
-        magnification = "extract_images_at_magnification_%".replace("%", magnification);
-        command = command + magnification + " extract_images_with_z-offset_0";
-
-        IJ.run("Custom extract to TIFF / Mosaic...", command);
-        */
-
-        // TODO neue files in tif liste
 
         String renameFileName = "_".concat(ndpiConverter.getMagnification().toLowerCase().concat(".ome.tif"));
         String newTifListElement = filePath.replace(".ndpi", renameFileName);
@@ -117,3 +103,4 @@ public class ConverterTask extends SwingWorker<String, Integer> {
         glScanAnalyzer.addTifToList(newTifListElement);
     }
 }
+

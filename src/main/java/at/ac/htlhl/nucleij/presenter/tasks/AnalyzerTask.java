@@ -40,10 +40,10 @@ public class AnalyzerTask extends SwingWorker<String, Integer>
         MainAnalyzer mainAnalyzer = new MainAnalyzer(glScanAnalyzer);
         List<String> tifFileList = glScanAnalyzer.getTifList();
 
-        for(int i=1; i<=100; i++)
+        for(int i=0; i<=100; i++)
         {
             // Task
-            if (i == 1)
+            if (i == 0)
             {
                 //Stapelfunktion!!
                 int gefundeneneElemente = 0;
@@ -71,7 +71,7 @@ public class AnalyzerTask extends SwingWorker<String, Integer>
                         mainAnalyzer.setDateiname(tifListElement);
                         System.out.println("\n****************\n"+tifListElement+"\n********************");
                         mainAnalyzer.run(null);
-                        i = i + plus-1;
+                        i = i + plus;
                         publish(i);
                     }
                 }
