@@ -41,8 +41,9 @@ public class AnalyzerConverterTask extends SwingWorker<String, Integer>
         List<String> tifFileList = glScanAnalyzer.getTifList();
         List<String> ndpiFileList = glScanAnalyzer.getNdpiList();
         int i = 0;
-        int add;
-        int counter = 0;
+        float currentStatus = 0;
+        float add;
+        float counter = 0;
 
         for (String ndpiListElement : ndpiFileList) {
             counter++;
@@ -54,12 +55,12 @@ public class AnalyzerConverterTask extends SwingWorker<String, Integer>
         }
 
         add = 100/counter;
-        add = Math.round(add);  //Nur verwenden, wenn 'add' float ist
 
         // Konvertieren & an TifListe anhängen
         for (String ndpiListElement : ndpiFileList) {
             startConverter(ndpiListElement);
-            publish(i+add);
+            currentStatus = currentStatus + add;
+            publish(Math.round(currentStatus));
         }
 
         // Analysieren
@@ -68,13 +69,12 @@ public class AnalyzerConverterTask extends SwingWorker<String, Integer>
             mainAnalyzer.setDateiname(tifListElement);
             System.out.println("\n****************\n"+tifListElement+"\n********************");
             mainAnalyzer.run(null);
-            publish(i+add);
+            currentStatus = currentStatus + add;
+            publish(Math.round(currentStatus));
         }
         mainAnalyzer.createSummary();
         return "Finished";
     }
-
-
 
     @Override
     protected void process(List<Integer> chunks) {
