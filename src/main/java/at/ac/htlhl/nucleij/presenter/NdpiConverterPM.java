@@ -19,7 +19,6 @@ import java.util.logging.Logger;
 
 import static at.ac.htlhl.nucleij.model.NdpiConverter.MAG_X10;
 import static at.ac.htlhl.nucleij.model.NdpiConverter.MAG_X5;
-import static at.ac.htlhl.nucleij.model.NdpiConverter.SINGLE_FILE;
 
 
 /**
@@ -34,10 +33,8 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
     FileNameExtensionFilter ndpiFilter = new FileNameExtensionFilter("Nano Zoomer Digital Pathology Image (.ndpi)","ndpi");
     FileNameExtensionFilter tifFilter = new FileNameExtensionFilter("Tagged Image File (.tif)","tif");
 
-    private Action typeAction;
     private Action inputPathAction;
     private Action outputPathAction;
-    private Action customPathAction;
     private Action magnificationAction;
     private Action convertAction;
 
@@ -54,7 +51,6 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
         this.glScanAnalyzer = glScanAnalyzer;
         this.glScanAnalyzerPM = glScanAnalyzerPM;
 
-        typeAction = new TypeAction();
         inputPathAction = new InputPathAction();
         outputPathAction = new ExportPathAction();
         magnificationAction = new MagnificationAction();
@@ -65,15 +61,6 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
         ndpiConverter.addPropertyChangeListener(new PropertyChangeListener() {
             public void propertyChange(PropertyChangeEvent evt) {
                 LOGGER.info("Property name="+evt.getPropertyName()+", oldValue="+evt.getOldValue()+", newValue="+evt.getNewValue());
-
-                // TODO ROI ein und ausblenden
-                if(NdpiConverter.PROPERTY_TYPE.equals(evt.getPropertyName())) {
-                    boolean enabled = evt.getNewValue().toString().toLowerCase().equals(SINGLE_FILE.toLowerCase());
-                    //System.out.println(enabled);
-                    //setComponentEnabled(GLScanAnalyzer.PROPERTY_ROIAREA, enabled);
-                    //setComponentVisible(GLScanAnalyzer.PROPERTY_ROIAREA, enabled);
-                    glScanAnalyzerPM.setROIvisible(enabled);
-                }
 
                 if(NdpiConverter.PROPERTY_MAGNIFICATION.equals(evt.getPropertyName()))
                 {
@@ -112,21 +99,12 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
         });
     }
 
-    //region Actions
-    public Action getTypeAction() {
-        return typeAction;
-    }
-
     public Action getInputPathAction() {
         return inputPathAction;
     }
 
     public Action getOutputPathAction() {
         return outputPathAction;
-    }
-
-    public Action getCustomPathAction() {
-        return customPathAction;
     }
 
     public Action getMagnificationAction() {
@@ -147,50 +125,14 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
         //TODO IDEE: Nur einen Filechooser mit setFileSelectionMode FILES_AND_DIRECTORIES und dann erkennen was gewählt wurde
         //TODO Bei mehreren gewählten Datein/Verzeichnissen den übergeordneten Ordner im InputPath Feld anzeigen (Oder 1.Datei mit "und X weitere Dateien" dran)
 
-        if(ndpiConverter.getType().equals(NdpiConverter.SINGLE_FILE)) {
-            chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-            chooser.addChoosableFileFilter(tifFilter);
-            chooser.addChoosableFileFilter(ndpiFilter);
-            chooser.setControlButtonsAreShown(true);
-            chooser.setDialogTitle("Datei auswählen");
-        }
-        else if(ndpiConverter.getType().equals(NdpiConverter.SINGLE_DIR) ) {
-            chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-            chooser.setControlButtonsAreShown(true);
-            chooser.setDialogTitle("Verzeichnis auswählen");
-        }
-        else if (ndpiConverter.getType().equals(NdpiConverter.MULTI_FILE)) {
-            chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-            chooser.addChoosableFileFilter(tifFilter);
-            chooser.addChoosableFileFilter(ndpiFilter);
-            chooser.setControlButtonsAreShown(true);
-            chooser.setMultiSelectionEnabled(true);
-            chooser.setDialogTitle("Mehrere Dateien auswählen");
-        }
-        else if (ndpiConverter.getType().equals(NdpiConverter.AUTO_MODE)) {
-            chooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
-            chooser.addChoosableFileFilter(tifFilter);
-            chooser.addChoosableFileFilter(ndpiFilter);
-            chooser.setControlButtonsAreShown(true);
-            chooser.setMultiSelectionEnabled(true);
-            chooser.setDialogTitle("Dateien Auswählen");
-        }
-        else {
-            System.out.println("\nERROR");
-        }
+        chooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+        chooser.addChoosableFileFilter(tifFilter);
+        chooser.addChoosableFileFilter(ndpiFilter);
+        chooser.setControlButtonsAreShown(true);
+        chooser.setMultiSelectionEnabled(true);
+        chooser.setDialogTitle("Dateien Auswählen");
+
         return chooser;
-    }
-
-
-    class TypeAction extends AbstractAction implements PropertyChangeListener {
-        public void propertyChange(PropertyChangeEvent e) {
-            ndpiConverter.setType(e.getPropertyName());
-            LOGGER.info("Type= "+ e.getPropertyName());
-        }
-
-        public void actionPerformed(ActionEvent e) {
-
-        }
     }
 
     private class InputPathAction extends AbstractAction {
@@ -207,130 +149,95 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
                 ndpiConverter.setInputpath(chooser.getSelectedFile().getAbsolutePath());
                 //ndpiConverter.setOutputpath(chooser.getSelectedFile().getAbsolutePath().concat("\\Output"));
 
-                if(ndpiConverter.getType().equals(NdpiConverter.SINGLE_FILE)) {
-                    //File file = chooser.getSelectedFile();
-                    LOGGER.info("1 File in Folder '" + chooser.getCurrentDirectory().getName() +"' found");
+                List<String> ndpiFileList = new ArrayList<>();
+                List<String> tifFileList = new ArrayList<>();
+                File[] filesInDirectory = new File[0];
+                boolean moreThanOneFolder = false;
+                int numberTifFiles = 0;
+                int numberNdpiFiles = 0;
+
+                if (chooser.getSelectedFile().isFile()) {
+                    filesInDirectory = chooser.getSelectedFiles();
+                }
+                else if (chooser.getSelectedFile().isDirectory()) {
+                    filesInDirectory = chooser.getSelectedFile().listFiles();
+
+
+                    //Checken ob mehr als ein Ordner ausgewählt wurde (Beta)
+                    int numberOfFolders = 0;
+                    File[] moreFolders = chooser.getSelectedFiles();
+                    for (File file : moreFolders ) {
+                        if (file.isDirectory()) {
+                            numberOfFolders++;
+                        }
+                    }
+                    if (numberOfFolders > 1) {
+                        moreThanOneFolder = true;
+                    }
                 }
 
-                else if(ndpiConverter.getType().equals(NdpiConverter.SINGLE_DIR)) {
-                    int numberOfFiles = 0;
-                    int numberOfFolder = 0;
-                    File[] filesInDirectory = chooser.getSelectedFile().listFiles();
-
-                    for (File file : filesInDirectory ) {
-                        System.out.println(file.getName());
-                        if (file.isFile()) {
-                            numberOfFiles ++;
+                for (File file : filesInDirectory ) {
+                    if (file.isFile()) {
+                        if (file.getName().endsWith(".ndpi")) {
+                            ndpiFileList.add(file.getAbsolutePath());
                         }
-                        else if (file.isDirectory()) {
-                            numberOfFolder ++;
+                        else if (file.getName().endsWith(".tif")) {
+                            tifFileList.add(file.getAbsolutePath());
+                        }
+                        else {
+                            LOGGER.warning("Invalid file extension '" + file.getName().substring(file.getName().indexOf(".")) + "' for file '" + file.getName() + "'");
                         }
                     }
-                    LOGGER.info(numberOfFiles + " Files & " + numberOfFolder + " Dirs in Folder '" + chooser.getSelectedFile().getName() +"' found");
-
-                }
-                else if (ndpiConverter.getType().equals(NdpiConverter.MULTI_FILE)) {
-                    int numberOfFiles = 0;
-                    File[] filesInDirectory = chooser.getSelectedFiles();
-
-                    for (File file : filesInDirectory ) {
-                        System.out.println(file.getName());
-                    }
-                    LOGGER.info(numberOfFiles + " Files in Folder '" + chooser.getSelectedFile().getName() +"' found");
                 }
 
-                else if (ndpiConverter.getType().equals(NdpiConverter.AUTO_MODE)) {
-                    List<String> ndpiFileList = new ArrayList<>();
-                    List<String> tifFileList = new ArrayList<>();
-                    File[] filesInDirectory = new File[0];
-                    boolean moreThanOneFolder = false;
-                    int numberTifFiles = 0;
-                    int numberNdpiFiles = 0;
-
-
-                    if (chooser.getSelectedFile().isFile()) {
-                        filesInDirectory = chooser.getSelectedFiles();
+                System.out.println("\nNDPI-Files:");
+                for (String string : ndpiFileList) {
+                    if (string != null) {
+                        numberNdpiFiles++;
+                        System.out.println(string);
                     }
-                    else if (chooser.getSelectedFile().isDirectory()) {
-                        filesInDirectory = chooser.getSelectedFile().listFiles();
-
-
-                        //Checken ob mehr als ein Ordner ausgewählt wurde (Beta)
-                        int numberOfFolders = 0;
-                        File[] moreFolders = chooser.getSelectedFiles();
-                        for (File file : moreFolders ) {
-                            if (file.isDirectory()) {
-                                numberOfFolders++;
-                            }
-                        }
-                        if (numberOfFolders > 1) {
-                            moreThanOneFolder = true;
-                        }
-                    }
-
-                    for (File file : filesInDirectory ) {
-                        if (file.isFile()) {
-                            if (file.getName().endsWith(".ndpi")) {
-                                ndpiFileList.add(file.getAbsolutePath());
-                            }
-                            else if (file.getName().endsWith(".tif")) {
-                                tifFileList.add(file.getAbsolutePath());
-                            }
-                            else {
-                                LOGGER.warning("Invalid file extension '" + file.getName().substring(file.getName().indexOf(".")) + "' for file '" + file.getName() + "'");
-                            }
-                        }
-                    }
-
-                    System.out.println("\nNDPI-Files:");
-                    for (String string : ndpiFileList) {
-                        if (string != null) {
-                            numberNdpiFiles++;
-                            System.out.println(string);
-                        }
-                    }
-
-
-                    System.out.println("\nTIF-Files:");
-                    for (String string : tifFileList) {
-                        if (string != null) {
-                            numberTifFiles++;
-                            System.out.println(string);
-                        }
-                    }
-                    System.out.println();
-                    LOGGER.info(numberNdpiFiles + " NDPI-Files & " + numberTifFiles + " TIF-Files in Folder '"+ chooser.getCurrentDirectory().getName() +"' found" + "\n");
-
-                    glScanAnalyzer.setNdpiList(ndpiFileList);
-                    glScanAnalyzer.setTifList(tifFileList);
-
-
-                    if (moreThanOneFolder) {
-                        JOptionPane.showMessageDialog(((SingleFrameApplication) Application.getInstance()).getMainFrame(),
-                                "Only one folder allowed!" +
-                                        "\n" + "Selected first folder '" + chooser.getSelectedFile().getName() + "':" +
-                                        "\n\n" + "NDPI-Files: " + numberNdpiFiles +
-                                        "\n" + "TIF-Files: " + numberTifFiles +
-                                        "\n\n" + "Directory: " + chooser.getCurrentDirectory(),
-                                "File-Selection successful!",
-                                JOptionPane.PLAIN_MESSAGE);
-                    }
-                    else {
-                        JOptionPane.showMessageDialog(((SingleFrameApplication) Application.getInstance()).getMainFrame(),
-                                "Successfully selected:" +
-                                        "\n\n" + "NDPI-Files: " + numberNdpiFiles +
-                                        "\n" + "TIF-Files: " + numberTifFiles +
-                                        "\n\n" + "Directory: " + chooser.getCurrentDirectory(),
-                                "File-Selection successful!",
-                                JOptionPane.PLAIN_MESSAGE);
-                    }
-
-                    //Würde den Controller starten (Startet automatisch)
-                    //controllerTask.main();
                 }
+
+                System.out.println("\nTIF-Files:");
+                for (String string : tifFileList) {
+                    if (string != null) {
+                        numberTifFiles++;
+                        System.out.println(string);
+                    }
+                }
+                System.out.println();
+                LOGGER.info(numberNdpiFiles + " NDPI-Files & " + numberTifFiles + " TIF-Files in Folder '"+ chooser.getCurrentDirectory().getName() +"' found" + "\n");
+
+                glScanAnalyzer.setNdpiList(ndpiFileList);
+                glScanAnalyzer.setTifList(tifFileList);
+
+
+                if (moreThanOneFolder) {
+                    JOptionPane.showMessageDialog(((SingleFrameApplication) Application.getInstance()).getMainFrame(),
+                            "Only one folder allowed!" +
+                                    "\n" + "Selected first folder '" + chooser.getSelectedFile().getName() + "':" +
+                                    "\n\n" + "NDPI-Files: " + numberNdpiFiles +
+                                    "\n" + "TIF-Files: " + numberTifFiles +
+                                    "\n\n" + "Directory: " + chooser.getCurrentDirectory(),
+                            "File-Selection successful!",
+                            JOptionPane.PLAIN_MESSAGE);
+                }
+                else {
+                    JOptionPane.showMessageDialog(((SingleFrameApplication) Application.getInstance()).getMainFrame(),
+                            "Successfully selected:" +
+                                    "\n\n" + "NDPI-Files: " + numberNdpiFiles +
+                                    "\n" + "TIF-Files: " + numberTifFiles +
+                                    "\n\n" + "Directory: " + chooser.getCurrentDirectory(),
+                            "File-Selection successful!",
+                            JOptionPane.PLAIN_MESSAGE);
+                }
+
+                //Würde den Controller starten (Startet automatisch)
+                //controllerTask.main();
             }
         }
     }
+
 
 
     private class ExportPathAction extends AbstractAction {
