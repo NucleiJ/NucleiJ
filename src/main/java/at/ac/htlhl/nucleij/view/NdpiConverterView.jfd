@@ -127,7 +127,7 @@ new FormModel {
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 15 )
-			"size": new java.awt.Dimension( 450, 310 )
+			"size": new java.awt.Dimension( 450, 250 )
 		} )
 		add( new FormNonVisual( "javax.swing.ButtonGroup" ) {
 			name: "buttonGroupMagnification"
