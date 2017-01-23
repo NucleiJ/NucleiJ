@@ -73,28 +73,6 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
                         ndpiConverter.setMagnification(MAG_X10);
                     }
                 }
-
-                if(NdpiConverter.PROPERTY_INPUTPATH.equals(evt.getPropertyName()))
-                {
-                    //File originalPath = new File(glScanAnalyzer.getInputpath().toString());
-                    File originalPath = new File(ndpiConverter.getInputpath().toString());
-
-
-                    boolean isDirectory = originalPath.isDirectory(); // Check if it's a directory
-                    boolean isFile =      originalPath.isFile();      // Check if it's a regular file
-
-                    if(isDirectory)
-                    {
-                        System.out.println("###Bin ein Ordner");
-                        ndpiConverter.setOutputpath(ndpiConverter.getInputpath().concat("\\Output"));
-                    }
-                    else if (isFile)
-                    {
-                        System.out.println("###Bin ein File:" + originalPath.toString().substring(0,originalPath.toString().lastIndexOf(File.separator)).concat("\\Output"));
-                        ndpiConverter.setOutputpath(originalPath.toString().substring(0,originalPath.toString().lastIndexOf(File.separator)).concat("\\Output"));
-                    }
-
-                }
             }
         });
     }
@@ -157,9 +135,12 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
                 int numberNdpiFiles = 0;
 
                 if (chooser.getSelectedFile().isFile()) {
+                    ndpiConverter.setOutputpath(ndpiConverter.getInputpath().substring(0,ndpiConverter.getInputpath().lastIndexOf(File.separator)).concat("\\Output"));
+
                     filesInDirectory = chooser.getSelectedFiles();
                 }
                 else if (chooser.getSelectedFile().isDirectory()) {
+                    ndpiConverter.setOutputpath(ndpiConverter.getInputpath().concat("\\Output"));
                     filesInDirectory = chooser.getSelectedFile().listFiles();
 
 
@@ -176,6 +157,7 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
                     }
                 }
 
+                assert filesInDirectory != null;
                 for (File file : filesInDirectory ) {
                     if (file.isFile()) {
                         if (file.getName().endsWith(".ndpi")) {
@@ -215,10 +197,9 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
                 if (moreThanOneFolder) {
                     JOptionPane.showMessageDialog(((SingleFrameApplication) Application.getInstance()).getMainFrame(),
                             "Only one folder allowed!" +
-                                    "\n" + "Selected first folder '" + chooser.getSelectedFile().getName() + "':" +
+                                    "\n" + "Selected first folder '" + chooser.getSelectedFile().getAbsolutePath() + "':" +
                                     "\n\n" + "NDPI-Files: " + numberNdpiFiles +
-                                    "\n" + "TIF-Files: " + numberTifFiles +
-                                    "\n\n" + "Directory: " + chooser.getCurrentDirectory(),
+                                    "\n" + "TIF-Files: " + numberTifFiles,
                             "File-Selection successful!",
                             JOptionPane.PLAIN_MESSAGE);
                 }
@@ -226,8 +207,7 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
                     JOptionPane.showMessageDialog(((SingleFrameApplication) Application.getInstance()).getMainFrame(),
                             "Successfully selected:" +
                                     "\n\n" + "NDPI-Files: " + numberNdpiFiles +
-                                    "\n" + "TIF-Files: " + numberTifFiles +
-                                    "\n\n" + "Directory: " + chooser.getCurrentDirectory(),
+                                    "\n" + "TIF-Files: " + numberTifFiles,
                             "File-Selection successful!",
                             JOptionPane.PLAIN_MESSAGE);
                 }

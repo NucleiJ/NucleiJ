@@ -1,18 +1,19 @@
 
-* TIF found? ausgrauen falls nicht gebraucht
-* java -jar ndpi-converter.jar -i 2 -c lzw -s "C:\Users\Stefan\Desktop\Medizin Projekt\Bilder\stapel\test.ndpi"
-
 # TO-DO Liste #
-
-## Stefan Erben ##
 
 ### 1. Erweiterungen: ###
 * ROI Einstellungen nur sichtbar, wenn SingleMode -> View an PM uebergeben?
 * Watershed Function!
+* Abfrage ob nur Analysieren oder Analysieren&Konvertieren (TaskDialog)
+* Einstellungen (Was gehört exportiert? Input/Output Ordner einstellen)
+* Speichern/Einlesen von Einstellungen
+* Jason File (.nucleij)
+* SwingWorker zusammenlegen zu einem
 
 
 ### 2. Zukunftsmusik ###
 * Schriftgröße änderbar (optional zur Laufzeit)
 * Sprache änderbar (optional zur Laufzeit)
 * interaktives Tutorial
-* geschätzte Restdauer anzeigen
+* geschätzte Restdauer anzeigen (Verarbeitete Daten/Sekunde...)
+* Momentan verarbeitete Datei anzeigen (Progress Monitor List)
