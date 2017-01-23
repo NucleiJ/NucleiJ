@@ -10,6 +10,8 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -73,13 +75,21 @@ public class ConverterTask extends SwingWorker<String, Integer> {
 
     private void startConverter(String filePath) {
         //Test fuer Consoleneingabe:
+        //Dateinamen:
+        Path fileName = Paths.get(filePath);
+
+        File outputpath = new File(ndpiConverter.getOutputpath());
+
         File file = new File("lib/ndpi-converter/ndpi-converter.jar");
         String absolutePathofNdpiJar = file.getAbsolutePath();
         System.out.println(absolutePathofNdpiJar);
 
         try {
-            //Process p = Runtime.getRuntime().exec("java -jar " + absolutePathofNdpiJar + " -i 2 -c lzw -s \"C:\\Users\\Stefan\\Desktop\\Medizin Projekt\\Bilder\\stapel\\test.ndpi\"");
-            Process p = Runtime.getRuntime().exec("java -jar " + absolutePathofNdpiJar + " -i 2 -c lzw -s \"" + filePath +"");
+            //Process p = Runtime.getRuntime().exec("java -jar " + absolutePathofNdpiJar + " -i 2 -c lzw -s \"" + filePath);
+            Process p = Runtime.getRuntime().exec("java -jar \"" + absolutePathofNdpiJar + "\" -i 2 -c lzw -s \"" + filePath +"\" \"" + outputpath.getParent().toString() + "\"");
+            //Process p = Runtime.getRuntime().exec("java -jar \" "+ absolutePathofNdpiJar +"\" -i 2 -c lzw -s \"C:\\Users\\Stefan\\Desktop\\Medizin Projekt\\Bilder\\stapel\\test.ndpi\" \"C:\\Users\\Stefan\\Desktop\\Medizin Projekt\\Bilder\\stapel\" ");
+            //java -jar "C:\Users\Stefan\Downloads\ndpi-to-ome-tiff-converter-v1.5\ndpi-converter.jar" -i 2 -c lzw -s "C:\Users\Stefan\Desktop\Medizin Projekt\Bilder\stapel\test.ndpi" "C:\Users\Stefan\Desktop\Medizin Projekt\Bilder\stapel"
+
             BufferedReader in = new BufferedReader(
                     new InputStreamReader(p.getInputStream()));
             String line = null;
@@ -102,6 +112,9 @@ public class ConverterTask extends SwingWorker<String, Integer> {
         */
 
         // TODO Die files liegen im ordner converted. von da in den parent ordner verschieben. danach leeren ordner loeschen. neue files in tif liste
-        //glScanAnalyzer.addTifToList(filePath.replace(".ndpi", "_").concat(magnification).concat("_z0.tiff"));
+
+
+        System.out.println("Der Filename nach dem Konvertieren ist:" + fileName.getFileName().toString());
+
     }
 }
