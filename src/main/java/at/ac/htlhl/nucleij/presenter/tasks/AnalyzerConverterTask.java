@@ -44,21 +44,25 @@ public class AnalyzerConverterTask extends SwingWorker<String, Integer>
         int add;
         int counter = 0;
 
+        for (String ndpiListElement : ndpiFileList) {
+            counter++;
+        }
+        counter=counter*2;
+
         for (String tifListElement : tifFileList) {
             counter++;
         }
 
-        for (String ndpiListElement : ndpiFileList) {
-            counter++;
-        }
+        add = 100/counter;
+        add = Math.round(add);  //Nur verwenden, wenn 'add' float ist
 
-        add = counter/100;
-
+        // Konvertieren & an TifListe anhängen
         for (String ndpiListElement : ndpiFileList) {
             startConverter(ndpiListElement);
             publish(i+add);
         }
 
+        // Analysieren
         for (String tifListElement : tifFileList)
         {
             mainAnalyzer.setDateiname(tifListElement);
