@@ -99,9 +99,6 @@ public class Heatmap
   				if (sum == 0)
   				{
   					dichte = 0;
-
-					// TODO jeden Px setzten, da Heatmap eh schon kleiner ist
-
   				    if ( ((x/10) >= 0) && ((y/10) >= 0)   )
 					{
 						heatmap_ip.putPixel(x/10, y/10, 0);
@@ -110,9 +107,6 @@ public class Heatmap
   				}
   				else
   				{
-
-					// TODO jeden Px setzten, da Heatmap eh schon kleiner ist
-
 					dichte = 255 / (abgesuchtepixel / sum);
   					if (dichte > max)
   					{
@@ -143,7 +137,6 @@ public class Heatmap
   		String befehl = "value=%";
   		String value = String.valueOf(faktorfloat);
 
-		// TODO projectpath!
 		File file = new File("div/lut/RedGreenErben.lut");
 		String absolutePathofLUT = file.getAbsolutePath();
 		System.out.println("##################\n" + absolutePathofLUT);
@@ -256,11 +249,6 @@ public class Heatmap
 
 		}
 
-
-
-
-		//TODO es fehlt das alte wait und dann LUT einstellen
-
 		//Speichern der Heatmap
 		String resultsFilename = filename.replaceFirst("[.][^.]+$", "") + "_Heatmap.tif";		//Neuen Filenamen festlegen
   		String exportHeatmap = path + newDirectoryname + "\\" + resultsFilename;
@@ -270,16 +258,12 @@ public class Heatmap
 	    System.out.print("\n\nHeatmap exportiert...\n");
 	    System.out.print(exportHeatmap);
 
-		//TODO besseres format damit immer gleich viele stellen agezeigt werden
-
-
 		DecimalFormat d3 = new DecimalFormat("#.##");
 		d3.setRoundingMode(RoundingMode.HALF_UP);
 
 		String key = String.valueOf( d3.format(heatmapMaxDichteWert) )+ "%";
 
 
-		//BufferedImage bufferedImage = BufferedImageCreator.create(heatmapTmp, 0);
 		BufferedImage bufferedImage = heatmap_ip.getBufferedImage();
 
 		Graphics graphics = bufferedImage.getGraphics();
@@ -303,21 +287,8 @@ public class Heatmap
 
 		heatmapTmp.close();
 
-		/*
-		// LUT anwenden
-		IJ.run(heatmapTmp, "Red/Green", "");
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		*/
-
-
 		System.out.print("\n\nHeatmap created...");
   		
   		return;
 	}
-	
-
 }

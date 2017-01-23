@@ -99,9 +99,6 @@ public class GLScanAnalyzerView extends JPanel
         ValueModel heatmapQualityValueModel = glScanAnalyzerPM.getModel(GLScanAnalyzer.PROPERTY_HEATMAPQUALITY);
         heatmapqualitySlider.setModel(new BoundedRangeAdapter(heatmapQualityValueModel, 1,  1,  101) );
         binder.bindBeanProperty(GLScanAnalyzer.PROPERTY_HEATMAPQUALITY).to(heatmapqualityTextField);
-        //TODO Wieso max Value = 101?, in View aber 100, wenn 100 eingestellt, dann 99 in View??
-
-
 
     }
 

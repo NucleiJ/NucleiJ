@@ -66,7 +66,6 @@ public class MainPM extends PresentationModel<Main>
         aboutAction = new AboutAction();
         exitAction = new ExitAction();
         newAction = new newAction();
-        startAction = new startAction();
     }
 
     public GLScanAnalyzerPM getGLScanAnalyzerPM()
@@ -101,11 +100,7 @@ public class MainPM extends PresentationModel<Main>
     public Action getNewAction() {
         return newAction;
     }
-
-    public Action getStartAction() {
-        return startAction;
-    }
-
+    
     public void setGlScanAnalyzerView(GLScanAnalyzerView glScanAnalyzerView) {
         this.glScanAnalyzerView = glScanAnalyzerView;
     }
@@ -234,48 +229,6 @@ public class MainPM extends PresentationModel<Main>
             newClass();
         }
     }
-
-    private class startAction extends AbstractAction
-    {
-        public void actionPerformed(ActionEvent e)
-        {
-            System.out.println("Starten");
-            //Macht noch nix!
-            // TODO view enablen!
-
-            ndpiConverter = new NdpiConverter();
-
-            JFrame parent = ((SingleFrameApplication) Application.getInstance()).getMainFrame();
-            ResourceBundle resourceBundle = AppContext.getInstance().getResourceBundle();
-
-            TaskDialog taskDialog = new TaskDialog(parent, resourceBundle.getString("TuningDialog.title"));
-
-            JProgressBar progressBar = new JProgressBar(0,100);
-            progressBar.setStringPainted(true);
-            progressBar.setValue(0);
-            taskDialog.setInstruction(resourceBundle.getString("TuningDialog.instructionMessage"));
-            taskDialog.setText(resourceBundle.getString("TuningDialog.text"));
-            taskDialog.setFixedComponent(progressBar);
-            taskDialog.setCommands(TaskDialog.StandardCommand.CANCEL);
-                    }
-    }
-
-    private class enableConverterViewAction extends AbstractAction
-    {
-        public void actionPerformed(ActionEvent e)
-        {
-            System.out.println("Konvertieren");
-            //Macht noch nix!
-            //NucleiJ.getInstance().changeView(NdpiConverterView ndpiConverterView);
-            nucleiJ.changeView(ndpiConverterView);
-
-            // TODO view enablen!
-        }
-    }
-
-
-
-    // endregion
 
 
 }

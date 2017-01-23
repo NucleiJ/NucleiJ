@@ -43,21 +43,21 @@ public class Exporter
 		try {
 			reportfile.createNewFile();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			System.out.println("ERROR beim exportieren!");
 			e.printStackTrace();
 		}
 		FileWriter fw = null;
 		try {
 			fw = new FileWriter(reportfile);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			System.out.println("ERROR beim exportieren!");
 			e.printStackTrace();
 		}
 		BufferedWriter writeSummary = new BufferedWriter(fw);
 		try {
 			writeSummary.write(resultzeile);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			System.out.println("ERROR beim exportieren!");
 			e.printStackTrace();
 		}
 		//writeSummary.flush();
@@ -65,13 +65,13 @@ public class Exporter
 		try {
 			writeSummary.flush();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			System.out.println("ERROR beim exportieren!");
 			e.printStackTrace();
 		}
 		try {
 			writeSummary.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			System.out.println("ERROR beim exportieren!");
 			e.printStackTrace();
 		}
 
@@ -105,27 +105,27 @@ public class Exporter
         try {
 			reportfile.createNewFile();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			System.out.println("ERROR beim exportieren!");
 			e.printStackTrace();
 		}
         FileWriter fw = null;
 		try {
 			fw = new FileWriter(reportfile);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			System.out.println("ERROR beim exportieren!");
 			e.printStackTrace();
 		}
         BufferedWriter writeSummary = new BufferedWriter(fw);
         try {
         	writeSummary.write("Results fuer den Scan: " + filename.replaceFirst("[.][^.]+$", "") + "\n\n");
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			System.out.println("ERROR beim exportieren!");
 			e.printStackTrace();
 		}
         try {
 			writeSummary.write(resultzeile);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			System.out.println("ERROR beim exportieren!");
 			e.printStackTrace();
 		}
         //writeSummary.flush();
@@ -133,13 +133,13 @@ public class Exporter
         try {
 			writeSummary.flush();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			System.out.println("ERROR beim exportieren!");
 			e.printStackTrace();
 		}
         try {
 			writeSummary.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			System.out.println("ERROR beim exportieren!");
 			e.printStackTrace();
 		}
 	}
@@ -175,27 +175,27 @@ public class Exporter
 	        try {
 				file.createNewFile();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
+				System.out.println("ERROR beim exportieren!");
 				e.printStackTrace();
 			}
 	        FileWriter fw = null;
 			try {
 				fw = new FileWriter(file);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
+				System.out.println("ERROR beim exportieren!");
 				e.printStackTrace();
 			}
 	        BufferedWriter writeSummary = new BufferedWriter(fw);
 	        try {		
 	        	writeSummary.write("Programm von Stefan Erben und Andreas Mattes. (c) 2016\nSummary erstellt am: " + todayTimeStamp + "\n");
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
+				System.out.println("ERROR beim exportieren!");
 				e.printStackTrace();
 			}
 	        try {
 				writeSummary.write(logInhalt);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
+				System.out.println("ERROR beim exportieren!");
 				e.printStackTrace();
 			}
 	        //writeSummary.flush();
@@ -203,25 +203,20 @@ public class Exporter
 	        try {
 				writeSummary.flush();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
+				System.out.println("ERROR beim exportieren!");
 				e.printStackTrace();
 			}
 	        try {
 				writeSummary.close();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
+				System.out.println("ERROR beim exportieren!");
 				e.printStackTrace();
 			}
-	        
-	        //bw.close();
-			
 		}
 		else
 		{
 			System.out.println("ERROR. Kein IJ Log vorhanden!");
 		}
-		
-		
 	}
 
 	/**
