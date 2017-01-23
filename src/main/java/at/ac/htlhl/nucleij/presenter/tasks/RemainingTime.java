@@ -1,5 +1,7 @@
 package at.ac.htlhl.nucleij.presenter.tasks;
 
+import java.io.File;
+
 /**
  * Created by andreas on 23.01.17.
  */
@@ -15,7 +17,4 @@ public class RemainingTime {
     Long elapsedTime = System.nanoTime() - startTime;
     //Long allTimeForDownloading = (elapsedTime * allBytes / downloadedBytes);
     //Long remainingTime = allTimeForDownloading - elapsedTime;
-
-
-
 }
