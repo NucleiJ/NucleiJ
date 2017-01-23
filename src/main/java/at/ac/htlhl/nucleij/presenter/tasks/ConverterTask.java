@@ -75,8 +75,6 @@ public class ConverterTask extends SwingWorker<String, Integer> {
 
     private void startConverter(String filePath) {
         //Test fuer Consoleneingabe:
-        //Dateinamen:
-        Path fileName = Paths.get(filePath);
 
         File outputpath = new File(ndpiConverter.getOutputpath());
 
@@ -111,10 +109,11 @@ public class ConverterTask extends SwingWorker<String, Integer> {
         IJ.run("Custom extract to TIFF / Mosaic...", command);
         */
 
-        // TODO Die files liegen im ordner converted. von da in den parent ordner verschieben. danach leeren ordner loeschen. neue files in tif liste
+        // TODO neue files in tif liste
 
-
-        System.out.println("Der Filename nach dem Konvertieren ist:" + fileName.getFileName().toString());
-
+        String renameFileName = "_".concat(ndpiConverter.getMagnification().toLowerCase().concat(".ome.tif"));
+        String newTifListElement = filePath.replace(".ndpi", renameFileName);
+        System.out.println("Der Filename nach dem Konvertieren ist:" + newTifListElement);
+        glScanAnalyzer.addTifToList(newTifListElement);
     }
 }
