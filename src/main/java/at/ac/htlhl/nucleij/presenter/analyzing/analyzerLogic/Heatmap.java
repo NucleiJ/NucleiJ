@@ -144,7 +144,7 @@ public class Heatmap
   		String value = String.valueOf(faktorfloat);
 
 		// TODO projectpath!
-		File file = new File("div/lut/RedGreenErben.lut");
+		File file = new File("at/ac/htlhl/nucleij/resources/lut/RedGreenErben.lut");
 		String absolutePathofLUT = file.getAbsolutePath();
 		System.out.println(absolutePathofLUT);
 
