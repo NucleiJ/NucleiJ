@@ -4,6 +4,7 @@
 
 ## Changelog NucleiJ
 
+* 21.01.2017: Released v1.2: Grundfunktionen voll funktionsfähig
 * 22.01.2017: v1.0_alpha released
 * 13.11.2016: einfache GUI für den Analyzer
 * 12.10.2016: Domainobjekt für Analyzeroberfläche erstellt 
