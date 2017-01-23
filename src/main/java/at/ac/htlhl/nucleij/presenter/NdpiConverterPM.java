@@ -33,7 +33,6 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
     FileNameExtensionFilter ndpiFilter = new FileNameExtensionFilter("Nano Zoomer Digital Pathology Image (.ndpi)","ndpi");
     FileNameExtensionFilter tifFilter = new FileNameExtensionFilter("Tagged Image File (.tif)","tif");
 
-    private Action typeAction;
     private Action inputPathAction;
     private Action outputPathAction;
     private Action magnificationAction;
@@ -98,11 +97,6 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
                 }
             }
         });
-    }
-
-    //region Actions
-    public Action getTypeAction() {
-        return typeAction;
     }
 
     public Action getInputPathAction() {
