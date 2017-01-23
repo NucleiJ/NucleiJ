@@ -68,7 +68,6 @@ public class GLScanAnalyzer extends Model
 
         this.inputpath = "";
         this.outputpath = "";
-        this.type = ndpiConverter.getType();
     }
 
     public List<String> getNdpiList() {
@@ -146,11 +145,6 @@ public class GLScanAnalyzer extends Model
     public String getOutputpath()
     {
         return ndpiConverter.getOutputpath();
-    }
-
-
-    public String getType() {
-        return ndpiConverter.getType();
     }
 
 

@@ -19,7 +19,6 @@ import java.io.File;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
-import static at.ac.htlhl.nucleij.model.NdpiConverter.SINGLE_FILE;
 
 /**
  *
@@ -76,14 +75,6 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
                 if(GLScanAnalyzer.PROPERTY_CALCULATEANDSHOWHEATMAP.equals(evt.getPropertyName())) {
                     boolean enabled = evt.getNewValue().toString().toLowerCase().equals("true");
                     setComponentEnabled(GLScanAnalyzer.PROPERTY_HEATMAPQUALITY, enabled);
-                }
-
-                // TODO ROI ein und ausblenden
-                if(NdpiConverter.PROPERTY_TYPE.equals(evt.getPropertyName())) {
-                    boolean enabled = evt.getNewValue().toString().toLowerCase().equals(SINGLE_FILE.toLowerCase());
-                    System.out.println(enabled);
-                    setComponentEnabled(GLScanAnalyzer.PROPERTY_ROIAREA, enabled);
-                    setComponentVisible(GLScanAnalyzer.PROPERTY_ROIAREA, enabled);
                 }
             }
         });
