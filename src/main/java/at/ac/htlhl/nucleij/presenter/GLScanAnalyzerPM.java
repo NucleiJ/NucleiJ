@@ -124,15 +124,14 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
             progressBarAnalyzerConverter.setValue(0);
             taskDialogAnalyzerConverter.setInstruction(resourceBundleAnalyzer.getString("AnalyzerConverterDialog.instructionMessage"));
             taskDialogAnalyzerConverter.setText(resourceBundleAnalyzer.getString("AnalyzerConverterDialog.text"));
+            taskDialogAnalyzerConverter.setResizable(true);
 
             taskDialogAnalyzerConverter.setFixedComponent(progressBarAnalyzerConverter);
             taskDialogAnalyzerConverter.setCommands(TaskDialog.StandardCommand.CANCEL);
 
-
             AnalyzerConverterTask analyzerConverterTask = new AnalyzerConverterTask(progressBarAnalyzerConverter, taskDialogAnalyzerConverter, ndpiConverter, glScanAnalyzer);
             analyzerConverterTask.execute();
             taskDialogAnalyzerConverter.show();
-
         }
     }
 

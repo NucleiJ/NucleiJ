@@ -205,7 +205,7 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
                 if (moreThanOneFolder) {
                     TaskDialogs.inform(parentDialog,
                             "Only one folder allowed!",
-                            "Selected first folder '" + chooser.getSelectedFile().getParent() + "'");
+                            "Selected first folder '" + chooser.getSelectedFile().getName() + "'");
                 }
                 else {
                     if (numberNdpiFiles > 0 && numberTifFiles > 0) {
@@ -227,11 +227,6 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
                     else if (numberNdpiFiles == 0 && numberTifFiles > 0) {
                         // Wird nur Konvertiert
                         ndpiConverter.setChoice(2);
-                    }
-                    else {
-                        TaskDialogs.inform(parentDialog,
-                                "Nothing selected!",
-                                "Please select files!");
                     }
                 }
 

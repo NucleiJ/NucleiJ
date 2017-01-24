@@ -2,7 +2,6 @@ package at.ac.htlhl.nucleij.presenter.tasks;
 
 import at.ac.htlhl.nucleij.model.GLScanAnalyzer;
 import at.ac.htlhl.nucleij.model.NdpiConverter;
-import at.ac.htlhl.nucleij.presenter.NdpiConverterPM;
 import at.ac.htlhl.nucleij.presenter.analyzing.MainAnalyzer;
 import com.ezware.dialog.task.TaskDialog;
 
@@ -19,7 +18,7 @@ import java.util.logging.Logger;
  * Created by andreas on 23.01.17.
  */
 
-public class AnalyzerConverterTask extends SwingWorker<String, Integer>
+public class AnalyzerConverterTask extends SwingWorker<String, String>
 {
     private static final Logger LOGGER = Logger.getLogger(AnalyzerConverterTask.class.getName());
     private JProgressBar progressBar;
@@ -39,73 +38,81 @@ public class AnalyzerConverterTask extends SwingWorker<String, Integer>
     @Override
     protected String doInBackground() throws Exception {
         MainAnalyzer mainAnalyzer = new MainAnalyzer(glScanAnalyzer);
-        List<String> tifFileList = glScanAnalyzer.getTifList();
+        List<String> tifFileList; //Wird erst vor Konvertieren aktualisiert geholt
         List<String> ndpiFileList = glScanAnalyzer.getNdpiList();
-        int i = 0;
+        String element;
         float currentStatus = 0;
         float add;
         int choice = ndpiConverter.getChoice();
         int numberNdpiFiles = ndpiConverter.getNumberNdpiFiles();
         int numberTifFiles = ndpiConverter.getNumberTifFiles();
-
         switch (choice) {
-            case 0: //Convert&Analyse
+            case 0:
                 add = 100/(numberNdpiFiles*2+numberTifFiles);
-
-                // Konvertieren & an TifListe anhängen
-                for (String ndpiListElement : ndpiFileList) {
-                    startConverter(ndpiListElement);
-                    currentStatus = currentStatus + add;
-                    publish(Math.round(currentStatus));
-                }
-
-                // Analysieren
-                for (String tifListElement : tifFileList)
-                {
-                    mainAnalyzer.setDateiname(tifListElement);
-                    System.out.println("\n****************\n"+tifListElement+"\n********************");
-                    mainAnalyzer.run(null);
-                    currentStatus = currentStatus + add;
-                    publish(Math.round(currentStatus));
-                }
-                mainAnalyzer.createSummary();
+                taskDialog.setInstruction("Converting & analyzing your Scans...");
                 break;
-
-            case 1: // Convert Only
-                add = 100/numberNdpiFiles;
-
-                // Konvertieren & an TifListe anhängen
-                for (String ndpiListElement : ndpiFileList) {
-                    startConverter(ndpiListElement);
-                    currentStatus = currentStatus + add;
-                    publish(Math.round(currentStatus));
-                }
+            case 1: add = 100/numberNdpiFiles;
+                taskDialog.setInstruction("Converting your Scans...");
                 break;
-
-            case 2:// Analyse Only
-                add = 100/numberTifFiles;
-
-                // Analysieren
-                for (String tifListElement : tifFileList)
-                {
-                    mainAnalyzer.setDateiname(tifListElement);
-                    System.out.println("\n****************\n"+tifListElement+"\n********************");
-                    mainAnalyzer.run(null);
-                    currentStatus = currentStatus + add;
-                    publish(Math.round(currentStatus));
-                }
-                mainAnalyzer.createSummary();
+            case 2: add = 100/numberTifFiles;
+                taskDialog.setInstruction("Analyzing your Scans...");
                 break;
+            default: add = 0;
+        }
+
+        if (choice != 2) { // Sicher Konvertieren
+            // Konvertieren & an TifListe anhängen
+            for (String ndpiListElement : ndpiFileList)
+            {
+                numberNdpiFiles--;
+
+                //element = ndpiListElement.substring(ndpiListElement.lastIndexOf(File.separator)+1, ndpiListElement.lastIndexOf("]"));// + "\n" + "Remaining: " + numberNdpiFiles + "NDPIs & " + numberTifFiles + "TIFs";
+                publish(ndpiListElement.substring(ndpiListElement.lastIndexOf(File.separator)+1));
+                //taskDialog.setText("File: " + String.valueOf(ndpiListElement).substring(String.valueOf(ndpiListElement).lastIndexOf(File.separator)+1, String.valueOf(ndpiListElement).lastIndexOf("]")));
+                //+ "\n" + "Remaining: " + numberNdpiFiles + "NDPIs & " + numberTifFiles + "TIFs");
+
+                startConverter(ndpiListElement);
+                currentStatus = currentStatus + add;
+
+                progressBar.setValue(Math.round(currentStatus));
+                //publish(Math.round(currentStatus));
+            }
+        }
+
+        if (choice != 1) { // Sicher Analysieren
+            tifFileList = glScanAnalyzer.getTifList();      //Aktualisierte Liste holen!!!
+            for (String tifListElement : tifFileList)
+            {
+                numberTifFiles--;
+
+                //element = tifListElement.substring(tifListElement.lastIndexOf(File.separator)+1, tifListElement.lastIndexOf("]"));// + "\n" + "Remaining: " + numberNdpiFiles + "NDPIs & " + numberTifFiles + "TIFs";
+                publish(tifListElement.substring(tifListElement.lastIndexOf(File.separator)+1));
+                //taskDialog.setText("File: " + String.valueOf(tifListElement).substring(String.valueOf(tifListElement).lastIndexOf(File.separator)+1, String.valueOf(tifListElement).lastIndexOf("]")));
+                // + "\n" + "Remaining: " + numberNdpiFiles + "NDPIs & " + numberTifFiles + "TIFs");
+
+                mainAnalyzer.setDateiname(tifListElement);
+                System.out.println("\n****************\n"+tifListElement+"\n********************");
+                mainAnalyzer.run(null);
+                currentStatus = currentStatus + add;
+
+                progressBar.setValue(Math.round(currentStatus));
+                //publish(Math.round(currentStatus));
+            }
+            mainAnalyzer.createSummary();
         }
         return "Finished";
     }
 
     @Override
-    protected void process(List<Integer> chunks) {
-        super.process(chunks);
-        for (int value : chunks) {
-            progressBar.setValue(value);
-        }
+    protected void process(List <String> element) {
+        super.process(element);
+        //for (int value : element) {
+        //    progressBar.setValue(value);
+        //}
+
+        //Sinnlos!
+        //element.toString().substring(element.toString().lastIndexOf("[")+1, element.toString().lastIndexOf("]")-1);
+        taskDialog.setText(element.toString());
     }
 
     @Override

@@ -19,3 +19,6 @@
 * interaktives Tutorial
 * geschätzte Restdauer anzeigen (Verarbeitete Daten/Sekunde...)
 * Momentan verarbeitete Datei anzeigen (Progress Monitor List)
+
+### 3.Diverses ###
+* Warum ist am Ende von jedem Listenelement in ndpiFileList und tifFileList eine "]"??
