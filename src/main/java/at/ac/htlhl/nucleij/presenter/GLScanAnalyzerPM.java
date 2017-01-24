@@ -124,12 +124,7 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
             progressBarAnalyzerConverter.setValue(0);
             taskDialogAnalyzerConverter.setInstruction(resourceBundleAnalyzer.getString("AnalyzerConverterDialog.instructionMessage"));
             taskDialogAnalyzerConverter.setText(resourceBundleAnalyzer.getString("AnalyzerConverterDialog.text"));
-            String text = "From:" + "\t\t" + "/Pfad/Zum/InputOrdner" +
-                    "\n" + "To:\t\t" + "Pfad/Zum/ZielOrdner" +
-                    "\n" + "Time Remaining:\t" + "Elapsed Time" +
-                    "\n" + "Items Remaining:\t" + "Anzahl(Größe)" +
-                    "\n" + "Speed:\t\t" + "Speed kB/s";
-            //taskDialogAnalyzerConverter.setText(text);
+
             taskDialogAnalyzerConverter.setFixedComponent(progressBarAnalyzerConverter);
             taskDialogAnalyzerConverter.setCommands(TaskDialog.StandardCommand.CANCEL);
 

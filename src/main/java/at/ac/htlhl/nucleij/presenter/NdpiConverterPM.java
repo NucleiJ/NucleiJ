@@ -180,6 +180,7 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
                         System.out.println(string);
                     }
                 }
+                ndpiConverter.setNumberNdpiFiles(numberNdpiFiles);
 
                 System.out.println("\nTIF-Files:");
                 for (String string : tifFileList) {
@@ -188,62 +189,59 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
                         System.out.println(string);
                     }
                 }
+                ndpiConverter.setNumberTifFiles(numberTifFiles);
+
+
                 System.out.println();
                 LOGGER.info(numberNdpiFiles + " NDPI-Files & " + numberTifFiles + " TIF-Files in Folder '"+ chooser.getCurrentDirectory().getName() +"' found" + "\n");
 
                 glScanAnalyzer.setNdpiList(ndpiFileList);
                 glScanAnalyzer.setTifList(tifFileList);
 
-                int numberTif = 0;
-                int numberNdpi = 0;
-
-                for (String ndpiListElement : ndpiFileList) {
-                    numberNdpi++;
-                }
-
-                for (String tifListElement : tifFileList) {
-                    numberTif++;
-                }
 
                 JFrame parentDialog = ((SingleFrameApplication) Application.getInstance()).getMainFrame();
-                TaskDialogs.inform(parentDialog, "Only one folder allowed!", "Selected first folder '" + chooser.getSelectedFile().getParent());
 
-
-
-                if (numberNdpi > 0 && numberTif > 0) { //Tif & NDPI Selected
-                    int choice = TaskDialogs.radioChoice(parentDialog,
-                            "It seems that you selected both NDPI & TIF Files" ,
-                            "NDPI-Files: \t" + numberNdpi + "\nTIF-Files: \t" + numberTif + "\n\nWhat do you want do?" ,
-                            0, "Convert & Analyze", "Analyze Only", "Convert Only" );
-
-                }
-                else if (numberNdpi > 0 && numberTif == 0) { //Only NDPI Selected
-                    int choice = TaskDialogs.radioChoice(parentDialog,"It seems that your selection is a Ndpi File", "What will you do?", 0, "Convert & Analyze", "Convert Only" );
-                }
-
-
-
-
+                int choice;
                 if (moreThanOneFolder) {
-                    JOptionPane.showMessageDialog(((SingleFrameApplication) Application.getInstance()).getMainFrame(),
-                            "Only one folder allowed!" +
-                                    "\n" + "Selected first folder '" + chooser.getSelectedFile().getAbsolutePath() + "':" +
-                                    "\n\n" + "NDPI-Files: " + numberNdpiFiles +
-                                    "\n" + "TIF-Files: " + numberTifFiles,
-                            "File-Selection successful!",
-                            JOptionPane.PLAIN_MESSAGE);
+                    TaskDialogs.inform(parentDialog,
+                            "Only one folder allowed!",
+                            "Selected first folder '" + chooser.getSelectedFile().getParent() + "'");
                 }
                 else {
-                    JOptionPane.showMessageDialog(((SingleFrameApplication) Application.getInstance()).getMainFrame(),
-                            "Successfully selected:" +
-                                    "\n\n" + "NDPI-Files: " + numberNdpiFiles +
-                                    "\n" + "TIF-Files: " + numberTifFiles,
-                            "File-Selection successful!",
-                            JOptionPane.PLAIN_MESSAGE);
+                    if (numberNdpiFiles > 0 && numberTifFiles > 0) {
+                        choice = TaskDialogs.radioChoice(parentDialog,
+                                "It seems that you selected both NDPI & TIF Files" ,
+                                "NDPI-Files: \t" + numberNdpiFiles + "\nTIF-Files: \t" + numberTifFiles + "\n\nWhat do you want do?" ,
+                                0,
+                                "Convert & Analyze", "Convert Only", "Analyze Only" );
+                        ndpiConverter.setChoice(choice);
+                    }
+                    else if (numberNdpiFiles > 0 && numberTifFiles == 0) { //Only NDPI Selected
+                        choice = TaskDialogs.radioChoice(parentDialog,
+                                "It seems that your selection is a Ndpi File",
+                                "What will you do?",
+                                0,
+                                "Convert & Analyze", "Convert Only" );
+                        ndpiConverter.setChoice(choice);
+                    }
+                    else if (numberNdpiFiles == 0 && numberTifFiles > 0) {
+                        // Wird nur Konvertiert
+                        ndpiConverter.setChoice(2);
+                    }
+                    else {
+                        TaskDialogs.inform(parentDialog,
+                                "Nothing selected!",
+                                "Please select files!");
+                    }
                 }
 
-                //Würde den Controller starten (Startet automatisch)
-                //controllerTask.main();
+                // Möglicher String für Progress monitor
+                String text = "From:" + "\t\t" + "/Pfad/Zum/InputOrdner" +
+                        "\n" + "To:\t\t" + "Pfad/Zum/ZielOrdner" +
+                        "\n" + "Time Remaining:\t" + "Elapsed Time" +
+                        "\n" + "Items Remaining:\t" + "Anzahl(Größe)" +
+                        "\n" + "Speed:\t\t" + "Speed kB/s";
+
             }
         }
     }

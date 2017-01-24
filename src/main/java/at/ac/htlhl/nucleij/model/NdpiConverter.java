@@ -28,7 +28,10 @@ public class NdpiConverter extends Model
     private String magnification;
     private String inputpath;
     private String outputpath;
-    private String custompath;
+
+    private int choice;
+    private int numberNdpiFiles;
+    private int numberTifFiles;
 
     public NdpiConverter()
     {
@@ -36,9 +39,33 @@ public class NdpiConverter extends Model
 
         this.inputpath = "";
         this.outputpath = "";
-        this.custompath = "";
         this.magnification = "x10";
     }
+
+    public int getChoice () {
+        return choice;
+    }
+
+    public void setChoice (int choice) {
+        this.choice = choice;
+    }
+
+    public int getNumberNdpiFiles() {
+        return numberNdpiFiles;
+    }
+
+    public void setNumberNdpiFiles(int numberNdpiFiles) {
+        this.numberNdpiFiles = numberNdpiFiles;
+    }
+
+    public int getNumberTifFiles() {
+        return numberTifFiles;
+    }
+
+    public void setNumberTifFiles(int numberTifFiles) {
+        this.numberTifFiles = numberTifFiles;
+    }
+
 
     //region Getter&Setter
 
