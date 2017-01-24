@@ -2,6 +2,7 @@ package at.ac.htlhl.nucleij.presenter;
 
 import at.ac.htlhl.nucleij.model.GLScanAnalyzer;
 import at.ac.htlhl.nucleij.model.NdpiConverter;
+import com.ezware.dialog.task.TaskDialog;
 import com.ezware.dialog.task.TaskDialogs;
 import com.jgoodies.binding.PresentationModel;
 import org.jdesktop.application.Application;
@@ -53,10 +54,8 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
         this.glScanAnalyzerPM = glScanAnalyzerPM;
 
         inputPathAction = new InputPathAction();
-        outputPathAction = new ExportPathAction();
+        outputPathAction = new OutputPathAction();
         magnificationAction = new MagnificationAction();
-        convertAction = new ConvertAction();
-
 
         // Ausgabe jeder Aenderung
         ndpiConverter.addPropertyChangeListener(new PropertyChangeListener() {
@@ -78,6 +77,7 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
         });
     }
 
+    //region Actions
     public Action getInputPathAction() {
         return inputPathAction;
     }
@@ -88,10 +88,6 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
 
     public Action getMagnificationAction() {
         return magnificationAction;
-    }
-
-    public Action getConvertAction() {
-        return convertAction;
     }
     //endregion
 
@@ -126,7 +122,6 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
             if (chooser.showOpenDialog(parent) == JFileChooser.APPROVE_OPTION)
             {
                 ndpiConverter.setInputpath(chooser.getSelectedFile().getAbsolutePath());
-                //ndpiConverter.setOutputpath(chooser.getSelectedFile().getAbsolutePath().concat("\\Output"));
 
                 List<String> ndpiFileList = new ArrayList<>();
                 List<String> tifFileList = new ArrayList<>();
@@ -136,16 +131,16 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
                 int numberNdpiFiles = 0;
 
                 if (chooser.getSelectedFile().isFile()) {
-                    ndpiConverter.setOutputpath(ndpiConverter.getInputpath().substring(0,ndpiConverter.getInputpath().lastIndexOf(File.separator)).concat("\\Output"));
-
+                    if (ndpiConverter.getOutputpath().isEmpty())
+                    {
+                        ndpiConverter.setOutputpath(ndpiConverter.getInputpath().substring(0,ndpiConverter.getInputpath().lastIndexOf(File.separator)).concat(File.separator + "Output"));
+                    }
                     filesInDirectory = chooser.getSelectedFiles();
                 }
                 else if (chooser.getSelectedFile().isDirectory()) {
-                    ndpiConverter.setOutputpath(ndpiConverter.getInputpath().concat("\\Output"));
+                    ndpiConverter.setOutputpath(ndpiConverter.getInputpath().concat(File.separator + "Output"));
                     filesInDirectory = chooser.getSelectedFile().listFiles();
 
-
-                    //Checken ob mehr als ein Ordner ausgewählt wurde (Beta)
                     int numberOfFolders = 0;
                     File[] moreFolders = chooser.getSelectedFiles();
                     for (File file : moreFolders ) {
@@ -168,7 +163,15 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
                             tifFileList.add(file.getAbsolutePath());
                         }
                         else {
+                            ndpiConverter.setOutputpath(null);
+                            ndpiConverter.setInputpath(null);
+
                             LOGGER.warning("Invalid file extension '" + file.getName().substring(file.getName().indexOf(".")) + "' for file '" + file.getName() + "'");
+                            TaskDialog errorDialog = new TaskDialog(parent,"Application Error");
+                            errorDialog.setInstruction( "Invalid File Extension!");
+                            errorDialog.setIcon(TaskDialog.StandardIcon.ERROR );
+                            errorDialog.setText("Invalid file extension '" + file.getName().substring(file.getName().indexOf(".")) + "' for file '" + file.getName() + "'" );
+                            errorDialog.show();
                         }
                     }
                 }
@@ -243,8 +246,8 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
 
 
 
-    private class ExportPathAction extends AbstractAction {
-        public ExportPathAction() {
+    private class OutputPathAction extends AbstractAction {
+        public OutputPathAction() {
             super();
         }
 
@@ -270,14 +273,4 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
         }
     }
 
-    private class ConvertAction extends AbstractAction {
-        public void actionPerformed(ActionEvent actionEvent) {
-
-
-        }
-
-        public ConvertAction() {
-
-        }
-    }
 }

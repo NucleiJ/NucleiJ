@@ -4,11 +4,9 @@
 ### 1. Erweiterungen: ###
 * ROI Einstellungen nur sichtbar, wenn SingleMode -> View an PM uebergeben?
 * Watershed Function!
-* Abfrage ob nur Analysieren oder Analysieren&Konvertieren (TaskDialog)
 * Einstellungen (Was gehört exportiert? Input/Output Ordner einstellen)
 * Speichern/Einlesen von Einstellungen
 * Jason File (.nucleij)
-* SwingWorker zusammenlegen zu einem
 * eigene Prozessnamen
 * Cancel soll wirklich beenden
 * Wenn Quality slider geändert, dann berechnen ankreuzen
@@ -19,11 +17,15 @@
 * Sprache änderbar (optional zur Laufzeit)
 * interaktives Tutorial
 * geschätzte Restdauer anzeigen (Verarbeitete Daten/Sekunde...)
-* Momentan verarbeitete Datei anzeigen (Progress Monitor List)
 
-### 3.Diverses ###
+### 3. Bugs ###
+* MainAnalyzer.java 103 Analyze funktioniert, jedoch Converter unter Linux nicht, unter Windows werden alle ergebnisse nicht in Output sondern überordner gespeichert
+
+### 4.Diverses ###
 * Warum ist am Ende von jedem Listenelement in ndpiFileList und tifFileList eine "]"??
 
-### 4. Abgeschlossene ###
-* SwingWorker zusammenlegen zu einem    23.01.17
-* LuT Relativer Pfad                    23.01.17
+### 5. Abgeschlossene ###
+* SwingWorker zusammenlegen zu einem                                23.01.17
+* LuT Relativer Pfad                                                23.01.17
+* Momentan verarbeitete Datei anzeigen                              24.01.17
+* Abfrage Analysieren oder Analysieren&Konvertieren (TaskDialog)    24.01.17

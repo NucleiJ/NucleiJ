@@ -141,7 +141,7 @@ public class AnalyzerConverterTask extends SwingWorker<String, String>
             }
             else {
                 p = Runtime.getRuntime().exec("java -jar \"" + absolutePathofNdpiJar + "\" -i 2 -c lzw -s \"" + filePath +"\" \"" + outputpath.getParent().toString() + "\"");
-                LOGGER.info("Magnification error: set to Std. 10x Magnification");
+                LOGGER.warning("Magnification error: set to Std. 10x Magnification");
             }
 
             BufferedReader in = new BufferedReader(

@@ -29,7 +29,6 @@ public class NdpiConverterView extends JPanel {
         inputPathAction = (AbstractAction) ndpiConverterPM.getInputPathAction();
         outputPathAction = (AbstractAction) ndpiConverterPM.getOutputPathAction();
         magnificationAction = (AbstractAction) ndpiConverterPM.getMagnificationAction();
-        convertAction = (AbstractAction) ndpiConverterPM.getConvertAction();
     }
 
     public void initBindings() {
@@ -129,9 +128,6 @@ public class NdpiConverterView extends JPanel {
         }
         add(panel1, CC.xywh(3, 11, 3, 1));
 
-        //---- convertAction ----
-        convertAction.putValue(Action.NAME, bundle.getString("NdpiConverterView.convertAction.name"));
-
         //---- outputPathAction ----
         outputPathAction.putValue(Action.NAME, bundle.getString("NdpiConverterView.inputOutputPathAction.name"));
 
@@ -161,7 +157,6 @@ public class NdpiConverterView extends JPanel {
     private JRadioButton magnification40Button;
     private JRadioButton magnification10Button;
     private JRadioButton magnification5Button;
-    private AbstractAction convertAction;
     private AbstractAction outputPathAction;
     private AbstractAction inputPathAction;
     private AbstractAction magnificationAction;

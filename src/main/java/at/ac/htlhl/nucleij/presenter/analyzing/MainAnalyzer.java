@@ -81,7 +81,7 @@ public class MainAnalyzer implements PlugInFilter {
 		getUserInput();
 
 		//Pfad Abfrage
-		File originalPath = new File(glScanAnalyzer.getInputpath().toString());
+		/*File originalPath = new File(glScanAnalyzer.getInputpath().toString());
 
 		boolean isDirectory = originalPath.isDirectory(); // Check if it's a directory
 		boolean isFile =      originalPath.isFile();      // Check if it's a regular file
@@ -97,11 +97,16 @@ public class MainAnalyzer implements PlugInFilter {
 			path.setValue(originalPath.toString().substring(0,originalPath.toString().lastIndexOf(File.separator)));
 		}
 		System.out.println(path.getValue());
+		*/
 
 
-		//einen Ordner erstellen:
 		startExporter.setnewDirectoryname("\\Output");  //TODO andis textfield auslesen wenn es property gibt
 		boolean success = new File(path.getValue() + startExporter.getnewDirectoryname()).mkdirs();
+
+		//Linux Fix: Analyze funktioniert, jedoch Converter unter Linux nicht, unter Windows werden alle ergebnisse nicht in Output sondern überordner gespeichert
+		//File outputPath = new File(glScanAnalyzer.getOutputpath());
+		//boolean success = outputPath.mkdirs();
+
 		if (!success) {
 			// Directory creation failed
 			System.out.println("Error beim Verzeichnis erstellen!");
