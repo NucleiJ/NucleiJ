@@ -11,6 +11,7 @@
 * Cancel soll wirklich beenden
 * Wenn Quality slider geändert, dann berechnen ankreuzen
 * OutputOrdner Benutzerdefiniert
+* Abfrage ob Analyse/Convert erst nach Start-Klick
 
 ### 2. Zukunftsmusik ###
 * Schriftgröße änderbar (optional zur Laufzeit)
