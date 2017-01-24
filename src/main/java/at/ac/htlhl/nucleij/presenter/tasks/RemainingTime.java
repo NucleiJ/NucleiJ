@@ -17,4 +17,14 @@ public class RemainingTime {
     Long elapsedTime = System.nanoTime() - startTime;
     //Long allTimeForDownloading = (elapsedTime * allBytes / downloadedBytes);
     //Long remainingTime = allTimeForDownloading - elapsedTime;
+
+
+    public void getFileSize(String filePath) {
+        File file =new File(filePath);
+
+        double bytes = file.length();
+
+    }
+
+
 }
