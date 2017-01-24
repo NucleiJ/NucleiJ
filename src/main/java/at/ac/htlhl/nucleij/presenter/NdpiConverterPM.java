@@ -226,6 +226,7 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
                                 0,
                                 "Convert & Analyze", "Convert Only" );
                         ndpiConverter.setChoice(choice);
+
                     }
                     else if (numberNdpiFiles == 0 && numberTifFiles > 0) {
                         // Wird nur Konvertiert
