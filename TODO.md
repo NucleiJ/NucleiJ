@@ -8,9 +8,8 @@
 * Einstellungen (Was gehört exportiert? Input/Output Ordner einstellen)
 * Speichern/Einlesen von Einstellungen
 * Jason File (.nucleij)
-* SwingWorker zusammenlegen zu einem
 * eigene Prozessnamen
-* Cancel soll wirklich beenden
+* ImageJ Dialoge unsichtbar machen
 
 
 ### 2. Zukunftsmusik ###
