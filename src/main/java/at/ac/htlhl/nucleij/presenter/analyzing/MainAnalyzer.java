@@ -11,6 +11,7 @@ import ij.gui.WaitForUserDialog;
 import ij.measure.ResultsTable;
 import ij.plugin.filter.Analyzer;
 import ij.plugin.filter.PlugInFilter;
+import ij.plugin.frame.RoiManager;
 import ij.process.ImageProcessor;
 
 import java.awt.*;
@@ -132,7 +133,10 @@ public class MainAnalyzer implements PlugInFilter {
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		System.out.println( (int) screenSize.getHeight() + " " + (int) screenSize.getWidth());
 		//ImageWindow.setNextLocation((int) screenSize.getHeight() -300, (int) screenSize.getWidth() -300);
-		ImageWindow.setNextLocation( (int) screenSize.getWidth() +100 , (int) screenSize.getHeight() +100);
+        if (!CROP_CHECKBOX)
+        {
+            ImageWindow.setNextLocation( (int) screenSize.getWidth() +100 , (int) screenSize.getHeight() +100);
+        }
 
 		imp.show();
 		//imp.hide();
@@ -158,10 +162,6 @@ public class MainAnalyzer implements PlugInFilter {
 
 		//Hauptprozess zum Erkennen der Zellkerne
 		startImageProcessingActivity(original, copy, sicherung, heatmapTmp, imp, heatmap_ip, x10, radiobox, w, h);
-
-		//Ausgabe und Ende des Programms
-		//IJ.showMessage("Es wurden" ,pixelanzahl+ " Pixel gefunden!");
-		System.out.print("\n\n############################################################\n");
 
 		//Ende des HP
 
@@ -373,13 +373,25 @@ public class MainAnalyzer implements PlugInFilter {
 
 			do {
 				//Bild oeffnen, var setzen dass bild bereits offen ist
-				imp.updateAndRepaintWindow();
 
-				new WaitForUserDialog("Information", "Please set a rectangular\nROI and press OK").show();
+                //ImageWindow.setLocationAndSize(10, 10, 50, 50);
+
+                RoiManager roiMng = RoiManager.getInstance();
+                if(roiMng == null)
+                    roiMng = new RoiManager();
+                while(roiMng.getCount() != 1 && roiMng.getCount() < 2 ); // warten bis user eine Roi ausgewählt hat
+
+                roiMng.close();
+
+                imp.updateAndRepaintWindow();
+
+				new WaitForUserDialog("Information", "ROI selected").show();
 
 				Roi roi = imp.getRoi();
 				if (roi instanceof Roi) {
-					IJ.run(imp, "Crop", "");
+
+				    // TODO imp.setRoi();
+				    IJ.run(imp, "Crop", "");
 					imp.updateAndDraw();
 
 					CROP_CHECKBOX = true;
@@ -402,6 +414,7 @@ public class MainAnalyzer implements PlugInFilter {
 		// TODO Werte einlesbar nicht statisch
 		EXPORT_RESULTS_CHECKBOX = true;
 		EXPORT_PIC_CHECKBOX = true;
+		CROP_CHECKBOX = glScanAnalyzer.isSetroi();
 		HEATMAP_CHECKBOX = glScanAnalyzer.isCalculateandshowheatmap();
 		AUFLOESUNG_SLIDER = glScanAnalyzer.getHeatmapquality();
 

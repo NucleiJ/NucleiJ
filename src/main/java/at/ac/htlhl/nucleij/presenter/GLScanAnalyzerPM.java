@@ -8,6 +8,11 @@ import at.ac.htlhl.nucleij.presenter.tasks.RoiTask;
 import com.ezware.dialog.task.TaskDialog;
 import com.ezware.dialog.task.TaskDialogs;
 import com.jgoodies.binding.PresentationModel;
+import ij.IJ;
+import ij.ImagePlus;
+import ij.gui.Roi;
+import ij.gui.WaitForUserDialog;
+import ij.plugin.frame.RoiManager;
 import org.jdesktop.application.Application;
 import org.jdesktop.application.SingleFrameApplication;
 
@@ -39,7 +44,7 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
 
     private Action analyzeAction;
     private Action calculateandshowheatmapAction;
-    private Action selectroiAction;
+    private Action setroiAction;
     private Action deleteroiAction;
 
     private GLScanAnalyzer glScanAnalyzer;
@@ -56,7 +61,7 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
 
         analyzeAction = new AnalyzeAction();
         calculateandshowheatmapAction = new CalculateandshowheatmapAction();
-        selectroiAction = new SelectroiAction();
+        setroiAction = new SetroiAction();
         deleteroiAction = new DeleteroiAction();
 
         /*selectpathAction = new SelectpathAction();
@@ -73,7 +78,8 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
         glScanAnalyzer.addPropertyChangeListener(new PropertyChangeListener() {
             public void propertyChange(PropertyChangeEvent evt) {
                 LOGGER.info("Property name="+evt.getPropertyName()+", oldValue="+evt.getOldValue()+", newValue="+evt.getNewValue());
-                if(GLScanAnalyzer.PROPERTY_CALCULATEANDSHOWHEATMAP.equals(evt.getPropertyName())) {
+
+                if(GLScanAnalyzer.PROPERTY_SETROI.equals(evt.getPropertyName())) {
                     boolean enabled = evt.getNewValue().toString().toLowerCase().equals("true");
                     setComponentEnabled(GLScanAnalyzer.PROPERTY_HEATMAPQUALITY, enabled);
                 }
@@ -101,9 +107,9 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
         return calculateandshowheatmapAction;
     }
 
-    public Action getSelectroiAction()
+    public Action getSetroiAction()
     {
-        return selectroiAction;
+        return setroiAction;
     }
 
     private class AnalyzeAction extends AbstractAction {
@@ -146,7 +152,7 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
 
             // Radiobox toggled von selber, Domainobject aendert sich von selber
             glScanAnalyzer.setCalculateandshowheatmap(glScanAnalyzer.isCalculateandshowheatmap());
-            System.out.println(glScanAnalyzer.isCalculateandshowheatmap());
+            System.out.println("Test: " + glScanAnalyzer.isCalculateandshowheatmap());
 
             // TODO Slider sichtbar machen
 
@@ -164,9 +170,9 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
         }
     }
 
-    private class SelectroiAction extends AbstractAction
+    private class SetroiAction extends AbstractAction
     {
-        public SelectroiAction() {
+        public SetroiAction() {
             super();
         }
 
@@ -174,11 +180,65 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
 
             // Radiobox toggled von selber, Domainobject aendert sich von selber
             System.out.println("\nSelect the ROI");
-            glScanAnalyzer.setRoiarea("10|30|100|200");
+            System.out.println("10|30|100|200");
 
-            RoiTask test = new RoiTask(glScanAnalyzer);
-            test.setROI();
+            if(ndpiConverter.getInputpath() != null && ndpiConverter.getInputpath() != "")
+            {
+                ImagePlus imp = IJ.openImage(ndpiConverter.getInputpath());
+                imp.unlock();
+                imp.show();
 
+                /*
+                RoiManager roiMng = RoiManager.getInstance();
+                if(roiMng == null)
+                    roiMng = new RoiManager();
+                while(roiMng.getCount() != 1 && roiMng.getCount() < 2 ); // warten bis user eine Roi ausgewählt hat
+
+                roiMng.close();
+
+                //imp.updateAndRepaintWindow();
+
+                Roi roi = imp.getRoi();
+                if (roi instanceof Roi) {
+                    // getROI infos
+                    imp.updateAndDraw();
+                }
+
+                new WaitForUserDialog("Information", "ROI selected").show();
+
+                */
+
+                RoiManager roiMng = RoiManager.getInstance();
+                try {
+                    roiMng.setEditMode(imp, true);
+                } catch (Exception e1) {
+                    System.out.println("Probleme bei dem editMode true setzten..\n");
+                }
+
+                boolean roigesetzt = false;
+
+
+                do {
+                    System.out.println("In Schleife ");
+                    new WaitForUserDialog("Information", "ROI auswaehlen!").show();
+
+                    Roi roi = imp.getRoi();
+
+                    if (roi instanceof Roi && roi != null)
+                    {
+
+                        roigesetzt = true;
+                        // getROI infos
+                        System.out.println("Man! Hab die ROI");
+                    }
+                }while (roigesetzt == false);
+                System.out.println("ROI gesetzt: ");    // + roiMng.getWidth()
+
+
+            }else
+            {
+                // ERROR DIALOG
+            }
             //glScanAnalyzer.setSelectroi(glScanAnalyzer.isSelectroi());
             //System.out.println(glScanAnalyzer.isSelectroi());
         }
@@ -349,7 +409,6 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
             LOGGER.info("Analyze Action clicked");
 
             System.out.println("Type! Ich bin ein Test!!\n");
-            // TODO Action ausprogrammieren
             JFrame parent = ((SingleFrameApplication) Application.getInstance()).getMainFrame();
         }
     }

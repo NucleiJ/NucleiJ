@@ -25,6 +25,7 @@ public class GLScanAnalyzer extends Model
     public static final String PROPERTY_CALCULATEANDSHOWHEATMAP = "calculateandshowheatmap";
     public static final String PROPERTY_HEATMAPQUALITY = "heatmapquality";
     public static final String PROPERTY_ROIAREA = "roiarea";
+    public static final String PROPERTY_SETROI = "setroi";
 
     // endregion
 
@@ -43,6 +44,7 @@ public class GLScanAnalyzer extends Model
     private int heatmapquality;
     private boolean calculateandshowheatmap;
     private String roiarea;
+    private boolean setroi;
 
     //von Andi uebernommen
     private String inputpath;
@@ -65,6 +67,7 @@ public class GLScanAnalyzer extends Model
 
         this.heatmapquality = 60;
         this.calculateandshowheatmap = false;
+        this.setroi = false;
 
         this.inputpath = "";
         this.outputpath = "";
@@ -113,6 +116,16 @@ public class GLScanAnalyzer extends Model
         int oldValue = this.heatmapquality;
         this.heatmapquality = heatmapquality;
         firePropertyChange(PROPERTY_HEATMAPQUALITY, oldValue, heatmapquality);
+    }
+
+    public boolean isSetroi() {
+        return setroi;
+    }
+
+    public void setSetroi(boolean setroi) {
+        boolean oldValue = this.setroi;
+        this.setroi = setroi;
+        firePropertyChange(PROPERTY_SETROI, oldValue, setroi);
     }
 
     public boolean isCalculateandshowheatmap()
