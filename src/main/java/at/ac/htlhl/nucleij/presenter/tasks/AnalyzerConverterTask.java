@@ -44,8 +44,9 @@ public class AnalyzerConverterTask extends SwingWorker<String, String>
         float currentStatus = 0;
         float add;
         int choice = ndpiConverter.getChoice();
-        int numberNdpiFiles = ndpiConverter.getNumberNdpiFiles();
-        int numberTifFiles = ndpiConverter.getNumberTifFiles();
+        float numberNdpiFiles = ndpiConverter.getNumberNdpiFiles();
+        float numberTifFiles = ndpiConverter.getNumberTifFiles();
+
         switch (choice) {
             case 0:
                 add = 100/(numberNdpiFiles*2+numberTifFiles);
