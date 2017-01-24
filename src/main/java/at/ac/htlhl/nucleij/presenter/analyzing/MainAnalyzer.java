@@ -5,6 +5,7 @@ import at.ac.htlhl.nucleij.presenter.analyzing.analyzerLogic.*;
 import ij.IJ;
 import ij.ImagePlus;
 import ij.Prefs;
+import ij.gui.ImageWindow;
 import ij.gui.Roi;
 import ij.gui.WaitForUserDialog;
 import ij.measure.ResultsTable;
@@ -12,6 +13,7 @@ import ij.plugin.filter.Analyzer;
 import ij.plugin.filter.PlugInFilter;
 import ij.process.ImageProcessor;
 
+import java.awt.*;
 import java.io.File;
 import java.math.RoundingMode;
 import java.nio.file.Path;
@@ -127,11 +129,14 @@ public class MainAnalyzer implements PlugInFilter {
 		ImagePlus imp = IJ.openImage(pfad);
 		imp.unlock();
 
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		System.out.println( (int) screenSize.getHeight() + " " + (int) screenSize.getWidth());
+		//ImageWindow.setNextLocation((int) screenSize.getHeight() -300, (int) screenSize.getWidth() -300);
+		ImageWindow.setNextLocation( (int) screenSize.getWidth() +100 , (int) screenSize.getHeight() +100);
 
 		imp.show();
 		//imp.hide();
 
-		//Test comment fuer neuen Brnach
 
 		//set Measurements Properties
 		settings.setMeasurementProporties(imp, distance);
