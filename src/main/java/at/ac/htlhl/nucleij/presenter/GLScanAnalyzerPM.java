@@ -6,6 +6,7 @@ import at.ac.htlhl.nucleij.model.NdpiConverter;
 import at.ac.htlhl.nucleij.presenter.tasks.AnalyzerConverterTask;
 import at.ac.htlhl.nucleij.presenter.tasks.RoiTask;
 import com.ezware.dialog.task.TaskDialog;
+import com.ezware.dialog.task.TaskDialogs;
 import com.jgoodies.binding.PresentationModel;
 import org.jdesktop.application.Application;
 import org.jdesktop.application.SingleFrameApplication;
@@ -15,6 +16,7 @@ import java.awt.event.ActionEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.File;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
@@ -109,13 +111,11 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
         }
 
         public void actionPerformed(ActionEvent e) {
-            //TODO: WICHTIG: Liste in glscanner model erstellen, nach analyze
-            //converter starten, scheuen ob was in der liste ist, danch analyzer starten, liste abarbeiten
-
-            // *******************************************************************************
-            //Analyzer & Converter Task
             JFrame parentAnalyzerConverter = ((SingleFrameApplication) Application.getInstance()).getMainFrame();
             ResourceBundle resourceBundleAnalyzer = AppContext.getInstance().getResourceBundle();
+
+
+            //TODO: WICHTIG: Liste in glscanner model erstellen, nach analyze
 
             TaskDialog taskDialogAnalyzerConverter = new TaskDialog(parentAnalyzerConverter, resourceBundleAnalyzer.getString("AnalyzerConverterDialog.title"));
 
@@ -124,12 +124,20 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
             progressBarAnalyzerConverter.setValue(0);
             taskDialogAnalyzerConverter.setInstruction(resourceBundleAnalyzer.getString("AnalyzerConverterDialog.instructionMessage"));
             taskDialogAnalyzerConverter.setText(resourceBundleAnalyzer.getString("AnalyzerConverterDialog.text"));
+            String text = "From:" + "\t\t" + "/Pfad/Zum/InputOrdner" +
+                    "\n" + "To:\t\t" + "Pfad/Zum/ZielOrdner" +
+                    "\n" + "Time Remaining:\t" + "Elapsed Time" +
+                    "\n" + "Items Remaining:\t" + "Anzahl(Größe)" +
+                    "\n" + "Speed:\t\t" + "Speed kB/s";
+            //taskDialogAnalyzerConverter.setText(text);
             taskDialogAnalyzerConverter.setFixedComponent(progressBarAnalyzerConverter);
             taskDialogAnalyzerConverter.setCommands(TaskDialog.StandardCommand.CANCEL);
+
 
             AnalyzerConverterTask analyzerConverterTask = new AnalyzerConverterTask(progressBarAnalyzerConverter, taskDialogAnalyzerConverter, ndpiConverter, glScanAnalyzer);
             analyzerConverterTask.execute();
             taskDialogAnalyzerConverter.show();
+
         }
     }
 
@@ -200,8 +208,7 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
         return(directory.delete());
     }
 
-
-
+    //region oldCode
 /*
 
     public Action getSelectpathAction()

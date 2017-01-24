@@ -2,6 +2,7 @@ package at.ac.htlhl.nucleij.presenter;
 
 import at.ac.htlhl.nucleij.model.GLScanAnalyzer;
 import at.ac.htlhl.nucleij.model.NdpiConverter;
+import com.ezware.dialog.task.TaskDialogs;
 import com.jgoodies.binding.PresentationModel;
 import org.jdesktop.application.Application;
 import org.jdesktop.application.SingleFrameApplication;
@@ -192,6 +193,35 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
 
                 glScanAnalyzer.setNdpiList(ndpiFileList);
                 glScanAnalyzer.setTifList(tifFileList);
+
+                int numberTif = 0;
+                int numberNdpi = 0;
+
+                for (String ndpiListElement : ndpiFileList) {
+                    numberNdpi++;
+                }
+
+                for (String tifListElement : tifFileList) {
+                    numberTif++;
+                }
+
+                JFrame parentDialog = ((SingleFrameApplication) Application.getInstance()).getMainFrame();
+                TaskDialogs.inform(parentDialog, "Only one folder allowed!", "Selected first folder '" + chooser.getSelectedFile().getParent());
+
+
+
+                if (numberNdpi > 0 && numberTif > 0) { //Tif & NDPI Selected
+                    int choice = TaskDialogs.radioChoice(parentDialog,
+                            "It seems that you selected both NDPI & TIF Files" ,
+                            "NDPI-Files: \t" + numberNdpi + "\nTIF-Files: \t" + numberTif + "\n\nWhat do you want do?" ,
+                            0, "Convert & Analyze", "Analyze Only", "Convert Only" );
+
+                }
+                else if (numberNdpi > 0 && numberTif == 0) { //Only NDPI Selected
+                    int choice = TaskDialogs.radioChoice(parentDialog,"It seems that your selection is a Ndpi File", "What will you do?", 0, "Convert & Analyze", "Convert Only" );
+                }
+
+
 
 
                 if (moreThanOneFolder) {
