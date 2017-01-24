@@ -403,7 +403,6 @@ public class MainAnalyzer implements PlugInFilter {
 		EXPORT_RESULTS_CHECKBOX = true;
 		EXPORT_PIC_CHECKBOX = true;
 		HEATMAP_CHECKBOX = glScanAnalyzer.isCalculateandshowheatmap();
-
 		AUFLOESUNG_SLIDER = glScanAnalyzer.getHeatmapquality();
 
 	}

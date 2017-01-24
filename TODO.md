@@ -9,7 +9,6 @@
 * Speichern/Einlesen von Einstellungen
 * Jason File (.nucleij)
 * eigene Prozessnamen
-* ImageJ Dialoge unsichtbar machen
 
 
 ### 2. Zukunftsmusik ###
