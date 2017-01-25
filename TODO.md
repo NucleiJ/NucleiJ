@@ -10,15 +10,14 @@
 * eigene Prozessnamen
 * Cancel soll wirklich beenden
 * Wenn Quality slider geändert, dann berechnen ankreuzen
-* OutputOrdner Benutzerdefiniert
+* [E] OutputOrdner Benutzerdefiniert
 * Abfrage ob Analyse/Convert erst nach Start-Klick
 * Einstellungen beim Laden von XML-Datei laden
 * Einstellungsdialog
 * Linux funktioniert?
-* In MainAnalyzer Pfad Problem beheben (direkt Property abfragen)
-* Dialog am Ende des Prozesses, Zusammenfassung was gemacht wurde und wielange es gedauert hat
-* ROI auswählen nur möglich wenn eine tif Datei
-* neues Look and Feel finden
+* [E] In MainAnalyzer Pfad Problem beheben (direkt Property abfragen)
+* [E] Dialog am Ende des Prozesses, Zusammenfassung was gemacht wurde und wielange es gedauert hat
+* [E] neues Look and Feel finden
 
 
 ### 2. Zukunftsmusik ###
@@ -30,15 +29,16 @@
 ### 3. Bugs ###
 * MainAnalyzer.java 103 Analyze funktioniert, jedoch Converter unter Linux nicht, unter Windows werden alle ergebnisse nicht in Output sondern überordner gespeichert
 
+
 ### 4.Diverses ###
 * Warum ist am Ende von jedem Listenelement in ndpiFileList und tifFileList eine "]"??
+
 
 ### 5.Einstellungen ###
 * Import external LUT
 * Verschiedene LUTs
 * Schriftgröße
 * Zukunftsmusik: L&F?
-
 
 
 ### 6. Abgeschlossene ###
