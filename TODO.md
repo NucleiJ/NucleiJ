@@ -12,6 +12,9 @@
 * Wenn Quality slider geändert, dann berechnen ankreuzen
 * OutputOrdner Benutzerdefiniert
 * Abfrage ob Analyse/Convert erst nach Start-Klick
+* Einstellungen beim Laden von XML-Datei laden
+* Einstellungsdialog
+* Linux funktioniert?
 
 ### 2. Zukunftsmusik ###
 * Schriftgröße änderbar (optional zur Laufzeit)
@@ -25,7 +28,15 @@
 ### 4.Diverses ###
 * Warum ist am Ende von jedem Listenelement in ndpiFileList und tifFileList eine "]"??
 
-### 5. Abgeschlossene ###
+### 5.Einstellungen ###
+* Import external LUT
+* Verschiedene LUTs
+* Schriftgröße
+* Zukunftsmusik: L&F?
+
+
+
+### 6. Abgeschlossene ###
 * SwingWorker zusammenlegen zu einem                                23.01.17
 * LuT Relativer Pfad                                                23.01.17
 * Momentan verarbeitete Datei anzeigen                              24.01.17
