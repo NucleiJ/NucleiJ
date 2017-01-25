@@ -9,6 +9,7 @@
 * Speichern/Einlesen von Einstellungen
 * Jason File (.nucleij)
 * eigene Prozessnamen
+* Dialog am Ende des Prozesses, Zusammenfassung was gemacht wurde und wielange es gedauert hat
 
 
 ### 2. Zukunftsmusik ###

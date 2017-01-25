@@ -23,6 +23,9 @@ import java.io.File;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
+import static at.ac.htlhl.nucleij.model.NdpiConverter.MAG_X10;
+import static at.ac.htlhl.nucleij.model.NdpiConverter.MAG_X5;
+
 
 /**
  *
@@ -62,14 +65,9 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
         setroiAction = new SetroiAction();
         deleteroiAction = new DeleteroiAction();
 
-        /*selectpathAction = new SelectpathAction();
-        typeAction = new TypeAction();
-        outputpathAction = new OutputpathAction();*/
-
         setComponentEnabled(GLScanAnalyzer.PROPERTY_HEATMAPQUALITY, getBean().isCalculateandshowheatmap());
-        //setComponentEnabled(GLScanAnalyzer.PROPERTY, getBean().isCalculateandshowheatmap());
 
-        setComponentEnabled(GLScanAnalyzer.PROPERTY_ROIAREA, false);
+        setComponentEnabled(GLScanAnalyzer.PROPERTY_SETROI, glScanAnalyzer.isSetroi());
         setComponentVisible(GLScanAnalyzer.PROPERTY_ROIAREA, false);
 
         // Ausgabe jeder Aenderung
@@ -77,19 +75,20 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
             public void propertyChange(PropertyChangeEvent evt) {
                 LOGGER.info("Property name="+evt.getPropertyName()+", oldValue="+evt.getOldValue()+", newValue="+evt.getNewValue());
 
-                if(GLScanAnalyzer.PROPERTY_SETROI.equals(evt.getPropertyName())) {
-                    boolean enabled = evt.getNewValue().toString().toLowerCase().equals("true");
-                    setComponentEnabled(GLScanAnalyzer.PROPERTY_HEATMAPQUALITY, enabled);
+                if(GLScanAnalyzer.PROPERTY_SETROI.equals(evt.getPropertyName()))
+                {
+                    if(evt.getNewValue().equals(false))
+                    {
+                        System.out.println("Property ist false");
+                    }
                 }
             }
+
+
         });
 
 
-    }
 
-    public void setROIvisible(boolean enabled)
-    {
-        setComponentVisible(GLScanAnalyzer.PROPERTY_ROIAREA, enabled);
     }
 
     public Action getAnalyzeAction() {
@@ -172,12 +171,18 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
 
         public void actionPerformed(ActionEvent e) {
 
-            if(ndpiConverter.getInputpath() != null && ndpiConverter.getInputpath() != "")
+            if(ndpiConverter.getInputpath() != null && ndpiConverter.getInputpath() != "" && ndpiConverter.getInputpath().contains(".tif"))
             {
                 Runnable myRunnable = new Runnable()
                 {
                     public void run() {
                         System.out.println("Runnable running");
+
+                        glScanAnalyzer.setRoiX(0);
+                        glScanAnalyzer.setRoiY(0);
+                        glScanAnalyzer.setRoiHeight(0);
+                        glScanAnalyzer.setRoiWidth(0);
+                        System.out.println("ROI Infos zurueckgesetzt..");
 
                         ImagePlus imp = IJ.openImage(ndpiConverter.getInputpath());
                         imp.unlock();
@@ -189,7 +194,7 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
                         } catch (Exception e1) {
                             System.out.println("Probleme bei dem editMode true setzten..\n");
                         }
-                        
+
                         boolean roigesetzt = false;
                         //System.out.println("In Schleife ");
                         imp.updateAndRepaintWindow();
@@ -197,7 +202,12 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
                         Roi roi;
 
                         do {
-                            System.out.println("suche ROI...");
+                            try {
+                                Thread.sleep(1000);
+                            } catch (InterruptedException e1) {
+                                e1.printStackTrace();
+                            }
+                            //System.out.println("suche ROI...");
                             roi = imp.getRoi();
                             if (roi instanceof Roi) {
                                 roigesetzt = true;
@@ -208,7 +218,27 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
                         new WaitForUserDialog("Information", "ROI selected").show();
 
                         Rectangle roiRec = roi.getBounds();
-                        System.out.println("Folgende ROI wurde erkannt:\n" + roiRec.getX()  + "\n" + roiRec.getY() + "\n"  + roiRec.getWidth() + "\n" + roiRec.getHeight() );
+
+                        if ( roiRec.getWidth() > 20 && roiRec.getHeight() > 20)
+                        {
+                            System.out.println("Folgende ROI wurde erkannt:\n" + roiRec.getX()  + "\n" + roiRec.getY() + "\n"  + roiRec.getWidth() + "\n" + roiRec.getHeight() );
+
+                            glScanAnalyzer.setRoiX((int) roiRec.getX());
+                            glScanAnalyzer.setRoiY((int) roiRec.getY());
+                            glScanAnalyzer.setRoiHeight((int) roiRec.getHeight());
+                            glScanAnalyzer.setRoiWidth((int) roiRec.getWidth());
+                            glScanAnalyzer.setSetroi(true);
+                        }
+                        else
+                        {
+                            TaskDialog dlg = new TaskDialog(((SingleFrameApplication) Application.getInstance()).getMainFrame(), "Application Error" );
+                            dlg.setIcon( TaskDialog.StandardIcon.ERROR );
+                            dlg.setText( "Diese Auswahl der Region of Interest ist nicht erlaubt.\nKlicken Sie für weitere Informationen auf \"weitere Details\". " );
+                            dlg.getDetails().setExpandableComponent(
+                                    new JLabel(" ROI zu klein gewählt. Muss mindestens 20 pixel Seitenlänge haben.\n " +
+                                            "Ihre Auswahl: " + String.valueOf(roiRec.getHeight()) + "px * " + String.valueOf(roiRec.getWidth()) +"px."));
+                            dlg.show();
+                        }
 
                         imp.close();
                     }

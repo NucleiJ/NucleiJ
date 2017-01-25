@@ -54,6 +54,13 @@ public class GLScanAnalyzer extends Model
     //Listen fuer Pfade der zu verarbeitenden arbeiten
     private List<String> ndpiList;
     private List<String> tifList;
+
+    //ROI Informationen:
+    int roiX;
+    int roiY;
+    int roiWidth;
+    int roiHeight;
+
     // endregion
 
 
@@ -71,6 +78,11 @@ public class GLScanAnalyzer extends Model
 
         this.inputpath = "";
         this.outputpath = "";
+
+        this.roiX = 0;
+        this.roiY = 0;
+        this.roiWidth = 0;
+        this.roiHeight = 0;
     }
 
     public List<String> getNdpiList() {
@@ -119,7 +131,14 @@ public class GLScanAnalyzer extends Model
     }
 
     public boolean isSetroi() {
-        return setroi;
+        if(roiX + roiY + roiHeight +roiWidth < 4)
+        {
+            return false;
+        }
+        else
+        {
+            return setroi;
+        }
     }
 
     public void setSetroi(boolean setroi) {
@@ -158,6 +177,38 @@ public class GLScanAnalyzer extends Model
     public String getOutputpath()
     {
         return ndpiConverter.getOutputpath();
+    }
+
+    public int getRoiX() {
+        return roiX;
+    }
+
+    public void setRoiX(int roiX) {
+        this.roiX = roiX;
+    }
+
+    public int getRoiY() {
+        return roiY;
+    }
+
+    public void setRoiY(int roiY) {
+        this.roiY = roiY;
+    }
+
+    public int getRoiWidth() {
+        return roiWidth;
+    }
+
+    public void setRoiWidth(int roiWidth) {
+        this.roiWidth = roiWidth;
+    }
+
+    public int getRoiHeight() {
+        return roiHeight;
+    }
+
+    public void setRoiHeight(int roiHeight) {
+        this.roiHeight = roiHeight;
     }
 
 

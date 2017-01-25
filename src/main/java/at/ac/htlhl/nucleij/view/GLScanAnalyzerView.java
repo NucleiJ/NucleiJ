@@ -5,6 +5,7 @@ package at.ac.htlhl.nucleij.view;
 
 import at.ac.htlhl.nucleij.model.GLScanAnalyzer;
 import at.ac.htlhl.nucleij.presenter.GLScanAnalyzerPM;
+import com.jgoodies.binding.adapter.BasicComponentFactory;
 import com.jgoodies.binding.adapter.BoundedRangeAdapter;
 import com.jgoodies.binding.adapter.ComboBoxAdapter;
 import com.jgoodies.binding.binder.Binders;
@@ -36,7 +37,6 @@ public class GLScanAnalyzerView extends JPanel {
     private JFormattedTextField heatmapqualityTextField;
     private JComponent roiSeperator;
     private JLabel selectroiLabel;
-    private JCheckBox roiCheckBox;
     private JButton selctroiButton;
     private JButton startAnalyzerButton;
     private AbstractAction analyzeAction;
@@ -86,12 +86,18 @@ public class GLScanAnalyzerView extends JPanel {
 
         PresentationModelBinder binder = Binders.binderFor(glScanAnalyzerPM);
         binder.bindBeanProperty(GLScanAnalyzer.PROPERTY_CALCULATEANDSHOWHEATMAP).to(calculateandshowheatmapCheckBox);
-        binder.bindBeanProperty(GLScanAnalyzer.PROPERTY_SETROI).to(roiCheckBox);
 
         // Property: HeatMapQuality
         ValueModel heatmapQualityValueModel = glScanAnalyzerPM.getModel(GLScanAnalyzer.PROPERTY_HEATMAPQUALITY);
         heatmapqualitySlider.setModel(new BoundedRangeAdapter(heatmapQualityValueModel, 1, 1, 101));
         binder.bindBeanProperty(GLScanAnalyzer.PROPERTY_HEATMAPQUALITY).to(heatmapqualityTextField);
+
+        //binder.bindBeanProperty(GLScanAnalyzer.PROPERTY_SETROI).to(selctroiButton);
+
+        //selectroiLabel.setText("Orger Test");
+        //selectroiLabel.setEnabled(false);
+        //selctroiButton.setEnabled(false);
+        //roiSeperator.setEnabled(false);
 
     }
 
@@ -109,7 +115,6 @@ public class GLScanAnalyzerView extends JPanel {
         heatmapqualityTextField = new JFormattedTextField();
         roiSeperator = compFactory.createSeparator(bundle.getString("GLScanAnalyzerView.roiSeperator.text"));
         selectroiLabel = new JLabel();
-        roiCheckBox = new JCheckBox();
         selctroiButton = new JButton();
         startAnalyzerButton = new JButton();
 
@@ -147,17 +152,13 @@ public class GLScanAnalyzerView extends JPanel {
         selectroiLabel.setText(bundle.getString("GLScanAnalyzerView.selectroiLabel"));
         add(selectroiLabel, CC.xy(1, 9));
 
-        //---- roiCheckBox ----
-        roiCheckBox.setAction(setRoiAction);
-        add(roiCheckBox, CC.xy(3, 9));
-
         //---- selctroiButton ----
         selctroiButton.setAction(setRoiAction);
-        add(selctroiButton, CC.xy(5, 9));
+        add(selctroiButton, CC.xy(3, 9, CC.LEFT, CC.DEFAULT));
 
         //---- startAnalyzerButton ----
         startAnalyzerButton.setAction(analyzeAction);
-        add(startAnalyzerButton, CC.xywh(5, 11, 5, 1));
+        add(startAnalyzerButton, CC.xywh(5, 11, 5, 1, CC.RIGHT, CC.DEFAULT));
 
         //---- analyzeAction ----
         analyzeAction.putValue(Action.NAME, bundle.getString("GLScanAnalyzerView.analyzeAction.Name"));

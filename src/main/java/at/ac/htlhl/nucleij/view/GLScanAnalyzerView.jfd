@@ -1,4 +1,4 @@
-JFDML JFormDesigner: "6.0.0.0.71" Java: "1.8.0_112-release" encoding: "UTF-8"
+JFDML JFormDesigner: "6.0.0.0.71" Java: "1.8.0_112" encoding: "UTF-8"
 
 new FormModel {
 	"i18n.bundlePackage": "at.ac.htlhl.nucleij.resources.i18n"
@@ -74,19 +74,13 @@ new FormModel {
 				"gridX": 1
 				"gridY": 9
 			} )
-			add( new FormComponent( "javax.swing.JCheckBox" ) {
-				name: "roiCheckBox"
-				"action": new FormReference( "setRoiAction" )
-			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 3
-				"gridY": 9
-			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "selctroiButton"
 				"action": new FormReference( "setRoiAction" )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 5
+				"gridX": 3
 				"gridY": 9
+				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints LEFT
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "startAnalyzerButton"
@@ -95,6 +89,7 @@ new FormModel {
 				"gridX": 5
 				"gridY": 11
 				"gridWidth": 5
+				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints RIGHT
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )
@@ -147,3 +142,4 @@ new FormModel {
 		} )
 	}
 }
+

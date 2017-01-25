@@ -133,10 +133,8 @@ public class MainAnalyzer implements PlugInFilter {
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		System.out.println( (int) screenSize.getHeight() + " " + (int) screenSize.getWidth());
 		//ImageWindow.setNextLocation((int) screenSize.getHeight() -300, (int) screenSize.getWidth() -300);
-        if (!CROP_CHECKBOX)
-        {
-            ImageWindow.setNextLocation( (int) screenSize.getWidth() +100 , (int) screenSize.getHeight() +100);
-        }
+
+		ImageWindow.setNextLocation( (int) screenSize.getWidth() +100 , (int) screenSize.getHeight() +100);
 
 		imp.show();
 		//imp.hide();
@@ -375,17 +373,9 @@ public class MainAnalyzer implements PlugInFilter {
 				//Bild oeffnen, var setzen dass bild bereits offen ist
 
                 //ImageWindow.setLocationAndSize(10, 10, 50, 50);
+				imp.updateAndRepaintWindow();
 
-                RoiManager roiMng = RoiManager.getInstance();
-                if(roiMng == null)
-                    roiMng = new RoiManager();
-                while(roiMng.getCount() != 1 && roiMng.getCount() < 2 ); // warten bis user eine Roi ausgewählt hat
-
-                roiMng.close();
-
-                imp.updateAndRepaintWindow();
-
-				new WaitForUserDialog("Information", "ROI selected").show();
+				imp.setRoi(glScanAnalyzer.getRoiX(), glScanAnalyzer.getRoiY(), glScanAnalyzer.getRoiWidth(), glScanAnalyzer.getRoiHeight());
 
 				Roi roi = imp.getRoi();
 				if (roi instanceof Roi) {
