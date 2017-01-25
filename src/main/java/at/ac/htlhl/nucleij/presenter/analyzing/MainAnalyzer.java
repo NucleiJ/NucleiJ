@@ -81,7 +81,7 @@ public class MainAnalyzer implements PlugInFilter {
 		getUserInput();
 
 		//Pfad Abfrage
-		/*File originalPath = new File(glScanAnalyzer.getInputpath().toString());
+		File originalPath = new File(glScanAnalyzer.getInputpath().toString());
 
 		boolean isDirectory = originalPath.isDirectory(); // Check if it's a directory
 		boolean isFile =      originalPath.isFile();      // Check if it's a regular file
@@ -97,7 +97,7 @@ public class MainAnalyzer implements PlugInFilter {
 			path.setValue(originalPath.toString().substring(0,originalPath.toString().lastIndexOf(File.separator)));
 		}
 		System.out.println(path.getValue());
-		*/
+
 
 
 		startExporter.setnewDirectoryname("\\Output");  //TODO andis textfield auslesen wenn es property gibt
