@@ -56,7 +56,7 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
 
         analyzeAction = new AnalyzeAction();
         calculateandshowheatmapAction = new CalculateandshowheatmapAction();
-        selectroiAction = new SelectroiAction();
+        selectroiAction = new SetRoiAction();
         deleteroiAction = new DeleteroiAction();
 
         /*selectpathAction = new SelectpathAction();
@@ -101,7 +101,7 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
         return calculateandshowheatmapAction;
     }
 
-    public Action getSelectroiAction()
+    public Action getSetroiAction()
     {
         return selectroiAction;
     }
@@ -164,9 +164,9 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
         }
     }
 
-    private class SelectroiAction extends AbstractAction
+    private class SetRoiAction extends AbstractAction
     {
-        public SelectroiAction() {
+        public SetRoiAction() {
             super();
         }
 
