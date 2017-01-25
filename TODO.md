@@ -18,6 +18,7 @@
 * In MainAnalyzer Pfad Problem beheben (direkt Property abfragen)
 * Dialog am Ende des Prozesses, Zusammenfassung was gemacht wurde und wielange es gedauert hat
 * ROI auswählen nur möglich wenn eine tif Datei
+* neues Look and Feel finden
 
 
 ### 2. Zukunftsmusik ###
@@ -45,3 +46,8 @@
 * LuT Relativer Pfad                                                23.01.17
 * Momentan verarbeitete Datei anzeigen                              24.01.17
 * Abfrage Analysieren oder Analysieren&Konvertieren (TaskDialog)    24.01.17
+
+
+### 7. Wichtige Notizen ###
+* Mergen: https://www.youtube.com/watch?v=j7wyS_gt0T0
+* Dialog Meister: https://mcoj.wordpress.com/category/java/

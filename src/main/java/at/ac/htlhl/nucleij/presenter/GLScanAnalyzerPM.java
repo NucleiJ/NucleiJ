@@ -171,7 +171,9 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
 
         public void actionPerformed(ActionEvent e) {
 
-            if(ndpiConverter.getInputpath() != null && ndpiConverter.getInputpath() != "" && ndpiConverter.getInputpath().contains(".tif"))
+            if(ndpiConverter.getInputpath() != null && ndpiConverter.getInputpath() != "" &&
+                    ndpiConverter.getInputpath().contains(".tif") && ndpiConverter.getNumberTifFiles() == 1 &&
+                    ndpiConverter.getNumberNdpiFiles() == 0)
             {
                 Runnable myRunnable = new Runnable()
                 {
@@ -215,7 +217,7 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
                             }
                         }while (roigesetzt == false);
 
-                        new WaitForUserDialog("Information", "ROI selected").show();
+                        new WaitForUserDialog("Information", "OK drücken, wenn die\nROI ausgewählt wurde").show();
 
                         Rectangle roiRec = roi.getBounds();
 
@@ -249,7 +251,12 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
 
             }else
             {
-                //TODO ERROR DIALOG
+                TaskDialog dlg = new TaskDialog(((SingleFrameApplication) Application.getInstance()).getMainFrame(),"Warnung");
+                dlg.setInstruction("ROI Funktion nicht verfügbar");
+                dlg.setText( "Die ROI Funktion ist nur verfügbar, " +
+                        "wenn sich im\nEingabepfad nur <b>eine</b> Datei befindet!" );
+                dlg.setIcon( TaskDialog.StandardIcon.WARNING );
+                dlg.show();
             }
             //glScanAnalyzer.setSelectroi(glScanAnalyzer.isSelectroi());
             //System.out.println(glScanAnalyzer.isSelectroi());
