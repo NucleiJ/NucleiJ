@@ -10,6 +10,7 @@ import com.ezware.dialog.task.TaskDialogs;
 import com.jgoodies.binding.PresentationModel;
 import ij.IJ;
 import ij.ImagePlus;
+import ij.Macro;
 import ij.gui.Roi;
 import ij.gui.WaitForUserDialog;
 import ij.plugin.frame.RoiManager;
@@ -17,6 +18,7 @@ import org.jdesktop.application.Application;
 import org.jdesktop.application.SingleFrameApplication;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -152,6 +154,10 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
 
             // Radiobox toggled von selber, Domainobject aendert sich von selber
             glScanAnalyzer.setCalculateandshowheatmap(glScanAnalyzer.isCalculateandshowheatmap());
+
+            Macro.setOptions("Please select a ROI");
+            IJ.runPlugIn("Wait_For_User","");
+
             System.out.println("Test: " + glScanAnalyzer.isCalculateandshowheatmap());
 
             // TODO Slider sichtbar machen
@@ -215,26 +221,47 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
                     System.out.println("Probleme bei dem editMode true setzten..\n");
                 }
 
+
                 boolean roigesetzt = false;
+                //System.out.println("In Schleife ");
+                imp.updateAndRepaintWindow();
 
+                Roi roi = imp.getRoi();
 
-                do {
-                    System.out.println("In Schleife ");
-                    new WaitForUserDialog("Information", "ROI auswaehlen!").show();
+                if (roi instanceof Roi)
+                {
+                    roigesetzt = true;
+                    // getROI infos
+                    System.out.println("Man! Hab die ROI");
+                }
 
-                    Roi roi = imp.getRoi();
+                /*
+                while (roigesetzt == false) {
+                    //System.out.println("In Schleife ");
+                    imp.updateAndRepaintWindow();
+                    //new WaitForUserDialog("Information", "ROI auswaehlen!").show();
+                    IJ.run("Wait_For_User", "Please select a ROI");
+                    System.out.println("In der Schleife!");
 
-                    if (roi instanceof Roi && roi != null)
-                    {
+                    roi = imp.getRoi();
 
+                    if (roi instanceof Roi) {
                         roigesetzt = true;
                         // getROI infos
                         System.out.println("Man! Hab die ROI");
                     }
-                }while (roigesetzt == false);
-                System.out.println("ROI gesetzt: ");    // + roiMng.getWidth()
+                }
+                */
+                System.out.println("ROI Ende: ");    // + roiMng.getWidth()
 
 
+                new WaitForUserDialog("Information", "ROI selected").show();
+                //TaskDialogs.inform(((SingleFrameApplication) Application.getInstance()).getMainFrame(), "Info", "Setz die ROI");
+
+                do {
+                    System.out.printf("Test\n");
+                    roi = imp.getRoi();
+                }while (roi == null);
             }else
             {
                 // ERROR DIALOG
