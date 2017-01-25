@@ -17,6 +17,7 @@
 * Linux funktioniert?
 * In MainAnalyzer Pfad Problem beheben (direkt Property abfragen)
 * Dialog am Ende des Prozesses, Zusammenfassung was gemacht wurde und wielange es gedauert hat
+* ROI auswählen nur möglich wenn eine tif Datei
 
 
 ### 2. Zukunftsmusik ###
