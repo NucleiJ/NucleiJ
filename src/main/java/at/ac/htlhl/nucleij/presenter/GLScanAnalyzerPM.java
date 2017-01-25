@@ -4,21 +4,27 @@ import at.ac.htlhl.nucleij.AppContext;
 import at.ac.htlhl.nucleij.model.GLScanAnalyzer;
 import at.ac.htlhl.nucleij.model.NdpiConverter;
 import at.ac.htlhl.nucleij.presenter.tasks.AnalyzerConverterTask;
-import at.ac.htlhl.nucleij.presenter.tasks.RoiTask;
 import com.ezware.dialog.task.TaskDialog;
-import com.ezware.dialog.task.TaskDialogs;
 import com.jgoodies.binding.PresentationModel;
+import ij.IJ;
+import ij.ImagePlus;
+import ij.gui.Roi;
+import ij.gui.WaitForUserDialog;
+import ij.plugin.frame.RoiManager;
 import org.jdesktop.application.Application;
 import org.jdesktop.application.SingleFrameApplication;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.File;
-import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
+
+import static at.ac.htlhl.nucleij.model.NdpiConverter.MAG_X10;
+import static at.ac.htlhl.nucleij.model.NdpiConverter.MAG_X5;
 
 
 /**
@@ -39,7 +45,7 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
 
     private Action analyzeAction;
     private Action calculateandshowheatmapAction;
-    private Action selectroiAction;
+    private Action setroiAction;
     private Action deleteroiAction;
 
     private GLScanAnalyzer glScanAnalyzer;
@@ -56,36 +62,33 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
 
         analyzeAction = new AnalyzeAction();
         calculateandshowheatmapAction = new CalculateandshowheatmapAction();
-        selectroiAction = new SetRoiAction();
+        setroiAction = new SetroiAction();
         deleteroiAction = new DeleteroiAction();
 
-        /*selectpathAction = new SelectpathAction();
-        typeAction = new TypeAction();
-        outputpathAction = new OutputpathAction();*/
-
         setComponentEnabled(GLScanAnalyzer.PROPERTY_HEATMAPQUALITY, getBean().isCalculateandshowheatmap());
-        //setComponentEnabled(GLScanAnalyzer.PROPERTY, getBean().isCalculateandshowheatmap());
 
-        setComponentEnabled(GLScanAnalyzer.PROPERTY_ROIAREA, false);
+        setComponentEnabled(GLScanAnalyzer.PROPERTY_SETROI, glScanAnalyzer.isSetroi());
         setComponentVisible(GLScanAnalyzer.PROPERTY_ROIAREA, false);
 
         // Ausgabe jeder Aenderung
         glScanAnalyzer.addPropertyChangeListener(new PropertyChangeListener() {
             public void propertyChange(PropertyChangeEvent evt) {
                 LOGGER.info("Property name="+evt.getPropertyName()+", oldValue="+evt.getOldValue()+", newValue="+evt.getNewValue());
-                if(GLScanAnalyzer.PROPERTY_CALCULATEANDSHOWHEATMAP.equals(evt.getPropertyName())) {
-                    boolean enabled = evt.getNewValue().toString().toLowerCase().equals("true");
-                    setComponentEnabled(GLScanAnalyzer.PROPERTY_HEATMAPQUALITY, enabled);
+
+                if(GLScanAnalyzer.PROPERTY_SETROI.equals(evt.getPropertyName()))
+                {
+                    if(evt.getNewValue().equals(false))
+                    {
+                        System.out.println("Property ist false");
+                    }
                 }
             }
+
+
         });
 
 
-    }
 
-    public void setROIvisible(boolean enabled)
-    {
-        setComponentVisible(GLScanAnalyzer.PROPERTY_ROIAREA, enabled);
     }
 
     public Action getAnalyzeAction() {
@@ -103,7 +106,7 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
 
     public Action getSetroiAction()
     {
-        return selectroiAction;
+        return setroiAction;
     }
 
     private class AnalyzeAction extends AbstractAction {
@@ -146,10 +149,6 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
 
             // Radiobox toggled von selber, Domainobject aendert sich von selber
             glScanAnalyzer.setCalculateandshowheatmap(glScanAnalyzer.isCalculateandshowheatmap());
-            System.out.println(glScanAnalyzer.isCalculateandshowheatmap());
-
-            // TODO Slider sichtbar machen
-
         }
     }
 
@@ -164,21 +163,94 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
         }
     }
 
-    private class SetRoiAction extends AbstractAction
+    private class SetroiAction extends AbstractAction
     {
-        public SetRoiAction() {
+        public SetroiAction() {
             super();
         }
 
         public void actionPerformed(ActionEvent e) {
 
-            // Radiobox toggled von selber, Domainobject aendert sich von selber
-            System.out.println("\nSelect the ROI");
-            glScanAnalyzer.setRoiarea("10|30|100|200");
+            if(ndpiConverter.getInputpath() != null && ndpiConverter.getInputpath() != "" && ndpiConverter.getInputpath().contains(".tif"))
+            {
+                Runnable myRunnable = new Runnable()
+                {
+                    public void run() {
+                        System.out.println("Runnable running");
 
-            RoiTask test = new RoiTask(glScanAnalyzer);
-            test.setROI();
+                        glScanAnalyzer.setRoiX(0);
+                        glScanAnalyzer.setRoiY(0);
+                        glScanAnalyzer.setRoiHeight(0);
+                        glScanAnalyzer.setRoiWidth(0);
+                        System.out.println("ROI Infos zurueckgesetzt..");
 
+                        ImagePlus imp = IJ.openImage(ndpiConverter.getInputpath());
+                        imp.unlock();
+                        imp.show();
+
+                        RoiManager roiMng = RoiManager.getInstance();
+                        try {
+                            roiMng.setEditMode(imp, true);
+                        } catch (Exception e1) {
+                            System.out.println("Probleme bei dem editMode true setzten..\n");
+                        }
+
+                        boolean roigesetzt = false;
+                        //System.out.println("In Schleife ");
+                        imp.updateAndRepaintWindow();
+
+                        Roi roi;
+
+                        do {
+                            try {
+                                Thread.sleep(1000);
+                            } catch (InterruptedException e1) {
+                                e1.printStackTrace();
+                            }
+                            //System.out.println("suche ROI...");
+                            roi = imp.getRoi();
+                            if (roi instanceof Roi) {
+                                roigesetzt = true;
+                                System.out.println("User setzt ROI");
+                            }
+                        }while (roigesetzt == false);
+
+                        new WaitForUserDialog("Information", "ROI selected").show();
+
+                        Rectangle roiRec = roi.getBounds();
+
+                        if ( roiRec.getWidth() > 20 && roiRec.getHeight() > 20)
+                        {
+                            System.out.println("Folgende ROI wurde erkannt:\n" + roiRec.getX()  + "\n" + roiRec.getY() + "\n"  + roiRec.getWidth() + "\n" + roiRec.getHeight() );
+
+                            glScanAnalyzer.setRoiX((int) roiRec.getX());
+                            glScanAnalyzer.setRoiY((int) roiRec.getY());
+                            glScanAnalyzer.setRoiHeight((int) roiRec.getHeight());
+                            glScanAnalyzer.setRoiWidth((int) roiRec.getWidth());
+                            glScanAnalyzer.setSetroi(true);
+                        }
+                        else
+                        {
+                            TaskDialog dlg = new TaskDialog(((SingleFrameApplication) Application.getInstance()).getMainFrame(), "Application Error" );
+                            dlg.setIcon( TaskDialog.StandardIcon.ERROR );
+                            dlg.setText( "Diese Auswahl der Region of Interest ist nicht erlaubt.\nKlicken Sie für weitere Informationen auf \"weitere Details\". " );
+                            dlg.getDetails().setExpandableComponent(
+                                    new JLabel(" ROI zu klein gewählt. Muss mindestens 20 pixel Seitenlänge haben.\n " +
+                                            "Ihre Auswahl: " + String.valueOf(roiRec.getHeight()) + "px * " + String.valueOf(roiRec.getWidth()) +"px."));
+                            dlg.show();
+                        }
+
+                        imp.close();
+                    }
+                };
+
+                Thread thread = new Thread(myRunnable);
+                thread.start();
+
+            }else
+            {
+                //TODO ERROR DIALOG
+            }
             //glScanAnalyzer.setSelectroi(glScanAnalyzer.isSelectroi());
             //System.out.println(glScanAnalyzer.isSelectroi());
         }
@@ -201,170 +273,6 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
         }
         return(directory.delete());
     }
-
-    //region oldCode
-/*
-
-    public Action getSelectpathAction()
-    {
-        return selectpathAction;
-    }
-
-    public Action getTypeAction()
-    {
-        return typeAction;
-    }
-
-    public Action getOutputpathAction()
-    {
-        return outputpathAction;
-    }
-
-    private JFileChooser createPreparedDirChooser()
-    {
-        JFileChooser chooser = new JFileChooser();
-        chooser.setAcceptAllFileFilterUsed(false);
-        chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-        chooser.setDialogTitle("Verzeichnis auswählen"); // TODO Text auslagern
-        return chooser;
-    }
-
-    private JFileChooser createPreparedFileChooser()
-    {
-        JFileChooser chooser = new JFileChooser();
-        chooser.setAcceptAllFileFilterUsed(false);
-        chooser.setFileFilter(new SuffixFileFilter(FILE_EXTENSION, "*." + FILE_EXTENSION, true));
-        chooser.setDialogTitle("File auswählen"); // TODO Text auslagern
-        return chooser;
-    }
-
-    private void selectPath()
-    {
-        LOGGER.info("Select Path Action clicked");
-
-
-        JFrame parent = ((SingleFrameApplication) Application.getInstance()).getMainFrame();
-
-        if(glScanAnalyzer.getType()== "Multi") {
-            JFileChooser chooser = createPreparedDirChooser();
-
-            if(glScanAnalyzer.getInputpath() != null)   //falls file im path dann wegfiltern
-            {
-                File inputpathFile = new File(glScanAnalyzer.getInputpath());
-                chooser.setCurrentDirectory(inputpathFile);
-            }
-
-            if (chooser.showOpenDialog(parent) == JFileChooser.APPROVE_OPTION)
-            {
-                inputpathString = chooser.getSelectedFile().getAbsolutePath();
-                glScanAnalyzer.setInputpath(inputpathString);
-
-                outputpathString = inputpathString.concat("\\Output");
-                glScanAnalyzer.setOutputpath(outputpathString);
-            }
-        }
-        else if(glScanAnalyzer.getType()== "Single") {              // TODO equals to satt ==
-            JFileChooser chooser = createPreparedFileChooser();
-
-            if(glScanAnalyzer.getInputpath() != null)   //falls file im path dann wegfiltern
-            {
-                File inputpathFile = new File(glScanAnalyzer.getInputpath());
-                chooser.setCurrentDirectory(inputpathFile);
-            }
-
-            if (chooser.showOpenDialog(parent) == JFileChooser.APPROVE_OPTION)
-            {
-                inputpathString = chooser.getSelectedFile().getAbsolutePath();
-                glScanAnalyzer.setInputpath(inputpathString);
-
-                File inputPathFile = new File( inputpathString);
-                outputpathString = inputPathFile.getParent().concat("\\Output");
-                glScanAnalyzer.setOutputpath(outputpathString);
-            }
-        } else {
-            System.out.println("\nERROR");
-        }
-
-        boolean createOutputDirectory = new File(outputpathString).mkdirs();
-        if (!createOutputDirectory) {
-            //TODO Warum Fehler? Gibt es dieses Verzeichnis schon? Dann kein Fehler
-            System.out.println("Error beim Erstellen des Ordners");
-        }
-
-    }
-
-    private void changeOutputPath()
-    {
-        LOGGER.info("Change Outputpath Action clicked");
-
-        JFrame parent = ((SingleFrameApplication) Application.getInstance()).getMainFrame();
-
-        JFileChooser chooser = new JFileChooser();
-        if(glScanAnalyzer.getInputpath() != null)
-        {
-            File outputpathFile = new File(glScanAnalyzer.getOutputpath());
-            chooser.setCurrentDirectory(outputpathFile);
-        }
-        chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-
-        if (chooser.showOpenDialog(parent) == JFileChooser.APPROVE_OPTION)
-        {
-            String newoutputpath = chooser.getSelectedFile().getAbsolutePath().concat("\\Output");
-            File outputpathFile = new File(outputpathString);
-
-            deleteDirectory(outputpathFile);        //altes Dir löschen
-            outputpathString = newoutputpath;       // Outpupath neu setzen
-
-            // priv outputpathString neu setzen
-            boolean createOutputDirectory = new File(outputpathString).mkdirs();    //neuen Ordner erstellen
-            if (!createOutputDirectory) {
-                //TODO Warum Fehler? Gibt es dieses Verzeichnis schon? Dann kein Fehler
-                System.out.println("Error beim Erstellen des Ordners");
-            }
-
-            // Domainobjekt aktualisieren, in Textfeld anzeigen
-            glScanAnalyzer.setOutputpath(outputpathString);
-        }
-
-
-    }
-
-    private class SelectpathAction extends AbstractAction
-    {
-        public SelectpathAction()
-        {
-        }
-
-        public void actionPerformed(ActionEvent e)
-        {
-            selectPath();
-        }
-    }
-
-    private class TypeAction extends AbstractAction {
-        public TypeAction() {
-        }
-
-        public void actionPerformed(ActionEvent e) {
-            LOGGER.info("Analyze Action clicked");
-
-            System.out.println("Type! Ich bin ein Test!!\n");
-            // TODO Action ausprogrammieren
-            JFrame parent = ((SingleFrameApplication) Application.getInstance()).getMainFrame();
-        }
-    }
-
-    private class OutputpathAction extends AbstractAction {
-        public OutputpathAction() {
-        }
-
-        public void actionPerformed(ActionEvent e) {
-            // TODO Pfad erst aenderbar, wenn Inputpfad gesetzt ist, vorher grau
-            changeOutputPath();
-
-        }
-    }
-*/
 
     //endregion:
 }

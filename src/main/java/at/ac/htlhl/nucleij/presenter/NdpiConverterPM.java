@@ -201,6 +201,17 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
                 glScanAnalyzer.setNdpiList(ndpiFileList);
                 glScanAnalyzer.setTifList(tifFileList);
 
+                if( numberTifFiles == 1 && numberNdpiFiles == 0 )
+                {
+                    System.out.println("ROI Modus enablen");
+                    glScanAnalyzer.setSetroi(true);
+                }
+                else
+                {
+                    System.out.println("ROI Modus disablen");
+                    glScanAnalyzer.setSetroi(false);
+
+                }
 
                 JFrame parentDialog = ((SingleFrameApplication) Application.getInstance()).getMainFrame();
 

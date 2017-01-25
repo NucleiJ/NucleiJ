@@ -37,9 +37,7 @@ public class GLScanAnalyzerView extends JPanel {
     private JFormattedTextField heatmapqualityTextField;
     private JComponent roiSeperator;
     private JLabel selectroiLabel;
-    private JFormattedTextField selectRoiTextField;
-    private JButton deleteRoiButton;
-    private JButton selectRoiButton;
+    private JButton selctroiButton;
     private JButton startAnalyzerButton;
     private AbstractAction analyzeAction;
     private AbstractAction calculateandshowheatmapAction;
@@ -117,9 +115,7 @@ public class GLScanAnalyzerView extends JPanel {
         heatmapqualityTextField = new JFormattedTextField();
         roiSeperator = compFactory.createSeparator(bundle.getString("GLScanAnalyzerView.roiSeperator.text"));
         selectroiLabel = new JLabel();
-        selectRoiTextField = new JFormattedTextField();
-        deleteRoiButton = new JButton();
-        selectRoiButton = new JButton();
+        selctroiButton = new JButton();
         startAnalyzerButton = new JButton();
 
         //======== this ========
@@ -156,23 +152,13 @@ public class GLScanAnalyzerView extends JPanel {
         selectroiLabel.setText(bundle.getString("GLScanAnalyzerView.selectroiLabel"));
         add(selectroiLabel, CC.xy(1, 9));
 
-        //---- selectRoiTextField ----
-        selectRoiTextField.setEditable(false);
-        add(selectRoiTextField, CC.xywh(3, 9, 3, 1));
-
-        //---- deleteRoiButton ----
-        deleteRoiButton.setBorderPainted(false);
-        deleteRoiButton.setAction(deleteroiAction);
-        deleteRoiButton.setIcon(new ImageIcon(getClass().getResource("/at/ac/htlhl/nucleij/resources/images/i16x16/process-stop.png")));
-        add(deleteRoiButton, CC.xy(7, 9));
-
-        //---- selectRoiButton ----
-        selectRoiButton.setAction(setRoiAction);
-        add(selectRoiButton, CC.xy(9, 9));
+        //---- selctroiButton ----
+        selctroiButton.setAction(setRoiAction);
+        add(selctroiButton, CC.xy(3, 9, CC.LEFT, CC.DEFAULT));
 
         //---- startAnalyzerButton ----
         startAnalyzerButton.setAction(analyzeAction);
-        add(startAnalyzerButton, CC.xywh(5, 11, 5, 1));
+        add(startAnalyzerButton, CC.xywh(5, 11, 5, 1, CC.RIGHT, CC.DEFAULT));
 
         //---- analyzeAction ----
         analyzeAction.putValue(Action.NAME, bundle.getString("GLScanAnalyzerView.analyzeAction.Name"));

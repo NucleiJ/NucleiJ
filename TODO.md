@@ -16,6 +16,8 @@
 * Einstellungsdialog
 * Linux funktioniert?
 * In MainAnalyzer Pfad Problem beheben (direkt Property abfragen)
+* Dialog am Ende des Prozesses, Zusammenfassung was gemacht wurde und wielange es gedauert hat
+
 
 ### 2. Zukunftsmusik ###
 * Schriftgröße änderbar (optional zur Laufzeit)

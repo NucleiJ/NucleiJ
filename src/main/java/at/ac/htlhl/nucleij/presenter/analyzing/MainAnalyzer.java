@@ -11,6 +11,7 @@ import ij.gui.WaitForUserDialog;
 import ij.measure.ResultsTable;
 import ij.plugin.filter.Analyzer;
 import ij.plugin.filter.PlugInFilter;
+import ij.plugin.frame.RoiManager;
 import ij.process.ImageProcessor;
 
 import java.awt.*;
@@ -137,6 +138,7 @@ public class MainAnalyzer implements PlugInFilter {
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		System.out.println( (int) screenSize.getHeight() + " " + (int) screenSize.getWidth());
 		//ImageWindow.setNextLocation((int) screenSize.getHeight() -300, (int) screenSize.getWidth() -300);
+
 		ImageWindow.setNextLocation( (int) screenSize.getWidth() +100 , (int) screenSize.getHeight() +100);
 
 		imp.show();
@@ -163,10 +165,6 @@ public class MainAnalyzer implements PlugInFilter {
 
 		//Hauptprozess zum Erkennen der Zellkerne
 		startImageProcessingActivity(original, copy, sicherung, heatmapTmp, imp, heatmap_ip, x10, radiobox, w, h);
-
-		//Ausgabe und Ende des Programms
-		//IJ.showMessage("Es wurden" ,pixelanzahl+ " Pixel gefunden!");
-		System.out.print("\n\n############################################################\n");
 
 		//Ende des HP
 
@@ -378,13 +376,17 @@ public class MainAnalyzer implements PlugInFilter {
 
 			do {
 				//Bild oeffnen, var setzen dass bild bereits offen ist
+
+                //ImageWindow.setLocationAndSize(10, 10, 50, 50);
 				imp.updateAndRepaintWindow();
 
-				new WaitForUserDialog("Information", "Please set a rectangular\nROI and press OK").show();
+				imp.setRoi(glScanAnalyzer.getRoiX(), glScanAnalyzer.getRoiY(), glScanAnalyzer.getRoiWidth(), glScanAnalyzer.getRoiHeight());
 
 				Roi roi = imp.getRoi();
 				if (roi instanceof Roi) {
-					IJ.run(imp, "Crop", "");
+
+				    // TODO imp.setRoi();
+				    IJ.run(imp, "Crop", "");
 					imp.updateAndDraw();
 
 					CROP_CHECKBOX = true;
@@ -407,6 +409,7 @@ public class MainAnalyzer implements PlugInFilter {
 		// TODO Werte einlesbar nicht statisch
 		EXPORT_RESULTS_CHECKBOX = true;
 		EXPORT_PIC_CHECKBOX = true;
+		CROP_CHECKBOX = glScanAnalyzer.isSetroi();
 		HEATMAP_CHECKBOX = glScanAnalyzer.isCalculateandshowheatmap();
 		AUFLOESUNG_SLIDER = glScanAnalyzer.getHeatmapquality();
 
