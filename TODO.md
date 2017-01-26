@@ -2,9 +2,9 @@
 # TO-DO Liste #
 
 ### 1. Erweiterungen: ###
-* ROI Einstellungen nur sichtbar, wenn SingleMode -> View an PM uebergeben?
+# ROI Einstellungen nur sichtbar, wenn SingleMode -> View an PM uebergeben?
 * Watershed Function!
-* Einstellungen (Was gehört exportiert? Input/Output Ordner einstellen)
+* Einstellungen (Was gehört exportiert? Input/Output Ordner einstellen) [E M]
 * Speichern/Einlesen von Einstellungen
 * Jason File (.nucleij)
 * Startdialog (NucleiJ v2.0)
@@ -36,7 +36,6 @@
 * Verschiedene LUTs
 * Standart Filechooserpath einstellbar 
 * Schriftgröße
-* Zukunftsmusik: L&F?
 
 
 ### 6. Abgeschlossene ###
@@ -44,6 +43,7 @@
 * LuT Relativer Pfad                                                23.01.17
 * Momentan verarbeitete Datei anzeigen                              24.01.17
 * Abfrage Analysieren oder Analysieren&Konvertieren (TaskDialog)    24.01.17
+* Zukunftsmusik: L&F? 26.01.17
 
 
 ### 7. Wichtige Notizen ###
