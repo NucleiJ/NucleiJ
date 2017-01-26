@@ -37,6 +37,7 @@
 ### 5.Einstellungen ###
 * Import external LUT
 * Verschiedene LUTs
+* Standart Filechooserpath einstellbar 
 * Schriftgröße
 * Zukunftsmusik: L&F?
 
