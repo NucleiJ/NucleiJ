@@ -7,10 +7,10 @@
 * Einstellungen (Was gehört exportiert? Input/Output Ordner einstellen) [E M]
 * Speichern/Einlesen von Einstellungen
 * Jason File (.nucleij)
-* Startdialog (NucleiJ v2.0)
+* AboutDialog erweitern [E M] 
 * eigene Prozessnamen
-* Cancel soll wirklich beenden
-* Wenn Quality slider geändert, dann berechnen ankreuzen
+* Cancel soll wirklich beenden [E]
+* Wenn Quality slider geändert, dann berechnen ankreuzen [M]
 * Abfrage ob Analyse/Convert erst nach Start-Klick
 * Einstellungen beim Laden von XML-Datei laden
 * Einstellungsdialog
