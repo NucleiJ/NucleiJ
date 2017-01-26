@@ -1,6 +1,7 @@
 package at.ac.htlhl.nucleij.presenter.analyzing;
 
 import at.ac.htlhl.nucleij.model.GLScanAnalyzer;
+import at.ac.htlhl.nucleij.model.NdpiConverter;
 import at.ac.htlhl.nucleij.presenter.analyzing.analyzerLogic.*;
 import ij.IJ;
 import ij.ImagePlus;
@@ -78,9 +79,11 @@ public class MainAnalyzer implements PlugInFilter {
 	}
 
 	public void run(ImageProcessor original_alt) {
+
 		//Benutzereingaben verarbeiten
 		getUserInput();
 
+		/*
 		//Pfad Abfrage
 		File originalPath = new File(glScanAnalyzer.getInputpath().toString());
 
@@ -91,18 +94,26 @@ public class MainAnalyzer implements PlugInFilter {
 		{
 			System.out.println("Bin ein Ordner");
 			path.setValue(originalPath.toString().concat("\\"));
+			System.out.println("*********************\n" +  path.getValue());
 		}
 		else if (isFile)
 		{
 			System.out.println("Bin ein File");
 			path.setValue(originalPath.toString().substring(0,originalPath.toString().lastIndexOf(File.separator)));
+			System.out.println("*********************\n" +  path.getValue());
 		}
+		*/
+
+		path.setValue(glScanAnalyzer.getOutputpath());
 		System.out.println(path.getValue());
 
-
-
 		startExporter.setnewDirectoryname("\\Output");  //TODO andis textfield auslesen wenn es property gibt
-		boolean success = new File(path.getValue() + startExporter.getnewDirectoryname()).mkdirs();
+		boolean success = new File(path.getValue() ).mkdirs();
+
+		//File outputPathFile = new File (glScanAnalyzer.getOutputpath());
+		//boolean success = outputPathFile.mkdirs();
+
+		System.out.println("\nOUTPUTPATHS:\nPfusch:  " + path.getValue() + startExporter.getnewDirectoryname() + "\nProperty:" + glScanAnalyzer.getOutputpath() + "\n################################################\n");
 
 		//Linux Fix: Analyze funktioniert, jedoch Converter unter Linux nicht, unter Windows werden alle ergebnisse nicht in Output sondern überordner gespeichert
 		//File outputPath = new File(glScanAnalyzer.getOutputpath());

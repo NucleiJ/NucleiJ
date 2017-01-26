@@ -114,6 +114,9 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
         }
 
         public void actionPerformed(ActionEvent e) {
+
+            long startTime = System.nanoTime();
+
             JFrame parentAnalyzerConverter = ((SingleFrameApplication) Application.getInstance()).getMainFrame();
             ResourceBundle resourceBundleAnalyzer = AppContext.getInstance().getResourceBundle();
 
@@ -135,6 +138,84 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
             AnalyzerConverterTask analyzerConverterTask = new AnalyzerConverterTask(progressBarAnalyzerConverter, taskDialogAnalyzerConverter, ndpiConverter, glScanAnalyzer);
             analyzerConverterTask.execute();
             taskDialogAnalyzerConverter.show();
+
+            long elapsedTime = System.nanoTime() - startTime;
+            double seconds = (double) elapsedTime / 1000000000.0;
+            double minutes = 0;
+            if (seconds > 59)
+            {
+                minutes = seconds / 60;
+                seconds = seconds % 60;
+            }
+
+            String processDuration;
+            if (minutes != 0)
+            {
+                processDuration = (int) minutes + " Minuten " + (int) seconds + " Sekunden";
+            }
+            else
+            {
+                processDuration = (int) seconds + " Sekunden";
+            }
+
+            String listString = "";
+            for (String s : glScanAnalyzer.getTifList())
+            {
+                listString += s.concat("\n");
+            }
+
+            System.out.println(listString);
+
+            String InfosOfProcessedScans;
+            if (ndpiConverter.getNumberNdpiFiles() != 0  && ndpiConverter.getNumberTifFiles() == 0)
+            {
+                InfosOfProcessedScans = "\n<b>Konvertierte Dateien: </b>" + ndpiConverter.getNumberNdpiFiles();
+            }
+            else if (ndpiConverter.getNumberNdpiFiles() == 0  && ndpiConverter.getNumberTifFiles() != 0)
+            {
+                InfosOfProcessedScans = "\n<b>Analysierte Dateien: </b>" + ndpiConverter.getNumberTifFiles();
+            }
+            else
+            {
+                InfosOfProcessedScans = "\n<b>Konvertierte Dateien: </b>" + ndpiConverter.getNumberNdpiFiles() +
+                        "\n<b>Analysierte Dateien:</b>" + (ndpiConverter.getNumberTifFiles() + ndpiConverter.getNumberNdpiFiles() );
+            }
+
+
+            String[] columnNames = {"First Name",
+                    "Last Name",
+                    "Sport",
+                    "# of Years",
+                    "Vegetarian"};
+            Object[][] data = {
+                    {"Kathy", "Smith",
+                            "Snowboarding", new Integer(5), new Boolean(false)},
+                    {"John", "Doe",
+                            "Rowing", new Integer(3), new Boolean(true)},
+                    {"Sue", "Black",
+                            "Knitting", new Integer(2), new Boolean(false)},
+                    {"Jane", "White",
+                            "Speed reading", new Integer(20), new Boolean(true)},
+                    {"Joe", "Brown",
+                            "Pool", new Integer(10), new Boolean(false)}
+            };
+
+            // Summary Dialog:
+            TaskDialog dlg = new TaskDialog(((SingleFrameApplication) Application.getInstance()).getMainFrame(), "Zusammenfassung" );
+            dlg.setIcon( TaskDialog.StandardIcon.INFO );
+            dlg.setText( "<b>Ausgabepfad:</b> " + ndpiConverter.getOutputpath() +
+                    "\n<b>Dauer:</b> " + processDuration + "\n" + InfosOfProcessedScans);
+
+            dlg.getDetails().setExpandableComponent(
+                    new JTable(data, columnNames)
+                    //https://www.google.at/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8#q=java+jtable+string+array
+                    //new JLabel("Liste:\n" + listString )
+            );
+
+            dlg.getFooter().setText( "\u00A9 NucleiJ 2017");
+            dlg.getFooter().setIcon( TaskDialog.StandardIcon.INFO );
+            dlg.show();
+
         }
     }
 

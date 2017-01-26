@@ -154,7 +154,6 @@ public class AnalyzerConverterTask extends SwingWorker<String, String>
             e.printStackTrace();
         }
 
-        // TODO neue files in tif liste
         String renameFileName = "_".concat(ndpiConverter.getMagnification().toLowerCase().concat(".ome.tif"));
         String newTifListElement = filePath.replace(".ndpi", renameFileName);
         System.out.println("Der Filename nach dem Konvertieren ist:" + newTifListElement);

@@ -10,15 +10,11 @@
 * eigene Prozessnamen
 * Cancel soll wirklich beenden
 * Wenn Quality slider geändert, dann berechnen ankreuzen
-* [E] OutputOrdner Benutzerdefiniert
 * Abfrage ob Analyse/Convert erst nach Start-Klick
 * Einstellungen beim Laden von XML-Datei laden
 * Einstellungsdialog
 * Linux funktioniert?
-* [E] In MainAnalyzer Pfad Problem beheben (direkt Property abfragen)
-* [E] Dialog am Ende des Prozesses, Zusammenfassung was gemacht wurde und wielange es gedauert hat
-* [E] neues Look and Feel finden
-
+* Dialog (mit Progressbar) breiter machen
 
 ### 2. Zukunftsmusik ###
 * Schriftgröße änderbar (optional zur Laufzeit)
