@@ -7,6 +7,7 @@
 * Einstellungen (Was gehört exportiert? Input/Output Ordner einstellen)
 * Speichern/Einlesen von Einstellungen
 * Jason File (.nucleij)
+* Startdialog (NucleiJ v2.0)
 * eigene Prozessnamen
 * Cancel soll wirklich beenden
 * Wenn Quality slider geändert, dann berechnen ankreuzen
@@ -33,6 +34,7 @@
 ### 5.Einstellungen ###
 * Import external LUT
 * Verschiedene LUTs
+* Standart Filechooserpath einstellbar 
 * Schriftgröße
 * Zukunftsmusik: L&F?
 
