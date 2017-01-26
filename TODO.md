@@ -7,6 +7,7 @@
 * Einstellungen (Was gehört exportiert? Input/Output Ordner einstellen)
 * Speichern/Einlesen von Einstellungen
 * Jason File (.nucleij)
+* Startdialog (NucleiJ v2.0)
 * eigene Prozessnamen
 * Cancel soll wirklich beenden
 * Wenn Quality slider geändert, dann berechnen ankreuzen
