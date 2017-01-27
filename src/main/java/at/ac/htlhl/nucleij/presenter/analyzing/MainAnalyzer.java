@@ -107,11 +107,11 @@ public class MainAnalyzer implements PlugInFilter {
 		path.setValue(glScanAnalyzer.getOutputpath());
 		System.out.println(path.getValue());
 
-		startExporter.setnewDirectoryname("\\Output");  //TODO andis textfield auslesen wenn es property gibt
-		boolean success = new File(path.getValue() ).mkdirs();
+		startExporter.setnewDirectoryname(File.separator + "Output");  //TODO andis textfield auslesen wenn es property gibt
+		//boolean success = new File(path.getValue() ).mkdirs();
 
-		//File outputPathFile = new File (glScanAnalyzer.getOutputpath());
-		//boolean success = outputPathFile.mkdirs();
+		File outputPathFile = new File (glScanAnalyzer.getOutputpath());
+		boolean success = outputPathFile.mkdirs();
 
 		System.out.println("\nOUTPUTPATHS:\nPfusch:  " + path.getValue() + startExporter.getnewDirectoryname() + "\nProperty:" + glScanAnalyzer.getOutputpath() + "\n################################################\n");
 

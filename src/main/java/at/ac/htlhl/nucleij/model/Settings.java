@@ -25,10 +25,10 @@ public class Settings extends Model
     public static final String PROPERTY_SETTINGS_SOLIDITY          = "solidity";
     public static final String PROPERTY_SETTINGS_SUMMARYTYPE       = "summarytype";
 
-    public static final String TYPE_SETTINGS_CSV  = "CSV";
-    public static final String TYPE_SETTINGS_CSVTXT   = "CSV & TXT";
-    public static final String TYPE_SETTINGS_TXT   = "TXT";
-    public static final String[] TYPE_SETTINGS_CHOICES = {TYPE_SETTINGS_CSV, TYPE_SETTINGS_CSVTXT, TYPE_SETTINGS_TXT};
+    public static final String TYPE_SETTINGS_CSV        = "CSV";
+    public static final String TYPE_SETTINGS_CSVTXT     = "CSV & TXT";
+    public static final String TYPE_SETTINGS_TXT        = "TXT";
+    public static final String[] TYPE_SETTINGS_CHOICES  = {TYPE_SETTINGS_CSV, TYPE_SETTINGS_CSVTXT, TYPE_SETTINGS_TXT};
 
 
     // private Vars #####################################################################################
@@ -37,21 +37,15 @@ public class Settings extends Model
     private String convertName;
     private String language;
 
-    private Boolean number;
-    private Boolean area;
-
-
-    // Mattes
-    // ****************************************************************************************
-    //Erben
-
-
+    private boolean number;
+    private boolean area;
     private boolean perimeter;
     private boolean roundness;
     private boolean widthheight;
     private boolean xycoordinates;
     private boolean circularity;
     private boolean solidity;
+
     private String summarytype;
 
     public Settings()
@@ -199,10 +193,9 @@ public class Settings extends Model
     }
 
     public void setSolidity(boolean solidity) {
+        boolean oldValue = this.solidity;
         this.solidity = solidity;
-        boolean oldValue = this.widthheight;
-        this.widthheight = widthheight;
-        firePropertyChange(PROPERTY_SETTINGS_WIDTHHEIGHT,oldValue,widthheight);
+        firePropertyChange(PROPERTY_SETTINGS_SOLIDITY,oldValue,widthheight);
 
     }
 
