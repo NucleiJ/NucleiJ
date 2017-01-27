@@ -120,18 +120,18 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
             long startTime = System.nanoTime();
 
             JFrame parentAnalyzerConverter = ((SingleFrameApplication) Application.getInstance()).getMainFrame();
-            ResourceBundle resourceBundleAnalyzer = AppContext.getInstance().getResourceBundle();
+            ResourceBundle bundle = ResourceBundle.getBundle("at.ac.htlhl.nucleij.resources.i18n.dialogs");
 
 
             //TODO: WICHTIG: Liste in glscanner model erstellen, nach analyze
 
-            TaskDialog taskDialogAnalyzerConverter = new TaskDialog(parentAnalyzerConverter, resourceBundleAnalyzer.getString("AnalyzerConverterDialog.title"));
+            TaskDialog taskDialogAnalyzerConverter = new TaskDialog(parentAnalyzerConverter, bundle.getString("AnalyzerConverterDialog.title"));
 
             JProgressBar progressBarAnalyzerConverter = new JProgressBar(0,100);
             progressBarAnalyzerConverter.setStringPainted(true);
             progressBarAnalyzerConverter.setValue(0);
-            taskDialogAnalyzerConverter.setInstruction(resourceBundleAnalyzer.getString("AnalyzerConverterDialog.instructionMessage"));
-            taskDialogAnalyzerConverter.setText(resourceBundleAnalyzer.getString("AnalyzerConverterDialog.text"));
+            taskDialogAnalyzerConverter.setInstruction(bundle.getString("AnalyzerConverterDialog.instructionMessage"));
+            taskDialogAnalyzerConverter.setText(bundle.getString("AnalyzerConverterDialog.text"));
             taskDialogAnalyzerConverter.setResizable(true);
 
             taskDialogAnalyzerConverter.setFixedComponent(progressBarAnalyzerConverter);
@@ -157,11 +157,12 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
             String processDuration;
             if (minutes != 0)
             {
-                processDuration = (int) minutes + " Minuten " + (int) seconds + " Sekunden";
+                processDuration = (int) minutes + " " + bundle.getString("Words.minutes.text") + " " +
+                        (int) seconds + " " + bundle.getString("Words.sekunds.text");
             }
             else
             {
-                processDuration = (int) seconds + " Sekunden";
+                processDuration = (int) seconds + " " + bundle.getString("Words.sekunds.text");
             }
 
             String listString = "";
@@ -175,16 +176,16 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
             String InfosOfProcessedScans;
             if (ndpiConverter.getNumberNdpiFiles() != 0  && ndpiConverter.getNumberTifFiles() == 0)
             {
-                InfosOfProcessedScans = "\n<b>Konvertierte Dateien: </b>" + ndpiConverter.getNumberNdpiFiles();
+                InfosOfProcessedScans = "\n<b>" + bundle.getString("Words.KonvertierteDateien.text") + ": </b>" + ndpiConverter.getNumberNdpiFiles();
             }
             else if (ndpiConverter.getNumberNdpiFiles() == 0  && ndpiConverter.getNumberTifFiles() != 0)
             {
-                InfosOfProcessedScans = "\n<b>Analysierte Dateien: </b>" + ndpiConverter.getNumberTifFiles();
+                InfosOfProcessedScans = "\n<b>" + bundle.getString("Words.AnalysierteDateien.text") + ": </b>" + ndpiConverter.getNumberTifFiles();
             }
             else
             {
-                InfosOfProcessedScans = "\n<b>Konvertierte Dateien: </b>" + ndpiConverter.getNumberNdpiFiles() +
-                        "\n<b>Analysierte Dateien: </b>" + (ndpiConverter.getNumberTifFiles() + ndpiConverter.getNumberNdpiFiles() );
+                InfosOfProcessedScans = "\n<b>" + bundle.getString("Words.KonvertierteDateien.text") + ": </b>" + ndpiConverter.getNumberNdpiFiles() +
+                        "\n<b>" + bundle.getString("Words.AnalysierteDateien.text") + ": </b>" + (ndpiConverter.getNumberTifFiles() + ndpiConverter.getNumberNdpiFiles() );
             }
 
 
