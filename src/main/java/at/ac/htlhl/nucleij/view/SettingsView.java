@@ -6,6 +6,12 @@ package at.ac.htlhl.nucleij.view;
 
 import java.awt.*;
 import javax.swing.*;
+
+import at.ac.htlhl.nucleij.model.GLScanAnalyzer;
+import at.ac.htlhl.nucleij.model.Settings;
+import at.ac.htlhl.nucleij.presenter.tasks.SettingsPM;
+import com.jgoodies.binding.binder.Binders;
+import com.jgoodies.binding.binder.PresentationModelBinder;
 import com.jgoodies.forms.factories.*;
 import com.jgoodies.forms.layout.*;
 
@@ -13,18 +19,53 @@ import com.jgoodies.forms.layout.*;
  * @author Schülerlizenz 2016/17
  */
 public class SettingsView extends JDialog {
-    public SettingsView(Frame owner) {
+
+    private SettingsPM settingsPM;
+    private Settings settings;
+
+    public SettingsView(Frame owner, SettingsPM settingsPM, Settings settings) {
         super(owner);
+
+        this.settingsPM = settingsPM;
+        this.settings = settings;
+
         initComponents();
+        initBinding();
     }
 
-    public SettingsView(Dialog owner) {
+    public SettingsView(Dialog owner, SettingsPM settingsPM, Settings settings) {
         super(owner);
+
+        this.settingsPM = settingsPM;
+        this.settings = settings;
+
         initComponents();
+        initBinding();
+    }
+
+    private void initBinding()
+    {
+        PresentationModelBinder binder = Binders.binderFor(settingsPM);
+        binder.bindBeanProperty(Settings.PROPERTY_SETTINGS_NUMBER).to(numberCheckBox);
+
+    }
+
+    private void createUIComponents() {
+        // TODO: add custom component creation code here
+        changeNumberAction = (AbstractAction) settingsPM.getAnalyzeAction();
+        changeAreaAction = (AbstractAction) settingsPM.getAnalyzeAction();
+        changeCircularityAction = (AbstractAction) settingsPM.getAnalyzeAction();
+        changePerimeterAction = (AbstractAction) settingsPM.getAnalyzeAction();
+        changeRoundnessAction = (AbstractAction) settingsPM.getAnalyzeAction();
+        changeSolidityAction = (AbstractAction) settingsPM.getAnalyzeAction();
+        changeXYCoordinatesAction = (AbstractAction) settingsPM.getAnalyzeAction();
+        changeWidthHeightAction = (AbstractAction) settingsPM.getAnalyzeAction();
     }
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
+        createUIComponents();
+
         DefaultComponentFactory compFactory = DefaultComponentFactory.getInstance();
         dialogPane = new JPanel();
         contentPanel = new JPanel();
@@ -42,14 +83,14 @@ public class SettingsView extends JDialog {
         comboBox1 = new JComboBox<>();
         separator2 = compFactory.createSeparator("Advanced");
         setMagnificationLabel = new JLabel();
-        checkBox13 = new JCheckBox();
-        checkBox9 = new JCheckBox();
-        checkBox14 = new JCheckBox();
-        checkBox2 = new JCheckBox();
-        checkBox11 = new JCheckBox();
-        checkBox4 = new JCheckBox();
-        checkBox8 = new JCheckBox();
-        checkBox10 = new JCheckBox();
+        numberCheckBox = new JCheckBox();
+        areaCheckBox = new JCheckBox();
+        perimeterCheckBox = new JCheckBox();
+        roundnessCheckBox = new JCheckBox();
+        widthheightCheckBox = new JCheckBox();
+        xycoordinatesCheckBox = new JCheckBox();
+        circularityCheckBox = new JCheckBox();
+        solidityCheckBox = new JCheckBox();
         label2 = new JLabel();
         comboBox3 = new JComboBox<>();
         buttonBar = new JPanel();
@@ -127,37 +168,37 @@ public class SettingsView extends JDialog {
                 setMagnificationLabel.setText("Summary Exports:");
                 contentPanel.add(setMagnificationLabel, CC.xy(1, 15, CC.RIGHT, CC.DEFAULT));
 
-                //---- checkBox13 ----
-                checkBox13.setText("# Number");
-                contentPanel.add(checkBox13, CC.xy(3, 15));
+                //---- numberCheckBox ----
+                numberCheckBox.setText("# Number");
+                contentPanel.add(numberCheckBox, CC.xy(3, 15));
 
-                //---- checkBox9 ----
-                checkBox9.setText("Area");
-                contentPanel.add(checkBox9, CC.xy(5, 15));
+                //---- areaCheckBox ----
+                areaCheckBox.setText("Area");
+                contentPanel.add(areaCheckBox, CC.xy(5, 15));
 
-                //---- checkBox14 ----
-                checkBox14.setText("Perimeter");
-                contentPanel.add(checkBox14, CC.xy(7, 15));
+                //---- perimeterCheckBox ----
+                perimeterCheckBox.setText("Perimeter");
+                contentPanel.add(perimeterCheckBox, CC.xy(7, 15));
 
-                //---- checkBox2 ----
-                checkBox2.setText("Roundness");
-                contentPanel.add(checkBox2, CC.xy(3, 17));
+                //---- roundnessCheckBox ----
+                roundnessCheckBox.setText("Roundness");
+                contentPanel.add(roundnessCheckBox, CC.xy(3, 17));
 
-                //---- checkBox11 ----
-                checkBox11.setText("Width/Height");
-                contentPanel.add(checkBox11, CC.xy(5, 17));
+                //---- widthheightCheckBox ----
+                widthheightCheckBox.setText("Width/Height");
+                contentPanel.add(widthheightCheckBox, CC.xy(5, 17));
 
-                //---- checkBox4 ----
-                checkBox4.setText("X/Y-Coordinates");
-                contentPanel.add(checkBox4, CC.xy(7, 17));
+                //---- xycoordinatesCheckBox ----
+                xycoordinatesCheckBox.setText("X/Y-Coordinates");
+                contentPanel.add(xycoordinatesCheckBox, CC.xy(7, 17));
 
-                //---- checkBox8 ----
-                checkBox8.setText("Circularity");
-                contentPanel.add(checkBox8, CC.xy(3, 19));
+                //---- circularityCheckBox ----
+                circularityCheckBox.setText("Circularity");
+                contentPanel.add(circularityCheckBox, CC.xy(3, 19));
 
-                //---- checkBox10 ----
-                checkBox10.setText("Solidity");
-                contentPanel.add(checkBox10, CC.xy(5, 19));
+                //---- solidityCheckBox ----
+                solidityCheckBox.setText("Solidity");
+                contentPanel.add(solidityCheckBox, CC.xy(5, 19));
 
                 //---- label2 ----
                 label2.setText("Summary Type:");
@@ -221,14 +262,14 @@ public class SettingsView extends JDialog {
     private JComboBox<String> comboBox1;
     private JComponent separator2;
     private JLabel setMagnificationLabel;
-    private JCheckBox checkBox13;
-    private JCheckBox checkBox9;
-    private JCheckBox checkBox14;
-    private JCheckBox checkBox2;
-    private JCheckBox checkBox11;
-    private JCheckBox checkBox4;
-    private JCheckBox checkBox8;
-    private JCheckBox checkBox10;
+    private JCheckBox numberCheckBox;
+    private JCheckBox areaCheckBox;
+    private JCheckBox perimeterCheckBox;
+    private JCheckBox roundnessCheckBox;
+    private JCheckBox widthheightCheckBox;
+    private JCheckBox xycoordinatesCheckBox;
+    private JCheckBox circularityCheckBox;
+    private JCheckBox solidityCheckBox;
     private JLabel label2;
     private JComboBox<String> comboBox3;
     private JPanel buttonBar;
@@ -236,5 +277,13 @@ public class SettingsView extends JDialog {
     private JButton okButton;
     private JButton cancelButton;
     private JButton helpButton;
+    private AbstractAction changeNumberAction;
+    private AbstractAction changeRoundnessAction;
+    private AbstractAction changeCircularityAction;
+    private AbstractAction changeAreaAction;
+    private AbstractAction changeWidthHeightAction;
+    private AbstractAction changeSolidityAction;
+    private AbstractAction changePerimeterAction;
+    private AbstractAction changeXYCoordinatesAction;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

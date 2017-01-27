@@ -1,4 +1,4 @@
-JFDML JFormDesigner: "6.0.0.0.51" Java: "1.8.0_102" encoding: "UTF-8"
+JFDML JFormDesigner: "6.0.0.0.71" Java: "1.8.0_112" encoding: "UTF-8"
 
 new FormModel {
 	contentType: "form/swing"
@@ -124,56 +124,56 @@ new FormModel {
 						"hAlign": sfield com.jgoodies.forms.layout.CellConstraints RIGHT
 					} )
 					add( new FormComponent( "javax.swing.JCheckBox" ) {
-						name: "checkBox13"
+						name: "numberCheckBox"
 						"text": "# Number"
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 						"gridX": 3
 						"gridY": 15
 					} )
 					add( new FormComponent( "javax.swing.JCheckBox" ) {
-						name: "checkBox9"
+						name: "areaCheckBox"
 						"text": "Area"
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 						"gridX": 5
 						"gridY": 15
 					} )
 					add( new FormComponent( "javax.swing.JCheckBox" ) {
-						name: "checkBox14"
+						name: "perimeterCheckBox"
 						"text": "Perimeter"
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 						"gridX": 7
 						"gridY": 15
 					} )
 					add( new FormComponent( "javax.swing.JCheckBox" ) {
-						name: "checkBox2"
+						name: "roundnessCheckBox"
 						"text": "Roundness"
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 						"gridY": 17
 						"gridX": 3
 					} )
 					add( new FormComponent( "javax.swing.JCheckBox" ) {
-						name: "checkBox11"
+						name: "widthheightCheckBox"
 						"text": "Width/Height"
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 						"gridX": 5
 						"gridY": 17
 					} )
 					add( new FormComponent( "javax.swing.JCheckBox" ) {
-						name: "checkBox4"
+						name: "xycoordinatesCheckBox"
 						"text": "X/Y-Coordinates"
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 						"gridX": 7
 						"gridY": 17
 					} )
 					add( new FormComponent( "javax.swing.JCheckBox" ) {
-						name: "checkBox8"
+						name: "circularityCheckBox"
 						"text": "Circularity"
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 						"gridX": 3
 						"gridY": 19
 					} )
 					add( new FormComponent( "javax.swing.JCheckBox" ) {
-						name: "checkBox10"
+						name: "solidityCheckBox"
 						"text": "Solidity"
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 						"gridX": 5
@@ -244,6 +244,70 @@ new FormModel {
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )
 			"size": new java.awt.Dimension( 625, 415 )
+		} )
+		add( new FormNonVisual( "javax.swing.AbstractAction" ) {
+			name: "changeNumberAction"
+			auxiliary() {
+				"JavaCodeGenerator.customCreate": true
+			}
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 420 )
+		} )
+		add( new FormNonVisual( "javax.swing.AbstractAction" ) {
+			name: "changeRoundnessAction"
+			auxiliary() {
+				"JavaCodeGenerator.customCreate": true
+			}
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 135, 420 )
+		} )
+		add( new FormNonVisual( "javax.swing.AbstractAction" ) {
+			name: "changeCircularityAction"
+			auxiliary() {
+				"JavaCodeGenerator.customCreate": true
+			}
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 270, 470 )
+		} )
+		add( new FormNonVisual( "javax.swing.AbstractAction" ) {
+			name: "changeAreaAction"
+			auxiliary() {
+				"JavaCodeGenerator.customCreate": true
+			}
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 470 )
+		} )
+		add( new FormNonVisual( "javax.swing.AbstractAction" ) {
+			name: "changeWidthHeightAction"
+			auxiliary() {
+				"JavaCodeGenerator.customCreate": true
+			}
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 115, 470 )
+		} )
+		add( new FormNonVisual( "javax.swing.AbstractAction" ) {
+			name: "changeSolidityAction"
+			auxiliary() {
+				"JavaCodeGenerator.customCreate": true
+			}
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 285, 420 )
+		} )
+		add( new FormNonVisual( "javax.swing.AbstractAction" ) {
+			name: "changePerimeterAction"
+			auxiliary() {
+				"JavaCodeGenerator.customCreate": true
+			}
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 520 )
+		} )
+		add( new FormNonVisual( "javax.swing.AbstractAction" ) {
+			name: "changeXYCoordinatesAction"
+			auxiliary() {
+				"JavaCodeGenerator.customCreate": true
+			}
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 140, 520 )
 		} )
 	}
 }
