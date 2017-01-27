@@ -17,7 +17,7 @@
 * [M] Linux funktioniert?
 * [E] Dialog (mit Progressbar) breiter machen
 * JAR zum Laufen bringen
-* Öffnen des Output-Ordners vom SummaryDialog aus
+* Öffnen des Output-Ordners vom SummaryDialog aus & Auch schließen
 
 ### 2. Zukunftsmusik ###
 * Schriftgröße änderbar (optional zur Laufzeit)
