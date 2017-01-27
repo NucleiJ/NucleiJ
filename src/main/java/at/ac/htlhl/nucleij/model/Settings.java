@@ -9,7 +9,6 @@ public class Settings extends Model
 {
     public static final String PROPERTY_SETTINGS_OUTPUTNAME        = "outputname";
     public static final String PROPERTY_SETTINGS_STANDARD_FOLDER   = "standardfolder";
-    public static final String PROPERTY_SETTINGS_CONVERTNAME       = "convertname";
     public static final String PROPERTY_SETTINGS_LANGUAGE          = "language";
 
     public static final String PROPERTY_SETTINGS_NUMBER            = "number";
@@ -25,16 +24,19 @@ public class Settings extends Model
     public static final String PROPERTY_SETTINGS_SOLIDITY          = "solidity";
     public static final String PROPERTY_SETTINGS_SUMMARYTYPE       = "summarytype";
 
-    public static final String TYPE_SETTINGS_CSV        = "CSV";
-    public static final String TYPE_SETTINGS_CSVTXT     = "CSV & TXT";
-    public static final String TYPE_SETTINGS_TXT        = "TXT";
-    public static final String[] TYPE_SETTINGS_CHOICES  = {TYPE_SETTINGS_CSV, TYPE_SETTINGS_CSVTXT, TYPE_SETTINGS_TXT};
+    public static final String TYPE_SETTINGS_CSV             = "CSV";
+    public static final String TYPE_SETTINGS_CSVTXT          = "CSV & TXT";
+    public static final String TYPE_SETTINGS_TXT             = "TXT";
+    public static final String[] TYPE_SETTINGS_CHOICES       = {TYPE_SETTINGS_CSV, TYPE_SETTINGS_CSVTXT, TYPE_SETTINGS_TXT};
+
+    public static final String LANGUAGE_SETTINGS_DE          = "Deutsch";
+    public static final String LANGUAGE_SETTINGS_EN          = "English";
+    public static final String[] LANGUAGE_SETTINGS_CHOICES   = {LANGUAGE_SETTINGS_DE, LANGUAGE_SETTINGS_EN};
 
 
     // private Vars #####################################################################################
     private String outputName;
     private String standardFolder;
-    private String convertName;
     private String language;
 
     private boolean number;
@@ -54,7 +56,6 @@ public class Settings extends Model
 
         this.outputName     = "Output";
         this.standardFolder = null;
-        this.convertName    = "_x10.OME";
         this.language       = "EN";
 
         this.number         = true;
@@ -67,7 +68,6 @@ public class Settings extends Model
         this.xycoordinates  = false;
         this.summarytype    = "CSV & TXT";
     }
-
 
 
     // getter setter ###################################################################################
@@ -91,16 +91,6 @@ public class Settings extends Model
         firePropertyChange(PROPERTY_SETTINGS_STANDARD_FOLDER,oldValue,standardFolder);
     }
 
-    public String getConvertName() {
-        return convertName;
-    }
-
-    public void setConvertName(String convertName) {
-        String oldValue = this.convertName;
-        this.convertName = convertName;
-        firePropertyChange(PROPERTY_SETTINGS_CONVERTNAME,oldValue,convertName);
-    }
-
     public String getLanguage() {
         return language;
     }
@@ -111,7 +101,7 @@ public class Settings extends Model
         firePropertyChange(PROPERTY_SETTINGS_LANGUAGE,oldValue,language);
     }
 
-    public Boolean getNumber() {
+    public Boolean isNumber() {
         return number;
     }
 
@@ -121,7 +111,7 @@ public class Settings extends Model
         firePropertyChange(PROPERTY_SETTINGS_NUMBER,oldValue,number);
     }
 
-    public Boolean getArea() {
+    public Boolean isArea() {
         return area;
     }
 
