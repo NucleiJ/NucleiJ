@@ -211,7 +211,7 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
             {
                 if(i == 0)
                 {
-                    modelSpezific.insertRow(modelSpezific.getRowCount() ,new Object[]{"Konvertierte Dateien:"});
+                    modelSpezific.insertRow(modelSpezific.getRowCount() ,new Object[]{"<html><b>Konvertierte Dateien:</b></html>"});
                 }
                 modelSpezific.insertRow(modelSpezific.getRowCount() ,new Object[]{ndpiElement});
                 i++;
@@ -222,17 +222,16 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
                 if(i == 0)
                 {
                     modelSpezific.insertRow(modelSpezific.getRowCount() ,new Object[]{""});
-                    modelSpezific.insertRow(modelSpezific.getRowCount() ,new Object[]{"Analysierte Dateien:"});
+                    modelSpezific.insertRow(modelSpezific.getRowCount() ,new Object[]{"<html><b>Analysierte Dateien:</b></html>"});
                 }
                 modelSpezific.insertRow(modelSpezific.getRowCount() ,new Object[]{tifElement});
                 i++;
             }
 
             TableColumn column = tableSpezific.getColumnModel().getColumn(0);
-            column.setPreferredWidth(500);
-             //JTable tableSpezific = new JTable (dataSpezific, columnNamesSpezific);
+            column.setPreferredWidth(700);
 
-
+            tableSpezific.getModel().getValueAt(0, 0);
 
             // Summary Dialog:
             TaskDialog dlg = new TaskDialog(((SingleFrameApplication) Application.getInstance()).getMainFrame(), "Zusammenfassung" );

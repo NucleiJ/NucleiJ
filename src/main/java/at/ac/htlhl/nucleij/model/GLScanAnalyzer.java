@@ -17,11 +17,6 @@ public class GLScanAnalyzer extends Model
     // ************************************************************************
     // Properties
 
-    /*public static final String PROPERTY_TYPE = "type";
-    public static final String PROPERTY_INPUTPATH = "inputpath";
-    public static final String PROPERTY_OUTPUTPATH = "outputpath";
-    public static final String PROPERTY_SELECTROI = "selectroi";*/
-
     public static final String PROPERTY_CALCULATEANDSHOWHEATMAP = "calculateandshowheatmap";
     public static final String PROPERTY_HEATMAPQUALITY = "heatmapquality";
     public static final String PROPERTY_ROIAREA = "roiarea";
@@ -29,15 +24,9 @@ public class GLScanAnalyzer extends Model
 
     // endregion
 
-    /*public static final String SINGLE   = "Single";
-    public static final String MULTI    = "Multi";
-    public static final String[] STRING_CHOICES = { SINGLE, MULTI };*/
-
     // region Fields
     // ************************************************************************
 
-    /*
-    private boolean selectroi;*/
 
     //eigene Werte
     private NdpiConverter ndpiConverter;
@@ -62,7 +51,6 @@ public class GLScanAnalyzer extends Model
     private int roiHeight;
 
     // endregion
-
 
     public GLScanAnalyzer(NdpiConverter ndpiConverter)
     {
