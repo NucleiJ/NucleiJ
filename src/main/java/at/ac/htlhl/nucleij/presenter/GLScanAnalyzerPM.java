@@ -139,6 +139,10 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
 
             AnalyzerConverterTask analyzerConverterTask = new AnalyzerConverterTask(progressBarAnalyzerConverter, taskDialogAnalyzerConverter, ndpiConverter, glScanAnalyzer);
             analyzerConverterTask.execute();
+
+            //analyzerConverterTask.isCancelled() == true
+
+
             taskDialogAnalyzerConverter.show();
 
             long elapsedTime = System.nanoTime() - startTime;
@@ -230,8 +234,6 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
 
             TableColumn column = tableSpezific.getColumnModel().getColumn(0);
             column.setPreferredWidth(700);
-
-            tableSpezific.getModel().getValueAt(0, 0);
 
             // Summary Dialog:
             TaskDialog dlg = new TaskDialog(((SingleFrameApplication) Application.getInstance()).getMainFrame(), "Zusammenfassung" );
