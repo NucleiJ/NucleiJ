@@ -1,4 +1,4 @@
-JFDML JFormDesigner: "6.0.0.0.71" Java: "1.8.0_112" encoding: "UTF-8"
+JFDML JFormDesigner: "6.0.0.0.51" Java: "1.8.0_102" encoding: "UTF-8"
 
 new FormModel {
 	contentType: "form/swing"
@@ -10,7 +10,7 @@ new FormModel {
 				"border": sfield com.jgoodies.forms.factories.Borders DIALOG
 				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
 					"$columnSpecs": "68dlu, labelcompgap, 31dlu:grow, labelcompgap, default:grow, labelcompgap, default:grow"
-					"$rowSpecs": "default, linegap, default, linegap, default, linegap, default, linegap, default, linegap, default, linegap, default, linegap, default, linegap, default, linegap, default, linegap, default"
+					"$rowSpecs": "default, linegap, default, linegap, default, linegap, default, linegap, default, linegap, default, linegap, default, linegap, default, linegap, default, linegap, default"
 					"$columnGroupIds": "0, 0, 1, 0, 1, 0, 1"
 				} ) {
 					name: "contentPanel"
@@ -28,20 +28,12 @@ new FormModel {
 						"hAlign": sfield com.jgoodies.forms.layout.CellConstraints RIGHT
 					} )
 					add( new FormComponent( "javax.swing.JTextField" ) {
-						name: "inputDirTextField"
+						name: "outputNameTextField"
 						"text": "Output"
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 						"gridX": 3
 						"gridY": 3
 						"gridWidth": 3
-					} )
-					add( new FormComponent( "javax.swing.JButton" ) {
-						name: "button1"
-						"text": "Reset"
-					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-						"gridX": 7
-						"gridY": 3
-						"hAlign": sfield com.jgoodies.forms.layout.CellConstraints LEFT
 					} )
 					add( new FormComponent( "javax.swing.JLabel" ) {
 						name: "folderDirectoryLabel2"
@@ -51,7 +43,7 @@ new FormModel {
 						"hAlign": sfield com.jgoodies.forms.layout.CellConstraints RIGHT
 					} )
 					add( new FormComponent( "javax.swing.JTextField" ) {
-						name: "textField1"
+						name: "standardDirTextField"
 						"text": "C:/User/Andreas/"
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 						"gridX": 3
@@ -60,43 +52,28 @@ new FormModel {
 					} )
 					add( new FormComponent( "javax.swing.JButton" ) {
 						name: "button2"
-						"text": "Reset"
+						"text": "..."
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 						"gridX": 7
 						"gridY": 5
 						"hAlign": sfield com.jgoodies.forms.layout.CellConstraints LEFT
 					} )
-					add( new FormComponent( "javax.swing.JLabel" ) {
-						name: "label1"
-						"text": "Convert Name:"
-					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-						"gridX": 1
-						"gridY": 7
-						"hAlign": sfield com.jgoodies.forms.layout.CellConstraints RIGHT
-					} )
-					add( new FormComponent( "javax.swing.JTextField" ) {
-						name: "textField2"
-						"text": "_x10.OME"
-					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-						"gridX": 3
-						"gridY": 7
-					} )
 					add( new FormComponent( "com.jformdesigner.designer.wrapper.JGoodiesFormsSeparator" ) {
 						name: "separator4"
 						"text": "Language"
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-						"gridY": 9
+						"gridY": 7
 						"gridWidth": 7
 					} )
 					add( new FormComponent( "javax.swing.JLabel" ) {
 						name: "exportFolder"
 						"text": "Source:"
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-						"gridY": 11
+						"gridY": 9
 						"hAlign": sfield com.jgoodies.forms.layout.CellConstraints RIGHT
 					} )
 					add( new FormComponent( "javax.swing.JComboBox" ) {
-						name: "comboBox1"
+						name: "languageComboBox"
 						"model": new javax.swing.DefaultComboBoxModel {
 							selectedItem: "EN"
 							addElement( "EN" )
@@ -107,20 +84,20 @@ new FormModel {
 						}
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 						"gridX": 3
-						"gridY": 11
+						"gridY": 9
 					} )
 					add( new FormComponent( "com.jformdesigner.designer.wrapper.JGoodiesFormsSeparator" ) {
 						name: "separator2"
 						"text": "Advanced"
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-						"gridY": 13
+						"gridY": 11
 						"gridWidth": 7
 					} )
 					add( new FormComponent( "javax.swing.JLabel" ) {
 						name: "setMagnificationLabel"
 						"text": "Summary Exports:"
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-						"gridY": 15
+						"gridY": 13
 						"hAlign": sfield com.jgoodies.forms.layout.CellConstraints RIGHT
 					} )
 					add( new FormComponent( "javax.swing.JCheckBox" ) {
@@ -128,27 +105,27 @@ new FormModel {
 						"text": "# Number"
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 						"gridX": 3
-						"gridY": 15
+						"gridY": 13
 					} )
 					add( new FormComponent( "javax.swing.JCheckBox" ) {
 						name: "areaCheckBox"
 						"text": "Area"
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 						"gridX": 5
-						"gridY": 15
+						"gridY": 13
 					} )
 					add( new FormComponent( "javax.swing.JCheckBox" ) {
 						name: "perimeterCheckBox"
 						"text": "Perimeter"
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 						"gridX": 7
-						"gridY": 15
+						"gridY": 13
 					} )
 					add( new FormComponent( "javax.swing.JCheckBox" ) {
 						name: "roundnessCheckBox"
 						"text": "Roundness"
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-						"gridY": 17
+						"gridY": 15
 						"gridX": 3
 					} )
 					add( new FormComponent( "javax.swing.JCheckBox" ) {
@@ -156,39 +133,39 @@ new FormModel {
 						"text": "Width/Height"
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 						"gridX": 5
-						"gridY": 17
+						"gridY": 15
 					} )
 					add( new FormComponent( "javax.swing.JCheckBox" ) {
 						name: "xycoordinatesCheckBox"
 						"text": "X/Y-Coordinates"
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 						"gridX": 7
-						"gridY": 17
+						"gridY": 15
 					} )
 					add( new FormComponent( "javax.swing.JCheckBox" ) {
 						name: "circularityCheckBox"
 						"text": "Circularity"
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 						"gridX": 3
-						"gridY": 19
+						"gridY": 17
 					} )
 					add( new FormComponent( "javax.swing.JCheckBox" ) {
 						name: "solidityCheckBox"
 						"text": "Solidity"
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 						"gridX": 5
-						"gridY": 19
+						"gridY": 17
 					} )
 					add( new FormComponent( "javax.swing.JLabel" ) {
 						name: "label2"
 						"text": "Summary Type:"
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 						"gridX": 1
-						"gridY": 21
+						"gridY": 19
 						"hAlign": sfield com.jgoodies.forms.layout.CellConstraints RIGHT
 					} )
 					add( new FormComponent( "javax.swing.JComboBox" ) {
-						name: "comboBox3"
+						name: "summaryTypeComboBox"
 						"model": new javax.swing.DefaultComboBoxModel {
 							selectedItem: "CSV"
 							addElement( "CSV" )
@@ -197,7 +174,7 @@ new FormModel {
 						}
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 						"gridX": 3
-						"gridY": 21
+						"gridY": 19
 					} )
 				}, new FormLayoutConstraints( class java.lang.String ) {
 					"value": "Center"
@@ -223,14 +200,14 @@ new FormModel {
 					} )
 					add( new FormComponent( "javax.swing.JButton" ) {
 						name: "cancelButton"
-						"text": "Cancel"
+						"text": "Apply"
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 						"gridX": 6
 						"gridY": 1
 					} )
 					add( new FormComponent( "javax.swing.JButton" ) {
 						name: "helpButton"
-						"text": "Help"
+						"text": "Cancel"
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 						"gridX": 8
 						"gridY": 1
@@ -243,7 +220,7 @@ new FormModel {
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )
-			"size": new java.awt.Dimension( 625, 415 )
+			"size": new java.awt.Dimension( 625, 370 )
 		} )
 		add( new FormNonVisual( "javax.swing.AbstractAction" ) {
 			name: "changeNumberAction"

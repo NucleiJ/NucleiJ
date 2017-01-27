@@ -12,7 +12,6 @@ public class SettingsPM extends PresentationModel<Settings>
 {
     private Action outputName;
     private Action standardFolder;
-    private Action convertName;
     private Action language;
 
     private Action number;
