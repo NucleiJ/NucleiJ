@@ -37,7 +37,7 @@ public class Exporter
 	public void csvSummary (String resultzeile, String path)
 	{
 		//String exportReport = path + newDirectoryname + "\\" + "Results.csv";
-		String exportReport = path.concat("\\").concat("Results.csv");
+		String exportReport = path.concat(File.separator + "Results.csv");
 
 		File reportfile = new File(exportReport);
 		try {
@@ -99,7 +99,7 @@ public class Exporter
 		String ReportFilename = filename.replaceFirst("[.][^.]+$", "").concat("_Results.txt");		//Neuen Filenamen festlegen
     	
     	//String exportReport = path + newDirectoryname + "\\" + ReportFilename;
-		String exportReport = path.concat("\\").concat(ReportFilename);
+		String exportReport = path.concat(File.separator + ReportFilename);
      	
      	File reportfile = new File(exportReport);
         try {
@@ -243,7 +243,7 @@ public class Exporter
 		{
 			filename = filename.replaceFirst("[.][^.]+$", "") + "_Marked.tif";	//Neuen Filenamen festlegen
 	    	
-	    	String exportEndpic = path + "\\" + filename;
+	    	String exportEndpic = path + File.separator + filename;
 
 		    IJ.saveAs(imp, "Tif", exportEndpic);
 		    System.out.print("\n\nMarkierter Schnitt exportiert: " + exportEndpic + "\n");
