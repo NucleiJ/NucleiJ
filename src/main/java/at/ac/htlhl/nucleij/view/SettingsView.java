@@ -79,6 +79,17 @@ public class SettingsView extends JDialog {
         changeSolidityAction = (AbstractAction) settingsPM.getSolidityAction();
         changeXYCoordinatesAction = (AbstractAction) settingsPM.getXyCoordinatesAction();
         changeWidthHeightAction = (AbstractAction) settingsPM.getWidthHeightAction();
+
+        changeOutputNameAction = (AbstractAction) settingsPM.getOutputNameAction();
+        changeStandardFolderAction = (AbstractAction) settingsPM.getStandardFolderAction();
+        changeLanguageAction = (AbstractAction) settingsPM.getLanguageAction();
+
+        changeSummaryTypeAction = (AbstractAction) settingsPM.getSummaryTypeAction();
+
+        resetAllAction = (AbstractAction) settingsPM.getResetAllAction();
+        okAction = (AbstractAction) settingsPM.getOkAction();
+        applyAction = (AbstractAction) settingsPM.getApplyAction();
+        cancelAction = (AbstractAction) settingsPM.getCancelActionAction();
     }
 
     private void initComponents() {
