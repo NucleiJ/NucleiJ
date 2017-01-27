@@ -2,23 +2,20 @@
 # TO-DO Liste #
 
 ### 1. Erweiterungen: ###
-* ROI Einstellungen nur sichtbar, wenn SingleMode -> View an PM uebergeben?
+# ROI Einstellungen nur sichtbar, wenn SingleMode -> View an PM uebergeben?
 * Watershed Function!
-* Einstellungen (Was gehört exportiert? Input/Output Ordner einstellen)
+* Einstellungen (Was gehört exportiert? Input/Output Ordner einstellen) [E M]
 * Speichern/Einlesen von Einstellungen
 * Jason File (.nucleij)
+* AboutDialog erweitern [E M] 
 * eigene Prozessnamen
-* Cancel soll wirklich beenden
-* Wenn Quality slider geändert, dann berechnen ankreuzen
-* [E] OutputOrdner Benutzerdefiniert
+* Cancel soll wirklich beenden [E]
+* Wenn Quality slider geändert, dann berechnen ankreuzen [M]
 * Abfrage ob Analyse/Convert erst nach Start-Klick
 * Einstellungen beim Laden von XML-Datei laden
 * Einstellungsdialog
 * Linux funktioniert?
-* [E] In MainAnalyzer Pfad Problem beheben (direkt Property abfragen)
-* [E] Dialog am Ende des Prozesses, Zusammenfassung was gemacht wurde und wielange es gedauert hat
-* [E] neues Look and Feel finden
-
+* Dialog (mit Progressbar) breiter machen
 
 ### 2. Zukunftsmusik ###
 * Schriftgröße änderbar (optional zur Laufzeit)
@@ -39,7 +36,6 @@
 * Verschiedene LUTs
 * Standart Filechooserpath einstellbar 
 * Schriftgröße
-* Zukunftsmusik: L&F?
 
 
 ### 6. Abgeschlossene ###
@@ -47,6 +43,7 @@
 * LuT Relativer Pfad                                                23.01.17
 * Momentan verarbeitete Datei anzeigen                              24.01.17
 * Abfrage Analysieren oder Analysieren&Konvertieren (TaskDialog)    24.01.17
+* Zukunftsmusik: L&F? 26.01.17
 
 
 ### 7. Wichtige Notizen ###
