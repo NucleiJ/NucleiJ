@@ -65,13 +65,13 @@ public class Settings extends Model
 
         this.number         = true;
         this.area           = true;
-        this.circularity = false;
-        this.perimeter = true;
-        this.roundness = true;
-        this.solidity = false;
-        this.widthheight  = true;
-        this.xycoordinates = false;
-        this.summarytype = "CSV & TXT";
+        this.circularity    = false;
+        this.perimeter      = true;
+        this.roundness      = true;
+        this.solidity       = false;
+        this.widthheight    = true;
+        this.xycoordinates  = false;
+        this.summarytype    = "CSV & TXT";
     }
 
 
