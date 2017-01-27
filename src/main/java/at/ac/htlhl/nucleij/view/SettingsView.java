@@ -8,6 +8,7 @@ import java.awt.*;
 import javax.swing.*;
 
 import at.ac.htlhl.nucleij.model.Settings;
+import at.ac.htlhl.nucleij.presenter.SettingsPM;
 import com.jgoodies.binding.adapter.ComboBoxAdapter;
 import com.jgoodies.binding.binder.Binders;
 import com.jgoodies.binding.binder.PresentationModelBinder;

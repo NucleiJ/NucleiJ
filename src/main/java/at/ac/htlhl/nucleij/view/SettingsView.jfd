@@ -1,6 +1,9 @@
 JFDML JFormDesigner: "6.0.0.0.51" Java: "1.8.0_102" encoding: "UTF-8"
 
 new FormModel {
+	"i18n.bundlePackage": "at.ac.htlhl.nucleij.resources.i18n"
+	"i18n.bundleName": "settingsview"
+	"i18n.keyPrefix": "SettingsView"
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormWindow( "javax.swing.JDialog", new FormLayoutManager( class java.awt.BorderLayout ) ) {

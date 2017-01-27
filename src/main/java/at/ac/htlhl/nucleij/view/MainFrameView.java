@@ -22,6 +22,7 @@ public class MainFrameView extends JFrame {
     private JMenuItem newMenuItem;
     private JMenuItem openMenuItem;
     private JMenuItem saveMenuItem;
+    private JMenuItem settingsMenuItem;
     private JMenuItem exitMenuItem;
     private JMenu helpMenu;
     private JMenuItem aboutMenuItem;
@@ -35,6 +36,7 @@ public class MainFrameView extends JFrame {
     private AbstractAction aboutAction;
     private AbstractAction exitAction;
     private AbstractAction newAction;
+    private AbstractAction settingsAction;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 
     private MainPM mainPM;
@@ -90,6 +92,7 @@ public class MainFrameView extends JFrame {
         newMenuItem = new JMenuItem();
         openMenuItem = new JMenuItem();
         saveMenuItem = new JMenuItem();
+        settingsMenuItem = new JMenuItem();
         exitMenuItem = new JMenuItem();
         helpMenu = new JMenu();
         aboutMenuItem = new JMenuItem();
@@ -126,6 +129,12 @@ public class MainFrameView extends JFrame {
                 saveMenuItem.setText("text");
                 saveMenuItem.setAction(saveAction);
                 settingsMenu.add(saveMenuItem);
+                settingsMenu.addSeparator();
+
+                //---- settingsMenuItem ----
+                settingsMenuItem.setText("text");
+                settingsMenuItem.setAction(settingsAction);
+                settingsMenu.add(settingsMenuItem);
                 settingsMenu.addSeparator();
 
                 //---- exitMenuItem ----
@@ -199,6 +208,11 @@ public class MainFrameView extends JFrame {
         newAction.putValue(Action.NAME, bundle.getString("MainFrame.newAction.Name"));
         newAction.putValue(Action.SMALL_ICON, new ImageIcon(getClass().getResource("/at/ac/htlhl/nucleij/resources/images/i16x16/document-new.png")));
         newAction.putValue(Action.LARGE_ICON_KEY, new ImageIcon(getClass().getResource("/at/ac/htlhl/nucleij/resources/images/i32x32/document-new.png")));
+
+        //---- settingsAction ----
+        settingsAction.putValue(Action.NAME, bundle.getString("MainFrame.settingsAction.Name"));
+        settingsAction.putValue(Action.SMALL_ICON, new ImageIcon(getClass().getResource("/at/ac/htlhl/nucleij/resources/images/i32x32/preferences-system.png")));
+        settingsAction.putValue(Action.LARGE_ICON_KEY, new ImageIcon(getClass().getResource("/at/ac/htlhl/nucleij/resources/images/i32x32/preferences-system.png")));
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 
