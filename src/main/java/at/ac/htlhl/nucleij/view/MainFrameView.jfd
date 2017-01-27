@@ -143,7 +143,7 @@ new FormModel {
 		add( new FormNonVisual( "javax.swing.AbstractAction" ) {
 			name: "settingsAction"
 			"$action.Name": new FormMessage( null, "MainFrame.settingsAction.Name" )
-			"$action.SmallIcon": new com.jformdesigner.model.SwingIcon( 0, "/at/ac/htlhl/nucleij/resources/images/i32x32/preferences-system.png" )
+			"$action.SmallIcon": new com.jformdesigner.model.SwingIcon( 0, "/at/ac/htlhl/nucleij/resources/images/i16x16/preferences-system.png" )
 			"$action.SwingLargeIconKey": new com.jformdesigner.model.SwingIcon( 0, "/at/ac/htlhl/nucleij/resources/images/i32x32/preferences-system.png" )
 			auxiliary() {
 				"JavaCodeGenerator.customCreate": true

@@ -211,7 +211,7 @@ public class MainFrameView extends JFrame {
 
         //---- settingsAction ----
         settingsAction.putValue(Action.NAME, bundle.getString("MainFrame.settingsAction.Name"));
-        settingsAction.putValue(Action.SMALL_ICON, new ImageIcon(getClass().getResource("/at/ac/htlhl/nucleij/resources/images/i32x32/preferences-system.png")));
+        settingsAction.putValue(Action.SMALL_ICON, new ImageIcon(getClass().getResource("/at/ac/htlhl/nucleij/resources/images/i16x16/preferences-system.png")));
         settingsAction.putValue(Action.LARGE_ICON_KEY, new ImageIcon(getClass().getResource("/at/ac/htlhl/nucleij/resources/images/i32x32/preferences-system.png")));
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }

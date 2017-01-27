@@ -156,11 +156,6 @@ public class NucleiJ extends SingleFrameApplication
         Application.launch(NucleiJ.class, args);
     }
 
-    public void changeView(JComponent ndpiConverterView) {
-
-        show(ndpiConverterView);
-    }
-
 
     // region Nested classes
     // ************************************************************************

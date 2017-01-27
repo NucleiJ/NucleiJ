@@ -1,8 +1,11 @@
 package at.ac.htlhl.nucleij.presenter;
 
+import at.ac.htlhl.nucleij.AppContext;
 import at.ac.htlhl.nucleij.model.GLScanAnalyzer;
 import at.ac.htlhl.nucleij.model.Settings;
+import at.ac.htlhl.nucleij.util.SuffixFileFilter;
 import at.ac.htlhl.nucleij.view.SettingsView;
+import com.ezware.dialog.task.TaskDialogs;
 import com.fasterxml.jackson.databind.annotation.JsonAppend;
 import com.jgoodies.binding.PresentationModel;
 
@@ -10,6 +13,8 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.io.File;
+import java.io.IOException;
 
 import static com.sun.xml.internal.ws.spi.db.BindingContextFactory.LOGGER;
 
@@ -18,6 +23,8 @@ import static com.sun.xml.internal.ws.spi.db.BindingContextFactory.LOGGER;
  */
 public class SettingsPM extends PresentationModel<Settings>
 {
+    public static final String FILE_EXTENSION			= "nucleij";
+
     private Action outputNameAction;
     private Action standardFolderAction;
     private Action languageAction;
@@ -267,7 +274,8 @@ public class SettingsPM extends PresentationModel<Settings>
     private class OkAction extends AbstractAction {
         @Override
         public void actionPerformed(ActionEvent e) {
-            //TODO Einstellungen übernehmen und Settings schließen
+            apply();
+            // TODO Schließen
         }
     }
 
@@ -281,7 +289,8 @@ public class SettingsPM extends PresentationModel<Settings>
     private class ApplyAction extends AbstractAction {
         @Override
         public void actionPerformed(ActionEvent e) {
-            //TODO Einstellungen übernehmen (speichern)
+            apply();
+            // TODO Speichern
         }
     }
 
@@ -289,6 +298,7 @@ public class SettingsPM extends PresentationModel<Settings>
         @Override
         public void actionPerformed(ActionEvent e) {
             //TODO abort
+
         }
     }
 
@@ -305,4 +315,16 @@ public class SettingsPM extends PresentationModel<Settings>
         settings.setLanguage(realLanguage);
         settings.setOutputName(realOutputName);
     }
+
+    private void save() {
+        String filePath = System.getProperty("user.dir") ;
+        System.out.println(filePath);
+
+        try {
+            AppContext.getInstance().getJsonMapper().writerWithDefaultPrettyPrinter().writeValue(new File(filePath), getBean());
+        } catch (IOException ex) {
+            TaskDialogs.showException(ex);
+        }
+    }
+
 }

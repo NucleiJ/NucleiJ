@@ -7,6 +7,7 @@ import at.ac.htlhl.nucleij.model.NdpiConverter;
 import at.ac.htlhl.nucleij.util.SuffixFileFilter;
 import at.ac.htlhl.nucleij.view.GLScanAnalyzerView;
 import at.ac.htlhl.nucleij.view.NdpiConverterView;
+import at.ac.htlhl.nucleij.view.SettingsView;
 import com.ezware.dialog.task.TaskDialog;
 import com.ezware.dialog.task.TaskDialogs;
 import com.jgoodies.binding.PresentationModel;
@@ -27,6 +28,9 @@ import static at.ac.htlhl.nucleij.NucleiJ.nucleiJ;
  */
 public class MainPM extends PresentationModel<Main>
 {
+    JFrame parent = ((SingleFrameApplication) Application.getInstance()).getMainFrame();
+    private SettingsView settingsView = new SettingsView(parent,);
+
     // Constants
     // ************************************************************************
     private static final Logger LOGGER = Logger.getLogger(MainPM.class.getName());
@@ -42,7 +46,7 @@ public class MainPM extends PresentationModel<Main>
     private Action aboutAction;
     private Action exitAction;
     private Action newAction;
-    private Action startAction;
+    private Action settingsAction;
 
     // References to sub presentation models
     private NdpiConverter ndpiConverter;
@@ -66,6 +70,7 @@ public class MainPM extends PresentationModel<Main>
         aboutAction = new AboutAction();
         exitAction = new ExitAction();
         newAction = new newAction();
+        settingsAction = new SettingsAction();
     }
 
     public GLScanAnalyzerPM getGLScanAnalyzerPM()
@@ -99,6 +104,10 @@ public class MainPM extends PresentationModel<Main>
 
     public Action getNewAction() {
         return newAction;
+    }
+
+    public Action getSettingsAction() {
+        return settingsAction;
     }
     
     public void setGlScanAnalyzerView(GLScanAnalyzerView glScanAnalyzerView) {
@@ -227,6 +236,14 @@ public class MainPM extends PresentationModel<Main>
         public void actionPerformed(ActionEvent e)
         {
             newClass();
+        }
+    }
+
+    private class SettingsAction extends AbstractAction {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            settingsView = new SettingsView();
+            SettingsView
         }
     }
 
