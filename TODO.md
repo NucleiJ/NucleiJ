@@ -18,6 +18,7 @@
 * [E] Dialog (mit Progressbar) breiter machen
 * JAR zum Laufen bringen
 * Öffnen des Output-Ordners vom SummaryDialog aus
+* alle Texte auslagern
 
 ### 2. Zukunftsmusik ###
 * Schriftgröße änderbar (optional zur Laufzeit)

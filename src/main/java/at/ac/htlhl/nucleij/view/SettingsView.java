@@ -9,7 +9,7 @@ import javax.swing.*;
 
 import at.ac.htlhl.nucleij.model.GLScanAnalyzer;
 import at.ac.htlhl.nucleij.model.Settings;
-import at.ac.htlhl.nucleij.presenter.tasks.SettingsPM;
+import at.ac.htlhl.nucleij.presenter.SettingsPM;
 import com.jgoodies.binding.binder.Binders;
 import com.jgoodies.binding.binder.PresentationModelBinder;
 import com.jgoodies.forms.factories.*;
@@ -52,14 +52,14 @@ public class SettingsView extends JDialog {
 
     private void createUIComponents() {
         // TODO: add custom component creation code here
-        changeNumberAction = (AbstractAction) settingsPM.getAnalyzeAction();
-        changeAreaAction = (AbstractAction) settingsPM.getAnalyzeAction();
-        changeCircularityAction = (AbstractAction) settingsPM.getAnalyzeAction();
-        changePerimeterAction = (AbstractAction) settingsPM.getAnalyzeAction();
-        changeRoundnessAction = (AbstractAction) settingsPM.getAnalyzeAction();
-        changeSolidityAction = (AbstractAction) settingsPM.getAnalyzeAction();
-        changeXYCoordinatesAction = (AbstractAction) settingsPM.getAnalyzeAction();
-        changeWidthHeightAction = (AbstractAction) settingsPM.getAnalyzeAction();
+        changeNumberAction = (AbstractAction) settingsPM.getNumberAction();
+        changeAreaAction = (AbstractAction) settingsPM.getAreaAction();
+        changeCircularityAction = (AbstractAction) settingsPM.getCircularityAction();
+        changePerimeterAction = (AbstractAction) settingsPM.getPerimeterAction();
+        changeRoundnessAction = (AbstractAction) settingsPM.getRoundnessAction();
+        changeSolidityAction = (AbstractAction) settingsPM.getSolidityAction();
+        changeXYCoordinatesAction = (AbstractAction) settingsPM.getXyCoordinatesAction();
+        changeWidthHeightAction = (AbstractAction) settingsPM.getWidthHeightAction();
     }
 
     private void initComponents() {
