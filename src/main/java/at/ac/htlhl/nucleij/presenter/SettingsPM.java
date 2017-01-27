@@ -58,7 +58,6 @@ public class SettingsPM extends PresentationModel<Settings>
             public void propertyChange(PropertyChangeEvent evt) {
                 LOGGER.info("Property name="+evt.getPropertyName()+", oldValue="+evt.getOldValue()+", newValue="+evt.getNewValue());
 
-
             }
 
 

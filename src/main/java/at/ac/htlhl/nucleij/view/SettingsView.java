@@ -5,13 +5,10 @@
 package at.ac.htlhl.nucleij.view;
 
 import java.awt.*;
-import java.util.Set;
 import javax.swing.*;
 
-import at.ac.htlhl.nucleij.model.GLScanAnalyzer;
 import at.ac.htlhl.nucleij.model.Settings;
 import com.jgoodies.binding.adapter.ComboBoxAdapter;
-import at.ac.htlhl.nucleij.presenter.SettingsPM;
 import com.jgoodies.binding.binder.Binders;
 import com.jgoodies.binding.binder.PresentationModelBinder;
 import com.jgoodies.binding.value.ValueModel;
