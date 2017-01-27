@@ -38,7 +38,6 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
     private Action inputPathAction;
     private Action outputPathAction;
     private Action magnificationAction;
-    private Action convertAction;
 
     private NdpiConverter ndpiConverter;
     private GLScanAnalyzer glScanAnalyzer;
@@ -255,8 +254,6 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
             }
         }
     }
-
-
 
     private class OutputPathAction extends AbstractAction {
         public OutputPathAction() {

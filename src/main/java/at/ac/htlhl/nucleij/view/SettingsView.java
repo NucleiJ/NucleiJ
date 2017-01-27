@@ -128,7 +128,7 @@ public class SettingsView extends JDialog {
                 contentPanel.add(setMagnificationLabel, CC.xy(1, 15, CC.RIGHT, CC.DEFAULT));
 
                 //---- checkBox13 ----
-                checkBox13.setText("# Nummer");
+                checkBox13.setText("# Number");
                 contentPanel.add(checkBox13, CC.xy(3, 15));
 
                 //---- checkBox9 ----
@@ -136,11 +136,11 @@ public class SettingsView extends JDialog {
                 contentPanel.add(checkBox9, CC.xy(5, 15));
 
                 //---- checkBox14 ----
-                checkBox14.setText("Perim.");
+                checkBox14.setText("Perimeter");
                 contentPanel.add(checkBox14, CC.xy(7, 15));
 
                 //---- checkBox2 ----
-                checkBox2.setText("Roundnes");
+                checkBox2.setText("Roundness");
                 contentPanel.add(checkBox2, CC.xy(3, 17));
 
                 //---- checkBox11 ----

@@ -125,7 +125,7 @@ new FormModel {
 					} )
 					add( new FormComponent( "javax.swing.JCheckBox" ) {
 						name: "checkBox13"
-						"text": "# Nummer"
+						"text": "# Number"
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 						"gridX": 3
 						"gridY": 15
@@ -139,14 +139,14 @@ new FormModel {
 					} )
 					add( new FormComponent( "javax.swing.JCheckBox" ) {
 						name: "checkBox14"
-						"text": "Perim."
+						"text": "Perimeter"
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 						"gridX": 7
 						"gridY": 15
 					} )
 					add( new FormComponent( "javax.swing.JCheckBox" ) {
 						name: "checkBox2"
-						"text": "Roundnes"
+						"text": "Roundness"
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 						"gridY": 17
 						"gridX": 3
