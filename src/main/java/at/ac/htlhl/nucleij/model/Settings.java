@@ -101,7 +101,7 @@ public class Settings extends Model
         firePropertyChange(PROPERTY_SETTINGS_LANGUAGE,oldValue,language);
     }
 
-    public Boolean getNumber() {
+    public Boolean isNumber() {
         return number;
     }
 
@@ -111,7 +111,7 @@ public class Settings extends Model
         firePropertyChange(PROPERTY_SETTINGS_NUMBER,oldValue,number);
     }
 
-    public Boolean getArea() {
+    public Boolean isArea() {
         return area;
     }
 
