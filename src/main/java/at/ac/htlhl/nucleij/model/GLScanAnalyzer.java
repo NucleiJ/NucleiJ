@@ -56,10 +56,10 @@ public class GLScanAnalyzer extends Model
     private List<String> tifList;
 
     //ROI Informationen:
-    int roiX;
-    int roiY;
-    int roiWidth;
-    int roiHeight;
+    private int roiX;
+    private int roiY;
+    private int roiWidth;
+    private int roiHeight;
 
     // endregion
 
