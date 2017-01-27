@@ -14,6 +14,9 @@ public class Settings extends Model
 
     public static final String PROPERTY_SETTINGS_NUMBER            = "number";
     public static final String PROPERTY_SETTINGS_AREA              = "area";
+    // Mattes
+    //**********************************
+    // Erben
     public static final String PROPERTY_SETTINGS_PERIMETER         = "perimeter";
     public static final String PROPERTY_SETTINGS_ROUNDNESS         = "roundness";
     public static final String PROPERTY_SETTINGS_WIDTHHEIGHT       = "widthheight";
@@ -31,7 +34,29 @@ public class Settings extends Model
     {
         super();
 
+        // TODO init werte setzen
 
     }
+
+    // private Vars #####################################################################################
+
+
+
+
+    // Mattes
+    // ****************************************************************************************
+    //Erben
+
+
+
+    // getter setter ###################################################################################
+
+
+
+    // Mattes
+    // ****************************************************************************************
+    //Erben
+
+
 
 }
