@@ -15,6 +15,8 @@ import org.jdesktop.application.Application;
 import org.jdesktop.application.SingleFrameApplication;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.beans.PropertyChangeEvent;
@@ -182,40 +184,62 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
             }
 
 
-            String[] columnNames = {"First Name",
-                    "Last Name",
-                    "Sport",
-                    "# of Years",
-                    "Vegetarian"};
-            Object[][] data = {
-                    {"Kathy", "Smith",
-                            "Snowboarding", new Integer(5), new Boolean(false)},
-                    {"John", "Doe",
-                            "Rowing", new Integer(3), new Boolean(true)},
-                    {"Sue", "Black",
-                            "Knitting", new Integer(2), new Boolean(false)},
-                    {"Jane", "White",
-                            "Speed reading", new Integer(20), new Boolean(true)},
-                    {"Joe", "Brown",
-                            "Pool", new Integer(10), new Boolean(false)}
+
+
+            String[] columnNamesGeneral = {"Titel",
+                    "Information"};
+            Object[][] dataGeneral = {
+                    {"Ausgabepfad:", ndpiConverter.getOutputpath()},
+                    //{"Ausgabepfad:", ndpiConverter.getOutputpath(), new Integer(5), new Boolean(false)},
+                    {"Dauer:", processDuration}, { "Konvertierte Dateien:", ndpiConverter.getNumberNdpiFiles() },
+                    {"Analysierte Dateien", (ndpiConverter.getNumberTifFiles() + ndpiConverter.getNumberNdpiFiles() )},
             };
+
+            String[] columnNamesSpezific = {"Titel",
+                    "Information"};
+            Object[][] dataSpezific = {
+                    {"Test", "Hallo", new Integer(5), new Boolean(false)},
+                    {"John", "Doe", new Integer(3), new Boolean(true)},
+            };
+
+            DefaultTableModel modelGeneral = new DefaultTableModel(dataGeneral, columnNamesGeneral);
+            JTable tableGeneral = new JTable(modelGeneral);
+
+            modelGeneral.insertRow(modelGeneral.getRowCount() ,new Object[]{"Ranjan","50"});
+
+            TableColumn column = null;
+            for (int i = 0; i < 2; i++) {
+                column = tableGeneral.getColumnModel().getColumn(i);
+                if (i == 0) {
+                    column.setPreferredWidth(150);
+                } else {
+                    column.setPreferredWidth(400);
+                }
+            }
+
+            //JTable tableSpezific = new JTable (dataSpezific, columnNamesSpezific);
+
+
 
             // Summary Dialog:
             TaskDialog dlg = new TaskDialog(((SingleFrameApplication) Application.getInstance()).getMainFrame(), "Zusammenfassung" );
             dlg.setIcon( TaskDialog.StandardIcon.INFO );
-            dlg.setText( "<b>Ausgabepfad:</b> " + ndpiConverter.getOutputpath() +
-                    "\n<b>Dauer:</b> " + processDuration + "\n" + InfosOfProcessedScans);
+            dlg.setInstruction("Zusammenfassung");
+            dlg.setText( "<b>NucleiJ Prozess abgeschlossen:</b>" );
+            //dlg.setFixedComponent(tableGeneral);
 
             dlg.getDetails().setExpandableComponent(
-                    new JTable(data, columnNames)
-                    //https://www.google.at/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8#q=java+jtable+string+array
-                    //new JLabel("Liste:\n" + listString )
-            );
+                    new JLabel( " javax.activity.InvalidActivityException \n " +
+                            "at com.ezware.dialog.task.TaskDialogTestBed.main(TaskDialogTestBed.java:316)"));
+
+
+            //dlg.getDetails().setExpandableComponent(new JTextArea("Test"));
 
             dlg.getFooter().setText( "\u00A9 NucleiJ 2017");
             dlg.getFooter().setIcon( TaskDialog.StandardIcon.INFO );
-            dlg.show();
 
+
+            dlg.show();
         }
     }
 

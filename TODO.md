@@ -58,3 +58,4 @@
 ### 7. Wichtige Notizen ###
 * Mergen: https://www.youtube.com/watch?v=j7wyS_gt0T0
 * Dialog Meister: https://mcoj.wordpress.com/category/java/
+* https://schneide.wordpress.com/tag/taskdialog/
