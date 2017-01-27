@@ -5,6 +5,7 @@
 package at.ac.htlhl.nucleij.view;
 
 import java.awt.*;
+import java.util.*;
 import javax.swing.*;
 
 import at.ac.htlhl.nucleij.model.Settings;
@@ -84,19 +85,20 @@ public class SettingsView extends JDialog {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         createUIComponents();
 
+        ResourceBundle bundle = ResourceBundle.getBundle("at.ac.htlhl.nucleij.resources.i18n.settingsview");
         DefaultComponentFactory compFactory = DefaultComponentFactory.getInstance();
         dialogPane = new JPanel();
         contentPanel = new JPanel();
-        separator3 = compFactory.createSeparator("General");
+        separator3 = compFactory.createSeparator(bundle.getString("SettingsView.General.text"));
         folderDirectoryLabel = new JLabel();
         outputNameTextField = new JTextField();
         folderDirectoryLabel2 = new JLabel();
         standardDirTextField = new JTextField();
-        button2 = new JButton();
-        separator4 = compFactory.createSeparator("Language");
+        standardFolderButton = new JButton();
+        separator4 = compFactory.createSeparator(bundle.getString("SettingsView.Language"));
         exportFolder = new JLabel();
         languageComboBox = new JComboBox<>();
-        separator2 = compFactory.createSeparator("Advanced");
+        separator2 = compFactory.createSeparator(bundle.getString("SettingsView.Advanced"));
         setMagnificationLabel = new JLabel();
         numberCheckBox = new JCheckBox();
         areaCheckBox = new JCheckBox();
@@ -109,10 +111,10 @@ public class SettingsView extends JDialog {
         label2 = new JLabel();
         summaryTypeComboBox = new JComboBox<>();
         buttonBar = new JPanel();
-        okButton2 = new JButton();
+        resetAllButton = new JButton();
         okButton = new JButton();
+        applyButton = new JButton();
         cancelButton = new JButton();
-        helpButton = new JButton();
 
         //======== this ========
         Container contentPane = getContentPane();
@@ -132,28 +134,31 @@ public class SettingsView extends JDialog {
                 contentPanel.add(separator3, CC.xywh(1, 1, 7, 1));
 
                 //---- folderDirectoryLabel ----
-                folderDirectoryLabel.setText("Output Name:");
+                folderDirectoryLabel.setText(bundle.getString("SettingsView.OutputName.text"));
                 contentPanel.add(folderDirectoryLabel, CC.xy(1, 3, CC.RIGHT, CC.DEFAULT));
 
                 //---- outputNameTextField ----
                 outputNameTextField.setText("Output");
+                outputNameTextField.setAction(changeOutputNameAction);
                 contentPanel.add(outputNameTextField, CC.xywh(3, 3, 3, 1));
 
                 //---- folderDirectoryLabel2 ----
-                folderDirectoryLabel2.setText("Standard Folder:");
+                folderDirectoryLabel2.setText(bundle.getString("SettingsView.StandardFolder"));
                 contentPanel.add(folderDirectoryLabel2, CC.xy(1, 5, CC.RIGHT, CC.DEFAULT));
 
                 //---- standardDirTextField ----
                 standardDirTextField.setText("C:/User/Andreas/");
+                standardDirTextField.setAction(changeStandardFolderAction);
                 contentPanel.add(standardDirTextField, CC.xywh(3, 5, 3, 1));
 
-                //---- button2 ----
-                button2.setText("...");
-                contentPanel.add(button2, CC.xy(7, 5, CC.LEFT, CC.DEFAULT));
+                //---- standardFolderButton ----
+                standardFolderButton.setActionCommand(bundle.getString("SettingsView.StandardFolderButton.name"));
+                standardFolderButton.setAction(changeStandardFolderAction);
+                contentPanel.add(standardFolderButton, CC.xy(7, 5, CC.LEFT, CC.DEFAULT));
                 contentPanel.add(separator4, CC.xywh(1, 7, 7, 1));
 
                 //---- exportFolder ----
-                exportFolder.setText("Source:");
+                exportFolder.setText(bundle.getString("SettingsView.Source"));
                 contentPanel.add(exportFolder, CC.xy(1, 9, CC.RIGHT, CC.DEFAULT));
 
                 //---- languageComboBox ----
@@ -164,11 +169,12 @@ public class SettingsView extends JDialog {
                     "CZ",
                     "ES"
                 }));
+                languageComboBox.setAction(changeLanguageAction);
                 contentPanel.add(languageComboBox, CC.xy(3, 9));
                 contentPanel.add(separator2, CC.xywh(1, 11, 7, 1));
 
                 //---- setMagnificationLabel ----
-                setMagnificationLabel.setText("Summary Exports:");
+                setMagnificationLabel.setText(bundle.getString("SettingsView.SummaryExports"));
                 contentPanel.add(setMagnificationLabel, CC.xy(1, 13, CC.RIGHT, CC.DEFAULT));
 
                 //---- numberCheckBox ----
@@ -204,7 +210,7 @@ public class SettingsView extends JDialog {
                 contentPanel.add(solidityCheckBox, CC.xy(5, 17));
 
                 //---- label2 ----
-                label2.setText("Summary Type:");
+                label2.setText(bundle.getString("SettingsView.SummaryType"));
                 contentPanel.add(label2, CC.xy(1, 19, CC.RIGHT, CC.DEFAULT));
 
                 //---- summaryTypeComboBox ----
@@ -224,27 +230,49 @@ public class SettingsView extends JDialog {
                     "$lcgap, $button, $glue, 2*($button, $rgap), $button",
                     "pref"));
 
-                //---- okButton2 ----
-                okButton2.setText("Reset all");
-                buttonBar.add(okButton2, CC.xy(2, 1));
+                //---- resetAllButton ----
+                resetAllButton.setText("Reset all");
+                resetAllButton.setAction(resetAllAction);
+                buttonBar.add(resetAllButton, CC.xy(2, 1));
 
                 //---- okButton ----
                 okButton.setText("OK");
+                okButton.setAction(okAction);
                 buttonBar.add(okButton, CC.xy(4, 1));
 
-                //---- cancelButton ----
-                cancelButton.setText("Apply");
-                buttonBar.add(cancelButton, CC.xy(6, 1));
+                //---- applyButton ----
+                applyButton.setText("Apply");
+                applyButton.setAction(applyAction);
+                buttonBar.add(applyButton, CC.xy(6, 1));
 
-                //---- helpButton ----
-                helpButton.setText("Cancel");
-                buttonBar.add(helpButton, CC.xy(8, 1));
+                //---- cancelButton ----
+                cancelButton.setText("Cancel");
+                cancelButton.setAction(cancelAction);
+                buttonBar.add(cancelButton, CC.xy(8, 1));
             }
             dialogPane.add(buttonBar, BorderLayout.SOUTH);
         }
         contentPane.add(dialogPane, BorderLayout.SOUTH);
         pack();
         setLocationRelativeTo(getOwner());
+
+        //---- changeStandardFolderAction ----
+        changeStandardFolderAction.putValue(Action.NAME, bundle.getString("SettingsView.StandardFolderButton.name"));
+
+        //---- changeLanguageAction ----
+        changeLanguageAction.putValue(Action.NAME, bundle.getString("SettingsView.Source"));
+
+        //---- okAction ----
+        okAction.putValue(Action.NAME, bundle.getString("SettingsView.OkButton.name"));
+
+        //---- applyAction ----
+        applyAction.putValue(Action.NAME, bundle.getString("SettingsView.ApplyButton.name"));
+
+        //---- cancelAction ----
+        cancelAction.putValue(Action.NAME, bundle.getString("SettingsView.CancelButton.name"));
+
+        //---- resetAllAction ----
+        resetAllAction.putValue(Action.NAME, bundle.getString("SettingsView.ResetAllButton.name"));
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 
@@ -256,7 +284,7 @@ public class SettingsView extends JDialog {
     private JTextField outputNameTextField;
     private JLabel folderDirectoryLabel2;
     private JTextField standardDirTextField;
-    private JButton button2;
+    private JButton standardFolderButton;
     private JComponent separator4;
     private JLabel exportFolder;
     private JComboBox<String> languageComboBox;
@@ -273,10 +301,10 @@ public class SettingsView extends JDialog {
     private JLabel label2;
     private JComboBox<String> summaryTypeComboBox;
     private JPanel buttonBar;
-    private JButton okButton2;
+    private JButton resetAllButton;
     private JButton okButton;
+    private JButton applyButton;
     private JButton cancelButton;
-    private JButton helpButton;
     private AbstractAction changeNumberAction;
     private AbstractAction changeRoundnessAction;
     private AbstractAction changeCircularityAction;
@@ -285,5 +313,13 @@ public class SettingsView extends JDialog {
     private AbstractAction changeSolidityAction;
     private AbstractAction changePerimeterAction;
     private AbstractAction changeXYCoordinatesAction;
+    private AbstractAction changeStandardFolderAction;
+    private AbstractAction changeOutputNameAction;
+    private AbstractAction changeLanguageAction;
+    private AbstractAction changeSummaryTypeAction;
+    private AbstractAction okAction;
+    private AbstractAction applyAction;
+    private AbstractAction cancelAction;
+    private AbstractAction resetAllAction;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

@@ -56,7 +56,7 @@ public class Settings extends Model
 
         this.outputName     = "Output";
         this.standardFolder = null;
-        this.language       = "EN";
+        this.language       = "English";
 
         this.number         = true;
         this.area           = true;

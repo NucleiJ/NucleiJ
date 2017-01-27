@@ -6,7 +6,6 @@ import javax.swing.*;
 
 import at.ac.htlhl.nucleij.model.NdpiConverter;
 import at.ac.htlhl.nucleij.presenter.NdpiConverterPM;
-import com.jgoodies.binding.adapter.ComboBoxAdapter;
 import com.jgoodies.binding.adapter.RadioButtonAdapter;
 import com.jgoodies.binding.binder.Binders;
 import com.jgoodies.binding.binder.PresentationModelBinder;
@@ -52,7 +51,7 @@ public class NdpiConverterView extends JPanel {
         folderDirectoryLabel = new JLabel();
         inputDirTextField = new JTextField();
         inputPathButton = new JButton();
-        separator4 = compFactory.createSeparator(bundle.getString("NdpiConverterView.OutputSeperator.Text"));
+        separator4 = compFactory.createSeparator(bundle.getString("NdpiConverterView.OutputSeperator.text"));
         exportFolder = new JLabel();
         outputDirTextField = new JTextField();
         outputPathButton = new JButton();

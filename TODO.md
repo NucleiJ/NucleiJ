@@ -12,7 +12,6 @@
 * [M] Wenn Quality slider geändert, dann berechnen ankreuzen
 * [E M] Abfrage ob Analyse/Convert erst nach Start-Klick
 * Einstellungen beim Laden von XML-Datei laden
-* [M E] Einstellungsdialog Properties, .. erstellen
 * [M] Linux funktioniert?
 * [E] Dialog (mit Progressbar) breiter machen
 * JAR zum Laufen bringen
@@ -54,6 +53,7 @@
 * neues L&F                                                         26.01.17
 * Outputpath beliebig veränderbar                                   27.01.17
 * Seperator statt //                                                27.01.17
+* Einstellungsdialog Properties, .. erstellen                       27.01.17
 
 ### 7. Wichtige Notizen ###
 * Mergen: https://www.youtube.com/watch?v=j7wyS_gt0T0

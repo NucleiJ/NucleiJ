@@ -19,13 +19,13 @@ new FormModel {
 					name: "contentPanel"
 					add( new FormComponent( "com.jformdesigner.designer.wrapper.JGoodiesFormsSeparator" ) {
 						name: "separator3"
-						"text": "General"
+						"text": new FormMessage( null, "SettingsView.General.text" )
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 						"gridWidth": 7
 					} )
 					add( new FormComponent( "javax.swing.JLabel" ) {
 						name: "folderDirectoryLabel"
-						"text": "Output Name:"
+						"text": new FormMessage( null, "SettingsView.OutputName.text" )
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 						"gridY": 3
 						"hAlign": sfield com.jgoodies.forms.layout.CellConstraints RIGHT
@@ -33,6 +33,7 @@ new FormModel {
 					add( new FormComponent( "javax.swing.JTextField" ) {
 						name: "outputNameTextField"
 						"text": "Output"
+						"action": new FormReference( "changeOutputNameAction" )
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 						"gridX": 3
 						"gridY": 3
@@ -40,7 +41,7 @@ new FormModel {
 					} )
 					add( new FormComponent( "javax.swing.JLabel" ) {
 						name: "folderDirectoryLabel2"
-						"text": "Standard Folder:"
+						"text": new FormMessage( null, "SettingsView.StandardFolder" )
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 						"gridY": 5
 						"hAlign": sfield com.jgoodies.forms.layout.CellConstraints RIGHT
@@ -48,14 +49,16 @@ new FormModel {
 					add( new FormComponent( "javax.swing.JTextField" ) {
 						name: "standardDirTextField"
 						"text": "C:/User/Andreas/"
+						"action": new FormReference( "changeStandardFolderAction" )
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 						"gridX": 3
 						"gridY": 5
 						"gridWidth": 3
 					} )
 					add( new FormComponent( "javax.swing.JButton" ) {
-						name: "button2"
-						"text": "..."
+						name: "standardFolderButton"
+						"actionCommand": new FormMessage( null, "SettingsView.StandardFolderButton.name" )
+						"action": new FormReference( "changeStandardFolderAction" )
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 						"gridX": 7
 						"gridY": 5
@@ -63,14 +66,14 @@ new FormModel {
 					} )
 					add( new FormComponent( "com.jformdesigner.designer.wrapper.JGoodiesFormsSeparator" ) {
 						name: "separator4"
-						"text": "Language"
+						"text": new FormMessage( null, "SettingsView.Language" )
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 						"gridY": 7
 						"gridWidth": 7
 					} )
 					add( new FormComponent( "javax.swing.JLabel" ) {
 						name: "exportFolder"
-						"text": "Source:"
+						"text": new FormMessage( null, "SettingsView.Source" )
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 						"gridY": 9
 						"hAlign": sfield com.jgoodies.forms.layout.CellConstraints RIGHT
@@ -85,20 +88,21 @@ new FormModel {
 							addElement( "CZ" )
 							addElement( "ES" )
 						}
+						"action": new FormReference( "changeLanguageAction" )
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 						"gridX": 3
 						"gridY": 9
 					} )
 					add( new FormComponent( "com.jformdesigner.designer.wrapper.JGoodiesFormsSeparator" ) {
 						name: "separator2"
-						"text": "Advanced"
+						"text": new FormMessage( null, "SettingsView.Advanced" )
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 						"gridY": 11
 						"gridWidth": 7
 					} )
 					add( new FormComponent( "javax.swing.JLabel" ) {
 						name: "setMagnificationLabel"
-						"text": "Summary Exports:"
+						"text": new FormMessage( null, "SettingsView.SummaryExports" )
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 						"gridY": 13
 						"hAlign": sfield com.jgoodies.forms.layout.CellConstraints RIGHT
@@ -161,7 +165,7 @@ new FormModel {
 					} )
 					add( new FormComponent( "javax.swing.JLabel" ) {
 						name: "label2"
-						"text": "Summary Type:"
+						"text": new FormMessage( null, "SettingsView.SummaryType" )
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 						"gridX": 1
 						"gridY": 19
@@ -189,28 +193,32 @@ new FormModel {
 					name: "buttonBar"
 					"border": sfield com.jgoodies.forms.factories.Borders BUTTON_BAR_PAD
 					add( new FormComponent( "javax.swing.JButton" ) {
-						name: "okButton2"
+						name: "resetAllButton"
 						"text": "Reset all"
+						"action": new FormReference( "resetAllAction" )
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 						"gridX": 2
 					} )
 					add( new FormComponent( "javax.swing.JButton" ) {
 						name: "okButton"
 						"text": "OK"
+						"action": new FormReference( "okAction" )
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 						"gridX": 4
 						"gridY": 1
 					} )
 					add( new FormComponent( "javax.swing.JButton" ) {
-						name: "cancelButton"
+						name: "applyButton"
 						"text": "Apply"
+						"action": new FormReference( "applyAction" )
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 						"gridX": 6
 						"gridY": 1
 					} )
 					add( new FormComponent( "javax.swing.JButton" ) {
-						name: "helpButton"
+						name: "cancelButton"
 						"text": "Cancel"
+						"action": new FormReference( "cancelAction" )
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 						"gridX": 8
 						"gridY": 1
@@ -288,6 +296,76 @@ new FormModel {
 			}
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 140, 520 )
+		} )
+		add( new FormNonVisual( "javax.swing.AbstractAction" ) {
+			name: "changeStandardFolderAction"
+			"$action.Name": new FormMessage( null, "SettingsView.StandardFolderButton.name" )
+			auxiliary() {
+				"JavaCodeGenerator.customCreate": true
+			}
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 435, 470 )
+		} )
+		add( new FormNonVisual( "javax.swing.AbstractAction" ) {
+			name: "changeOutputNameAction"
+			auxiliary() {
+				"JavaCodeGenerator.customCreate": true
+			}
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 435, 420 )
+		} )
+		add( new FormNonVisual( "javax.swing.AbstractAction" ) {
+			name: "changeLanguageAction"
+			"$action.Name": new FormMessage( null, "SettingsView.Source" )
+			auxiliary() {
+				"JavaCodeGenerator.customCreate": true
+			}
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 595, 420 )
+		} )
+		add( new FormNonVisual( "javax.swing.AbstractAction" ) {
+			name: "changeSummaryTypeAction"
+			auxiliary() {
+				"JavaCodeGenerator.customCreate": true
+			}
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 605, 470 )
+		} )
+		add( new FormNonVisual( "javax.swing.AbstractAction" ) {
+			name: "okAction"
+			"$action.Name": new FormMessage( null, "SettingsView.OkButton.name" )
+			auxiliary() {
+				"JavaCodeGenerator.customCreate": true
+			}
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 650, 120 )
+		} )
+		add( new FormNonVisual( "javax.swing.AbstractAction" ) {
+			name: "applyAction"
+			"$action.Name": new FormMessage( null, "SettingsView.ApplyButton.name" )
+			auxiliary() {
+				"JavaCodeGenerator.customCreate": true
+			}
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 650, 170 )
+		} )
+		add( new FormNonVisual( "javax.swing.AbstractAction" ) {
+			name: "cancelAction"
+			"$action.Name": new FormMessage( null, "SettingsView.CancelButton.name" )
+			auxiliary() {
+				"JavaCodeGenerator.customCreate": true
+			}
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 650, 220 )
+		} )
+		add( new FormNonVisual( "javax.swing.AbstractAction" ) {
+			name: "resetAllAction"
+			"$action.Name": new FormMessage( null, "SettingsView.ResetAllButton.name" )
+			auxiliary() {
+				"JavaCodeGenerator.customCreate": true
+			}
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 650, 70 )
 		} )
 	}
 }
