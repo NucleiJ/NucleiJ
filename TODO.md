@@ -2,29 +2,32 @@
 # TO-DO Liste #
 
 ### 1. Erweiterungen: ###
-* Watershed Function!
-* Einstellungen (Was gehört exportiert? Input/Output Ordner einstellen) [E M]
-* Speichern/Einlesen von Einstellungen
-* Jason File (.nucleij)
-* [E M] AboutDialog erweitern 
-* eigene Prozessnamen
-* [E] Cancel soll wirklich beenden
-* [M] Wenn Quality slider geändert, dann berechnen ankreuzen
-* [E M] Abfrage ob Analyse/Convert erst nach Start-Klick
-* Einstellungen beim Laden von XML-Datei laden
-* [M E] Einstellungsdialog Properties, .. erstellen
-* [E / M] Seperator statt //
+* [E] JAR zum Laufen bringen
+* [M] Cancel soll wirklich beenden
 * [M] Linux funktioniert?
-* [E] Dialog (mit Progressbar) breiter machen
-* JAR zum Laufen bringen
-* alle Texte auslagern
-* Öffnen des Output-Ordners vom SummaryDialog aus & Auch schließen
+* [M] Apple Builden
+* auf allen Plattformen lauffähig
+* [E & M] alle Texte auslagern
+
+* [E] Wenn Quality slider geändert, dann berechnen ankreuzen
+* [E] AboutDialog erweitern
+
+* [M] Dialog (mit Progressbar) breiter machen
+* Speichern/Einlesen von Einstellungen + Jason File (.nucleij)
+
 
 ### 2. Zukunftsmusik ###
 * Schriftgröße änderbar (optional zur Laufzeit)
 * Sprache änderbar (optional zur Laufzeit)
 * interaktives Tutorial
 * geschätzte Restdauer anzeigen (Verarbeitete Daten/Sekunde...)
+* Öffnen des Output-Ordners vom SummaryDialog aus & Auch schließen
+* Einstellungen (Was gehört exportiert? Input/Output Ordner einstellen) [E M]
+* Watershed Function!
+* eigene Prozessnamen
+* Einstellungen beim Laden von XML-Datei laden
+* [M E] Einstellungsdialog Properties, .. erstellen
+
 
 ### 3. Bugs ###
 * MainAnalyzer.java 103 Analyze funktioniert, jedoch Converter unter Linux nicht, unter Windows werden alle ergebnisse nicht in Output sondern überordner gespeichert
@@ -54,6 +57,10 @@
 * Summary-Dialog erstellt                                           26.01.17
 * neues L&F                                                         26.01.17
 * Outputpath beliebig verönderbar                                   27.01.17
+* Abfrage ob Analyse/Convert erst nach Start-Klick					27.01.17
+* Seperator statt //												27.01.17
+
+
 
 ### 7. Wichtige Notizen ###
 * Mergen: https://www.youtube.com/watch?v=j7wyS_gt0T0
