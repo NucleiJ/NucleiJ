@@ -141,8 +141,6 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
             analyzerConverterTask.execute();
 
             //analyzerConverterTask.isCancelled() == true
-
-
             taskDialogAnalyzerConverter.show();
 
             long elapsedTime = System.nanoTime() - startTime;
@@ -250,6 +248,7 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
 
             dlg.getFooter().setText( "\u00A9 NucleiJ 2017");
             dlg.getFooter().setIcon( TaskDialog.StandardIcon.INFO );
+
             dlg.show();
         }
     }

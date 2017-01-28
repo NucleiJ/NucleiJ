@@ -9,7 +9,6 @@ import at.ac.htlhl.nucleij.view.GLScanAnalyzerView;
 import at.ac.htlhl.nucleij.view.MainFrameView;
 import at.ac.htlhl.nucleij.view.NdpiConverterView;
 import com.ezware.dialog.task.TaskDialogs;
-import de.javasoft.plaf.synthetica.SyntheticaBlueIceLookAndFeel;
 import org.jdesktop.application.*;
 
 import javax.swing.*;
@@ -39,7 +38,7 @@ public class NucleiJ extends SingleFrameApplication
     protected void initialize(String[] args)
     {
         // Force application to use given language setting instead of using OS default
-        // Locale.setDefault(Locale.ENGLISH);
+        //Locale.setDefault(Locale.ENGLISH);
 
         // Load NucleiJ.properties file
         ApplicationContext ctxt = getContext();
@@ -48,6 +47,8 @@ public class NucleiJ extends SingleFrameApplication
 
         configureLoggingSystem();
         initLookAndFeel();
+
+
     }
 
     @Override
