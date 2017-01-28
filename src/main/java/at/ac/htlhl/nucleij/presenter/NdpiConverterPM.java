@@ -17,6 +17,7 @@ import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
 import static at.ac.htlhl.nucleij.model.NdpiConverter.MAG_X10;
@@ -116,6 +117,7 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
 
         public void actionPerformed(ActionEvent actionEvent) {
             JFrame parent = ((SingleFrameApplication) Application.getInstance()).getMainFrame();
+            ResourceBundle bundle = ResourceBundle.getBundle("at.ac.htlhl.nucleij.resources.i18n.dialogs");
             JFileChooser chooser = createFileChooser();
 
             if (chooser.showOpenDialog(parent) == JFileChooser.APPROVE_OPTION)
@@ -167,11 +169,11 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
                             ndpiConverter.setOutputpath(null);
                             ndpiConverter.setInputpath(null);
 
-                            LOGGER.warning("Invalid file extension '" + file.getName().substring(file.getName().indexOf(".")) + "' for file '" + file.getName() + "'");
+                            LOGGER.warning("Invalid file extension '" + file.getName().substring(file.getName().indexOf(".")) + bundle.getString("InvalidFileExtension.forFile") + file.getName() + "'");
                             TaskDialog errorDialog = new TaskDialog(parent,"Application Error");
-                            errorDialog.setInstruction( "Invalid File Extension!");
+                            errorDialog.setInstruction(bundle.getString("InvalidFileExtension.text2"));
                             errorDialog.setIcon(TaskDialog.StandardIcon.ERROR );
-                            errorDialog.setText("Invalid file extension '" + file.getName().substring(file.getName().indexOf(".")) + "' for file '" + file.getName() + "'" );
+                            errorDialog.setText(bundle.getString("InvalidFileExtension.text") + file.getName().substring(file.getName().indexOf(".")) + bundle.getString("InvalidFileExtension.forFile") + file.getName() + "'" );
                             errorDialog.show();
                         }
                     }
