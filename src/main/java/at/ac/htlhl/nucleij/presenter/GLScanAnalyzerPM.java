@@ -77,12 +77,18 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
             public void propertyChange(PropertyChangeEvent evt) {
                 LOGGER.info("Property name="+evt.getPropertyName()+", oldValue="+evt.getOldValue()+", newValue="+evt.getNewValue());
 
-                if(GLScanAnalyzer.PROPERTY_SETROI.equals(evt.getPropertyName()))
+                if(GLScanAnalyzer.PROPERTY_CALCULATEANDSHOWHEATMAP.equals(evt.getPropertyName()))
                 {
                     if(evt.getNewValue().equals(false))
                     {
-                        System.out.println("Property ist false");
+                        setComponentEnabled(GLScanAnalyzer.PROPERTY_HEATMAPQUALITY, false);
                     }
+                }
+
+                if(GLScanAnalyzer.PROPERTY_HEATMAPQUALITY.equals(evt.getPropertyName()))
+                {
+                    setComponentEnabled(GLScanAnalyzer.PROPERTY_HEATMAPQUALITY, true);
+                    glScanAnalyzer.setCalculateandshowheatmap(true);
                 }
             }
 

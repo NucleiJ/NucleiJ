@@ -8,9 +8,8 @@
 * [M] Linux funktioniert?
 * [M] Apple Builden
 * auf allen Plattformen lauffähig
-* [E & M] alle Texte auslagern
+* [M] alle Texte auslagern
 
-* [E] Wenn Quality slider geändert, dann berechnen ankreuzen
 * [E] AboutDialog erweitern
 
 * [M] Dialog (mit Progressbar) breiter machen
@@ -60,6 +59,7 @@
 * Outputpath beliebig verönderbar                                   27.01.17
 * Abfrage ob Analyse/Convert erst nach Start-Klick					27.01.17
 * Seperator statt //												27.01.17
+* Wenn Quality slider geändert, dann berechnen ankreuzen            28.01.17
 
 
 
