@@ -116,14 +116,14 @@ public class MainPM extends PresentationModel<Main>
         // IDEEN: JDialog
 
         JFrame parentConverter = ((SingleFrameApplication) Application.getInstance()).getMainFrame();
-        ResourceBundle resourceBundleConverter = AppContext.getInstance().getResourceBundle();
+        ResourceBundle bundle = ResourceBundle.getBundle("at.ac.htlhl.nucleij.resources.i18n.dialogs");
 
         JLabel text = new JLabel("www.htl-hl.ac.at", JLabel.RIGHT);
 
 
-        TaskDialog taskDialogAbout = new TaskDialog(parentConverter, resourceBundleConverter.getString("AboutDialog.title"));
-        taskDialogAbout.setInstruction(resourceBundleConverter.getString("AboutDialog.instructionMessage"));
-        taskDialogAbout.setText(resourceBundleConverter.getString("AboutDialog.text"));
+        TaskDialog taskDialogAbout = new TaskDialog(parentConverter, bundle.getString("AboutDialog.title"));
+        taskDialogAbout.setInstruction(bundle.getString("AboutDialog.instructionMessage"));
+        taskDialogAbout.setText(bundle.getString("AboutDialog.text"));
         taskDialogAbout.setFixedComponent(text);
 
         taskDialogAbout.setCommands(TaskDialog.StandardCommand.CANCEL);

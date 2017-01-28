@@ -78,12 +78,18 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
             public void propertyChange(PropertyChangeEvent evt) {
                 LOGGER.info("Property name="+evt.getPropertyName()+", oldValue="+evt.getOldValue()+", newValue="+evt.getNewValue());
 
-                if(GLScanAnalyzer.PROPERTY_SETROI.equals(evt.getPropertyName()))
+                if(GLScanAnalyzer.PROPERTY_CALCULATEANDSHOWHEATMAP.equals(evt.getPropertyName()))
                 {
                     if(evt.getNewValue().equals(false))
                     {
-                        System.out.println("Property ist false");
+                        setComponentEnabled(GLScanAnalyzer.PROPERTY_HEATMAPQUALITY, false);
                     }
+                }
+
+                if(GLScanAnalyzer.PROPERTY_HEATMAPQUALITY.equals(evt.getPropertyName()))
+                {
+                    setComponentEnabled(GLScanAnalyzer.PROPERTY_HEATMAPQUALITY, true);
+                    glScanAnalyzer.setCalculateandshowheatmap(true);
                 }
             }
 
@@ -146,8 +152,6 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
             analyzerConverterTask.execute();
 
             //analyzerConverterTask.isCancelled() == true
-
-
             taskDialogAnalyzerConverter.show();
 
             long elapsedTime = System.nanoTime() - startTime;
@@ -199,10 +203,10 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
             String[] columnNamesGeneral = {"Titel",
                     "Information"};
             Object[][] dataGeneral = {
-                    {"Ausgabepfad:", ndpiConverter.getOutputpath()},
+                    {bundle.getString("Words.Ausgabepfad.text") + ":", ndpiConverter.getOutputpath()},
                     //{"Ausgabepfad:", ndpiConverter.getOutputpath(), new Integer(5), new Boolean(false)},
-                    {"Dauer:", processDuration}, { "Konvertierte Dateien: ", ndpiConverter.getNumberNdpiFiles() },
-                    {"Analysierte Dateien", (ndpiConverter.getNumberTifFiles() + ndpiConverter.getNumberNdpiFiles() )},
+                    {bundle.getString("Words.Dauer.text") + ":", processDuration}, { bundle.getString("Words.KonvertierteDateien.text") +": ", ndpiConverter.getNumberNdpiFiles() },
+                    {bundle.getString("Words.AnalysierteDateien.text") + ":", (ndpiConverter.getNumberTifFiles() + ndpiConverter.getNumberNdpiFiles() )},
             };
 
             String[] columnNamesSpezific = { "Information"};
@@ -221,7 +225,7 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
             {
                 if(i == 0)
                 {
-                    modelSpezific.insertRow(modelSpezific.getRowCount() ,new Object[]{"<html><b>Konvertierte Dateien:</b></html>"});
+                    modelSpezific.insertRow(modelSpezific.getRowCount() ,new Object[]{"<html><b>" + bundle.getString("Words.KonvertierteDateien.text") + ":</b></html>"});
                 }
                 modelSpezific.insertRow(modelSpezific.getRowCount() ,new Object[]{ndpiElement});
                 i++;
@@ -232,7 +236,7 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
                 if(i == 0)
                 {
                     modelSpezific.insertRow(modelSpezific.getRowCount() ,new Object[]{""});
-                    modelSpezific.insertRow(modelSpezific.getRowCount() ,new Object[]{"<html><b>Analysierte Dateien:</b></html>"});
+                    modelSpezific.insertRow(modelSpezific.getRowCount() ,new Object[]{"<html><b>" + bundle.getString("Words.AnalysierteDateien.text") + ":</b></html>"});
                 }
                 modelSpezific.insertRow(modelSpezific.getRowCount() ,new Object[]{tifElement});
                 i++;
@@ -242,10 +246,10 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
             column.setPreferredWidth(700);
 
             // Summary Dialog:
-            TaskDialog dlg = new TaskDialog(((SingleFrameApplication) Application.getInstance()).getMainFrame(), "Zusammenfassung" );
+            TaskDialog dlg = new TaskDialog(((SingleFrameApplication) Application.getInstance()).getMainFrame(), bundle.getString("Words.Zusammenfassung.text") );
             dlg.setIcon( TaskDialog.StandardIcon.INFO );
-            dlg.setText( "<b>Ausgabepfad:</b> " + ndpiConverter.getOutputpath() +
-                    "\n<b>Dauer:</b> " + processDuration + "\n" + InfosOfProcessedScans);
+            dlg.setText( "<b>" + bundle.getString("Words.Ausgabepfad.text") + ":</b> " + ndpiConverter.getOutputpath() +
+                    "\n<b>" + bundle.getString("Words.Dauer.text") + ":</b> " + processDuration + "\n" + InfosOfProcessedScans);
 
             dlg.getDetails().setExpandableComponent(
                     tableSpezific
@@ -255,6 +259,7 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
 
             dlg.getFooter().setText( "\u00A9 NucleiJ 2017");
             dlg.getFooter().setIcon( TaskDialog.StandardIcon.INFO );
+
             dlg.show();
         }
     }
@@ -291,6 +296,8 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
         }
 
         public void actionPerformed(ActionEvent e) {
+
+            ResourceBundle bundle = ResourceBundle.getBundle("at.ac.htlhl.nucleij.resources.i18n.dialogs");
 
             if(ndpiConverter.getInputpath() != null && ndpiConverter.getInputpath() != "" &&
                     ndpiConverter.getInputpath().contains(".tif") && ndpiConverter.getNumberTifFiles() == 1 &&
@@ -338,7 +345,7 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
                             }
                         }while (roigesetzt == false);
 
-                        new WaitForUserDialog("Information", "OK drücken, wenn die\nROI ausgewählt wurde").show();
+                        new WaitForUserDialog("Information", bundle.getString("ROIinfo.info.text") ).show();
 
                         Rectangle roiRec = roi.getBounds();
 
@@ -354,12 +361,11 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
                         }
                         else
                         {
-                            TaskDialog dlg = new TaskDialog(((SingleFrameApplication) Application.getInstance()).getMainFrame(), "Application Error" );
+                            TaskDialog dlg = new TaskDialog(((SingleFrameApplication) Application.getInstance()).getMainFrame(), "Error" );
                             dlg.setIcon( TaskDialog.StandardIcon.ERROR );
-                            dlg.setText( "Diese Auswahl der Region of Interest ist nicht erlaubt.\nKlicken Sie für weitere Informationen auf \"weitere Details\". " );
+                            dlg.setText( bundle.getString("ROIerror.info.text") );
                             dlg.getDetails().setExpandableComponent(
-                                    new JLabel(" ROI zu klein gewählt. Muss mindestens 20 pixel Seitenlänge haben.\n " +
-                                            "Ihre Auswahl: " + String.valueOf(roiRec.getHeight()) + "px * " + String.valueOf(roiRec.getWidth()) +"px."));
+                                    new JLabel(bundle.getString("ROIerror.details.text") + String.valueOf(roiRec.getHeight()) + "px * " + String.valueOf(roiRec.getWidth()) +"px."));
                             dlg.show();
                         }
 
@@ -373,9 +379,8 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
             }else
             {
                 TaskDialog dlg = new TaskDialog(((SingleFrameApplication) Application.getInstance()).getMainFrame(),"Warnung");
-                dlg.setInstruction("ROI Funktion nicht verfügbar");
-                dlg.setText( "Die ROI Funktion ist nur verfügbar, " +
-                        "wenn sich im\nEingabepfad nur <b>eine</b> Datei befindet!" );
+                dlg.setInstruction(bundle.getString("ROInotavialbe.instruction.text"));
+                dlg.setText( bundle.getString("ROInotavialbe.info.text") );
                 dlg.setIcon( TaskDialog.StandardIcon.WARNING );
                 dlg.show();
             }
