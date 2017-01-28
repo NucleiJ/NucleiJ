@@ -35,6 +35,7 @@ public class AnalyzerConverterTask extends SwingWorker<String, String>
     }
 
 
+
     @Override
     protected String doInBackground() throws Exception {
         MainAnalyzer mainAnalyzer = new MainAnalyzer(glScanAnalyzer);
@@ -100,6 +101,8 @@ public class AnalyzerConverterTask extends SwingWorker<String, String>
                 //publish(Math.round(currentStatus));
             }
             mainAnalyzer.createSummary();
+
+
         }
         return "Finished";
     }
@@ -107,12 +110,7 @@ public class AnalyzerConverterTask extends SwingWorker<String, String>
     @Override
     protected void process(List <String> element) {
         super.process(element);
-        //for (int value : element) {
-        //    progressBar.setValue(value);
-        //}
 
-        //Sinnlos!
-        //element.toString().substring(element.toString().lastIndexOf("[")+1, element.toString().lastIndexOf("]")-1);
         taskDialog.setText(element.toString());
     }
 
