@@ -13,6 +13,7 @@ import org.jdesktop.application.*;
 
 import javax.swing.*;
 import java.util.EventObject;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 

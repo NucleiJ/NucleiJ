@@ -133,8 +133,8 @@ public class AnalyzerConverterTask extends SwingWorker<String, String>
             Process p;
             if (ndpiConverter.getMagnification().equals(NdpiConverter.MAG_X10)) {
                 System.out.println("X10 Konvertieren sollte beginnen:");
-                //p = Runtime.getRuntime().exec("cmd /c " + "java -jar \"" + absolutePathofNdpiJar + "\" -i 2 -c lzw -s \"" + filePath +"\" \"" + outputpath.getParent().toString() + "\"");
-                p = Runtime.getRuntime().exec( "java -jar \"C:\\Users\\Stefan\\Downloads\\ndpi-to-ome-tiff-converter-v1.5\\ndpi-converter.jar\" -i 2 -c lzw -s \"C:\\Users\\Stefan\\Documents\\stapel\\test.ndpi\"");
+                p = Runtime.getRuntime().exec("cmd /c " + "java -jar \"" + absolutePathofNdpiJar + "\" -i 2 -c lzw -s \"" + filePath +"\" \"" + outputpath.getParent().toString() + "\"");
+                //p = Runtime.getRuntime().exec( "java -jar \"C:\\Users\\Stefan\\Downloads\\ndpi-to-ome-tiff-converter-v1.5\\ndpi-converter.jar\" -i 2 -c lzw -s \"C:\\Users\\Stefan\\Documents\\stapel\\test.ndpi\"");
                 System.out.println("X10 Konvertieren sollte enden:");
             }
             else if(ndpiConverter.getMagnification().equals(NdpiConverter.MAG_X40)) {

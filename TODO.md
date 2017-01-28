@@ -2,6 +2,7 @@
 # TO-DO Liste #
 
 ### 1. Erweiterungen: ###
+* [E & M] Konverter muss funktionieren (JAR Pfad)
 * [E] JAR zum Laufen bringen
 * [M] Cancel soll wirklich beenden
 * [M] Linux funktioniert?
