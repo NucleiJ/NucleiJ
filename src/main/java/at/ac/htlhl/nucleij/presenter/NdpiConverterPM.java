@@ -152,6 +152,8 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
                     }
                 }
 
+
+
                 assert filesInDirectory != null;
                 for (File file : filesInDirectory ) {
                     if (file.isFile()) {
@@ -214,42 +216,36 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
 
                 JFrame parentDialog = ((SingleFrameApplication) Application.getInstance()).getMainFrame();
 
-                int choice;
+
                 if (moreThanOneFolder) {
                     TaskDialogs.inform(parentDialog,
                             "Only one folder allowed!",
                             "Selected first folder '" + chooser.getSelectedFile().getName() + "'");
+                    //Automatisch wird 1. Ordner gewählt
                 }
-                else {
-                    if (numberNdpiFiles > 0 && numberTifFiles > 0) {
-                        choice = TaskDialogs.radioChoice(parentDialog,
+
+                /*int choice;
+                if (numberNdpiFiles > 0 && numberTifFiles > 0) {
+                    choice = TaskDialogs.radioChoice(parentDialog,
                                 "It seems that you selected both NDPI & TIF Files" ,
                                 "NDPI-Files: \t" + numberNdpiFiles + "\nTIF-Files: \t" + numberTifFiles + "\n\nWhat do you want do?" ,
                                 0,
                                 "Convert & Analyze", "Convert Only", "Analyze Only" );
-                        ndpiConverter.setChoice(choice);
-                    }
-                    else if (numberNdpiFiles > 0 && numberTifFiles == 0) { //Only NDPI Selected
-                        choice = TaskDialogs.radioChoice(parentDialog,
-                                "It seems that your selection is a Ndpi File",
-                                "What will you do?",
-                                0,
-                                "Convert & Analyze", "Convert Only" );
-                        ndpiConverter.setChoice(choice);
-
-                    }
-                    else if (numberNdpiFiles == 0 && numberTifFiles > 0) {
-                        // Wird nur Konvertiert
-                        ndpiConverter.setChoice(2);
-                    }
+                    ndpiConverter.setChoice(choice);
                 }
+                else if (numberNdpiFiles > 0 && numberTifFiles == 0) { //Only NDPI Selected
+                    choice = TaskDialogs.radioChoice(parentDialog,
+                            "It seems that your selection is a Ndpi File",
+                            "What will you do?",
+                            0,
+                            "Convert & Analyze", "Convert Only" );
+                    ndpiConverter.setChoice(choice);
+                }
+                else if (numberNdpiFiles == 0 && numberTifFiles > 0) {
+                    // Wird nur Konvertiert
+                    ndpiConverter.setChoice(2);
+                }*/
 
-                // Möglicher String für Progress monitor
-                String text = "From:" + "\t\t" + "/Pfad/Zum/InputOrdner" +
-                        "\n" + "To:\t\t" + "Pfad/Zum/ZielOrdner" +
-                        "\n" + "Time Remaining:\t" + "Elapsed Time" +
-                        "\n" + "Items Remaining:\t" + "Anzahl(Größe)" +
-                        "\n" + "Speed:\t\t" + "Speed kB/s";
 
             }
         }
@@ -281,5 +277,6 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
 
         }
     }
+
 
 }

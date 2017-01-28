@@ -5,6 +5,7 @@ import at.ac.htlhl.nucleij.model.GLScanAnalyzer;
 import at.ac.htlhl.nucleij.model.NdpiConverter;
 import at.ac.htlhl.nucleij.presenter.tasks.AnalyzerConverterTask;
 import com.ezware.dialog.task.TaskDialog;
+import com.ezware.dialog.task.TaskDialogs;
 import com.jgoodies.binding.PresentationModel;
 import ij.IJ;
 import ij.ImagePlus;
@@ -122,6 +123,10 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
             JFrame parentAnalyzerConverter = ((SingleFrameApplication) Application.getInstance()).getMainFrame();
             ResourceBundle resourceBundleAnalyzer = AppContext.getInstance().getResourceBundle();
 
+            // ausführen der analyzeConvertMethode
+            int numberNdpiFiles = ndpiConverter.getNumberNdpiFiles();
+            int numberTifFiles = ndpiConverter.getNumberTifFiles();
+            analyzeConvertCheck(numberNdpiFiles, numberTifFiles);
 
             //TODO: WICHTIG: Liste in glscanner model erstellen, nach analyze
 
@@ -395,4 +400,31 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
     }
 
     //endregion:
+
+    public void analyzeConvertCheck (int numberNdpiFiles, int numberTifFiles) {
+        JFrame parentDialog = ((SingleFrameApplication) Application.getInstance()).getMainFrame();
+
+        int choice;
+        if (numberNdpiFiles > 0 && numberTifFiles > 0) {
+            choice = TaskDialogs.radioChoice(parentDialog,
+                    "It seems that you selected both NDPI & TIF Files" ,
+                    "NDPI-Files: \t" + numberNdpiFiles + "\nTIF-Files: \t" + numberTifFiles + "\n\nWhat do you want do?" ,
+                    0,
+                    "Convert & Analyze", "Convert Only", "Analyze Only" );
+            ndpiConverter.setChoice(choice);
+        }
+        else if (numberNdpiFiles > 0 && numberTifFiles == 0) { //Only NDPI Selected
+            choice = TaskDialogs.radioChoice(parentDialog,
+                    "It seems that your selection is a Ndpi File",
+                    "What will you do?",
+                    0,
+                    "Convert & Analyze", "Convert Only" );
+            ndpiConverter.setChoice(choice);
+        }
+        else if (numberNdpiFiles == 0 && numberTifFiles > 0) {
+            // Wird nur Konvertiert
+            ndpiConverter.setChoice(2);
+        }
+    }
+
 }
