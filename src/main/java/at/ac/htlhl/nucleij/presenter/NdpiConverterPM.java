@@ -97,7 +97,6 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
         LOGGER.info("Select Path Action clicked");
         JFileChooser chooser = new JFileChooser();
 
-        //TODO IDEE: Nur einen Filechooser mit setFileSelectionMode FILES_AND_DIRECTORIES und dann erkennen was gewählt wurde
         //TODO Bei mehreren gewählten Datein/Verzeichnissen den übergeordneten Ordner im InputPath Feld anzeigen (Oder 1.Datei mit "und X weitere Dateien" dran)
 
         chooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
@@ -155,7 +154,6 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
                 }
 
 
-
                 assert filesInDirectory != null;
                 for (File file : filesInDirectory ) {
                     if (file.isFile()) {
@@ -173,7 +171,7 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
                             TaskDialog errorDialog = new TaskDialog(parent,"Application Error");
                             errorDialog.setInstruction(bundle.getString("InvalidFileExtension.text2"));
                             errorDialog.setIcon(TaskDialog.StandardIcon.ERROR );
-                            errorDialog.setText(bundle.getString("InvalidFileExtension.text") + file.getName().substring(file.getName().indexOf(".")) + bundle.getString("InvalidFileExtension.forFile") + file.getName() + "'" );
+                            errorDialog.setText(bundle.getString("InvalidFileExtension.text") + file.getName().substring(file.getName().indexOf(".")) + bundle.getString("InvalidFileExtension.forFile") + "'" + file.getName() + "'" );
                             errorDialog.show();
                         }
                     }
@@ -217,38 +215,12 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
                 }
 
                 JFrame parentDialog = ((SingleFrameApplication) Application.getInstance()).getMainFrame();
-
-
                 if (moreThanOneFolder) {
                     TaskDialogs.inform(parentDialog,
-                            "Only one folder allowed!",
-                            "Selected first folder '" + chooser.getSelectedFile().getName() + "'");
+                            bundle.getString("OnlyOneFolder.text"),
+                            bundle.getString("SelectedFirstFolder.text") + "'" + chooser.getSelectedFile().getName() + "'");
                     //Automatisch wird 1. Ordner gewählt
                 }
-
-                /*int choice;
-                if (numberNdpiFiles > 0 && numberTifFiles > 0) {
-                    choice = TaskDialogs.radioChoice(parentDialog,
-                                "It seems that you selected both NDPI & TIF Files" ,
-                                "NDPI-Files: \t" + numberNdpiFiles + "\nTIF-Files: \t" + numberTifFiles + "\n\nWhat do you want do?" ,
-                                0,
-                                "Convert & Analyze", "Convert Only", "Analyze Only" );
-                    ndpiConverter.setChoice(choice);
-                }
-                else if (numberNdpiFiles > 0 && numberTifFiles == 0) { //Only NDPI Selected
-                    choice = TaskDialogs.radioChoice(parentDialog,
-                            "It seems that your selection is a Ndpi File",
-                            "What will you do?",
-                            0,
-                            "Convert & Analyze", "Convert Only" );
-                    ndpiConverter.setChoice(choice);
-                }
-                else if (numberNdpiFiles == 0 && numberTifFiles > 0) {
-                    // Wird nur Konvertiert
-                    ndpiConverter.setChoice(2);
-                }*/
-
-
             }
         }
     }

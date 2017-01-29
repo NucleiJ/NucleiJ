@@ -15,6 +15,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.util.List;
+import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -26,6 +27,7 @@ public class RoiTask
     // Constants
     // ************************************************************************
     private static final Logger LOGGER = Logger.getLogger(AnalyzerConverterTask.class.getName());
+    ResourceBundle bundle = ResourceBundle.getBundle("at.ac.htlhl.nucleij.resources.i18n.dialogs");
 
     private GLScanAnalyzer glScanAnalyzer;
 
@@ -39,8 +41,8 @@ public class RoiTask
     public String setROI()
     {
         JOptionPane.showMessageDialog(((SingleFrameApplication) Application.getInstance()).getMainFrame(),
-                "This feature is currently not working!",
-                "Warning",
+                bundle.getString("FeatureNotAvailable.text"),
+                bundle.getString("Warning.text"),
                 JOptionPane.WARNING_MESSAGE);
 
         System.out.println(IJ.getFullVersion());
@@ -56,7 +58,8 @@ public class RoiTask
         {
 
             //bild.updateAndRepaintWindow();
-            new WaitForUserDialog("Information", "Bitte rechteckige ROI\nsetzen und OK druecken").show();
+            new WaitForUserDialog("Information",
+                    bundle.getString("RoiSetzen.text")).show();
 
             Roi roi = bild.getRoi();
             if (roi instanceof Roi)

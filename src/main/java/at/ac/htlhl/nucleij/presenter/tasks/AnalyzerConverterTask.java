@@ -4,6 +4,7 @@ import at.ac.htlhl.nucleij.model.GLScanAnalyzer;
 import at.ac.htlhl.nucleij.model.NdpiConverter;
 import at.ac.htlhl.nucleij.presenter.analyzing.MainAnalyzer;
 import com.ezware.dialog.task.TaskDialog;
+import com.ezware.dialog.task.TaskDialogs;
 import de.javasoft.util.OS;
 
 import javax.swing.*;
@@ -158,6 +159,7 @@ public class AnalyzerConverterTask extends SwingWorker<String, String>
             }
             else {
                 System.out.println("Your OS is not supported!");
+                //TODO Möglicherweise ConvertProzess beenden und not supported Dialog anzeigen
                 p = null;
             }
 

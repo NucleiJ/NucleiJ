@@ -12,6 +12,7 @@
 
 * [M] Dialog (mit Progressbar) breiter machen
 * Speichern/Einlesen von Einstellungen + Jason File (.nucleij)
+* bei auswälen mehrerer Dateien werden kurz im ProgressWindow alle Dateinamen nacheinander angezeigt
 
 
 ### 2. Zukunftsmusik ###

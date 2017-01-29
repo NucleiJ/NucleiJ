@@ -9,7 +9,7 @@ public class RemainingTime {
     private RemainingTime () {
 
     }
-
+    //TODO Wenigstens durhcschnittliche Restzeit aus Anzahl der Dateien berechnen
     // When you start downloading save timestamp :
     Long startTime = System.nanoTime();
 
