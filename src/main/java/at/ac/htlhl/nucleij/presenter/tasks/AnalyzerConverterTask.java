@@ -4,6 +4,7 @@ import at.ac.htlhl.nucleij.model.GLScanAnalyzer;
 import at.ac.htlhl.nucleij.model.NdpiConverter;
 import at.ac.htlhl.nucleij.presenter.analyzing.MainAnalyzer;
 import com.ezware.dialog.task.TaskDialog;
+import de.javasoft.util.OS;
 
 import javax.swing.*;
 import java.io.BufferedReader;
@@ -11,6 +12,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.List;
+import java.util.StringJoiner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -21,6 +23,7 @@ import java.util.logging.Logger;
 public class AnalyzerConverterTask extends SwingWorker<String, String>
 {
     private static final Logger LOGGER = Logger.getLogger(AnalyzerConverterTask.class.getName());
+
     private JProgressBar progressBar;
     private TaskDialog taskDialog;
     private GLScanAnalyzer glScanAnalyzer;
@@ -33,8 +36,6 @@ public class AnalyzerConverterTask extends SwingWorker<String, String>
         this.ndpiConverter = ndpiConverter;
         this.glScanAnalyzer = glScanAnalyzer;
     }
-
-
 
     @Override
     protected String doInBackground() throws Exception {
@@ -123,17 +124,59 @@ public class AnalyzerConverterTask extends SwingWorker<String, String>
     }
 
     private void startConverter(String filePath) {
-        File outputpath = new File(ndpiConverter.getOutputpath());
-
+        String OS = System.getProperty("os.name").toLowerCase();
         File file = new File("lib/ndpi-converter/ndpi-converter.jar");
+        File outputpath = new File(ndpiConverter.getOutputpath());
         String absolutePathofNdpiJar = file.getAbsolutePath();
+
         System.out.println(absolutePathofNdpiJar);
+        System.out.println(filePath);
+        System.out.println(outputpath.getParent());
+
+        Process p;
+
+        //absolutePathofNdpiJar = "/home/andreas/IdeaProjects/nucleij/lib/ndpi-converter/ndpi-converter.jar";
 
         try {
+            if (OS.contains("linux")) {
+                System.out.println("Your OS is Linux");
+                p = Runtime.getRuntime().exec("sudo java -jar " + absolutePathofNdpiJar + " -i 2 -c lzw -s "+ filePath +  outputpath.getParent());
+                //p = Runtime.getRuntime().exec("sudo java -jar \"" + absolutePathofNdpiJar + "\" -i 2 -c lzw -s \""+ filePath + "\" \"" + outputpath.getParent() + "\"");
+                //p = Runtime.getRuntime().exec("sudo java -jar /home/andreas/IdeaProjects/nucleij/lib/ndpi-converter/ndpi-converter.jar -i 2 -c lzw -s /home/andreas/Schreibtisch/Scans/N2700-14\\ 5\\ HE\\ -\\ 2016-06-06\\ 14.57.00.ndpi");
+                //p = Runtime.getRuntime().exec("sudo java -jar /home/andreas/IdeaProjects/nucleij/lib/ndpi-converter/ndpi-converter.jar -i 2 -c lzw -s /home/andreas/Schreibtisch/Scans/N2700-14 5 HE - 2016-06-06 14.57.00.ndpi");
+
+                // Befehl auf Linux:
+                // sudo java -jar /home/andreas/IdeaProjects/nucleij/lib/ndpi-converter/ndpi-converter.jar -i 2 -c lzw -s /home/andreas/Schreibtisch/Scans/N2700-14\ 5\ HE\ -\ 2016-06-06\ 14.57.00.ndpi
+            }
+            else if (OS.contains("windows")) {
+                System.out.println("Your OS is Windows");
+                p = Runtime.getRuntime().exec("java -jar \"" + absolutePathofNdpiJar + "\" -i 2 -c lzw -s \"" + filePath + "\" \"" + outputpath.getParent() + "\"");
+            }
+            else if (OS.contains("mac")) {
+                p = Runtime.getRuntime().exec("java -jar \"" + absolutePathofNdpiJar + "\" -i 2 -c lzw -s \"" + filePath + "\" \"" + outputpath.getParent() + "\"");
+                System.out.println("Your OS is Mac OS");
+            }
+            else {
+                System.out.println("Your OS is not supported!");
+                p = null;
+            }
+
+            BufferedReader in = new BufferedReader(
+                    new InputStreamReader(p.getInputStream()));
+            String line = null;
+            while ((line = in.readLine()) != null) {
+                System.out.println(line);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+        /*try {
             Process p;
             if (ndpiConverter.getMagnification().equals(NdpiConverter.MAG_X10)) {
-                System.out.println("X10 Konvertieren sollte beginnen:");
-                p = Runtime.getRuntime().exec("cmd /c " + "java -jar \"" + absolutePathofNdpiJar + "\" -i 2 -c lzw -s \"" + filePath +"\" \"" + outputpath.getParent().toString() + "\"");
+                System.out.println("X10 Konvertieren beginnt:");
+                p = Runtime.getRuntime().exec("java -jar \"" + absolutePathofNdpiJar + "\" -i 2 -c lzw -s \"" + filePath +"\" \"" + outputpath.getParent().toString() + "\"");
                 //p = Runtime.getRuntime().exec( "java -jar \"C:\\Users\\Stefan\\Downloads\\ndpi-to-ome-tiff-converter-v1.5\\ndpi-converter.jar\" -i 2 -c lzw -s \"C:\\Users\\Stefan\\Documents\\stapel\\test.ndpi\"");
                 System.out.println("X10 Konvertieren sollte enden:");
             }
@@ -153,7 +196,7 @@ public class AnalyzerConverterTask extends SwingWorker<String, String>
             }
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
 
         String renameFileName = "_".concat(ndpiConverter.getMagnification().toLowerCase().concat(".ome.tif"));
         String newTifListElement = filePath.replace(".ndpi", renameFileName);
