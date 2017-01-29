@@ -10,8 +10,6 @@
 * auf allen Plattformen lauffähig
 * [M] alle Texte auslagern
 
-* [E] AboutDialog erweitern
-
 * [M] Dialog (mit Progressbar) breiter machen
 * Speichern/Einlesen von Einstellungen + Jason File (.nucleij)
 
@@ -26,7 +24,7 @@
 * Watershed Function!
 * eigene Prozessnamen
 * Einstellungen beim Laden von XML-Datei laden
-* [M E] Einstellungsdialog Properties, .. erstellen
+* Einstellungsdialog Properties, .. erstellen
 
 
 ### 3. Bugs ###
@@ -60,7 +58,7 @@
 * Abfrage ob Analyse/Convert erst nach Start-Klick					27.01.17
 * Seperator statt //												27.01.17
 * Wenn Quality slider geändert, dann berechnen ankreuzen            28.01.17
-
+* AboutDialog erweitern                                             29.01.17
 
 
 ### 7. Wichtige Notizen ###

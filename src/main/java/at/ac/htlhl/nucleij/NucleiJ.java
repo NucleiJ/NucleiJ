@@ -8,6 +8,7 @@ import at.ac.htlhl.nucleij.view.CombinedView;
 import at.ac.htlhl.nucleij.view.GLScanAnalyzerView;
 import at.ac.htlhl.nucleij.view.MainFrameView;
 import at.ac.htlhl.nucleij.view.NdpiConverterView;
+import com.ezware.dialog.task.TaskDialog;
 import com.ezware.dialog.task.TaskDialogs;
 import org.jdesktop.application.*;
 
@@ -158,12 +159,6 @@ public class NucleiJ extends SingleFrameApplication
         Application.launch(NucleiJ.class, args);
     }
 
-    public void changeView(JComponent ndpiConverterView) {
-
-        show(ndpiConverterView);
-    }
-
-
     // region Nested classes
     // ************************************************************************
 
@@ -174,7 +169,7 @@ public class NucleiJ extends SingleFrameApplication
             JFrame parent = ((SingleFrameApplication) getContext().getApplication()).getMainFrame();
 
             // Confirmation Dialog
-            if(TaskDialogs.isConfirmed( parent, "Wollen Sie wirklich beenden?", "Falls Vorgänge noch nicht abgeschlossen sind,\nkönnen diese fehlerhaft beendet werden! ..."))
+            if(TaskDialogs.ask( parent, "Wollen Sie wirklich beenden?", "Falls Vorgänge noch nicht abgeschlossen sind,\nkönnen diese fehlerhaft beendet werden! ..."))
             {
                 return true;
             }

@@ -10,10 +10,12 @@ import at.ac.htlhl.nucleij.view.NdpiConverterView;
 import com.ezware.dialog.task.TaskDialog;
 import com.ezware.dialog.task.TaskDialogs;
 import com.jgoodies.binding.PresentationModel;
+import javafx.stage.Stage;
 import org.jdesktop.application.Application;
 import org.jdesktop.application.SingleFrameApplication;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.IOException;
@@ -115,13 +117,13 @@ public class MainPM extends PresentationModel<Main>
 
         // IDEEN: JDialog
 
-        JFrame parentConverter = ((SingleFrameApplication) Application.getInstance()).getMainFrame();
+        JFrame parentAbout = ((SingleFrameApplication) Application.getInstance()).getMainFrame();
         ResourceBundle bundle = ResourceBundle.getBundle("at.ac.htlhl.nucleij.resources.i18n.dialogs");
 
-        JLabel text = new JLabel("www.htl-hl.ac.at", JLabel.RIGHT);
+        //JLabel text = new JLabel("www.htl-hl.ac.at", JLabel.RIGHT);
+        JLabel text = new JLabel("<html> <a href = http://www.htl-hl.ac.at>http://www.htl-hl.ac.at</a> </html>", JLabel.RIGHT);
 
-
-        TaskDialog taskDialogAbout = new TaskDialog(parentConverter, bundle.getString("AboutDialog.title"));
+        TaskDialog taskDialogAbout = new TaskDialog(parentAbout, bundle.getString("AboutDialog.title"));
         taskDialogAbout.setInstruction(bundle.getString("AboutDialog.instructionMessage"));
         taskDialogAbout.setText(bundle.getString("AboutDialog.text"));
         taskDialogAbout.setFixedComponent(text);
