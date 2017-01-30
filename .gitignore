@@ -2,5 +2,8 @@
 div/icons
 div/jgoodies-doc
 div/launch4j
-target/
-/lib/ndpi-converter/ndpi-converter.jar
+target/classes
+target/generated-sources
+/lib/Original-ndpi-converter/ndpi-converter.jar
+classes/
+lib/Original-ndpi-converter/
