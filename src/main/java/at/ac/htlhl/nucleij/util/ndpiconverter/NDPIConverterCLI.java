@@ -453,9 +453,9 @@ public class NDPIConverterCLI {
 			System.err.println("Could not determine Java Version");
 		}
 
-		if (args.length == 0)
-			System.out.println("keine ARGS");
-			usage();
+		//if (args.length == 0)
+			//System.out.println("keine ARGS");
+
 
 		// Create store for command-line arguments which can't be stored in conversion settings
 		CLArgumentsStore argStore = new CLArgumentsStore();
@@ -468,114 +468,42 @@ public class NDPIConverterCLI {
 		// Parse arguments
 		Getopt g = new Getopt(Constants.CONVERTER_JAR, args, ":fi:estd:c:bhv", null);
 		//Getopt g = new Getopt("TestConvertername", args, ":fi:estd:c:bhv", null);
-		g.setOpterr(false);
+		g.setOpterr(true);
 
 		int option;
 		String arg;
 
 		// Loop through the options
-		while ((option = g.getopt()) != -1)
-			switch (option) {
-			case 'f':
-				argStore.setFileContentDisplayOnly(true);
-				break;
-			case 'i':
-				// Check if argument is 'macro', 'map' or an image number
-				System.out.println("Fall i");
-				arg = g.getOptarg();
-				if (arg.equalsIgnoreCase("macro")) {
-					argStore.setMacroSelected(true);
-				} else if (arg.equalsIgnoreCase("map")) {
-					argStore.setMapSelected(true);
-				} else {
-					try {
-						argStore.setImagePositionNumber(Integer.parseInt(arg));
-					} catch (NumberFormatException e) {
-						System.err.println("Error - Usage of -i <image>: Given image-number is not a valid number");
-						usage();
-					}
-				}
-				break;
-			case 'e':
-				// Export selected image (no conversion to OME-TIFF)
-				argStore.setExportOnly(true);
-				break;
-			case 's':
-				// Singlepage OME-TIFF (do not split color channels)
-				settings.setMultipageOMETiffSelected(false);
-				break;
-			case 't':
-				// Tiled OME-TIFF
-				settings.setImgDataOrganization(ConversionSettings.TILES);
-				break;
-			case 'd':
-				// Downscale OME-TIFF					
-				settings.setDownscalingSelected(true);
-				arg = g.getOptarg();
-				boolean validAlgorithm = false;
-				for (String algorithm : ConversionSettings.getInstance().getAvailableDownscalingAlgorithms()) {
-					if (algorithm.equalsIgnoreCase(arg)) {
-						settings.setDownscalingAlgorithm(algorithm);
-						validAlgorithm = true;
-					}
-				}
-				if (!validAlgorithm || arg == null) {
-					System.err.println("Error - Usage of -d <algo>: Given interpolation algorithm is not valid/supported");
-					usage();
-				}
-				break;
-			case 'c':
-				// Compress OME-TIFF
-				arg = g.getOptarg();
-				boolean validCompression = false;
-				if (arg.equalsIgnoreCase("lzw")) {
-					settings.setCompressionAlgorithm(TiffCompression.LZW.getCode());
-					validCompression = true;
-				} else if (arg.equalsIgnoreCase("deflate")) {
-					settings.setCompressionAlgorithm(TiffCompression.DEFLATE.getCode());
-					validCompression = true;
-				} else if (arg.equalsIgnoreCase("adobe-deflate")) {
-					settings.setCompressionAlgorithm(TiffCompression.PROPRIETARY_DEFLATE.getCode());
-					validCompression = true;
-				} else if (arg.equalsIgnoreCase("jpeg2000")) {
-					settings.setCompressionAlgorithm(TiffCompression.JPEG_2000.getCode());
-					validCompression = true;
-				}
-				if (!validCompression) {
-					System.err.println("Error - Usage of -c <compr>: Given compression algorithm is not valid/supported");
-					usage();
-				}
-				break;
-			case 'b':
-				// Use BigTIFF file format
-				settings.setBigTiffSelected(true);
-				break;
-			case 'h':
-				// Display help
-				usage();
-				break;
-			case 'v':
-				System.out.println("INFO ausgeben");
-				// Display info
-				info();
-				break;
-			case ':':
-				System.err.println("Error - Required argument is missing for option -" + (char) g.getOptopt());
-				usage();
-				break;
-			case '?':
-				System.err.println("Error - The option -" + (char) g.getOptopt() + " is not valid");
-				usage();
-				break;
-			}
+		// Check if argument is 'macro', 'map' or an image number
+		System.out.println("Fall i");
+		try {
+			argStore.setImagePositionNumber(2);
+		} catch (NumberFormatException e) {
+			System.err.println("Error - Usage of -i <image>: Given image-number is not a valid number");
+			usage();
+		}
+
+
+		//case 's':
+		// Singlepage OME-TIFF (do not split color channels)
+		settings.setMultipageOMETiffSelected(false);
+
+		//case 'c':
+		// Compress OME-TIFF
+		arg = g.getOptarg();
+		boolean validCompression = false;
+		settings.setCompressionAlgorithm(TiffCompression.LZW.getCode());
+		validCompression = true;
+
 
 		// Get NDPI filename
 		try {
-			argStore.setNDPIFilename(args[g.getOptind()]);
+			argStore.setNDPIFilename( "C:\\Users\\Stefan\\Documents\\stapel\\test.ndpi" );
 		} catch (ArrayIndexOutOfBoundsException e) {
 			System.err.println("Error - No NDPI file given");
 			usage();
 		}
+
 
 		// Get user-defined output directory
 		try {
@@ -589,7 +517,7 @@ public class NDPIConverterCLI {
 		if (argStore.getImagePositionNumber() == -1 && !argStore.isMacroSelected() && !argStore.isMapSelected()) {
 			// No image was selected
 			// Therefore, set selected image to image number 1 (largest image)
-			argStore.setImagePositionNumber(1);
+			argStore.setImagePositionNumber(2);
 		}
 
 		// Check if downscaling is allowed
@@ -602,7 +530,7 @@ public class NDPIConverterCLI {
 		NDPIConverterCLI converter = new NDPIConverterCLI(argStore);
 		int returnCode = converter.start();
 
-		System.exit(returnCode);
+		//System.exit(returnCode);
 	}
 
 }

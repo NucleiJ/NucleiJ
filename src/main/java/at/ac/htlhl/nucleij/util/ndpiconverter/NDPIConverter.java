@@ -47,9 +47,8 @@ public class NDPIConverter {
 	 */
 	//public static void main(String[] args) {
 	public static void main(String[] args) {
-		System.out.println("KONVERTER GESTARTET");
 		if (args.length >= 1) {
-
+			System.out.println("KONVERTER GESTARTET");
 			NDPIConverterCLI.main(args);
 			return;
 		}
