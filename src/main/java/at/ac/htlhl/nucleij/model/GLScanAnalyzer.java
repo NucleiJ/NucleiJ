@@ -35,10 +35,7 @@ public class GLScanAnalyzer extends Model
     private String roiarea;
     private boolean setroi;
 
-    //von Andi uebernommen
-    private String inputpath;
-    private String outputpath;
-    private String type;
+    private String absolutePathofNdpiJar;
 
     //Listen fuer Pfade der zu verarbeitenden arbeiten
     private List<String> ndpiList;
@@ -63,9 +60,6 @@ public class GLScanAnalyzer extends Model
         this.heatmapquality = 60;
         this.calculateandshowheatmap = false;
         this.setroi = false;
-
-        this.inputpath = "";
-        this.outputpath = "";
 
         this.roiX = 0;
         this.roiY = 0;
@@ -199,22 +193,13 @@ public class GLScanAnalyzer extends Model
         this.roiHeight = roiHeight;
     }
 
-
-    /*
-    public boolean isSelectroi()
-    {
-        return selectroi;
+    public String getAbsolutePathofNdpiJar() {
+        return absolutePathofNdpiJar;
     }
 
-    public void setSelectroi(boolean selectroi) {
-        boolean oldValue = this.selectroi;
-        this.selectroi = selectroi;
-        firePropertyChange(PROPERTY_SELECTROI, oldValue, selectroi);
+    public void setAbsolutePathofNdpiJar(String absolutePathofNdpiJar) {
+        this.absolutePathofNdpiJar = absolutePathofNdpiJar;
     }
-
-
-
-    */
 
     // endregion
 }
