@@ -132,6 +132,7 @@ public class AnalyzerConverterTask extends SwingWorker<String, String>
         System.out.println(filePath);
         System.out.println(outputpath.getParent());
 
+        //absolutePathofNdpiJar = "/home/stefan/Desktop/ndpi-to-ome-tiff-converter-v1.5/ndpi-converter.jar";
         Process p;
 
         //absolutePathofNdpiJar = "/home/andreas/IdeaProjects/nucleij/lib/ndpi-converter/ndpi-converter.jar";
@@ -139,12 +140,13 @@ public class AnalyzerConverterTask extends SwingWorker<String, String>
         try {
             if (OS.contains("linux")) {
                 System.out.println("Your OS is Linux");
-                p = Runtime.getRuntime().exec("sudo java -jar " + absolutePathofNdpiJar + " -i 2 -c lzw -s "+ filePath +  outputpath.getParent());
+                p = Runtime.getRuntime().exec("sudo java -jar " + absolutePathofNdpiJar + "\" -i 2 -c lzw -s \"" + filePath + "\" \"" + outputpath.getParent() + "\"");
                 //p = Runtime.getRuntime().exec("sudo java -jar \"" + absolutePathofNdpiJar + "\" -i 2 -c lzw -s \""+ filePath + "\" \"" + outputpath.getParent() + "\"");
                 //p = Runtime.getRuntime().exec("sudo java -jar /home/andreas/IdeaProjects/nucleij/lib/ndpi-converter/ndpi-converter.jar -i 2 -c lzw -s /home/andreas/Schreibtisch/Scans/N2700-14\\ 5\\ HE\\ -\\ 2016-06-06\\ 14.57.00.ndpi");
                 //p = Runtime.getRuntime().exec("sudo java -jar /home/andreas/IdeaProjects/nucleij/lib/ndpi-converter/ndpi-converter.jar -i 2 -c lzw -s /home/andreas/Schreibtisch/Scans/N2700-14 5 HE - 2016-06-06 14.57.00.ndpi");
 
                 // Befehl auf Linux:
+                // FUNKTIONIERT Erben: java -jar "/home/stefan/Desktop/ndpi-to-ome-tiff-converter-v1.5/ndpi-converter.jar"  -i 2 -c lzw -s  "/home/stefan/Desktop/test Scan.ndpi"
                 // sudo java -jar /home/andreas/IdeaProjects/nucleij/lib/ndpi-converter/ndpi-converter.jar -i 2 -c lzw -s /home/andreas/Schreibtisch/Scans/N2700-14\ 5\ HE\ -\ 2016-06-06\ 14.57.00.ndpi
             }
             else if (OS.contains("windows")) {
