@@ -106,8 +106,6 @@ public class AnalyzerConverterTask extends SwingWorker<String, String>
                 //publish(Math.round(currentStatus));
             }
             mainAnalyzer.createSummary();
-
-
         }
         return "Finished";
     }
@@ -131,6 +129,7 @@ public class AnalyzerConverterTask extends SwingWorker<String, String>
         String OS = System.getProperty("os.name").toLowerCase();
         File outputpath = new File(ndpiConverter.getOutputpath());
 
+        //region ################ NDPI-Converter JAR ################
         File jarPath = new File("lib/ndpi-converter/ndpi-converter.jar");
         String absolutePathofNdpiJar = jarPath.getAbsolutePath();
         if (jarPath.exists())
@@ -193,14 +192,13 @@ public class AnalyzerConverterTask extends SwingWorker<String, String>
 
         }
 
+        // endregion
+
         System.out.println(absolutePathofNdpiJar);
         System.out.println(filePath);
         System.out.println(outputpath.getParent());
 
-        //absolutePathofNdpiJar = "/home/stefan/Desktop/ndpi-to-ome-tiff-converter-v1.5/ndpi-converter.jar";
         Process p;
-
-        //absolutePathofNdpiJar = "/home/andreas/IdeaProjects/nucleij/lib/ndpi-converter/ndpi-converter.jar";
 
         try {
             if (OS.contains("linux")) {
