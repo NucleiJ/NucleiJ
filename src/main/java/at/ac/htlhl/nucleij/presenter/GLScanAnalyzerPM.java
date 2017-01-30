@@ -151,8 +151,15 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
             AnalyzerConverterTask analyzerConverterTask = new AnalyzerConverterTask(progressBarAnalyzerConverter, taskDialogAnalyzerConverter, ndpiConverter, glScanAnalyzer);
             analyzerConverterTask.execute();
 
-            //analyzerConverterTask.isCancelled() == true
-            taskDialogAnalyzerConverter.show();
+            //taskDialogAnalyzerConverter.show();
+            TaskDialog.Command erg = taskDialogAnalyzerConverter.show();
+            System.out.println("ERG:::" + erg);
+
+            if (erg.toString() == "CANCEL")
+            {
+                //taskDialogAnalyzerConverter.setVisible(false);
+                analyzerConverterTask.cancel(true);
+            }
 
             long elapsedTime = System.nanoTime() - startTime;
             double seconds = (double) elapsedTime / 1000000000.0;
