@@ -3,6 +3,7 @@ package at.ac.htlhl.nucleij.presenter.tasks;
 import at.ac.htlhl.nucleij.model.GLScanAnalyzer;
 import at.ac.htlhl.nucleij.model.NdpiConverter;
 import at.ac.htlhl.nucleij.presenter.analyzing.MainAnalyzer;
+import at.ac.htlhl.nucleij.util.ndpiconverter.NDPIConverter;
 import com.ezware.dialog.task.TaskDialog;
 import de.javasoft.util.OS;
 
@@ -137,6 +138,15 @@ public class AnalyzerConverterTask extends SwingWorker<String, String>
 
         //absolutePathofNdpiJar = "/home/andreas/IdeaProjects/nucleij/lib/ndpi-converter/ndpi-converter.jar";
 
+        //String[] args = new String[]{"-i", "2", "\"C:\\Users\\Stefan\\Documents\\stapel\\test.ndpi\""};  //-i 2 -c lzw -s
+        //String[] args = new String[]{"-i", "\"C:\\Users\\Stefan\\Documents\\stapel\\test.ndpi\""};  //-i 2 -c lzw -s
+        String[] args = new String[]{"-i", "2", "C:\\Users\\Stefan\\Documents\\stapel\\test.ndpi"};  //-i 2 -c lzw -s
+
+        System.out.println(args.toString());
+        NDPIConverter ndpiConverterExtern = new NDPIConverter(args);
+        ndpiConverterExtern.main(args);
+
+        /*
         try {
             if (OS.contains("linux")) {
                 System.out.println("Your OS is Linux");
@@ -172,6 +182,7 @@ public class AnalyzerConverterTask extends SwingWorker<String, String>
         } catch (IOException e) {
             e.printStackTrace();
         }
+        */
 
 
         /*try {
