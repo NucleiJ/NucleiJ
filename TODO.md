@@ -6,7 +6,6 @@
 * [E] Linux fixen
 * [M] Apple Builden
 * auf allen Plattformen lauffähig
-* [M] alle Texte auslagern
 
 * [M] Dialog (mit Progressbar) breiter machen
 * Speichern/Einlesen von Einstellungen + Jason File (.nucleij)
@@ -58,6 +57,7 @@
 * Seperator statt //												27.01.17
 * Wenn Quality slider geändert, dann berechnen ankreuzen            28.01.17
 * AboutDialog erweitern                                             29.01.17
+* alle Texte auslagern                                              30.01.17
 
 
 ### 7. Wichtige Notizen ###

@@ -21,7 +21,6 @@ public class NdpiConverter extends Model
     public static final String MAG_X10  = "x10";
     public static final String MAG_X40  = "x40";
     public static final String[] MAG_CHOICES = {MAG_X5, MAG_X10, MAG_X40};
-
     //endregion Constants
 
     //*******************************************************************
@@ -68,7 +67,6 @@ public class NdpiConverter extends Model
 
 
     //region Getter&Setter
-
     public String getMagnification() {
         return magnification;
     }
@@ -97,9 +95,6 @@ public class NdpiConverter extends Model
         String oldValue = this.outputpath;
         this.outputpath = outputpath;
         firePropertyChange(PROPERTY_OUTPUTPATH,oldValue,outputpath);
-
-        //TODO dass im directoryNameTextField nur benutzerdefinierter Name angezeigt wird und im outputFolderTextField gleich der Pfad sich mitaktualisiert
     }
     //endregion Getter&Setter
-
 }

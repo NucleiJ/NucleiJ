@@ -42,7 +42,6 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
 
     private NdpiConverter ndpiConverter;
     private GLScanAnalyzer glScanAnalyzer;
-    private GLScanAnalyzerPM glScanAnalyzerPM;
 
 
     public NdpiConverterPM(NdpiConverter ndpiConverter, GLScanAnalyzer glScanAnalyzer, final GLScanAnalyzerPM glScanAnalyzerPM)
@@ -51,7 +50,6 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
 
         this.ndpiConverter = ndpiConverter;
         this.glScanAnalyzer = glScanAnalyzer;
-        this.glScanAnalyzerPM = glScanAnalyzerPM;
 
         inputPathAction = new InputPathAction();
         outputPathAction = new OutputPathAction();
@@ -90,7 +88,6 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
         return magnificationAction;
     }
     //endregion
-
 
     private JFileChooser createFileChooser()
     {
@@ -153,7 +150,6 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
                     }
                 }
 
-
                 assert filesInDirectory != null;
                 for (File file : filesInDirectory ) {
                     if (file.isFile()) {
@@ -194,10 +190,7 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
                     }
                 }
                 ndpiConverter.setNumberTifFiles(numberTifFiles);
-
-
-                System.out.println();
-                LOGGER.info(numberNdpiFiles + " NDPI-Files & " + numberTifFiles + " TIF-Files in Folder '"+ chooser.getCurrentDirectory().getName() +"' found" + "\n");
+                LOGGER.info("\n" + numberNdpiFiles + " NDPI-Files & " + numberTifFiles + " TIF-Files in Folder '"+ chooser.getCurrentDirectory().getName() +"' found" + "\n");
 
                 glScanAnalyzer.setNdpiList(ndpiFileList);
                 glScanAnalyzer.setTifList(tifFileList);
@@ -219,7 +212,6 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
                     TaskDialogs.inform(parentDialog,
                             bundle.getString("OnlyOneFolder.text"),
                             bundle.getString("SelectedFirstFolder.text") + "'" + chooser.getSelectedFile().getName() + "'");
-                    //Automatisch wird 1. Ordner gewählt
                 }
             }
         }

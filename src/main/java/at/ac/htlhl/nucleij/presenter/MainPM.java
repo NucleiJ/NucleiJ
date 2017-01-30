@@ -34,7 +34,6 @@ public class MainPM extends PresentationModel<Main>
     private static final Logger LOGGER = Logger.getLogger(MainPM.class.getName());
 
     public static final String FILE_EXTENSION			= "nucleij";
-
     public static final String PROPERTY_MAIN			= "main";
 
     // Fields
@@ -44,10 +43,6 @@ public class MainPM extends PresentationModel<Main>
     private Action aboutAction;
     private Action exitAction;
     private Action newAction;
-    private Action startAction;
-
-    // References to sub presentation models
-    private NdpiConverter ndpiConverter;
 
     private GLScanAnalyzerPM glScanAnalyzerPM;
     private NdpiConverterPM ndpiConverterPM;
@@ -61,7 +56,6 @@ public class MainPM extends PresentationModel<Main>
 
         glScanAnalyzerPM = new GLScanAnalyzerPM(main.getGLScanAnalyzer(), main.getNdpiConverter());
         ndpiConverterPM = new NdpiConverterPM(main.getNdpiConverter(),main.getGLScanAnalyzer(), glScanAnalyzerPM);
-
 
         loadAction = new LoadAction();
         saveAction = new SaveAction();
@@ -102,7 +96,7 @@ public class MainPM extends PresentationModel<Main>
     public Action getNewAction() {
         return newAction;
     }
-    
+
     public void setGlScanAnalyzerView(GLScanAnalyzerView glScanAnalyzerView) {
         this.glScanAnalyzerView = glScanAnalyzerView;
     }
@@ -114,13 +108,9 @@ public class MainPM extends PresentationModel<Main>
     private void showAbout()
     {
         System.out.println("About Action gestartet:\n");
-
-        // IDEEN: JDialog
-
         JFrame parentAbout = ((SingleFrameApplication) Application.getInstance()).getMainFrame();
         ResourceBundle bundle = ResourceBundle.getBundle("at.ac.htlhl.nucleij.resources.i18n.dialogs");
 
-        //JLabel text = new JLabel("www.htl-hl.ac.at", JLabel.RIGHT);
         JLabel text = new JLabel("<html> <a href = http://www.htl-hl.ac.at>http://www.htl-hl.ac.at</a> </html>", JLabel.RIGHT);
 
         TaskDialog taskDialogAbout = new TaskDialog(parentAbout, bundle.getString("AboutDialog.title"));
@@ -152,7 +142,6 @@ public class MainPM extends PresentationModel<Main>
                 TaskDialogs.showException(ex);
             }
         }
-
     }
 
     private void load()
@@ -170,7 +159,6 @@ public class MainPM extends PresentationModel<Main>
                 TaskDialogs.showException(ex);
             }
         }
-
     }
 
     private void newClass()
