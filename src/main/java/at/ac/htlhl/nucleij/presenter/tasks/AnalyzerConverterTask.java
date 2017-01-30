@@ -203,7 +203,7 @@ public class AnalyzerConverterTask extends SwingWorker<String, String>
         try {
             if (OS.contains("linux")) {
                 System.out.println("Your OS is Linux");
-                p = Runtime.getRuntime().exec("sudo java -jar " + absolutePathofNdpiJar + "\" -i 2 -c lzw -s \"" + filePath + "\" \"" + outputpath.getParent() + "\"");
+                p = Runtime.getRuntime().exec("java -jar " + absolutePathofNdpiJar + "\" -i 2 -c lzw -s \"" + filePath + "\" \"" + outputpath.getParent() + "\"");
                 //p = Runtime.getRuntime().exec("sudo java -jar \"" + absolutePathofNdpiJar + "\" -i 2 -c lzw -s \""+ filePath + "\" \"" + outputpath.getParent() + "\"");
                 //p = Runtime.getRuntime().exec("sudo java -jar /home/andreas/IdeaProjects/nucleij/lib/ndpi-converter/ndpi-converter.jar -i 2 -c lzw -s /home/andreas/Schreibtisch/Scans/N2700-14\\ 5\\ HE\\ -\\ 2016-06-06\\ 14.57.00.ndpi");
                 //p = Runtime.getRuntime().exec("sudo java -jar /home/andreas/IdeaProjects/nucleij/lib/ndpi-converter/ndpi-converter.jar -i 2 -c lzw -s /home/andreas/Schreibtisch/Scans/N2700-14 5 HE - 2016-06-06 14.57.00.ndpi");
