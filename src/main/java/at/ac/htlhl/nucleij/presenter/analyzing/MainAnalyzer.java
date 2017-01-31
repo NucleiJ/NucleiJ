@@ -75,7 +75,7 @@ public class MainAnalyzer implements PlugInFilter {
 
         path.setValue(glScanAnalyzer.getOutputpath());
 
-        startExporter.setnewDirectoryname(File.separator + "Output");  //TODO andis textfield auslesen wenn es property gibt
+        startExporter.setnewDirectoryname(File.separator + "Output");
 
         File outputPathFile = new File(glScanAnalyzer.getOutputpath());
         boolean success = outputPathFile.mkdirs();
@@ -306,11 +306,8 @@ public class MainAnalyzer implements PlugInFilter {
 
                 Roi roi = imp.getRoi();
                 if (roi instanceof Roi) {
-
-                    // TODO imp.setRoi();
                     IJ.run(imp, "Crop", "");
                     imp.updateAndDraw();
-
                     CROP_CHECKBOX = true;
                 }
             } while (CROP_CHECKBOX == false);
@@ -328,7 +325,6 @@ public class MainAnalyzer implements PlugInFilter {
             CROP_CHECKBOX = true;
         }
 
-        // TODO Werte einlesbar nicht statisch
         EXPORT_RESULTS_CHECKBOX = true;
         CROP_CHECKBOX = glScanAnalyzer.isSetroi();
         HEATMAP_CHECKBOX = glScanAnalyzer.isCalculateandshowheatmap();

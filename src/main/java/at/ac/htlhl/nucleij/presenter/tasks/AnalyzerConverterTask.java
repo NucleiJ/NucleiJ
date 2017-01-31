@@ -240,14 +240,13 @@ public class AnalyzerConverterTask extends SwingWorker<String, String>
             }
             else {
                 System.out.println("Your OS is not supported!");
-                //TODO Möglicherweise ConvertProzess beenden und not supported Dialog anzeigen
                 p = null;
             }
 
             //p = Runtime.getRuntime().exec("ls");
             BufferedReader in = new BufferedReader(
                     new InputStreamReader(p.getInputStream()));
-            String line = null;
+            String line;
             while ((line = in.readLine()) != null) {
                 System.out.println(line);
             }

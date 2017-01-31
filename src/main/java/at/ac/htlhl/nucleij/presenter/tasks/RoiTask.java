@@ -17,6 +17,7 @@ import java.util.logging.Logger;
  * Created by Stefan on 29.12.2016.
  */
 public class RoiTask {
+    //TODO Klasse unnoetig?
     private static final Logger LOGGER = Logger.getLogger(AnalyzerConverterTask.class.getName());
     ResourceBundle bundle = ResourceBundle.getBundle("at.ac.htlhl.nucleij.resources.i18n.dialogs");
 
