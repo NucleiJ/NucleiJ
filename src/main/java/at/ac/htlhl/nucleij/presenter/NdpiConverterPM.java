@@ -40,7 +40,7 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter> {
     private NdpiConverter  ndpiConverter;
     private GLScanAnalyzer glScanAnalyzer;
 
-    public NdpiConverterPM(NdpiConverter ndpiConverter, GLScanAnalyzer glScanAnalyzer) {
+    public NdpiConverterPM(NdpiConverter ndpiConverter, GLScanAnalyzer glScanAnalyzer, GLScanAnalyzerPM glScanAnalyzerPM) {
         super(ndpiConverter);
 
         this.ndpiConverter = ndpiConverter;

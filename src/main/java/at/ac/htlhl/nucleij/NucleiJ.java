@@ -60,10 +60,6 @@ public class NucleiJ extends SingleFrameApplication
 
         MainFrameView mainFrame = new MainFrameView(mainPM);
 
-        // die Views ins PM Model "senden"
-        mainPM.setGlScanAnalyzerView(glScanAnalyzerView);
-        mainPM.setNdpiConverterView(ndpiConverterView);
-
         setMainFrame(mainFrame);
         getMainFrame().setTitle(resource.getString("Application.id"));
 
