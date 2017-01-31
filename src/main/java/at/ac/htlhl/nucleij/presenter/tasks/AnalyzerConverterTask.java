@@ -33,12 +33,16 @@ public class AnalyzerConverterTask extends SwingWorker<String, String>
     private GLScanAnalyzer glScanAnalyzer;
     private NdpiConverter ndpiConverter;
 
+    volatile boolean requestCancel;
+
     public AnalyzerConverterTask(JProgressBar progressBar, TaskDialog taskDialog, NdpiConverter ndpiConverter, GLScanAnalyzer glScanAnalyzer)
     {
         this.progressBar = progressBar;
         this.taskDialog = taskDialog;
         this.ndpiConverter = ndpiConverter;
         this.glScanAnalyzer = glScanAnalyzer;
+
+        this.requestCancel = false;
     }
 
     @Override
@@ -46,7 +50,6 @@ public class AnalyzerConverterTask extends SwingWorker<String, String>
         MainAnalyzer mainAnalyzer = new MainAnalyzer(glScanAnalyzer);
         List<String> tifFileList; //Wird erst vor Konvertieren aktualisiert geholt
         List<String> ndpiFileList = glScanAnalyzer.getNdpiList();
-        String element;
         float currentStatus = 0;
         float add;
         int choice = ndpiConverter.getChoice();
@@ -194,16 +197,21 @@ public class AnalyzerConverterTask extends SwingWorker<String, String>
 
         // endregion
 
-        System.out.println(absolutePathofNdpiJar);
-        System.out.println(filePath);
-        System.out.println(outputpath.getParent());
+        System.out.println("\nAbsolutePathOfNdpi" + absolutePathofNdpiJar);
+        System.out.println("FilePath" + filePath);
+        System.out.println("OutputPath.getParent" + outputpath.getParent());
 
         Process p;
 
         try {
             if (OS.contains("linux")) {
                 System.out.println("Your OS is Linux");
-                p = Runtime.getRuntime().exec("java -jar " + absolutePathofNdpiJar + "\" -i 2 -c lzw -s \"" + filePath + "\" \"" + outputpath.getParent() + "\"");
+                String command = "/usr/bin/java -jar  \"" + absolutePathofNdpiJar + "\" -i 2 -c lzw -s \"" + filePath + "\" \"" + outputpath.getParent() + "\"";
+                System.out.println("Command: '" + command  +"'");
+
+                p = Runtime.getRuntime().exec(command);
+                //p.getInputStream() anschen
+
                 //p = Runtime.getRuntime().exec("sudo java -jar \"" + absolutePathofNdpiJar + "\" -i 2 -c lzw -s \""+ filePath + "\" \"" + outputpath.getParent() + "\"");
                 //p = Runtime.getRuntime().exec("sudo java -jar /home/andreas/IdeaProjects/nucleij/lib/ndpi-converter/ndpi-converter.jar -i 2 -c lzw -s /home/andreas/Schreibtisch/Scans/N2700-14\\ 5\\ HE\\ -\\ 2016-06-06\\ 14.57.00.ndpi");
                 //p = Runtime.getRuntime().exec("sudo java -jar /home/andreas/IdeaProjects/nucleij/lib/ndpi-converter/ndpi-converter.jar -i 2 -c lzw -s /home/andreas/Schreibtisch/Scans/N2700-14 5 HE - 2016-06-06 14.57.00.ndpi");
