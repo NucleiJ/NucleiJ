@@ -5,9 +5,7 @@ package at.ac.htlhl.nucleij.view;
 
 import at.ac.htlhl.nucleij.model.GLScanAnalyzer;
 import at.ac.htlhl.nucleij.presenter.GLScanAnalyzerPM;
-import com.jgoodies.binding.adapter.BasicComponentFactory;
 import com.jgoodies.binding.adapter.BoundedRangeAdapter;
-import com.jgoodies.binding.adapter.ComboBoxAdapter;
 import com.jgoodies.binding.binder.Binders;
 import com.jgoodies.binding.binder.PresentationModelBinder;
 import com.jgoodies.binding.value.ValueModel;
@@ -17,50 +15,40 @@ import com.jgoodies.forms.factories.DefaultComponentFactory;
 import com.jgoodies.forms.layout.FormLayout;
 
 import javax.swing.*;
-import java.awt.*;
 import java.util.ResourceBundle;
-import net.miginfocom.swing.*;
 
 /**
- * @author Schülerlizenz 2016/17
+ * @author Stefan Erben
+ * @version 1.0
  */
 public class GLScanAnalyzerView extends JPanel {
 
-    // region Fields
-    // ************************************************************************
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    private JComponent heatmapSeparator;
-    private JLabel calculateandshowheatmapLabel;
-    private JCheckBox calculateandshowheatmapCheckBox;
-    private JLabel heatmapqualityLabel;
-    private JSlider heatmapqualitySlider;
+    private JComponent          heatmapSeparator;
+    private JLabel              calculateandshowheatmapLabel;
+    private JCheckBox           calculateandshowheatmapCheckBox;
+    private JLabel              heatmapqualityLabel;
+    private JSlider             heatmapqualitySlider;
     private JFormattedTextField heatmapqualityTextField;
-    private JComponent roiSeperator;
-    private JLabel selectroiLabel;
-    private JButton selctroiButton;
-    private JButton startAnalyzerButton;
-    private AbstractAction analyzeAction;
-    private AbstractAction calculateandshowheatmapAction;
-    private AbstractAction setRoiAction;
-    private AbstractAction changeheatmapqualityAction;
-    private AbstractAction deleteroiAction;
+    private JComponent          roiSeperator;
+    private JLabel              selectroiLabel;
+    private JButton             selctroiButton;
+    private JButton             startAnalyzerButton;
+    private AbstractAction      analyzeAction;
+    private AbstractAction      calculateandshowheatmapAction;
+    private AbstractAction      setRoiAction;
+    private AbstractAction      changeheatmapqualityAction;
+    private AbstractAction      deleteroiAction;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 
     private GLScanAnalyzerPM glScanAnalyzerPM;
-    private GLScanAnalyzer glScanAnalyzer;
 
-    // endregion
-
-    // Instance creation
-    // ************************************************************************
-    public GLScanAnalyzerView(GLScanAnalyzerPM glScanAnalyzerPM, GLScanAnalyzer glScanAnalyzer) {
+    public GLScanAnalyzerView(GLScanAnalyzerPM glScanAnalyzerPM) {
 
         this.glScanAnalyzerPM = glScanAnalyzerPM;
-        this.glScanAnalyzer = glScanAnalyzer;
 
         initComponents();
         initBinding();
-        //outputpathTextField.setEditable(false);
     }
 
     private void createUIComponents() {
@@ -68,22 +56,9 @@ public class GLScanAnalyzerView extends JPanel {
         calculateandshowheatmapAction = (AbstractAction) glScanAnalyzerPM.getCalculateandshowheatmapAction();
         setRoiAction = (AbstractAction) glScanAnalyzerPM.getSetroiAction();
         deleteroiAction = (AbstractAction) glScanAnalyzerPM.getDeleteroiAction();
-
-        /*selectpathAction= (AbstractAction) glScanAnalyzerPM.getSelectpathAction();
-        typeAction = (AbstractAction) glScanAnalyzerPM.getTypeAction();
-        outputpathAction  = (AbstractAction) glScanAnalyzerPM.getOutputpathAction();*/
     }
 
     private void initBinding() {
-        /*//ALTES BINDING
-        PresentationModelBinder binder = Binders.binderFor(glScanAnalyzerPM);
-        binder.bindBeanProperty(GLScanAnalyzer.PROPERTY_INPUTPATH).to(inputpathTextField);
-        binder.bindBeanProperty(GLScanAnalyzer.PROPERTY_OUTPUTPATH).to(outputpathTextField);
-        binder.bindBeanProperty(GLScanAnalyzer.PROPERTY_SELECTROI).to(selectroiCheckBox);
-        ValueModel typeValueModel =  glScanAnalyzerPM.getComponentModel(GLScanAnalyzer.PROPERTY_TYPE);
-        ComboBoxAdapter comboBoxAdapter = new ComboBoxAdapter(GLScanAnalyzer.STRING_CHOICES, typeValueModel);
-        typeComboBox.setModel(comboBoxAdapter);*/
-
         PresentationModelBinder binder = Binders.binderFor(glScanAnalyzerPM);
         binder.bindBeanProperty(GLScanAnalyzer.PROPERTY_CALCULATEANDSHOWHEATMAP).to(calculateandshowheatmapCheckBox);
 
@@ -91,14 +66,6 @@ public class GLScanAnalyzerView extends JPanel {
         ValueModel heatmapQualityValueModel = glScanAnalyzerPM.getModel(GLScanAnalyzer.PROPERTY_HEATMAPQUALITY);
         heatmapqualitySlider.setModel(new BoundedRangeAdapter(heatmapQualityValueModel, 1, 1, 101));
         binder.bindBeanProperty(GLScanAnalyzer.PROPERTY_HEATMAPQUALITY).to(heatmapqualityTextField);
-
-        //binder.bindBeanProperty(GLScanAnalyzer.PROPERTY_SETROI).to(selctroiButton);
-
-        //selectroiLabel.setText("Orger Test");
-        //selectroiLabel.setEnabled(false);
-        //selctroiButton.setEnabled(false);
-        //roiSeperator.setEnabled(false);
-
     }
 
     private void initComponents() {
@@ -121,8 +88,8 @@ public class GLScanAnalyzerView extends JPanel {
         //======== this ========
         setBorder(Borders.DIALOG);
         setLayout(new FormLayout(
-            "right:68dlu, $lcgap, 63dlu, $lcgap, pref:grow, $lcgap, default, $lcgap, 24dlu, $lcgap, pref",
-            "pref, $lgap, 16dlu, $lgap, 18dlu, 3*($lgap, pref)"));
+                "right:68dlu, $lcgap, 63dlu, $lcgap, pref:grow, $lcgap, default, $lcgap, 24dlu, $lcgap, pref",
+                "pref, $lgap, 16dlu, $lgap, 18dlu, 3*($lgap, pref)"));
         add(heatmapSeparator, CC.xywh(1, 1, 11, 1));
 
         //---- calculateandshowheatmapLabel ----
