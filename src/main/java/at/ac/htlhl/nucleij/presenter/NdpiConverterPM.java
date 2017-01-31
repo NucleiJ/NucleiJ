@@ -23,29 +23,26 @@ import java.util.logging.Logger;
 import static at.ac.htlhl.nucleij.model.NdpiConverter.MAG_X10;
 import static at.ac.htlhl.nucleij.model.NdpiConverter.MAG_X5;
 
-
 /**
  * Created by Andreas on 11.11.2016.
  */
-//TODO Wenn mode geändert wird, werden alle Eingaben zurückgesetzt (Construktor aufrufen??)
-public class NdpiConverterPM extends PresentationModel<NdpiConverter>
-{
-    private static final Logger LOGGER = Logger.getLogger(NdpiConverterPM.class.getName());
-    public static final String FILE_EXTENSION = "nucleij";
 
-    FileNameExtensionFilter ndpiFilter = new FileNameExtensionFilter("Nano Zoomer Digital Pathology Image (.ndpi)","ndpi");
-    FileNameExtensionFilter tifFilter = new FileNameExtensionFilter("Tagged Image File (.tif)","tif");
+public class NdpiConverterPM extends PresentationModel<NdpiConverter> {
+    private static final Logger LOGGER         = Logger.getLogger(NdpiConverterPM.class.getName());
+    public static final  String FILE_EXTENSION = "nucleij";
+
+    FileNameExtensionFilter ndpiFilter = new FileNameExtensionFilter("Nano Zoomer Digital Pathology Image (.ndpi)", "ndpi");
+    FileNameExtensionFilter tifFilter  = new FileNameExtensionFilter("Tagged Image File (.tif)", "tif");
 
     private Action inputPathAction;
     private Action outputPathAction;
     private Action magnificationAction;
 
-    private NdpiConverter ndpiConverter;
+    private NdpiConverter  ndpiConverter;
     private GLScanAnalyzer glScanAnalyzer;
 
 
-    public NdpiConverterPM(NdpiConverter ndpiConverter, GLScanAnalyzer glScanAnalyzer, final GLScanAnalyzerPM glScanAnalyzerPM)
-    {
+    public NdpiConverterPM(NdpiConverter ndpiConverter, GLScanAnalyzer glScanAnalyzer, final GLScanAnalyzerPM glScanAnalyzerPM) {
         super(ndpiConverter);
 
         this.ndpiConverter = ndpiConverter;
@@ -55,15 +52,12 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
         outputPathAction = new OutputPathAction();
         magnificationAction = new MagnificationAction();
 
-        // Ausgabe jeder Aenderung
         ndpiConverter.addPropertyChangeListener(new PropertyChangeListener() {
             public void propertyChange(PropertyChangeEvent evt) {
-                LOGGER.info("Property name="+evt.getPropertyName()+", oldValue="+evt.getOldValue()+", newValue="+evt.getNewValue());
+                LOGGER.info("Property name=" + evt.getPropertyName() + ", oldValue=" + evt.getOldValue() + ", newValue=" + evt.getNewValue());
 
-                if(NdpiConverter.PROPERTY_MAGNIFICATION.equals(evt.getPropertyName()))
-                {
-                    if(evt.getNewValue().toString().toLowerCase().equals(MAG_X5.toLowerCase()))
-                    {
+                if (NdpiConverter.PROPERTY_MAGNIFICATION.equals(evt.getPropertyName())) {
+                    if (evt.getNewValue().toString().toLowerCase().equals(MAG_X5.toLowerCase())) {
                         JOptionPane.showMessageDialog(((SingleFrameApplication) Application.getInstance()).getMainFrame(),
                                 "This magnification is currently not aviable!",
                                 "Error",
@@ -89,8 +83,7 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
     }
     //endregion
 
-    private JFileChooser createFileChooser()
-    {
+    private JFileChooser createFileChooser() {
         LOGGER.info("Select Path Action clicked");
         JFileChooser chooser = new JFileChooser();
 
@@ -107,7 +100,7 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
     }
 
     private class InputPathAction extends AbstractAction {
-        public InputPathAction () {
+        public InputPathAction() {
             super();
         }
 
@@ -116,8 +109,7 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
             ResourceBundle bundle = ResourceBundle.getBundle("at.ac.htlhl.nucleij.resources.i18n.dialogs");
             JFileChooser chooser = createFileChooser();
 
-            if (chooser.showOpenDialog(parent) == JFileChooser.APPROVE_OPTION)
-            {
+            if (chooser.showOpenDialog(parent) == JFileChooser.APPROVE_OPTION) {
                 ndpiConverter.setInputpath(chooser.getSelectedFile().getAbsolutePath());
 
                 List<String> ndpiFileList = new ArrayList<>();
@@ -128,19 +120,17 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
                 int numberNdpiFiles = 0;
 
                 if (chooser.getSelectedFile().isFile()) {
-                    if (ndpiConverter.getOutputpath().isEmpty())
-                    {
-                        ndpiConverter.setOutputpath(ndpiConverter.getInputpath().substring(0,ndpiConverter.getInputpath().lastIndexOf(File.separator)).concat(File.separator + "Output"));
+                    if (ndpiConverter.getOutputpath().isEmpty()) {
+                        ndpiConverter.setOutputpath(ndpiConverter.getInputpath().substring(0, ndpiConverter.getInputpath().lastIndexOf(File.separator)).concat(File.separator + "Output"));
                     }
                     filesInDirectory = chooser.getSelectedFiles();
-                }
-                else if (chooser.getSelectedFile().isDirectory()) {
+                } else if (chooser.getSelectedFile().isDirectory()) {
                     ndpiConverter.setOutputpath(ndpiConverter.getInputpath().concat(File.separator + "Output"));
                     filesInDirectory = chooser.getSelectedFile().listFiles();
 
                     int numberOfFolders = 0;
                     File[] moreFolders = chooser.getSelectedFiles();
-                    for (File file : moreFolders ) {
+                    for (File file : moreFolders) {
                         if (file.isDirectory()) {
                             numberOfFolders++;
                         }
@@ -151,23 +141,21 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
                 }
 
                 assert filesInDirectory != null;
-                for (File file : filesInDirectory ) {
+                for (File file : filesInDirectory) {
                     if (file.isFile()) {
                         if (file.getName().endsWith(".ndpi")) {
                             ndpiFileList.add(file.getAbsolutePath());
-                        }
-                        else if (file.getName().endsWith(".tif")) {
+                        } else if (file.getName().endsWith(".tif")) {
                             tifFileList.add(file.getAbsolutePath());
-                        }
-                        else {
+                        } else {
                             ndpiConverter.setOutputpath(null);
                             ndpiConverter.setInputpath(null);
 
                             LOGGER.warning("Invalid file extension '" + file.getName().substring(file.getName().indexOf(".")) + bundle.getString("InvalidFileExtension.forFile") + file.getName() + "'");
-                            TaskDialog errorDialog = new TaskDialog(parent,"Application Error");
+                            TaskDialog errorDialog = new TaskDialog(parent, "Application Error");
                             errorDialog.setInstruction(bundle.getString("InvalidFileExtension.text2"));
-                            errorDialog.setIcon(TaskDialog.StandardIcon.ERROR );
-                            errorDialog.setText(bundle.getString("InvalidFileExtension.text") + file.getName().substring(file.getName().indexOf(".")) + bundle.getString("InvalidFileExtension.forFile") + "'" + file.getName() + "'" );
+                            errorDialog.setIcon(TaskDialog.StandardIcon.ERROR);
+                            errorDialog.setText(bundle.getString("InvalidFileExtension.text") + file.getName().substring(file.getName().indexOf(".")) + bundle.getString("InvalidFileExtension.forFile") + "'" + file.getName() + "'");
                             errorDialog.show();
                         }
                     }
@@ -190,18 +178,15 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
                     }
                 }
                 ndpiConverter.setNumberTifFiles(numberTifFiles);
-                LOGGER.info("\n" + numberNdpiFiles + " NDPI-Files & " + numberTifFiles + " TIF-Files in Folder '"+ chooser.getCurrentDirectory().getName() +"' found" + "\n");
+                LOGGER.info("\n" + numberNdpiFiles + " NDPI-Files & " + numberTifFiles + " TIF-Files in Folder '" + chooser.getCurrentDirectory().getName() + "' found" + "\n");
 
                 glScanAnalyzer.setNdpiList(ndpiFileList);
                 glScanAnalyzer.setTifList(tifFileList);
 
-                if( numberTifFiles == 1 && numberNdpiFiles == 0 )
-                {
+                if (numberTifFiles == 1 && numberNdpiFiles == 0) {
                     System.out.println("ROI Modus enablen");
                     glScanAnalyzer.setSetroi(true);
-                }
-                else
-                {
+                } else {
                     System.out.println("ROI Modus disablen");
                     glScanAnalyzer.setSetroi(false);
 
@@ -226,8 +211,7 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
             JFrame parent = ((SingleFrameApplication) Application.getInstance()).getMainFrame();
             JFileChooser chooser = createFileChooser();
 
-            if (chooser.showOpenDialog(parent) == JFileChooser.APPROVE_OPTION)
-            {
+            if (chooser.showOpenDialog(parent) == JFileChooser.APPROVE_OPTION) {
                 ndpiConverter.setOutputpath(chooser.getSelectedFile().getAbsolutePath());
             }
         }
@@ -236,7 +220,7 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter>
     class MagnificationAction extends AbstractAction implements PropertyChangeListener {
         public void propertyChange(PropertyChangeEvent e) {
             ndpiConverter.setMagnification(e.getPropertyName());
-            LOGGER.info("Magnification= "+ e.getPropertyName());
+            LOGGER.info("Magnification= " + e.getPropertyName());
         }
 
         public void actionPerformed(ActionEvent e) {
