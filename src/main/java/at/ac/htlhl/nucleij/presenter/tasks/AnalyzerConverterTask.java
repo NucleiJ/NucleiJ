@@ -11,10 +11,7 @@ import org.jdesktop.application.SingleFrameApplication;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.logging.Level;
@@ -212,13 +209,14 @@ public class AnalyzerConverterTask extends SwingWorker<String, String>
                 p = Runtime.getRuntime().exec(command);
                 //p.getInputStream() anschen
 
-                //p = Runtime.getRuntime().exec("sudo java -jar \"" + absolutePathofNdpiJar + "\" -i 2 -c lzw -s \""+ filePath + "\" \"" + outputpath.getParent() + "\"");
-                //p = Runtime.getRuntime().exec("sudo java -jar /home/andreas/IdeaProjects/nucleij/lib/ndpi-converter/ndpi-converter.jar -i 2 -c lzw -s /home/andreas/Schreibtisch/Scans/N2700-14\\ 5\\ HE\\ -\\ 2016-06-06\\ 14.57.00.ndpi");
-                //p = Runtime.getRuntime().exec("sudo java -jar /home/andreas/IdeaProjects/nucleij/lib/ndpi-converter/ndpi-converter.jar -i 2 -c lzw -s /home/andreas/Schreibtisch/Scans/N2700-14 5 HE - 2016-06-06 14.57.00.ndpi");
+                InputStream in = p.getInputStream();
+                for (int i = 0; i < in.available(); i++) {
+                    System.out.println("" + in.read());
+                }
 
                 // Befehl auf Linux:
                 // FUNKTIONIERT Erben: java -jar "/home/stefan/Desktop/ndpi-to-ome-tiff-converter-v1.5/ndpi-converter.jar"  -i 2 -c lzw -s  "/home/stefan/Desktop/test Scan.ndpi"
-                // sudo java -jar /home/andreas/IdeaProjects/nucleij/lib/ndpi-converter/ndpi-converter.jar -i 2 -c lzw -s /home/andreas/Schreibtisch/Scans/N2700-14\ 5\ HE\ -\ 2016-06-06\ 14.57.00.ndpi
+                // FUNKTIONIERT Mattes: java -jar /home/andreas/IdeaProjects/nucleij/lib/ndpi-converter/ndpi-converter.jar -i 2 -c lzw -s /home/andreas/Schreibtisch/Scans/N2700-14\ 5\ HE\ -\ 2016-06-06\ 14.57.00.ndpi
             }
             else if (OS.contains("windows")) {
                 System.out.println("Your OS is Windows");
@@ -234,6 +232,7 @@ public class AnalyzerConverterTask extends SwingWorker<String, String>
                 p = null;
             }
 
+            p = Runtime.getRuntime().exec("ls");
             BufferedReader in = new BufferedReader(
                     new InputStreamReader(p.getInputStream()));
             String line = null;
