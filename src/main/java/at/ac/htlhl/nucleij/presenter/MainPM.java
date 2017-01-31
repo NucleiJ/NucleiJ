@@ -5,8 +5,6 @@ import at.ac.htlhl.nucleij.model.GLScanAnalyzer;
 import at.ac.htlhl.nucleij.model.Main;
 import at.ac.htlhl.nucleij.model.NdpiConverter;
 import at.ac.htlhl.nucleij.util.SuffixFileFilter;
-import at.ac.htlhl.nucleij.view.GLScanAnalyzerView;
-import at.ac.htlhl.nucleij.view.NdpiConverterView;
 import com.ezware.dialog.task.TaskDialog;
 import com.ezware.dialog.task.TaskDialogs;
 import com.jgoodies.binding.PresentationModel;
@@ -18,38 +16,27 @@ import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.IOException;
 import java.util.ResourceBundle;
-import java.util.logging.Logger;
 
 /**
  * Created by Stefan & Andreas on 11.11.2016.
  */
 public class MainPM extends PresentationModel<Main> {
-    // Constants
-    // ************************************************************************
-    private static final Logger LOGGER = Logger.getLogger(MainPM.class.getName());
-
     public static final String FILE_EXTENSION = "nucleij";
 
-    // Fields
-    // ************************************************************************
     private Action loadAction;
     private Action saveAction;
     private Action aboutAction;
     private Action exitAction;
     private Action newAction;
 
-    // References to sub presentation models
     private GLScanAnalyzerPM glScanAnalyzerPM;
     private NdpiConverterPM  ndpiConverterPM;
-
-    private GLScanAnalyzerView glScanAnalyzerView;
-    private JComponent         ndpiConverterView;
 
     public MainPM(Main main) {
         super(main);
 
         glScanAnalyzerPM = new GLScanAnalyzerPM(main.getGLScanAnalyzer(), main.getNdpiConverter());
-        ndpiConverterPM = new NdpiConverterPM(main.getNdpiConverter(), main.getGLScanAnalyzer());
+        ndpiConverterPM = new NdpiConverterPM(main.getNdpiConverter(), main.getGLScanAnalyzer(), glScanAnalyzerPM);
 
         loadAction = new LoadAction();
         saveAction = new SaveAction();
@@ -65,7 +52,6 @@ public class MainPM extends PresentationModel<Main> {
     public NdpiConverterPM getNdpiConverterPM() {
         return ndpiConverterPM;
     }
-
 
     public Action getLoadAction() {
         return loadAction;
@@ -87,17 +73,7 @@ public class MainPM extends PresentationModel<Main> {
         return newAction;
     }
 
-    public void setGlScanAnalyzerView(GLScanAnalyzerView glScanAnalyzerView) {
-        this.glScanAnalyzerView = glScanAnalyzerView;
-    }
-
-    public void setNdpiConverterView(NdpiConverterView ndpiConverterView) {
-        this.ndpiConverterView = ndpiConverterView;
-    }
-
     private void showAbout() {
-        System.out.println("About Action gestartet:\n");
-
         JFrame parentAbout = ((SingleFrameApplication) Application.getInstance()).getMainFrame();
         ResourceBundle bundle = ResourceBundle.getBundle("at.ac.htlhl.nucleij.resources.i18n.dialogs");
 
@@ -107,6 +83,7 @@ public class MainPM extends PresentationModel<Main> {
         taskDialogAbout.setInstruction(bundle.getString("AboutDialog.instructionMessage"));
         taskDialogAbout.setText(bundle.getString("AboutDialog.text"));
         taskDialogAbout.setFixedComponent(text);
+
         taskDialogAbout.setCommands(TaskDialog.StandardCommand.CANCEL);
         taskDialogAbout.setIcon(TaskDialog.StandardIcon.INFO);
 
@@ -114,8 +91,6 @@ public class MainPM extends PresentationModel<Main> {
     }
 
     private void saveAs() {
-        System.out.println("Save\n");
-
         JFileChooser chooser = createPreparedFileChooser();
         JFrame parent = ((SingleFrameApplication) Application.getInstance()).getMainFrame();
         if (chooser.showSaveDialog(parent) == JFileChooser.APPROVE_OPTION) {
@@ -133,8 +108,6 @@ public class MainPM extends PresentationModel<Main> {
     }
 
     private void load() {
-        System.out.println("Load\n");
-
         JFileChooser chooser = createPreparedFileChooser();
         JFrame parent = ((SingleFrameApplication) Application.getInstance()).getMainFrame();
         if (chooser.showOpenDialog(parent) == JFileChooser.APPROVE_OPTION) {
@@ -150,7 +123,6 @@ public class MainPM extends PresentationModel<Main> {
     private void newClass() {
         ndpiConverterPM.setBean(new NdpiConverter());
         glScanAnalyzerPM.setBean(new GLScanAnalyzer(ndpiConverterPM.getBean()));
-        System.out.println("Neu gedrueckt\n");
     }
 
     private JFileChooser createPreparedFileChooser() {
@@ -160,9 +132,6 @@ public class MainPM extends PresentationModel<Main> {
         return chooser;
     }
 
-
-    // region Nested classes
-    // ************************************************************************
     private class LoadAction extends AbstractAction {
         public void actionPerformed(ActionEvent e) {
             load();
@@ -177,7 +146,6 @@ public class MainPM extends PresentationModel<Main> {
 
     private class AboutAction extends AbstractAction {
         public void actionPerformed(ActionEvent e) {
-            LOGGER.info("About Action clicked");
             showAbout();
         }
     }
@@ -193,6 +161,4 @@ public class MainPM extends PresentationModel<Main> {
             newClass();
         }
     }
-
-
 }

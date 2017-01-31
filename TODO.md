@@ -2,17 +2,21 @@
 # TO-DO Liste #
 
 ### 1. Erweiterungen: ###
-* [E & M] Konverter muss funktionieren (JAR Pfad)
-* [E] JAR zum Laufen bringen
 * [M] Cancel soll wirklich beenden
-* [M] Linux funktioniert?
+* [E] Linux fixen
 * [M] Apple Builden
 * auf allen Plattformen lauffähig
-* [M] alle Texte auslagern
 
 * [M] Dialog (mit Progressbar) breiter machen
 * Speichern/Einlesen von Einstellungen + Jason File (.nucleij)
-* bei auswälen mehrerer Dateien werden kurz im ProgressWindow alle Dateinamen nacheinander angezeigt
+* bei auswählen mehrerer Dateien werden kurz im ProgressWindow alle Dateinamen nacheinander angezeigt
+* Maximum Pixel Size (Pro nuclei)
+
+### DOKU ###
+
+* Automatisch Blockschaltbild generieren
+
+* Einstellungen auch in die Doku???
 
 
 ### 2. Zukunftsmusik ###
@@ -60,6 +64,7 @@
 * Seperator statt //												27.01.17
 * Wenn Quality slider geändert, dann berechnen ankreuzen            28.01.17
 * AboutDialog erweitern                                             29.01.17
+* alle Texte auslagern                                              30.01.17
 
 
 ### 7. Wichtige Notizen ###

@@ -31,14 +31,9 @@ public class NucleiJ extends SingleFrameApplication
     // Fields
     private ResourceMap resource;
 
-    // region Public API
-    // ************************************************************************
-
-
 
     @Override
-    protected void initialize(String[] args)
-    {
+    protected void initialize(String[] args) {
         // Force application to use given language setting instead of using OS default
         //Locale.setDefault(Locale.ENGLISH);
 
@@ -49,8 +44,6 @@ public class NucleiJ extends SingleFrameApplication
 
         configureLoggingSystem();
         initLookAndFeel();
-
-
     }
 
     @Override
@@ -62,7 +55,7 @@ public class NucleiJ extends SingleFrameApplication
         MainPM mainPM = new MainPM(main);
 
 
-        GLScanAnalyzerView glScanAnalyzerView = new GLScanAnalyzerView(mainPM.getGLScanAnalyzerPM(), main.getGLScanAnalyzer());
+        GLScanAnalyzerView glScanAnalyzerView = new GLScanAnalyzerView(mainPM.getGLScanAnalyzerPM());
         NdpiConverterView ndpiConverterView = new NdpiConverterView(mainPM.getNdpiConverterPM());
 
         MainFrameView mainFrame = new MainFrameView(mainPM);
@@ -77,9 +70,7 @@ public class NucleiJ extends SingleFrameApplication
         CombinedView combinedView = new CombinedView(ndpiConverterView, glScanAnalyzerView);
         show(combinedView);
 
-        // getMainFrame().setResizable(false);
         addExitListener(new CarConfiguratorExitListener());
-
     }
 
 
@@ -91,7 +82,6 @@ public class NucleiJ extends SingleFrameApplication
 
 
     // endregion
-
     // Private helper methods
     // ************************************************************************
 
@@ -177,9 +167,6 @@ public class NucleiJ extends SingleFrameApplication
             {
                 return false;
             }
-
-            // LOGGER.info("Result: " + taskDialog.getResult());
-
         }
 
         public void willExit(EventObject event)

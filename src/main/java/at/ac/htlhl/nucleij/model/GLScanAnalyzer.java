@@ -1,41 +1,35 @@
 package at.ac.htlhl.nucleij.model;
 
 import com.jgoodies.binding.beans.Model;
-import com.jgoodies.forms.layout.ColumnSpec;
 
 import java.util.List;
 
 /**
- *
  * @author Stefan Erben
  * @version 1.0
  */
-public class GLScanAnalyzer extends Model
-{
+public class GLScanAnalyzer extends Model {
 
     // region Constants
     // ************************************************************************
-    // Properties
 
+    // Properties
     public static final String PROPERTY_CALCULATEANDSHOWHEATMAP = "calculateandshowheatmap";
-    public static final String PROPERTY_HEATMAPQUALITY = "heatmapquality";
-    public static final String PROPERTY_ROIAREA = "roiarea";
-    public static final String PROPERTY_SETROI = "setroi";
+    public static final String PROPERTY_HEATMAPQUALITY          = "heatmapquality";
+    public static final String PROPERTY_ROIAREA                 = "roiarea";
+    public static final String PROPERTY_SETROI                  = "setroi";
 
     // endregion
 
     // region Fields
     // ************************************************************************
 
-
     //eigene Werte
     private NdpiConverter ndpiConverter;
-    private int heatmapquality;
-    private boolean calculateandshowheatmap;
-    private String roiarea;
-    private boolean setroi;
-
-    private String absolutePathofNdpiJar;
+    private int           heatmapquality;
+    private boolean       calculateandshowheatmap;
+    private String        roiarea;
+    private boolean       setroi;
 
     //Listen fuer Pfade der zu verarbeitenden arbeiten
     private List<String> ndpiList;
@@ -49,13 +43,10 @@ public class GLScanAnalyzer extends Model
 
     // endregion
 
-    public GLScanAnalyzer(NdpiConverter ndpiConverter)
-    {
+    public GLScanAnalyzer(NdpiConverter ndpiConverter) {
         super();
 
         this.ndpiConverter = ndpiConverter;
-
-        //this.selectroi = false;
 
         this.heatmapquality = 60;
         this.calculateandshowheatmap = false;
@@ -75,11 +66,6 @@ public class GLScanAnalyzer extends Model
         this.ndpiList = ndpiList;
     }
 
-    public void addNdpiToList(String path)
-    {
-        ndpiList.add(path);
-    }
-
     public List<String> getTifList() {
         return tifList;
     }
@@ -88,37 +74,20 @@ public class GLScanAnalyzer extends Model
         this.tifList = tifList;
     }
 
-    public void addTifToList(String path)
-    {
+    public void addTifToList(String path) {
         tifList.add(path);
     }
 
     // region Getter and Setter
     // ************************************************************************
-    public int getHeatmapquality()
-    {
+    public int getHeatmapquality() {
         return heatmapquality;
     }
 
-    public void setHeatmapquality(int heatmapquality)
-    {
-        if (heatmapquality>100) {
-            heatmapquality=100;
-        } else if (heatmapquality <1) {
-            heatmapquality=1;
-        }
-        int oldValue = this.heatmapquality;
-        this.heatmapquality = heatmapquality;
-        firePropertyChange(PROPERTY_HEATMAPQUALITY, oldValue, heatmapquality);
-    }
-
     public boolean isSetroi() {
-        if(roiX + roiY + roiHeight +roiWidth < 4)
-        {
+        if (roiX + roiY + roiHeight + roiWidth < 4) {
             return false;
-        }
-        else
-        {
+        } else {
             return setroi;
         }
     }
@@ -129,8 +98,7 @@ public class GLScanAnalyzer extends Model
         firePropertyChange(PROPERTY_SETROI, oldValue, setroi);
     }
 
-    public boolean isCalculateandshowheatmap()
-    {
+    public boolean isCalculateandshowheatmap() {
         return calculateandshowheatmap;
     }
 
@@ -150,14 +118,11 @@ public class GLScanAnalyzer extends Model
         firePropertyChange(PROPERTY_ROIAREA, oldValue, roiarea);
     }
 
-
-    public String getInputpath()
-    {
+    public String getInputpath() {
         return ndpiConverter.getInputpath();
     }
 
-    public String getOutputpath()
-    {
+    public String getOutputpath() {
         return ndpiConverter.getOutputpath();
     }
 
@@ -191,14 +156,7 @@ public class GLScanAnalyzer extends Model
 
     public void setRoiHeight(int roiHeight) {
         this.roiHeight = roiHeight;
-    }
 
-    public String getAbsolutePathofNdpiJar() {
-        return absolutePathofNdpiJar;
-    }
-
-    public void setAbsolutePathofNdpiJar(String absolutePathofNdpiJar) {
-        this.absolutePathofNdpiJar = absolutePathofNdpiJar;
     }
 
     // endregion
