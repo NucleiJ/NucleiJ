@@ -1,8 +1,6 @@
 package at.ac.htlhl.nucleij.presenter.tasks;
 
 import at.ac.htlhl.nucleij.model.GLScanAnalyzer;
-import at.ac.htlhl.nucleij.presenter.analyzing.MainAnalyzer;
-import com.ezware.dialog.task.TaskDialog;
 import ij.IJ;
 import ij.ImagePlus;
 import ij.gui.PolygonRoi;
@@ -12,34 +10,25 @@ import org.jdesktop.application.Application;
 import org.jdesktop.application.SingleFrameApplication;
 
 import javax.swing.*;
-import java.awt.*;
-import java.io.File;
-import java.util.List;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
  * Created by Stefan on 29.12.2016.
  */
-public class RoiTask
-{
-    // Constants
-    // ************************************************************************
+public class RoiTask {
     private static final Logger LOGGER = Logger.getLogger(AnalyzerConverterTask.class.getName());
     ResourceBundle bundle = ResourceBundle.getBundle("at.ac.htlhl.nucleij.resources.i18n.dialogs");
 
     private GLScanAnalyzer glScanAnalyzer;
 
-    public RoiTask(GLScanAnalyzer glScanAnalyzer)
-    {
+    public RoiTask(GLScanAnalyzer glScanAnalyzer) {
         super();
 
         this.glScanAnalyzer = glScanAnalyzer;
     }
 
-    public String setROI()
-    {
+    public String setROI() {
         JOptionPane.showMessageDialog(((SingleFrameApplication) Application.getInstance()).getMainFrame(),
                 bundle.getString("FeatureNotAvailable.text"),
                 bundle.getString("Warning.text"),
@@ -49,27 +38,21 @@ public class RoiTask
         System.out.println("set gestartet");
         ImagePlus bild = IJ.openImage(glScanAnalyzer.getInputpath());
         bild.show();
-        //imp.setRoi(1404,15,690,966);
-        //IJ.run(imp, "Crop", "");
 
-        boolean roigesetzt = false;
+        boolean roigesetzt;
 
-        do
-        {
-
-            //bild.updateAndRepaintWindow();
+        do {
             new WaitForUserDialog("Information",
                     bundle.getString("RoiSetzen.text")).show();
 
             Roi roi = bild.getRoi();
-            if (roi instanceof Roi)
-            {
-                PolygonRoi polygon = (PolygonRoi)roi;
+            if (roi instanceof Roi) {
+                PolygonRoi polygon = (PolygonRoi) roi;
                 //Rectangle bounds = roi.getBounds();
                 int n = polygon.getNCoordinates();
                 int[] x = polygon.getXCoordinates();
                 int[] y = polygon.getYCoordinates();
-                System.out.println(x+"."+y);
+                System.out.println(x + "." + y);
 
                 /*IJ.run(bild, "Crop", "");
                 bild.updateAndDraw();
@@ -77,7 +60,7 @@ public class RoiTask
                 roigesetzt = true;
             }
             roigesetzt = true;
-        }while (roigesetzt==false);
+        } while (roigesetzt == false);
 
 
         return "test";

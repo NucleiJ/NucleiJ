@@ -199,17 +199,13 @@ public class AnalyzerConverterTask extends SwingWorker<String, String>
                             absolutePathofNdpiJar = selectedFile.getAbsolutePath();
                         }
                     }
-
                 }
             } catch (URISyntaxException e) {
                 e.printStackTrace();
             }
-
-
         }
 
         // endregion
-
         System.out.println("\nAbsolutePathOfNdpi" + absolutePathofNdpiJar);
         System.out.println("FilePath" + filePath);
         System.out.println("OutputPath.getParent" + outputpath.getParent());
@@ -248,7 +244,7 @@ public class AnalyzerConverterTask extends SwingWorker<String, String>
                 p = null;
             }
 
-            p = Runtime.getRuntime().exec("ls");
+            //p = Runtime.getRuntime().exec("ls");
             BufferedReader in = new BufferedReader(
                     new InputStreamReader(p.getInputStream()));
             String line = null;
