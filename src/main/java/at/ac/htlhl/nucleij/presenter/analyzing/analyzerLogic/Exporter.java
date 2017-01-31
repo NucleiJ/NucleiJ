@@ -218,39 +218,5 @@ public class Exporter
 			System.out.println("ERROR. Kein IJ Log vorhanden!");
 		}
 	}
-
-	/**
-	 * The heatmap method creates and exports a textfile (.txt), which exports the heatmap
-	 * for the current Scan.
-	 *
-	 * @param imp					Object from the ImagePlus class, which contains the created 8bit Heatmap for the
-	 *                              	currently analyzed Scan.
-	 * @see ImagePlus
-	 *
-	 * @param filename 				String, which contains the return value of the method getValue() from the object
-	 *                         			file.
-	 * @see StringTransfer
-	 *
-	 * @param path 					String, which contains the return value of the method getValue() from the object
-	 *                         			path.
-	 * @see StringTransfer
-	 *
-	 * @param EXPORT_PIC_CHECKBOX	boolean value, if true, the marked Scan will be exported, otherwise not
-	 */
-	public void marked(ImagePlus imp, String filename, String path, String getnewDirectoryname, boolean EXPORT_PIC_CHECKBOX)
-	{
-		if (EXPORT_PIC_CHECKBOX == true)
-		{
-			filename = filename.replaceFirst("[.][^.]+$", "") + "_Marked.tif";	//Neuen Filenamen festlegen
-	    	
-	    	String exportEndpic = path + File.separator + filename;
-
-		    IJ.saveAs(imp, "Tif", exportEndpic);
-		    System.out.print("\n\nMarkierter Schnitt exportiert: " + exportEndpic + "\n");
-		    System.out.print(filename);
-		}
-	    return;
-	}
-	
 	
 }

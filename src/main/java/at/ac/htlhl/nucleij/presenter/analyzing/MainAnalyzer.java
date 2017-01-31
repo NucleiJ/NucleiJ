@@ -363,7 +363,6 @@ public class MainAnalyzer implements PlugInFilter {
 
 		//Ergebnis anzeigen & als neue Datei speichern,
 		imp.updateAndRepaintWindow();
-		startExporter.marked(imp, file.getValue(), path.getValue(), startExporter.getnewDirectoryname(), EXPORT_PIC_CHECKBOX);
 
 		//Heatmap erstellen
 		if (HEATMAP_CHECKBOX == true) {
