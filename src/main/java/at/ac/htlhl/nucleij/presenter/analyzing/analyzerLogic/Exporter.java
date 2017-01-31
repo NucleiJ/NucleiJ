@@ -218,5 +218,4 @@ public class Exporter
 			System.out.println("ERROR. Kein IJ Log vorhanden!");
 		}
 	}
-	
 }

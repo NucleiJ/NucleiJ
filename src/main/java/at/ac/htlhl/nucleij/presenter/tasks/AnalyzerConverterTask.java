@@ -71,18 +71,22 @@ public class AnalyzerConverterTask extends SwingWorker<String, String>
             // Konvertieren & an TifListe anhängen
             for (String ndpiListElement : ndpiFileList)
             {
-                numberNdpiFiles--;
+                if (!requestCancel)
+                {
+                    numberNdpiFiles--;
 
-                //element = ndpiListElement.substring(ndpiListElement.lastIndexOf(File.separator)+1, ndpiListElement.lastIndexOf("]"));// + "\n" + "Remaining: " + numberNdpiFiles + "NDPIs & " + numberTifFiles + "TIFs";
-                publish(ndpiListElement.substring(ndpiListElement.lastIndexOf(File.separator)+1));
-                //taskDialog.setText("File: " + String.valueOf(ndpiListElement).substring(String.valueOf(ndpiListElement).lastIndexOf(File.separator)+1, String.valueOf(ndpiListElement).lastIndexOf("]")));
-                //+ "\n" + "Remaining: " + numberNdpiFiles + "NDPIs & " + numberTifFiles + "TIFs");
+                    //element = ndpiListElement.substring(ndpiListElement.lastIndexOf(File.separator)+1, ndpiListElement.lastIndexOf("]"));// + "\n" + "Remaining: " + numberNdpiFiles + "NDPIs & " + numberTifFiles + "TIFs";
+                    publish(ndpiListElement.substring(ndpiListElement.lastIndexOf(File.separator)+1));
+                    //taskDialog.setText("File: " + String.valueOf(ndpiListElement).substring(String.valueOf(ndpiListElement).lastIndexOf(File.separator)+1, String.valueOf(ndpiListElement).lastIndexOf("]")));
+                    //+ "\n" + "Remaining: " + numberNdpiFiles + "NDPIs & " + numberTifFiles + "TIFs");
 
-                startConverter(ndpiListElement);
-                currentStatus = currentStatus + add;
+                    startConverter(ndpiListElement);
+                    currentStatus = currentStatus + add;
 
-                progressBar.setValue(Math.round(currentStatus));
-                //publish(Math.round(currentStatus));
+                    progressBar.setValue(Math.round(currentStatus));
+                    //publish(Math.round(currentStatus));
+                }
+
             }
         }
 
@@ -90,22 +94,28 @@ public class AnalyzerConverterTask extends SwingWorker<String, String>
             tifFileList = glScanAnalyzer.getTifList();      //Aktualisierte Liste holen!!!
             for (String tifListElement : tifFileList)
             {
-                numberTifFiles--;
+                if (!requestCancel)
+                {
+                    numberTifFiles--;
 
-                //element = tifListElement.substring(tifListElement.lastIndexOf(File.separator)+1, tifListElement.lastIndexOf("]"));// + "\n" + "Remaining: " + numberNdpiFiles + "NDPIs & " + numberTifFiles + "TIFs";
-                publish(tifListElement.substring(tifListElement.lastIndexOf(File.separator)+1));
-                //taskDialog.setText("File: " + String.valueOf(tifListElement).substring(String.valueOf(tifListElement).lastIndexOf(File.separator)+1, String.valueOf(tifListElement).lastIndexOf("]")));
-                // + "\n" + "Remaining: " + numberNdpiFiles + "NDPIs & " + numberTifFiles + "TIFs");
+                    //element = tifListElement.substring(tifListElement.lastIndexOf(File.separator)+1, tifListElement.lastIndexOf("]"));// + "\n" + "Remaining: " + numberNdpiFiles + "NDPIs & " + numberTifFiles + "TIFs";
+                    publish(tifListElement.substring(tifListElement.lastIndexOf(File.separator)+1));
+                    //taskDialog.setText("File: " + String.valueOf(tifListElement).substring(String.valueOf(tifListElement).lastIndexOf(File.separator)+1, String.valueOf(tifListElement).lastIndexOf("]")));
+                    // + "\n" + "Remaining: " + numberNdpiFiles + "NDPIs & " + numberTifFiles + "TIFs");
 
-                mainAnalyzer.setDateiname(tifListElement);
-                System.out.println("\n****************\n"+tifListElement+"\n********************");
-                mainAnalyzer.run(null);
-                currentStatus = currentStatus + add;
+                    mainAnalyzer.setDateiname(tifListElement);
+                    System.out.println("\n****************\n"+tifListElement+"\n********************");
+                    mainAnalyzer.run(null);
+                    currentStatus = currentStatus + add;
 
-                progressBar.setValue(Math.round(currentStatus));
-                //publish(Math.round(currentStatus));
+                    progressBar.setValue(Math.round(currentStatus));
+                    //publish(Math.round(currentStatus));
+                }
             }
-            mainAnalyzer.createSummary();
+            if (!requestCancel)
+            {
+                mainAnalyzer.createSummary();
+            }
         }
         return "Finished";
     }
@@ -123,6 +133,12 @@ public class AnalyzerConverterTask extends SwingWorker<String, String>
         LOGGER.log(Level.INFO, "Done");
         progressBar.setValue(100);
         taskDialog.setVisible(false);
+    }
+
+    public void stopProcess(boolean requestCancel)
+    {
+        this.requestCancel = requestCancel;
+        taskDialog.setInstruction("Prozess stoppen...");
     }
 
     private void startConverter(String filePath) {

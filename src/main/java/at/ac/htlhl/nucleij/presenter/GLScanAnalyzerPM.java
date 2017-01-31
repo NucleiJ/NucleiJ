@@ -153,12 +153,13 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
 
             //taskDialogAnalyzerConverter.show();
             TaskDialog.Command erg = taskDialogAnalyzerConverter.show();
-            System.out.println("ERG:::" + erg);
 
             if (erg.toString() == "CANCEL")
             {
                 //taskDialogAnalyzerConverter.setVisible(false);
-                analyzerConverterTask.cancel(true);
+                analyzerConverterTask.stopProcess(true);
+                LOGGER.info("SwingWorker gecanceled!");
+                //analyzerConverterTask.cancel(true);
             }
 
             long elapsedTime = System.nanoTime() - startTime;
