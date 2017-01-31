@@ -73,7 +73,7 @@ public class AnalyzerConverterTask extends SwingWorker<String, String>
             {
                 if (!requestCancel)
                 {
-                    numberNdpiFiles--;
+                    numberNdpiFiles--; //test
 
                     //element = ndpiListElement.substring(ndpiListElement.lastIndexOf(File.separator)+1, ndpiListElement.lastIndexOf("]"));// + "\n" + "Remaining: " + numberNdpiFiles + "NDPIs & " + numberTifFiles + "TIFs";
                     publish(ndpiListElement.substring(ndpiListElement.lastIndexOf(File.separator)+1));
