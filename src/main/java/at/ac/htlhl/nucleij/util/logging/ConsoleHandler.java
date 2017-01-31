@@ -14,24 +14,22 @@ import java.util.logging.LogRecord;
 /**
  * The aim of this class is to permit to specify the output for the console
  * handler of the java.util.logging system.
- *
+ * <p>
  * This console handler is also able to choose the right ouput (System.err
  * or System.out) depending on the message level.
  *
- * @author  S.Chassande-Barrioz:
- *          https://javalibs.com/artifact/org.ow2.monolog/monolog-wrapper-javalog?className=org.objectweb.util.monolog.wrapper.javaLog.ConsoleHandler
- *          License: LGPL
+ * @author S.Chassande-Barrioz:
+ *         https://javalibs.com/artifact/org.ow2.monolog/monolog-wrapper-javalog?className=org.objectweb.util.monolog.wrapper.javaLog.ConsoleHandler
+ *         License: LGPL
  * @version 13. August 2006
  */
-public class ConsoleHandler extends Handler
-{
+public class ConsoleHandler extends Handler {
     private Writer writer;
 
     private static PrintStream orginalOut = System.out;
     private static PrintStream orginalErr = System.err;
 
-    public ConsoleHandler()
-    {
+    public ConsoleHandler() {
         super();
 
         setOutput(orginalOut);
@@ -42,26 +40,18 @@ public class ConsoleHandler extends Handler
      * class.
      */
     public synchronized void setOutput(OutputStream out)
-            throws SecurityException
-    {
-        if (out == null)
-        {
+            throws SecurityException {
+        if (out == null) {
             throw new NullPointerException();
         }
         flush();
         String encoding = getEncoding();
-        if (encoding == null)
-        {
+        if (encoding == null) {
             writer = new OutputStreamWriter(out);
-        }
-        else
-        {
-            try
-            {
+        } else {
+            try {
                 writer = new OutputStreamWriter(out, encoding);
-            }
-            catch (UnsupportedEncodingException ex)
-            {
+            } catch (UnsupportedEncodingException ex) {
                 // This shouldn't happen.  The setEncoding method
                 // should have validated that the encoding is OK.
                 throw new Error("Unexpected exception " + ex);
@@ -70,42 +60,31 @@ public class ConsoleHandler extends Handler
     }
 
     @Override
-    public void publish(LogRecord record)
-    {
-        if (!isLoggable(record))
-        {
+    public void publish(LogRecord record) {
+        if (!isLoggable(record)) {
             return;
         }
 
         String msg;
-        try
-        {
+        try {
             msg = getFormatter().format(record);
-        }
-        catch (Exception ex)
-        {
+        } catch (Exception ex) {
             // We don't want to throw an exception here, but we
             // report the exception to any registered ErrorManager.
             reportError(null, ex, ErrorManager.FORMAT_FAILURE);
             return;
         }
 
-        if (record.getLevel() == Level.SEVERE)
-        {
+        if (record.getLevel() == Level.SEVERE) {
             orginalOut.flush();
             setOutput(orginalErr);
-        }
-        else
-        {
+        } else {
             setOutput(orginalOut);
         }
 
-        try
-        {
+        try {
             writer.write(msg);
-        }
-        catch (Exception ex)
-        {
+        } catch (Exception ex) {
             // We don't want to throw an exception here, but we
             // report the exception to any registered ErrorManager.
             reportError(null, ex, ErrorManager.WRITE_FAILURE);
@@ -116,16 +95,11 @@ public class ConsoleHandler extends Handler
     }
 
     @Override
-    public void flush()
-    {
-        if (writer != null)
-        {
-            try
-            {
+    public void flush() {
+        if (writer != null) {
+            try {
                 writer.flush();
-            }
-            catch (Exception ex)
-            {
+            } catch (Exception ex) {
                 // We don't want to throw an exception here, but we
                 // report the exception to any registered ErrorManager.
                 reportError(null, ex, ErrorManager.FLUSH_FAILURE);
@@ -134,8 +108,7 @@ public class ConsoleHandler extends Handler
     }
 
     @Override
-    public void close() throws SecurityException
-    {
+    public void close() throws SecurityException {
         flush();
     }
 }

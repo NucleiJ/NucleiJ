@@ -14,8 +14,7 @@ import static com.sun.xml.internal.ws.spi.db.BindingContextFactory.LOGGER;
 /**
  * Created by andreas on 25.01.2017.
  */
-public class SettingsPM extends PresentationModel<Settings>
-{
+public class SettingsPM extends PresentationModel<Settings> {
     private Action outputNameAction;
     private Action standardFolderAction;
     private Action convertNameAction;
@@ -35,8 +34,7 @@ public class SettingsPM extends PresentationModel<Settings>
 
     private Settings settings;
 
-    public SettingsPM (Settings settings)
-    {
+    public SettingsPM(Settings settings) {
         super(settings);
 
         numberAction = new NumberAction();
@@ -56,7 +54,7 @@ public class SettingsPM extends PresentationModel<Settings>
 
         settings.addPropertyChangeListener(new PropertyChangeListener() {
             public void propertyChange(PropertyChangeEvent evt) {
-                LOGGER.info("Property name="+evt.getPropertyName()+", oldValue="+evt.getOldValue()+", newValue="+evt.getNewValue());
+                LOGGER.info("Property name=" + evt.getPropertyName() + ", oldValue=" + evt.getOldValue() + ", newValue=" + evt.getNewValue());
 
             }
 
@@ -121,13 +119,11 @@ public class SettingsPM extends PresentationModel<Settings>
         return typeChoicesAction;
     }
 
-    private class NumberAction extends AbstractAction
-    {
+    private class NumberAction extends AbstractAction {
         public NumberAction() {
         }
 
-        public void actionPerformed(ActionEvent e)
-        {
+        public void actionPerformed(ActionEvent e) {
             settings.setNumber(settings.isNumber());
         }
     }

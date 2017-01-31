@@ -6,25 +6,18 @@ import com.jgoodies.forms.layout.ColumnSpec;
 import java.io.Serializable;
 
 /**
- *
  * @author Andreas Mattes
  * @version 1.0
  */
-public class NdpiConverter extends Model
-{
-    //region Constants
-    public static final String PROPERTY_INPUTPATH       = "inputpath";
-    public static final String PROPERTY_OUTPUTPATH      = "outputpath";
-    public static final String PROPERTY_MAGNIFICATION   = "magnification";
+public class NdpiConverter extends Model {
+    public static final String PROPERTY_INPUTPATH     = "inputpath";
+    public static final String PROPERTY_OUTPUTPATH    = "outputpath";
+    public static final String PROPERTY_MAGNIFICATION = "magnification";
 
-    public static final String MAG_X5   = "x5";
-    public static final String MAG_X10  = "x10";
-    public static final String MAG_X40  = "x40";
-    public static final String[] MAG_CHOICES = {MAG_X5, MAG_X10, MAG_X40};
+    public static final String MAG_X5  = "x5";
+    public static final String MAG_X10 = "x10";
+    public static final String MAG_X40 = "x40";
 
-    //endregion Constants
-
-    //*******************************************************************
     private String magnification;
     private String inputpath;
     private String outputpath;
@@ -33,8 +26,7 @@ public class NdpiConverter extends Model
     private int numberNdpiFiles;
     private int numberTifFiles;
 
-    public NdpiConverter()
-    {
+    public NdpiConverter() {
         super();
 
         this.inputpath = "";
@@ -42,11 +34,12 @@ public class NdpiConverter extends Model
         this.magnification = "x10";
     }
 
-    public int getChoice () {
+    // region other Getter&Setter
+    public int getChoice() {
         return choice;
     }
 
-    public void setChoice (int choice) {
+    public void setChoice(int choice) {
         this.choice = choice;
     }
 
@@ -65,10 +58,9 @@ public class NdpiConverter extends Model
     public void setNumberTifFiles(int numberTifFiles) {
         this.numberTifFiles = numberTifFiles;
     }
+    // endregion other Getter&Setter
 
-
-    //region Getter&Setter
-
+    // region Getter&Setter
     public String getMagnification() {
         return magnification;
     }
@@ -76,7 +68,7 @@ public class NdpiConverter extends Model
     public void setMagnification(String magnification) {
         String oldValue = this.magnification;
         this.magnification = magnification;
-        firePropertyChange(PROPERTY_MAGNIFICATION,oldValue,magnification);
+        firePropertyChange(PROPERTY_MAGNIFICATION, oldValue, magnification);
     }
 
     public String getInputpath() {
@@ -86,7 +78,7 @@ public class NdpiConverter extends Model
     public void setInputpath(String inputpath) {
         String oldValue = this.inputpath;
         this.inputpath = inputpath;
-        firePropertyChange(PROPERTY_INPUTPATH,oldValue,inputpath);
+        firePropertyChange(PROPERTY_INPUTPATH, oldValue, inputpath);
     }
 
     public String getOutputpath() {
@@ -96,10 +88,7 @@ public class NdpiConverter extends Model
     public void setOutputpath(String outputpath) {
         String oldValue = this.outputpath;
         this.outputpath = outputpath;
-        firePropertyChange(PROPERTY_OUTPUTPATH,oldValue,outputpath);
-
-        //TODO dass im directoryNameTextField nur benutzerdefinierter Name angezeigt wird und im outputFolderTextField gleich der Pfad sich mitaktualisiert
+        firePropertyChange(PROPERTY_OUTPUTPATH, oldValue, outputpath);
     }
-    //endregion Getter&Setter
-
+    // endregion Getter&Setter
 }

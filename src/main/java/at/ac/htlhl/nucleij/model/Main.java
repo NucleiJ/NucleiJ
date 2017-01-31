@@ -9,19 +9,15 @@ import com.jgoodies.binding.beans.Model;
  * @author Stefan Erben & Andreas Mattes
  * @version 1.0
  */
-public class Main extends Model
-{
+public class Main extends Model {
     // region Constants
     // ************************************************************************
     // Properties
-    public static final String PROPERTY_GLSCANANALYZER = "GLScanAnalyzer";
-    public static final String PROPERTY_NDPICONVERTER = "NdpiConverter";
 
     private GLScanAnalyzer glScanAnalyzer;
-    private NdpiConverter ndpiConverter;
+    private NdpiConverter  ndpiConverter;
 
-    public Main()
-    {
+    public Main() {
         super();
 
         ndpiConverter = new NdpiConverter();
@@ -29,13 +25,11 @@ public class Main extends Model
     }
 
     // Getters
-    public GLScanAnalyzer getGLScanAnalyzer()
-    {
+    public GLScanAnalyzer getGLScanAnalyzer() {
         return glScanAnalyzer;
     }
 
-    public NdpiConverter getNdpiConverter()
-    {
+    public NdpiConverter getNdpiConverter() {
         return ndpiConverter;
     }
 

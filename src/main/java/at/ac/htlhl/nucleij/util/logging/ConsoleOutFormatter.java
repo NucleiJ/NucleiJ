@@ -6,13 +6,10 @@ import java.util.logging.Formatter;
 import java.util.logging.LogRecord;
 
 /**
- *
- *
- * @author   WIH
- * @version  2016-11-02
+ * @author WIH
+ * @version 2016-11-02
  */
-public class ConsoleOutFormatter extends Formatter
-{
+public class ConsoleOutFormatter extends Formatter {
     /**
      * Format the given LogRecord:
      * "TYPE: MESSAGE (PACKAGE CLASS METHOD)"
@@ -20,13 +17,13 @@ public class ConsoleOutFormatter extends Formatter
      * @param record the log record to be formatted.
      * @return a formatted log record
      */
+
     @Override
-    public synchronized String format(LogRecord record)
-    {
+    public synchronized String format(LogRecord record) {
         StringBuffer stringBuffer = new StringBuffer();
 
         // Type: (only one character: S W I ... )
-        stringBuffer.append(record.getLevel().getName().charAt(0)+": ");
+        stringBuffer.append(record.getLevel().getName().charAt(0) + ": ");
 
         // Message
         stringBuffer.append(formatMessage(record));
@@ -36,8 +33,7 @@ public class ConsoleOutFormatter extends Formatter
         // Package and class
         if (record.getSourceClassName() != null) {
             stringBuffer.append(record.getSourceClassName());
-        }
-        else {
+        } else {
             stringBuffer.append(record.getLoggerName());
         }
 
@@ -49,8 +45,7 @@ public class ConsoleOutFormatter extends Formatter
         stringBuffer.append(")\n");
 
         // Format exception
-        if (record.getThrown() != null)
-        {
+        if (record.getThrown() != null) {
             StringWriter sw = new StringWriter();
             PrintWriter pw = new PrintWriter(sw);
             record.getThrown().printStackTrace(pw);

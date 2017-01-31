@@ -10,32 +10,25 @@ import at.ac.htlhl.nucleij.view.NdpiConverterView;
 import com.ezware.dialog.task.TaskDialog;
 import com.ezware.dialog.task.TaskDialogs;
 import com.jgoodies.binding.PresentationModel;
-import javafx.stage.Stage;
 import org.jdesktop.application.Application;
 import org.jdesktop.application.SingleFrameApplication;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.IOException;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
-import static at.ac.htlhl.nucleij.NucleiJ.nucleiJ;
-
 /**
  * Created by Stefan & Andreas on 11.11.2016.
  */
-public class MainPM extends PresentationModel<Main>
-{
+public class MainPM extends PresentationModel<Main> {
     // Constants
     // ************************************************************************
     private static final Logger LOGGER = Logger.getLogger(MainPM.class.getName());
 
-    public static final String FILE_EXTENSION			= "nucleij";
-
-    public static final String PROPERTY_MAIN			= "main";
+    public static final String FILE_EXTENSION = "nucleij";
 
     // Fields
     // ************************************************************************
@@ -44,24 +37,19 @@ public class MainPM extends PresentationModel<Main>
     private Action aboutAction;
     private Action exitAction;
     private Action newAction;
-    private Action startAction;
 
     // References to sub presentation models
-    private NdpiConverter ndpiConverter;
-
     private GLScanAnalyzerPM glScanAnalyzerPM;
-    private NdpiConverterPM ndpiConverterPM;
+    private NdpiConverterPM  ndpiConverterPM;
 
     private GLScanAnalyzerView glScanAnalyzerView;
-    private JComponent ndpiConverterView;
+    private JComponent         ndpiConverterView;
 
-    public MainPM(Main main)
-    {
+    public MainPM(Main main) {
         super(main);
 
         glScanAnalyzerPM = new GLScanAnalyzerPM(main.getGLScanAnalyzer(), main.getNdpiConverter());
-        ndpiConverterPM = new NdpiConverterPM(main.getNdpiConverter(),main.getGLScanAnalyzer(), glScanAnalyzerPM);
-
+        ndpiConverterPM = new NdpiConverterPM(main.getNdpiConverter(), main.getGLScanAnalyzer());
 
         loadAction = new LoadAction();
         saveAction = new SaveAction();
@@ -70,24 +58,20 @@ public class MainPM extends PresentationModel<Main>
         newAction = new newAction();
     }
 
-    public GLScanAnalyzerPM getGLScanAnalyzerPM()
-    {
+    public GLScanAnalyzerPM getGLScanAnalyzerPM() {
         return glScanAnalyzerPM;
     }
 
-    public NdpiConverterPM getNdpiConverterPM()
-    {
+    public NdpiConverterPM getNdpiConverterPM() {
         return ndpiConverterPM;
     }
 
 
-    public Action getLoadAction()
-    {
+    public Action getLoadAction() {
         return loadAction;
     }
 
-    public Action getSaveAction()
-    {
+    public Action getSaveAction() {
         return saveAction;
     }
 
@@ -102,7 +86,7 @@ public class MainPM extends PresentationModel<Main>
     public Action getNewAction() {
         return newAction;
     }
-    
+
     public void setGlScanAnalyzerView(GLScanAnalyzerView glScanAnalyzerView) {
         this.glScanAnalyzerView = glScanAnalyzerView;
     }
@@ -111,31 +95,25 @@ public class MainPM extends PresentationModel<Main>
         this.ndpiConverterView = ndpiConverterView;
     }
 
-    private void showAbout()
-    {
+    private void showAbout() {
         System.out.println("About Action gestartet:\n");
-
-        // IDEEN: JDialog
 
         JFrame parentAbout = ((SingleFrameApplication) Application.getInstance()).getMainFrame();
         ResourceBundle bundle = ResourceBundle.getBundle("at.ac.htlhl.nucleij.resources.i18n.dialogs");
 
-        //JLabel text = new JLabel("www.htl-hl.ac.at", JLabel.RIGHT);
         JLabel text = new JLabel("<html> <a href = http://www.htl-hl.ac.at>http://www.htl-hl.ac.at</a> </html>", JLabel.RIGHT);
 
         TaskDialog taskDialogAbout = new TaskDialog(parentAbout, bundle.getString("AboutDialog.title"));
         taskDialogAbout.setInstruction(bundle.getString("AboutDialog.instructionMessage"));
         taskDialogAbout.setText(bundle.getString("AboutDialog.text"));
         taskDialogAbout.setFixedComponent(text);
-
         taskDialogAbout.setCommands(TaskDialog.StandardCommand.CANCEL);
         taskDialogAbout.setIcon(TaskDialog.StandardIcon.INFO);
 
         taskDialogAbout.show();
     }
 
-    private void saveAs()
-    {
+    private void saveAs() {
         System.out.println("Save\n");
 
         JFileChooser chooser = createPreparedFileChooser();
@@ -152,17 +130,14 @@ public class MainPM extends PresentationModel<Main>
                 TaskDialogs.showException(ex);
             }
         }
-
     }
 
-    private void load()
-    {
+    private void load() {
         System.out.println("Load\n");
 
         JFileChooser chooser = createPreparedFileChooser();
         JFrame parent = ((SingleFrameApplication) Application.getInstance()).getMainFrame();
-        if (chooser.showOpenDialog(parent) == JFileChooser.APPROVE_OPTION)
-        {
+        if (chooser.showOpenDialog(parent) == JFileChooser.APPROVE_OPTION) {
             try {
                 Main loadedMain = AppContext.getInstance().getJsonMapper().readValue(chooser.getSelectedFile(), Main.class);
                 glScanAnalyzerPM.setBean(loadedMain.getGLScanAnalyzer());
@@ -170,18 +145,15 @@ public class MainPM extends PresentationModel<Main>
                 TaskDialogs.showException(ex);
             }
         }
-
     }
 
-    private void newClass()
-    {
+    private void newClass() {
         ndpiConverterPM.setBean(new NdpiConverter());
         glScanAnalyzerPM.setBean(new GLScanAnalyzer(ndpiConverterPM.getBean()));
         System.out.println("Neu gedrueckt\n");
     }
 
-    private JFileChooser createPreparedFileChooser()
-    {
+    private JFileChooser createPreparedFileChooser() {
         JFileChooser chooser = new JFileChooser();
         chooser.setAcceptAllFileFilterUsed(false);
         chooser.setFileFilter(new SuffixFileFilter(FILE_EXTENSION, "*." + FILE_EXTENSION, true));
@@ -191,43 +163,33 @@ public class MainPM extends PresentationModel<Main>
 
     // region Nested classes
     // ************************************************************************
-    private class LoadAction extends AbstractAction
-    {
-        public void actionPerformed(ActionEvent e)
-        {
+    private class LoadAction extends AbstractAction {
+        public void actionPerformed(ActionEvent e) {
             load();
         }
     }
 
-    private class SaveAction extends AbstractAction
-    {
-        public void actionPerformed(ActionEvent e)
-        {
+    private class SaveAction extends AbstractAction {
+        public void actionPerformed(ActionEvent e) {
             saveAs();
         }
     }
 
-    private class AboutAction extends AbstractAction
-    {
-        public void actionPerformed(ActionEvent e)
-        {
+    private class AboutAction extends AbstractAction {
+        public void actionPerformed(ActionEvent e) {
             LOGGER.info("About Action clicked");
             showAbout();
         }
     }
 
-    private class ExitAction extends AbstractAction
-    {
-        public void actionPerformed(ActionEvent e)
-        {
+    private class ExitAction extends AbstractAction {
+        public void actionPerformed(ActionEvent e) {
             Application.getInstance().exit(e);
         }
     }
 
-    private class newAction extends AbstractAction
-    {
-        public void actionPerformed(ActionEvent e)
-        {
+    private class newAction extends AbstractAction {
+        public void actionPerformed(ActionEvent e) {
             newClass();
         }
     }
