@@ -1,19 +1,13 @@
 package at.ac.htlhl.nucleij.presenter.analyzing.analyzerLogic;
 
-public class StringTransfer
-{
-	public String value = null;
-	//setValue
-	public void setValue(String uebergebenerString) 
-	{
-		value = uebergebenerString;
+public class StringTransfer {
+    public String value = null;
 
-	}
-	
-	//getValue
-	public String getValue() 
-	{
-		return value;
-		
-	}
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String uebergebenerString) {
+        value = uebergebenerString;
+    }
 }
