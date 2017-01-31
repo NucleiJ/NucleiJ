@@ -12,6 +12,12 @@
 * bei auswählen mehrerer Dateien werden kurz im ProgressWindow alle Dateinamen nacheinander angezeigt
 * Maximum Pixel Size (Pro nuclei)
 
+### DOKU ###
+
+* Automatisch Blockschaltbild generieren
+
+* Einstellungen auch in die Doku???
+
 
 ### 2. Zukunftsmusik ###
 * Schriftgröße änderbar (optional zur Laufzeit)
