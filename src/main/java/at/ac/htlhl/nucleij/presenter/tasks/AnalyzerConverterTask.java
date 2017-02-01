@@ -18,7 +18,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Created by andreas on 23.01.17.
+ * Created by Andreas Mattes and Stefan Erben on 23.01.17.
  */
 
 public class AnalyzerConverterTask extends SwingWorker<String, String> {
@@ -30,6 +30,7 @@ public class AnalyzerConverterTask extends SwingWorker<String, String> {
     private NdpiConverter  ndpiConverter;
 
     private volatile boolean requestCancel;
+    public volatile boolean finishedCancel;
 
     public AnalyzerConverterTask(JProgressBar progressBar, TaskDialog taskDialog, NdpiConverter ndpiConverter, GLScanAnalyzer glScanAnalyzer) {
         this.progressBar = progressBar;
@@ -38,6 +39,7 @@ public class AnalyzerConverterTask extends SwingWorker<String, String> {
         this.glScanAnalyzer = glScanAnalyzer;
 
         this.requestCancel = false;
+        this.finishedCancel = false;
     }
 
     @Override
@@ -71,7 +73,7 @@ public class AnalyzerConverterTask extends SwingWorker<String, String> {
         if (choice != 2) {
             for (String ndpiListElement : ndpiFileList) {
                 if (!requestCancel) {
-                    numberNdpiFiles--; //test
+                    numberNdpiFiles--;
 
                     publish(ndpiListElement.substring(ndpiListElement.lastIndexOf(File.separator) + 1));
 
@@ -80,7 +82,6 @@ public class AnalyzerConverterTask extends SwingWorker<String, String> {
 
                     progressBar.setValue(Math.round(currentStatus));
                 }
-
             }
         }
 
@@ -167,7 +168,6 @@ public class AnalyzerConverterTask extends SwingWorker<String, String> {
                         fileChooser.setCurrentDirectory(new File(System.getProperty(newjarPath.getAbsolutePath())));
                         fileChooser.setFileFilter(new FileNameExtensionFilter("*.jar", "jar"));
 
-
                         int result = fileChooser.showOpenDialog(parent);
                         if (result == JFileChooser.APPROVE_OPTION) {
                             File selectedFile = fileChooser.getSelectedFile();
@@ -194,9 +194,10 @@ public class AnalyzerConverterTask extends SwingWorker<String, String> {
                 p = Runtime.getRuntime().exec(new String[]{"java", "-jar", absolutePathofNdpiJar, "-i", "2", "-c", "lzw", "-s", filePath, outputpath.getParent()});
             } else if (OS.contains("windows")) {
                 System.out.println("Your OS is Windows");
-                p = Runtime.getRuntime().exec("java -jar \"" + absolutePathofNdpiJar + "\" -i 2 -c lzw -s \"" + filePath + "\" \"" + outputpath.getParent() + "\"");
+                //p = Runtime.getRuntime().exec("java -jar \"" + absolutePathofNdpiJar + "\" -i 2 -c lzw -s \"" + filePath + "\" \"" + outputpath.getParent() + "\"");
+                p = Runtime.getRuntime().exec(new String[]{"java", "-jar", absolutePathofNdpiJar, "-i", "2", "-c", "lzw", "-s", filePath, outputpath.getParent()});
             } else if (OS.contains("mac")) {
-                p = Runtime.getRuntime().exec("java -jar \"" + absolutePathofNdpiJar + "\" -i 2 -c lzw -s \"" + filePath + "\" \"" + outputpath.getParent() + "\"");
+                p = Runtime.getRuntime().exec(new String[]{"java", "-jar", absolutePathofNdpiJar, "-i", "2", "-c", "lzw", "-s", filePath, outputpath.getParent()});
                 System.out.println("Your OS is Mac OS");
             } else {
                 System.out.println("Your OS is not supported!");
@@ -217,5 +218,13 @@ public class AnalyzerConverterTask extends SwingWorker<String, String> {
         String newTifListElement = filePath.replace(".ndpi", renameFileName);
         System.out.println("Der Filename nach dem Konvertieren ist:" + newTifListElement);
         glScanAnalyzer.addTifToList(newTifListElement);
+
+        // TODO Ausgabe beim dialog verbessern, wenn zB eine datei konv & analysiert werden soll dann muss tif Counter erhoeht werden
+        // gehoert dort hin wo andis abfrage ist um nur k oder a werden soll
+        //ndpiConverter.setNumberTifFiles(ndpiConverter.getNumberTifFiles()+1);
+    }
+
+    public boolean isFinishedCancel() {
+        return finishedCancel;
     }
 }

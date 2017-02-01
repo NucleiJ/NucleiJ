@@ -8,13 +8,11 @@ import at.ac.htlhl.nucleij.view.CombinedView;
 import at.ac.htlhl.nucleij.view.GLScanAnalyzerView;
 import at.ac.htlhl.nucleij.view.MainFrameView;
 import at.ac.htlhl.nucleij.view.NdpiConverterView;
-import com.ezware.dialog.task.TaskDialog;
 import com.ezware.dialog.task.TaskDialogs;
 import org.jdesktop.application.*;
 
 import javax.swing.*;
 import java.util.EventObject;
-import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -66,7 +64,7 @@ public class NucleiJ extends SingleFrameApplication
         CombinedView combinedView = new CombinedView(ndpiConverterView, glScanAnalyzerView);
         show(combinedView);
 
-        addExitListener(new CarConfiguratorExitListener());
+        addExitListener(new NucleiJExitListener());
     }
 
 
@@ -148,7 +146,7 @@ public class NucleiJ extends SingleFrameApplication
     // region Nested classes
     // ************************************************************************
 
-    private class CarConfiguratorExitListener implements ExitListener
+    private class NucleiJExitListener implements ExitListener
     {
         public boolean canExit(EventObject e)
         {
@@ -157,7 +155,7 @@ public class NucleiJ extends SingleFrameApplication
             // Confirmation Dialog
             if(TaskDialogs.ask( parent, "Wollen Sie wirklich beenden?", "Falls Vorgänge noch nicht abgeschlossen sind,\nkönnen diese fehlerhaft beendet werden! ..."))
             {
-                return true;
+                return true;    //TODO Texte auslagern
             }
             else
             {

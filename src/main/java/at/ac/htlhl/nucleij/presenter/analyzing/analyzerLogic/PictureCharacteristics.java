@@ -15,7 +15,6 @@ public class PictureCharacteristics {
         magnification = uebergebeneMagnification;
     }
 
-    //getValue
     public double getTumorArea() {
         double tumorArea = gewebepixel / (magnification * magnification);
         return tumorArea;

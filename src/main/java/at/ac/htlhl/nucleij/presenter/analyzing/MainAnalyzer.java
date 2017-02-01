@@ -24,12 +24,11 @@ import java.util.Arrays;
 public class MainAnalyzer implements PlugInFilter {
 
     // Constants **************************************************************
-    public String  PIXEL_SIZE;        //fuer min Partikelgroesse
-    public int     AUFLOESUNG_SLIDER;    //fuer die aufloesung der heatmap
-    public boolean CROP_CHECKBOX;        //var ob das bild zugeschnitten werden soll
-    public boolean HEATMAP_CHECKBOX;    //var ob heatmap erstellt werden soll
-    public boolean EXPORT_PIC_CHECKBOX;    //var ob markierter schnitt exportiert werden soll
-    public boolean EXPORT_RESULTS_CHECKBOX;     //var ob Results exportiert werden sollen
+    public String  pixelSize;           //fuer min Partikelgroesse
+    public int     aufloesungSlider;    //fuer die aufloesung der heatmap
+    public boolean cropCheckbox;        //var ob das bild zugeschnitten werden soll
+    public boolean heatmapCheckbox;    //var ob heatmap erstellt werden soll
+    public boolean exportResultsCheckbox;     //var ob Results exportiert werden sollen
 
     StringAdder            summaryStack        = new StringAdder();
     StringAdder            csvSummaryStack     = new StringAdder();
@@ -47,7 +46,6 @@ public class MainAnalyzer implements PlugInFilter {
     private String radiobox = "Nothing";
     private String dateiname;
     private String csvSummaryString = "";
-
 
     public MainAnalyzer(GLScanAnalyzer glScanAnalyzer) {
         this.glScanAnalyzer = glScanAnalyzer;
@@ -136,7 +134,7 @@ public class MainAnalyzer implements PlugInFilter {
         IJ.run("Set Measurements...", "area standard centroid perimeter bounding shape redirect=None decimal=3");
         String befehl = "size=$-Infinity pixel circularity=0.00-1.00 show=% ";    //display
 
-        String endbefehl = befehl.replace("$", PIXEL_SIZE);
+        String endbefehl = befehl.replace("$", pixelSize);
         IJ.run("Analyze Particles...", endbefehl.replace("%", radiobox));
 
         //Resultate auslesen:
@@ -180,7 +178,7 @@ public class MainAnalyzer implements PlugInFilter {
         StringBuffer resultzeile = new StringBuffer();
         resultzeile.append("Nummer\tArea\tPerim.\tRound\tWidth\tHeight\tX\t\t\tY\t\tCirc.\tSolidity\n");
 
-        if (EXPORT_RESULTS_CHECKBOX == true) {
+        if (exportResultsCheckbox == true) {
             for (int x = 0; x <= counter - 1; x++) {
                 area[x] = rt.getValue("Area", x);
                 roundness[x] = rt.getValue("Round", x);
@@ -281,8 +279,8 @@ public class MainAnalyzer implements PlugInFilter {
         imp.updateAndRepaintWindow();
 
         //Heatmap erstellen
-        if (HEATMAP_CHECKBOX == true) {
-            heatmap.create(file.getValue(), path.getValue(), startExporter.getnewDirectoryname(), AUFLOESUNG_SLIDER, heatmapTmp, heatmapMaske, heatmap_ip, w, h);
+        if (heatmapCheckbox == true) {
+            heatmap.create(file.getValue(), path.getValue(), startExporter.getnewDirectoryname(), aufloesungSlider, heatmapTmp, heatmapMaske, heatmap_ip, w, h);
         }
 
         imp.changes = false;        //es wurden keine Aenderungen vorgenommen, -> "wollen Sie speichern" umgehen
@@ -294,9 +292,9 @@ public class MainAnalyzer implements PlugInFilter {
     }
 
     public void setROI(ImagePlus imp) {
-        if (CROP_CHECKBOX == true)        //Bild wird zugeschnitten
+        if (cropCheckbox == true)        //Bild wird zugeschnitten
         {
-            CROP_CHECKBOX = false;
+            cropCheckbox = false;
 
             do {
                 //Bild oeffnen, var setzen dass bild bereits offen ist
@@ -308,27 +306,26 @@ public class MainAnalyzer implements PlugInFilter {
                 if (roi instanceof Roi) {
                     IJ.run(imp, "Crop", "");
                     imp.updateAndDraw();
-                    CROP_CHECKBOX = true;
+                    cropCheckbox = true;
                 }
-            } while (CROP_CHECKBOX == false);
-
+            } while (cropCheckbox == false);
         }
     }
 
     public void getUserInput() {
         // TODO je nach vergroesserung waehlen
-        PIXEL_SIZE = "8";
+        pixelSize = "8";
 
         if (glScanAnalyzer.getRoiarea() == null) {
-            CROP_CHECKBOX = false;
+            cropCheckbox = false;
         } else {
-            CROP_CHECKBOX = true;
+            cropCheckbox = true;
         }
 
-        EXPORT_RESULTS_CHECKBOX = true;
-        CROP_CHECKBOX = glScanAnalyzer.isSetroi();
-        HEATMAP_CHECKBOX = glScanAnalyzer.isCalculateandshowheatmap();
-        AUFLOESUNG_SLIDER = glScanAnalyzer.getHeatmapquality();
+        exportResultsCheckbox = true;
+        cropCheckbox = glScanAnalyzer.isSetroi();
+        heatmapCheckbox = glScanAnalyzer.isCalculateandshowheatmap();
+        aufloesungSlider = glScanAnalyzer.getHeatmapquality();
     }
 
     //Maske erstellen
@@ -343,7 +340,7 @@ public class MainAnalyzer implements PlugInFilter {
         startParticleAnalyzer(markiert, radiobox);
 
         //Results exportieren
-        if (EXPORT_RESULTS_CHECKBOX == true) {
+        if (exportResultsCheckbox == true) {
             startExporter.results(resultStack.getValue(), file.getValue(), path.getValue());
         }
 

@@ -155,7 +155,18 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
 
             if (erg.toString() == "CANCEL") {
                 analyzerConverterTask.stopProcess(true);
-                LOGGER.info("SwingWorker gecanceled!");
+
+                if (!analyzerConverterTask.isDone()) {
+                    TaskDialog dlg = new TaskDialog(parentAnalyzerConverter, "Beenden..."); // TODO texte auslagern
+                    dlg.setInstruction("Vorgang wird abgebrochen...");
+                    dlg.setText("NucleiJ beendet den Vorgang. Dieser wird in den naechsten\n" +
+                            "Momenten selbststaendig im Hintergrund abgebrochen. Bitte OK druecken");
+                    dlg.setIcon(TaskDialog.StandardIcon.WARNING);
+                    dlg.show();
+                    ndpiConverter.setNumberNdpiFiles(0);
+                    ndpiConverter.setNumberTifFiles(0);
+                }
+
             }
 
             long elapsedTime = System.nanoTime() - startTime;
@@ -179,24 +190,17 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
                 listString += s.concat("\n");
             }
 
-            String InfosOfProcessedScans;
-            if (ndpiConverter.getNumberNdpiFiles() != 0 && ndpiConverter.getNumberTifFiles() == 0) {
-                InfosOfProcessedScans = "\n<b>" + bundle.getString("Words.KonvertierteDateien.text") + ": </b>" + ndpiConverter.getNumberNdpiFiles();
-            } else if (ndpiConverter.getNumberNdpiFiles() == 0 && ndpiConverter.getNumberTifFiles() != 0) {
-                InfosOfProcessedScans = "\n<b>" + bundle.getString("Words.AnalysierteDateien.text") + ": </b>" + ndpiConverter.getNumberTifFiles();
-            } else {
-                InfosOfProcessedScans = "\n<b>" + bundle.getString("Words.KonvertierteDateien.text") + ": </b>" + ndpiConverter.getNumberNdpiFiles() +
-                        "\n<b>" + bundle.getString("Words.AnalysierteDateien.text") + ": </b>" + (ndpiConverter.getNumberTifFiles() + ndpiConverter.getNumberNdpiFiles());
+            String InfosOfProcessedScans = "Prozess wurde waerend der Programmlaufzeit abgebrochen!";       //TODO Texte auslagern
+            if ((ndpiConverter.getNumberTifFiles() + ndpiConverter.getNumberNdpiFiles()) > 0) {
+                if (ndpiConverter.getNumberNdpiFiles() != 0 && ndpiConverter.getNumberTifFiles() == 0) {
+                    InfosOfProcessedScans = "\n<b>" + bundle.getString("Words.KonvertierteDateien.text") + ": </b>" + ndpiConverter.getNumberNdpiFiles();
+                } else if (ndpiConverter.getNumberNdpiFiles() == 0 && ndpiConverter.getNumberTifFiles() != 0) {
+                    InfosOfProcessedScans = "\n<b>" + bundle.getString("Words.AnalysierteDateien.text") + ": </b>" + ndpiConverter.getNumberTifFiles();
+                } else {
+                    InfosOfProcessedScans = "\n<b>" + bundle.getString("Words.KonvertierteDateien.text") + ": </b>" + ndpiConverter.getNumberNdpiFiles() +
+                            "\n<b>" + bundle.getString("Words.AnalysierteDateien.text") + ": </b>" + (ndpiConverter.getNumberTifFiles() + ndpiConverter.getNumberNdpiFiles());
+                }
             }
-
-
-            String[] columnNamesGeneral = {"Titel",
-                    "Information"};
-            Object[][] dataGeneral = {
-                    {bundle.getString("Words.Ausgabepfad.text") + ":", ndpiConverter.getOutputpath()},
-                    {bundle.getString("Words.Dauer.text") + ":", processDuration}, {bundle.getString("Words.KonvertierteDateien.text") + ": ", ndpiConverter.getNumberNdpiFiles()},
-                    {bundle.getString("Words.AnalysierteDateien.text") + ":", (ndpiConverter.getNumberTifFiles() + ndpiConverter.getNumberNdpiFiles())},
-            };
 
             String[] columnNamesSpezific = {"Information"};
             Object[][] dataSpezific = {
@@ -230,14 +234,17 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
             // Summary Dialog:
             TaskDialog dlg = new TaskDialog(((SingleFrameApplication) Application.getInstance()).getMainFrame(), bundle.getString("Words.Zusammenfassung.text"));
             dlg.setIcon(TaskDialog.StandardIcon.INFO);
-            dlg.setText("<b>" + bundle.getString("Words.Ausgabepfad.text") + ":</b> " + ndpiConverter.getOutputpath() +
-                    "\n<b>" + bundle.getString("Words.Dauer.text") + ":</b> " + processDuration + "\n" + InfosOfProcessedScans);
 
-            dlg.getDetails().setExpandableComponent(tableSpezific);
+            if ((ndpiConverter.getNumberTifFiles() + ndpiConverter.getNumberNdpiFiles()) > 0) {
+                dlg.setText("<b>" + bundle.getString("Words.Ausgabepfad.text") + ":</b> " + ndpiConverter.getOutputpath() +
+                        "\n<b>" + bundle.getString("Words.Dauer.text") + ":</b> " + processDuration + "\n" + InfosOfProcessedScans);
+                dlg.getDetails().setExpandableComponent(tableSpezific);
+                dlg.getFooter().setText("\u00A9 NucleiJ 2017");
+                dlg.getFooter().setIcon(TaskDialog.StandardIcon.INFO);
+            } else {
+                dlg.setText("<b>" + bundle.getString("Words.Dauer.text") + ":</b> " + processDuration + "\n" + InfosOfProcessedScans);
 
-            dlg.getFooter().setText("\u00A9 NucleiJ 2017");
-            dlg.getFooter().setIcon(TaskDialog.StandardIcon.INFO);
-
+            }
             dlg.show();
         }
     }
@@ -254,62 +261,60 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
             if (ndpiConverter.getInputpath() != null && ndpiConverter.getInputpath() != "" &&
                     ndpiConverter.getInputpath().contains(".tif") && ndpiConverter.getNumberTifFiles() == 1 &&
                     ndpiConverter.getNumberNdpiFiles() == 0) {
-                Runnable myRunnable = new Runnable() {
-                    public void run() {
-                        glScanAnalyzer.setRoiX(0);
-                        glScanAnalyzer.setRoiY(0);
-                        glScanAnalyzer.setRoiHeight(0);
-                        glScanAnalyzer.setRoiWidth(0);
+                Runnable myRunnable = () -> {
+                    glScanAnalyzer.setRoiX(0);
+                    glScanAnalyzer.setRoiY(0);
+                    glScanAnalyzer.setRoiHeight(0);
+                    glScanAnalyzer.setRoiWidth(0);
 
-                        ImagePlus imp = IJ.openImage(ndpiConverter.getInputpath());
-                        imp.unlock();
-                        imp.show();
+                    ImagePlus imp = IJ.openImage(ndpiConverter.getInputpath());
+                    imp.unlock();
+                    imp.show();
 
-                        RoiManager roiMng = RoiManager.getInstance();
+                    RoiManager roiMng = RoiManager.getInstance();
+                    try {
+                        roiMng.setEditMode(imp, true);
+                    } catch (Exception e1) {
+                        e1.printStackTrace();
+                    }
+
+                    boolean roigesetzt = false;
+                    imp.updateAndRepaintWindow();
+
+                    Roi roi;
+
+                    do {
                         try {
-                            roiMng.setEditMode(imp, true);
-                        } catch (Exception e1) {
+                            Thread.sleep(1000);
+                        } catch (InterruptedException e1) {
                             e1.printStackTrace();
                         }
-
-                        boolean roigesetzt = false;
-                        imp.updateAndRepaintWindow();
-
-                        Roi roi;
-
-                        do {
-                            try {
-                                Thread.sleep(1000);
-                            } catch (InterruptedException e1) {
-                                e1.printStackTrace();
-                            }
-                            roi = imp.getRoi();
-                            if (roi instanceof Roi) {
-                                roigesetzt = true;
-                            }
-                        } while (roigesetzt == false);
-
-                        new WaitForUserDialog("Information", bundle.getString("ROIinfo.info.text")).show();
-
-                        Rectangle roiRec = roi.getBounds();
-
-                        if (roiRec.getWidth() > 20 && roiRec.getHeight() > 20) {
-                            glScanAnalyzer.setRoiX((int) roiRec.getX());
-                            glScanAnalyzer.setRoiY((int) roiRec.getY());
-                            glScanAnalyzer.setRoiHeight((int) roiRec.getHeight());
-                            glScanAnalyzer.setRoiWidth((int) roiRec.getWidth());
-                            glScanAnalyzer.setSetroi(true);
-                        } else {
-                            TaskDialog dlg = new TaskDialog(((SingleFrameApplication) Application.getInstance()).getMainFrame(), "Error");
-                            dlg.setIcon(TaskDialog.StandardIcon.ERROR);
-                            dlg.setText(bundle.getString("ROIerror.info.text"));
-                            dlg.getDetails().setExpandableComponent(
-                                    new JLabel(bundle.getString("ROIerror.details.text") + String.valueOf(roiRec.getHeight())
-                                            + "px * " + String.valueOf(roiRec.getWidth()) + "px."));
-                            dlg.show();
+                        roi = imp.getRoi();
+                        if (roi instanceof Roi) {
+                            roigesetzt = true;
                         }
-                        imp.close();
+                    } while (roigesetzt == false);
+
+                    new WaitForUserDialog("Information", bundle.getString("ROIinfo.info.text")).show();
+
+                    Rectangle roiRec = roi.getBounds();
+
+                    if (roiRec.getWidth() > 20 && roiRec.getHeight() > 20) {
+                        glScanAnalyzer.setRoiX((int) roiRec.getX());
+                        glScanAnalyzer.setRoiY((int) roiRec.getY());
+                        glScanAnalyzer.setRoiHeight((int) roiRec.getHeight());
+                        glScanAnalyzer.setRoiWidth((int) roiRec.getWidth());
+                        glScanAnalyzer.setSetroi(true);
+                    } else {
+                        TaskDialog dlg = new TaskDialog(((SingleFrameApplication) Application.getInstance()).getMainFrame(), "Error");
+                        dlg.setIcon(TaskDialog.StandardIcon.ERROR);
+                        dlg.setText(bundle.getString("ROIerror.info.text"));
+                        dlg.getDetails().setExpandableComponent(
+                                new JLabel(bundle.getString("ROIerror.details.text") + String.valueOf(roiRec.getHeight())
+                                        + "px * " + String.valueOf(roiRec.getWidth()) + "px."));
+                        dlg.show();
                     }
+                    imp.close();
                 };
                 Thread thread = new Thread(myRunnable);
                 thread.start();
