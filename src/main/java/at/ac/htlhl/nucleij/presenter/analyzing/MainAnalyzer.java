@@ -441,7 +441,7 @@ public class MainAnalyzer implements PlugInFilter {
         csvSummaryString = csvSummaryString + df.format(area_arith) + ";";    //Ausgabe des arithmetishen Mittels aller Zellkernflaechen (auf 3 Kommastellen genau)
 
         summaryString = summaryString + "Median area:\t\t\t\t" + df.format(median) + " um2\n";                //Ausgabe des Medianwerts aller Zellkernfleachen (auf 3 Kommastellen genau)
-        csvSummaryString = csvSummaryString + df.format(median) + ";";                //Ausgabe des Medianwerts aller Zellkernfleachen (auf 3 Kommastellen genau)
+        csvSummaryString = csvSummaryString + df.format(median) + ";\n";                //Ausgabe des Medianwerts aller Zellkernfleachen (auf 3 Kommastellen genau)
 
         //An StringStack uebergeben
         summaryStack.appendString(summaryString);
