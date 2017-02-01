@@ -8,13 +8,11 @@ import at.ac.htlhl.nucleij.view.CombinedView;
 import at.ac.htlhl.nucleij.view.GLScanAnalyzerView;
 import at.ac.htlhl.nucleij.view.MainFrameView;
 import at.ac.htlhl.nucleij.view.NdpiConverterView;
-import com.ezware.dialog.task.TaskDialog;
 import com.ezware.dialog.task.TaskDialogs;
 import org.jdesktop.application.*;
 
 import javax.swing.*;
 import java.util.EventObject;
-import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -66,7 +64,15 @@ public class NucleiJ extends SingleFrameApplication
         CombinedView combinedView = new CombinedView(ndpiConverterView, glScanAnalyzerView);
         show(combinedView);
 
-        addExitListener(new CarConfiguratorExitListener());
+        JFrame parent = ((SingleFrameApplication) Application.getInstance()).getMainFrame();
+        TaskDialogs.inform(parent, "Welcome to NucleiJ",
+                "Thank you for using our software!\n"
+                        + "\n1.\tClick on \"...\" and choose a directory or file. Output dir will be set automatically or you can choose a custom name."
+                        + "\n2.\tSelect your preferred magnification."
+                        + "\n3.\tYou can generate a heatmap and set the heatmap quality. Warning: Higher quality needs more time! Standard: 60"
+                        + "\n4.\tIf you have only selected 1 file, choose a region of interest."
+                        + "\n5.\tPush \"Start Process...\" and wait for NucleiJ converting and analyzing your scans");
+        addExitListener(new NucleijExitListener());
     }
 
 
@@ -148,7 +154,7 @@ public class NucleiJ extends SingleFrameApplication
     // region Nested classes
     // ************************************************************************
 
-    private class CarConfiguratorExitListener implements ExitListener
+    private class NucleijExitListener implements ExitListener
     {
         public boolean canExit(EventObject e)
         {
