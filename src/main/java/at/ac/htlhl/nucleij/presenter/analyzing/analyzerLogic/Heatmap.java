@@ -1,15 +1,21 @@
 package at.ac.htlhl.nucleij.presenter.analyzing.analyzerLogic;
 
+import at.ac.htlhl.nucleij.NucleiJ;
+import com.ezware.dialog.task.TaskDialogs;
 import ij.IJ;
 import ij.ImagePlus;
 import ij.process.ImageProcessor;
+import org.jdesktop.application.Application;
+import org.jdesktop.application.SingleFrameApplication;
 
 import javax.imageio.ImageIO;
+import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.math.RoundingMode;
+import java.net.URISyntaxException;
 import java.text.DecimalFormat;
 
 
@@ -100,12 +106,18 @@ public class Heatmap {
         String befehl = "value=%";
         String value = String.valueOf(faktorfloat);
 
-        File file = new File("div/lut/RedGreenErben.lut");      //TODO lut auslagern da in JAR nicht findbar
-        String absolutePathofLUT = file.getAbsolutePath();
+        File newLutPath = null;
+        try {
+            newLutPath = new File(NucleiJ.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath());
+        } catch (URISyntaxException e) {
+            TaskDialogs.inform(((SingleFrameApplication) Application.getInstance()).getMainFrame(), "Error", "NucleiJ konnte den LookUpTable nicht finden\n" +
+                    "Bitte vergewissern Sie sich dass sich dieser im richtigen Verzeichnis befindet.");
+        }
+        String absolutePathofLUT = newLutPath.getParent().concat(File.separator).concat("NucleiJ-Data").
+                concat(File.separator).concat("lut").concat(File.separator).concat("RedGreenErben.lut");
 
         IJ.run("LUT... ", "open=".concat(absolutePathofLUT));
 
-        //wieviel pixel sind auf 255?
         int heatmapWidth = heatmap_ip.getWidth();
         int heatmapHeight = heatmap_ip.getHeight();
         int maxPixel = 0;
@@ -178,7 +190,7 @@ public class Heatmap {
 
         //Speichern der Heatmap
         String resultsFilename = filename.replaceFirst("[.][^.]+$", "") + "_Heatmap.tif";        //Neuen Filenamen festlegen
-        String exportHeatmap = path + newDirectoryname + File.separator + resultsFilename;
+        String exportHeatmap = path + File.separator + resultsFilename;
 
         IJ.run(heatmapTmp, "Median...", "radius=2");
         IJ.saveAs(heatmapTmp, "Tif", exportHeatmap);
