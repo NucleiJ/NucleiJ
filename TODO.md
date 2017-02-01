@@ -2,10 +2,7 @@
 # TO-DO Liste #
 
 ### 1. Erweiterungen: ###
-* [M] Cancel soll wirklich beenden
-* [E] Linux fixen
 * [M] Apple Builden
-* auf allen Plattformen lauffähig
 
 * [M] Dialog (mit Progressbar) breiter machen
 * Speichern/Einlesen von Einstellungen + Jason File (.nucleij)
@@ -14,10 +11,7 @@
 * Ausgaben clearen
 
 ### DOKU ###
-
 * Automatisch Blockschaltbild generieren
-
-* Einstellungen auch in die Doku???
 
 
 ### 2. Zukunftsmusik ###
@@ -34,8 +28,7 @@
 
 
 ### 3. Bugs ###
-* MainAnalyzer.java 103 Analyze funktioniert, jedoch Converter unter Linux nicht, unter Windows werden alle ergebnisse nicht in Output sondern überordner gespeichert
-
+* Tell me
 
 ### 4.Diverses ###
 * Warum ist am Ende von jedem Listenelement in ndpiFileList und tifFileList eine "]"??
@@ -66,6 +59,9 @@
 * Wenn Quality slider geändert, dann berechnen ankreuzen            28.01.17
 * AboutDialog erweitern                                             29.01.17
 * alle Texte auslagern                                              30.01.17
+* Cancel soll wirklich beenden                                      31.01.17
+* Linux fixen                                                       01.02.17
+* Auf allen Plattformen lauffähig (Converter gefixed)               01.02.17
 
 
 ### 7. Wichtige Notizen ###

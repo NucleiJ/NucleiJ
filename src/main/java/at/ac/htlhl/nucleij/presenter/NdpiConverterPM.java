@@ -84,7 +84,6 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter> {
     private JFileChooser createFileChooser() {
         LOGGER.info("Select Path Action clicked");
         JFileChooser chooser = new JFileChooser();
-        //TODO Bei mehreren gewählten Datein/Verzeichnissen den übergeordneten Ordner im InputPath Feld anzeigen (Oder 1.Datei mit "und X weitere Dateien" dran)
 
         chooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
         chooser.addChoosableFileFilter(tifFilter);
@@ -158,19 +157,15 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter> {
                     }
                 }
 
-                System.out.println("\nNDPI-Files:");
                 for (String string : ndpiFileList) {
                     if (string != null) {
                         numberNdpiFiles++;
-                        System.out.println(string);
                     }
                 }
 
-                System.out.println("\nTIF-Files:");
                 for (String string : tifFileList) {
                     if (string != null) {
                         numberTifFiles++;
-                        System.out.println(string);
                     }
                 }
 
