@@ -2,18 +2,17 @@
 # TO-DO Liste #
 
 ### 1. Erweiterungen: ###
-* [M] Cancel soll wirklich beenden
 * [M] Apple Builden
 * auf allen Plattformen lauffähig
 
 * [M] Dialog (mit Progressbar) breiter machen
 * Speichern/Einlesen von Einstellungen + Jason File (.nucleij)
+* bei auswählen mehrerer Dateien werden kurz im ProgressWindow alle Dateinamen nacheinander angezeigt
 * Maximum Pixel Size (Pro nuclei)
 * Ausgaben clearen
 
 ### DOKU ###
 * Automatisch Blockschaltbild generieren
-* Einstellungen auch in die Doku???
 
 
 ### 2. Zukunftsmusik ###
@@ -30,7 +29,7 @@
 
 
 ### 3. Bugs ###
-* MainAnalyzer.java 103 Analyze funktioniert, jedoch Converter unter Linux nicht, unter Windows werden alle ergebnisse nicht in Output sondern überordner gespeichert
+* Tell me: NO BUGS!
 
 
 ### 4.Diverses ###
@@ -62,6 +61,9 @@
 * Wenn Quality slider geändert, dann berechnen ankreuzen            28.01.17
 * AboutDialog erweitern                                             29.01.17
 * alle Texte auslagern                                              30.01.17
+* Cancel soll wirklich beenden                                      31.01.17
+* Linux fixen                                                       01.02.17
+* Auf allen Plattformen lauffähig (Converter gefixed)               01.02.17
 
 
 ### 7. Wichtige Notizen ###
