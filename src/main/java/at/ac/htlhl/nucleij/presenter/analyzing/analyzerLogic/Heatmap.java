@@ -9,14 +9,17 @@ import org.jdesktop.application.Application;
 import org.jdesktop.application.SingleFrameApplication;
 
 import javax.imageio.ImageIO;
-import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.math.RoundingMode;
 import java.net.URISyntaxException;
+import java.net.URLDecoder;
 import java.text.DecimalFormat;
+
+import static com.sun.xml.internal.ws.spi.db.BindingContextFactory.LOGGER;
 
 
 public class Heatmap {
@@ -113,8 +116,17 @@ public class Heatmap {
             TaskDialogs.inform(((SingleFrameApplication) Application.getInstance()).getMainFrame(), "Error", "NucleiJ konnte den LookUpTable nicht finden\n" +
                     "Bitte vergewissern Sie sich dass sich dieser im richtigen Verzeichnis befindet.");
         }
+        //TODO Abstand in Pfad, wieso nicht moeglich?
         String absolutePathofLUT = newLutPath.getParent().concat(File.separator).concat("NucleiJ-Data").
                 concat(File.separator).concat("lut").concat(File.separator).concat("RedGreenErben.lut");
+        try {
+            absolutePathofLUT = URLDecoder.decode(absolutePathofLUT, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+
+        LOGGER.info(absolutePathofLUT);
 
         IJ.run("LUT... ", "open=".concat(absolutePathofLUT));
 
