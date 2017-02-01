@@ -5,13 +5,15 @@ import at.ac.htlhl.nucleij.model.GLScanAnalyzer;
 import at.ac.htlhl.nucleij.model.NdpiConverter;
 import at.ac.htlhl.nucleij.presenter.analyzing.MainAnalyzer;
 import com.ezware.dialog.task.TaskDialog;
-import de.javasoft.util.OS;
 import org.jdesktop.application.Application;
 import org.jdesktop.application.SingleFrameApplication;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.logging.Level;
@@ -23,14 +25,12 @@ import java.util.logging.Logger;
 
 public class AnalyzerConverterTask extends SwingWorker<String, String> {
     private static final Logger LOGGER = Logger.getLogger(AnalyzerConverterTask.class.getName());
-
+    public volatile  boolean finishedCancel;
     private JProgressBar   progressBar;
     private TaskDialog     taskDialog;
     private GLScanAnalyzer glScanAnalyzer;
     private NdpiConverter  ndpiConverter;
-
     private volatile boolean requestCancel;
-    public volatile boolean finishedCancel;
 
     public AnalyzerConverterTask(JProgressBar progressBar, TaskDialog taskDialog, NdpiConverter ndpiConverter, GLScanAnalyzer glScanAnalyzer) {
         this.progressBar = progressBar;
@@ -44,7 +44,7 @@ public class AnalyzerConverterTask extends SwingWorker<String, String> {
 
     @Override
     protected String doInBackground() throws Exception {
-        MainAnalyzer mainAnalyzer = new MainAnalyzer(glScanAnalyzer);
+        MainAnalyzer mainAnalyzer = new MainAnalyzer(glScanAnalyzer, ndpiConverter);
         List<String> tifFileList;
         List<String> ndpiFileList = glScanAnalyzer.getNdpiList();
         float currentStatus = 0;

@@ -1,6 +1,7 @@
 package at.ac.htlhl.nucleij.presenter.analyzing;
 
 import at.ac.htlhl.nucleij.model.GLScanAnalyzer;
+import at.ac.htlhl.nucleij.model.NdpiConverter;
 import at.ac.htlhl.nucleij.presenter.analyzing.analyzerLogic.*;
 import ij.IJ;
 import ij.ImagePlus;
@@ -19,6 +20,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.DecimalFormat;
 import java.util.Arrays;
+
+import static at.ac.htlhl.nucleij.model.NdpiConverter.MAG_X10;
 
 
 public class MainAnalyzer implements PlugInFilter {
@@ -43,13 +46,14 @@ public class MainAnalyzer implements PlugInFilter {
     PictureCharacteristics properties          = new PictureCharacteristics();
 
     private GLScanAnalyzer glScanAnalyzer;
+    private NdpiConverter  ndpiConverter;
     private String radiobox = "Nothing";
     private String dateiname;
     private String csvSummaryString = "";
 
-    public MainAnalyzer(GLScanAnalyzer glScanAnalyzer) {
+    public MainAnalyzer(GLScanAnalyzer glScanAnalyzer, NdpiConverter ndpiConverter) {
         this.glScanAnalyzer = glScanAnalyzer;
-
+        this.ndpiConverter = ndpiConverter;
     }
 
     public void setDateiname(String dateiname) {
@@ -313,8 +317,14 @@ public class MainAnalyzer implements PlugInFilter {
     }
 
     public void getUserInput() {
-        // TODO je nach vergroesserung waehlen
-        pixelSize = "8";
+        if(ndpiConverter.getMagnification().toLowerCase() == MAG_X10)
+        {
+            pixelSize = "34";
+        }
+        else
+        {
+            pixelSize = "8";
+        }
 
         if (glScanAnalyzer.getRoiarea() == null) {
             cropCheckbox = false;
