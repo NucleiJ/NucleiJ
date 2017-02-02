@@ -5,6 +5,7 @@
 * Analyzer auf Linux lauffähig
 * auf allen Plattformen lauffähig
 * System - LaF für Apple & (Linux) 
+* In AnalyzerConverterTask wird 2x auf OS abgefragt
 
 * Speichern/Einlesen von Einstellungen + Jason File (.nucleij)
 * bei auswählen mehrerer Dateien werden kurz im ProgressWindow alle Dateinamen nacheinander angezeigt

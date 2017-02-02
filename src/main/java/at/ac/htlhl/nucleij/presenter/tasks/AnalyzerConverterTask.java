@@ -181,29 +181,29 @@ public class AnalyzerConverterTask extends SwingWorker<String, String> {
         }
 
         // endregion
-        System.out.println("\nAbsolutePathOfNdpi" + absolutePathofNdpiJar);
-        System.out.println("FilePath" + filePath);
-        System.out.println("OutputPath.getParent" + outputpath.getParent());
+        System.out.println("\nAbsolutePathOfNdpi: " + absolutePathofNdpiJar);
+        System.out.println("FilePath: " + filePath);
+        System.out.println("OutputPath.getParent: " + outputpath.getParent());
 
         Process p;
 
         try {
-            if (OS.contains("linux")) {
-                System.out.println("Your OS is Linux");
-
-                p = Runtime.getRuntime().exec(new String[]{"java", "-jar", absolutePathofNdpiJar, "-i", "2", "-c", "lzw", "-s", filePath, outputpath.getParent()});
-            } else if (OS.contains("windows")) {
-                System.out.println("Your OS is Windows");
-                //p = Runtime.getRuntime().exec("java -jar \"" + absolutePathofNdpiJar + "\" -i 2 -c lzw -s \"" + filePath + "\" \"" + outputpath.getParent() + "\"");
-                p = Runtime.getRuntime().exec(new String[]{"java", "-jar", absolutePathofNdpiJar, "-i", "2", "-c", "lzw", "-s", filePath, outputpath.getParent()});
-            } else if (OS.contains("mac")) {
-                p = Runtime.getRuntime().exec(new String[]{"java", "-jar", absolutePathofNdpiJar, "-i", "2", "-c", "lzw", "-s", filePath, outputpath.getParent()});
-                System.out.println("Your OS is Mac OS");
-            } else {
-                System.out.println("Your OS is not supported!");
-                p = null;
+            switch (ndpiConverter.getMagnification()) {
+                case NdpiConverter.MAG_X10:
+                    p = Runtime.getRuntime().exec(new String[]{"java", "-jar", absolutePathofNdpiJar, "-i", "2", "-c", "lzw", "-s", filePath, outputpath.getParent()});
+                    break;
+                case NdpiConverter.MAG_X40:
+                    p = Runtime.getRuntime().exec(new String[]{"java", "-jar", absolutePathofNdpiJar, "-i", "1", "-c", "lzw", "-s", filePath, outputpath.getParent()});
+                    break;
+                case NdpiConverter.MAG_X5:
+                    p = Runtime.getRuntime().exec(new String[]{"java", "-jar", absolutePathofNdpiJar, "-i", "0", "-c", "lzw", "-s", filePath, outputpath.getParent()});
+                    break;
+                default:
+                    p = Runtime.getRuntime().exec(new String[]{"java", "-jar", absolutePathofNdpiJar, "-i", "2", "-c", "lzw", "-s", filePath, outputpath.getParent()});
+                    break;
             }
 
+            assert p != null;
             BufferedReader in = new BufferedReader(
                     new InputStreamReader(p.getInputStream()));
             String line;
