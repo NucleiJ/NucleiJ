@@ -135,6 +135,10 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
             int numberTifFiles = ndpiConverter.getNumberTifFiles();
             analyzeConvertCheck(numberNdpiFiles, numberTifFiles);
 
+            if (ndpiConverter.getChoice() == -1) {
+                return;
+            }
+
             TaskDialog taskDialogAnalyzerConverter = new TaskDialog(parentAnalyzerConverter, bundle.getString("AnalyzerConverterDialog.title"));
 
             JProgressBar progressBarAnalyzerConverter = new JProgressBar(0, 100);
@@ -347,7 +351,6 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
             glScanAnalyzer.setRoiarea("");
         }
     }
-
     //endregion:
 
 }
