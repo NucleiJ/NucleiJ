@@ -3,6 +3,7 @@ package at.ac.htlhl.nucleij.model;
 import com.jgoodies.binding.beans.Model;
 import com.jgoodies.forms.layout.ColumnSpec;
 
+import java.io.File;
 import java.io.Serializable;
 
 /**
@@ -25,6 +26,8 @@ public class NdpiConverter extends Model {
     private int choice;
     private int numberNdpiFiles;
     private int numberTifFiles;
+
+    File[] filesInDirectory = null;
 
     public NdpiConverter() {
         super();
@@ -58,6 +61,15 @@ public class NdpiConverter extends Model {
     public void setNumberTifFiles(int numberTifFiles) {
         this.numberTifFiles = numberTifFiles;
     }
+
+    public File[] getFilesInDirectory() {
+        return filesInDirectory;
+    }
+
+    public void setFilesInDirectory(File[] filesInDirectory) {
+        this.filesInDirectory = filesInDirectory;
+    }
+
     // endregion other Getter&Setter
 
     // region Getter&Setter

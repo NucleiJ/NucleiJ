@@ -40,7 +40,7 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter> {
     private NdpiConverter  ndpiConverter;
     private GLScanAnalyzer glScanAnalyzer;
 
-    public NdpiConverterPM(NdpiConverter ndpiConverter, GLScanAnalyzer glScanAnalyzer, GLScanAnalyzerPM glScanAnalyzerPM) {
+    public NdpiConverterPM(NdpiConverter ndpiConverter, GLScanAnalyzer glScanAnalyzer) {
         super(ndpiConverter);
 
         this.ndpiConverter = ndpiConverter;
@@ -105,90 +105,24 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter> {
             ResourceBundle bundle = ResourceBundle.getBundle("at.ac.htlhl.nucleij.resources.i18n.dialogs");
             JFileChooser chooser = createFileChooser();
 
+            List<String> ndpiFileList = new ArrayList<>();
+            List<String> tifFileList = new ArrayList<>();
+            File[] filesInDirectory;
+            boolean moreThanOneFolder;
+
             if (chooser.showOpenDialog(parent) == JFileChooser.APPROVE_OPTION) {
                 ndpiConverter.setInputpath(chooser.getSelectedFile().getAbsolutePath());
 
-                List<String> ndpiFileList = new ArrayList<>();
-                List<String> tifFileList = new ArrayList<>();
-                File[] filesInDirectory = new File[0];
-                boolean moreThanOneFolder = false;
-                int numberTifFiles = 0;
-                int numberNdpiFiles = 0;
+                moreThanOneFolder = loadFilesAndFolders(chooser);
 
-                if (chooser.getSelectedFile().isFile()) {
-                    if (ndpiConverter.getOutputpath().isEmpty()) {
-                        ndpiConverter.setOutputpath(ndpiConverter.getInputpath().substring(0, ndpiConverter.getInputpath().lastIndexOf(File.separator)).concat(File.separator + "Output"));
-                    }
-                    filesInDirectory = chooser.getSelectedFiles();
-                } else if (chooser.getSelectedFile().isDirectory()) {
-                    ndpiConverter.setOutputpath(ndpiConverter.getInputpath().concat(File.separator + "Output"));
-                    filesInDirectory = chooser.getSelectedFile().listFiles();
+                filesInDirectory = ndpiConverter.getFilesInDirectory();
+                checkAndSetFiles(filesInDirectory, ndpiFileList, tifFileList);
 
-                    int numberOfFolders = 0;
-                    File[] moreFolders = chooser.getSelectedFiles();
-                    for (File file : moreFolders) {
-                        if (file.isDirectory()) {
-                            numberOfFolders++;
-                        }
-                    }
-                    if (numberOfFolders > 1) {
-                        moreThanOneFolder = true;
-                    }
-                }
+                countFiles(ndpiFileList, tifFileList, chooser);
+                enableDisableROI();
 
-                assert filesInDirectory != null;
-                for (File file : filesInDirectory) {
-                    if (file.isFile()) {
-                        if (file.getName().endsWith(".ndpi")) {
-                            ndpiFileList.add(file.getAbsolutePath());
-                        } else if (file.getName().endsWith(".tif")) {
-                            tifFileList.add(file.getAbsolutePath());
-                        } else {
-                            ndpiConverter.setOutputpath(null);
-                            ndpiConverter.setInputpath(null);
-
-                            LOGGER.warning("Invalid file extension '" + file.getName().substring(file.getName().indexOf(".")) + bundle.getString("InvalidFileExtension.forFile") + file.getName() + "'");
-                            TaskDialog errorDialog = new TaskDialog(parent, "Application Error");
-                            errorDialog.setInstruction(bundle.getString("InvalidFileExtension.text2"));
-                            errorDialog.setIcon(TaskDialog.StandardIcon.ERROR);
-                            errorDialog.setText(bundle.getString("InvalidFileExtension.text") + file.getName().substring(file.getName().indexOf(".")) + bundle.getString("InvalidFileExtension.forFile") + "'" + file.getName() + "'");
-                            errorDialog.show();
-                        }
-                    }
-                }
-
-                for (String string : ndpiFileList) {
-                    if (string != null) {
-                        numberNdpiFiles++;
-                    }
-                }
-
-                for (String string : tifFileList) {
-                    if (string != null) {
-                        numberTifFiles++;
-                    }
-                }
-
-                ndpiConverter.setNumberNdpiFiles(numberNdpiFiles);
-                ndpiConverter.setNumberTifFiles(numberTifFiles);
-
-                System.out.println();
-                LOGGER.info(numberNdpiFiles + " NDPI-Files & " + numberTifFiles + " TIF-Files in Folder '" + chooser.getCurrentDirectory().getName() + "' found" + "\n");
-
-                glScanAnalyzer.setNdpiList(ndpiFileList);
-                glScanAnalyzer.setTifList(tifFileList);
-
-                if (numberTifFiles == 1 && numberNdpiFiles == 0) {
-                    System.out.println("ROI Modus enablen");
-                    glScanAnalyzer.setSetroi(true);
-                } else {
-                    System.out.println("ROI Modus disablen");
-                    glScanAnalyzer.setSetroi(false);
-                }
-
-                JFrame parentDialog = ((SingleFrameApplication) Application.getInstance()).getMainFrame();
                 if (moreThanOneFolder) {
-                    TaskDialogs.inform(parentDialog,
+                    TaskDialogs.inform(parent,
                             bundle.getString("OnlyOneFolder.text"),
                             bundle.getString("SelectedFirstFolder.text") + "'" + chooser.getSelectedFile().getName() + "'");
                 }
@@ -222,5 +156,96 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter> {
         }
     }
 
+
+
+    private boolean loadFilesAndFolders(JFileChooser chooser) {
+        boolean moreThanOneFolder = false;
+
+        if (chooser.getSelectedFile().isFile()) {
+            if (ndpiConverter.getOutputpath().isEmpty()) {
+                ndpiConverter.setOutputpath(ndpiConverter.getInputpath().substring(0, ndpiConverter.getInputpath().lastIndexOf(File.separator)).concat(File.separator + "Output"));
+            }
+            ndpiConverter.setFilesInDirectory(chooser.getSelectedFiles());
+        } else if (chooser.getSelectedFile().isDirectory()) {
+            ndpiConverter.setOutputpath(ndpiConverter.getInputpath().concat(File.separator + "Output"));
+            ndpiConverter.setFilesInDirectory(chooser.getSelectedFile().listFiles());
+
+            int numberOfFolders = 0;
+            File[] moreFolders = chooser.getSelectedFiles();
+            for (File file : moreFolders) {
+                if (file.isDirectory()) {
+                    numberOfFolders++;
+                }
+            }
+            if (numberOfFolders > 1) {
+                moreThanOneFolder = true;
+            }
+        }
+        return moreThanOneFolder;
+    }
+
+    private void checkAndSetFiles(File[] filesInDirectory, List<String> ndpiFileList, List<String> tifFileList) {
+        JFrame parent = ((SingleFrameApplication) Application.getInstance()).getMainFrame();
+        ResourceBundle bundle = ResourceBundle.getBundle("at.ac.htlhl.nucleij.resources.i18n.dialogs");
+
+        assert filesInDirectory != null;
+        for (File file : filesInDirectory) {
+            if (file.isFile()) {
+                if (file.getName().endsWith(".ndpi")) {
+                    ndpiFileList.add(file.getAbsolutePath());
+                } else if (file.getName().endsWith(".tif")) {
+                    tifFileList.add(file.getAbsolutePath());
+                } else {
+                    ndpiConverter.setOutputpath(null);
+                    ndpiConverter.setInputpath(null);
+
+                    LOGGER.warning("Invalid file extension '" + file.getName().substring(file.getName().indexOf(".")) + bundle.getString("InvalidFileExtension.forFile") + file.getName() + "'");
+                    TaskDialog errorDialog = new TaskDialog(parent, "Application Error");
+                    errorDialog.setInstruction(bundle.getString("InvalidFileExtension.text2"));
+                    errorDialog.setIcon(TaskDialog.StandardIcon.ERROR);
+                    errorDialog.setText(bundle.getString("InvalidFileExtension.text") + file.getName().substring(file.getName().indexOf(".")) + bundle.getString("InvalidFileExtension.forFile") + "'" + file.getName() + "'");
+                    errorDialog.show();
+                }
+                glScanAnalyzer.setNdpiList(ndpiFileList);
+                glScanAnalyzer.setTifList(tifFileList);
+            }
+        }
+    }
+
+    private void countFiles(List<String> ndpiFileList, List<String> tifFileList, JFileChooser chooser) {
+        int numberTifFiles = 0;
+        int numberNdpiFiles = 0;
+
+        for (String string : ndpiFileList) {
+            if (string != null) {
+                numberNdpiFiles++;
+            }
+        }
+
+        for (String string : tifFileList) {
+            if (string != null) {
+                numberTifFiles++;
+            }
+        }
+
+        ndpiConverter.setNumberNdpiFiles(numberNdpiFiles);
+        ndpiConverter.setNumberTifFiles(numberTifFiles);
+
+        glScanAnalyzer.setNdpiList(ndpiFileList);
+        glScanAnalyzer.setTifList(tifFileList);
+
+        System.out.println();
+        LOGGER.info(numberNdpiFiles + " NDPI-Files & " + numberTifFiles + " TIF-Files in Folder '" + chooser.getCurrentDirectory().getName() + "' found" + "\n");
+    }
+
+    private void enableDisableROI () {
+        if (ndpiConverter.getNumberTifFiles() == 1 && ndpiConverter.getNumberNdpiFiles() == 0) {
+            System.out.println("ROI Modus enablen");
+            glScanAnalyzer.setSetroi(true);
+        } else {
+            System.out.println("ROI Modus disablen");
+            glScanAnalyzer.setSetroi(false);
+        }
+    }
 
 }

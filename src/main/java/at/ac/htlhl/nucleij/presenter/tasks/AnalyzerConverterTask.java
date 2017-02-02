@@ -25,7 +25,6 @@ import java.util.logging.Logger;
 
 public class AnalyzerConverterTask extends SwingWorker<String, String> {
     private static final Logger LOGGER = Logger.getLogger(AnalyzerConverterTask.class.getName());
-    public volatile  boolean finishedCancel;
     private JProgressBar   progressBar;
     private TaskDialog     taskDialog;
     private GLScanAnalyzer glScanAnalyzer;
@@ -39,7 +38,6 @@ public class AnalyzerConverterTask extends SwingWorker<String, String> {
         this.glScanAnalyzer = glScanAnalyzer;
 
         this.requestCancel = false;
-        this.finishedCancel = false;
     }
 
     @Override
@@ -222,9 +220,5 @@ public class AnalyzerConverterTask extends SwingWorker<String, String> {
         // TODO Ausgabe beim dialog verbessern, wenn zB eine datei konv & analysiert werden soll dann muss tif Counter erhoeht werden
         // gehoert dort hin wo andis abfrage ist um nur k oder a werden soll
         //ndpiConverter.setNumberTifFiles(ndpiConverter.getNumberTifFiles()+1);
-    }
-
-    public boolean isFinishedCancel() {
-        return finishedCancel;
     }
 }
