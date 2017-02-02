@@ -108,12 +108,11 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter> {
             List<String> ndpiFileList = new ArrayList<>();
             List<String> tifFileList = new ArrayList<>();
             File[] filesInDirectory;
-            boolean moreThanOneFolder;
 
             if (chooser.showOpenDialog(parent) == JFileChooser.APPROVE_OPTION) {
                 ndpiConverter.setInputpath(chooser.getSelectedFile().getAbsolutePath());
 
-                moreThanOneFolder = loadFilesAndFolders(chooser);
+                loadFilesAndFolders(chooser);
 
                 filesInDirectory = ndpiConverter.getFilesInDirectory();
                 checkAndSetFiles(filesInDirectory, ndpiFileList, tifFileList);
@@ -121,7 +120,7 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter> {
                 countFiles(ndpiFileList, tifFileList, chooser);
                 enableDisableROI();
 
-                if (moreThanOneFolder) {
+                if (moreThanOneFolder(chooser)) {
                     TaskDialogs.inform(parent,
                             bundle.getString("OnlyOneFolder.text"),
                             bundle.getString("SelectedFirstFolder.text") + "'" + chooser.getSelectedFile().getName() + "'");
@@ -158,9 +157,7 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter> {
 
 
 
-    private boolean loadFilesAndFolders(JFileChooser chooser) {
-        boolean moreThanOneFolder = false;
-
+    private void loadFilesAndFolders(JFileChooser chooser) {
         if (chooser.getSelectedFile().isFile()) {
             if (ndpiConverter.getOutputpath().isEmpty()) {
                 ndpiConverter.setOutputpath(ndpiConverter.getInputpath().substring(0, ndpiConverter.getInputpath().lastIndexOf(File.separator)).concat(File.separator + "Output"));
@@ -169,19 +166,7 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter> {
         } else if (chooser.getSelectedFile().isDirectory()) {
             ndpiConverter.setOutputpath(ndpiConverter.getInputpath().concat(File.separator + "Output"));
             ndpiConverter.setFilesInDirectory(chooser.getSelectedFile().listFiles());
-
-            int numberOfFolders = 0;
-            File[] moreFolders = chooser.getSelectedFiles();
-            for (File file : moreFolders) {
-                if (file.isDirectory()) {
-                    numberOfFolders++;
-                }
-            }
-            if (numberOfFolders > 1) {
-                moreThanOneFolder = true;
-            }
         }
-        return moreThanOneFolder;
     }
 
     private void checkAndSetFiles(File[] filesInDirectory, List<String> ndpiFileList, List<String> tifFileList) {
@@ -246,6 +231,21 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter> {
             System.out.println("ROI Modus disablen");
             glScanAnalyzer.setSetroi(false);
         }
+    }
+
+    private boolean moreThanOneFolder(JFileChooser chooser) {
+        boolean moreThanOneFolder = false;
+        int numberOfFolders = 0;
+        File[] moreFolders = chooser.getSelectedFiles();
+        for (File file : moreFolders) {
+            if (file.isDirectory()) {
+                numberOfFolders++;
+            }
+        }
+        if (numberOfFolders > 1) {
+            moreThanOneFolder = true;
+        }
+        return moreThanOneFolder;
     }
 
 }

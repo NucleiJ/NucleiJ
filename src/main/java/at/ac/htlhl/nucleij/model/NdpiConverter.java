@@ -27,7 +27,7 @@ public class NdpiConverter extends Model {
     private int numberNdpiFiles;
     private int numberTifFiles;
 
-    File[] filesInDirectory = null;
+    private File[] filesInDirectory = null;
 
     public NdpiConverter() {
         super();
