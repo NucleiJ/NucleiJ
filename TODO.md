@@ -2,10 +2,10 @@
 # TO-DO Liste #
 
 ### 1. Erweiterungen: ###
-* [M] Apple Builden
+* Analyzer auf Linux lauffähig
 * auf allen Plattformen lauffähig
+* System - LaF für Apple & (Linux) 
 
-* [M] Dialog (mit Progressbar) breiter machen
 * Speichern/Einlesen von Einstellungen + Jason File (.nucleij)
 * bei auswählen mehrerer Dateien werden kurz im ProgressWindow alle Dateinamen nacheinander angezeigt
 * Ausgaben clearen
