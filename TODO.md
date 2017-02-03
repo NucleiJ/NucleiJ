@@ -2,14 +2,12 @@
 # TO-DO Liste #
 
 ### 1. Erweiterungen: ###
-* Analyzer auf Linux lauffähig
-* auf allen Plattformen lauffähig
 * System - LaF für Apple & (Linux) 
-* In AnalyzerConverterTask wird 2x auf OS abgefragt
+* Consolenausgaben entfernen
+* ImageJ Window 
+* Summary (txt) File Seperator
 
 * Speichern/Einlesen von Einstellungen + Jason File (.nucleij)
-* bei auswählen mehrerer Dateien werden kurz im ProgressWindow alle Dateinamen nacheinander angezeigt
-* Ausgaben clearen
 
 ### DOKU ###
 * Automatisch Blockschaltbild generieren
@@ -64,6 +62,10 @@
 * Cancel soll wirklich beenden                                      31.01.17
 * Linux fixen                                                       01.02.17
 * Auf allen Plattformen lauffähig (Converter gefixed)               01.02.17
+* Analyzer auf Linux lauffähig                                      03.02.17
+* auf allen Plattformen lauffähig                                   03.02.17
+* In AnalyzerConverterTask wird 2x auf OS abgefragt                 03.02.17
+* mehrerer Dateien ProgressWindow fix                               03.02.17
 
 
 ### 7. Wichtige Notizen ###

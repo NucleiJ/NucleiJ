@@ -196,9 +196,9 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
 
             String InfosOfProcessedScans = "Prozess wurde waerend der Programmlaufzeit abgebrochen!";       //TODO Texte auslagern
             if ((ndpiConverter.getNumberTifFiles() + ndpiConverter.getNumberNdpiFiles()) > 0) {
-                if (ndpiConverter.getNumberNdpiFiles() != 0 && ndpiConverter.getNumberTifFiles() == 0) {
+                if (ndpiConverter.getChoice() == 1) {
                     InfosOfProcessedScans = "\n<b>" + bundle.getString("Words.KonvertierteDateien.text") + ": </b>" + ndpiConverter.getNumberNdpiFiles();
-                } else if (ndpiConverter.getNumberNdpiFiles() == 0 && ndpiConverter.getNumberTifFiles() != 0) {
+                } else if (ndpiConverter.getChoice() == 2) {
                     InfosOfProcessedScans = "\n<b>" + bundle.getString("Words.AnalysierteDateien.text") + ": </b>" + ndpiConverter.getNumberTifFiles();
                 } else {
                     InfosOfProcessedScans = "\n<b>" + bundle.getString("Words.KonvertierteDateien.text") + ": </b>" + ndpiConverter.getNumberNdpiFiles() +

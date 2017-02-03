@@ -125,7 +125,6 @@ public class Heatmap {
             e.printStackTrace();
         }
 
-
         LOGGER.info(absolutePathofLUT);
 
         IJ.run("LUT... ", "open=".concat(absolutePathofLUT));
