@@ -151,7 +151,7 @@ public class Exporter {
             }
             BufferedWriter writeSummary = new BufferedWriter(fw);
             try {
-                writeSummary.write("Programm von Stefan Erben und Andreas Mattes. (c) 2016\nSummary erstellt am: " + todayTimeStamp + "\n");
+                writeSummary.write("Programm von Stefan Erben und Andreas Mattes. (c) 2016\r\nSummary erstellt am: " + todayTimeStamp + "\r\n");
             } catch (IOException e) {
                 e.printStackTrace();
             }

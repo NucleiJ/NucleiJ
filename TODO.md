@@ -2,14 +2,22 @@
 # TO-DO Liste #
 
 ### 1. Erweiterungen: ###
-* System - LaF für Apple & (Linux) 
 * Consolenausgaben entfernen
-* ImageJ Window 
+* Apple txt File lesbar?
+* GNU Licence
+* Texte auslagern (About, Help)
+* ROI Auswahl anzeigen
+
 
 * Speichern/Einlesen von Einstellungen + Jason File (.nucleij)
 
 ### DOKU ###
 * Automatisch Blockschaltbild generieren
+* PlantUML: svg - inkscope - emf
+* Listing mit Zeilennummern (Notepad++ Plugin, RTF)
+* Word-Abschnitte (wer hat was geschrieben, Fußzeile)
+* Zitieren: [JGO17a] 
+* Serife Shriftart
 
 
 ### 2. Zukunftsmusik ###
@@ -65,6 +73,10 @@
 * auf allen Plattformen lauffähig                                   03.02.17
 * In AnalyzerConverterTask wird 2x auf OS abgefragt                 03.02.17
 * mehrerer Dateien ProgressWindow fix                               03.02.17
+* System - LaF für Apple & (Linux)                                  03.02.17
+* ImageJ Window                                                     03.02.17
+* \r\n bei Txt Summaryausgabe                                       03.02.17
+* Hilfe Dialog                                                      03.02.17
 
 
 ### 7. Wichtige Notizen ###
