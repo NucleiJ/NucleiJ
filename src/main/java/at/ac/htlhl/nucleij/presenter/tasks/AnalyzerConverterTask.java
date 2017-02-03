@@ -16,15 +16,12 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URISyntaxException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * Created by Andreas Mattes and Stefan Erben on 23.01.17.
  */
 
 public class AnalyzerConverterTask extends SwingWorker<String, String> {
-    private static final Logger LOGGER = Logger.getLogger(AnalyzerConverterTask.class.getName());
     private          JProgressBar   progressBar;
     private          TaskDialog     taskDialog;
     private          GLScanAnalyzer glScanAnalyzer;
@@ -92,7 +89,6 @@ public class AnalyzerConverterTask extends SwingWorker<String, String> {
                     publish(tifListElement.substring(tifListElement.lastIndexOf(File.separator) + 1));
 
                     mainAnalyzer.setDateiname(tifListElement);
-                    System.out.println("\n****************\n" + tifListElement + "\n********************");
                     mainAnalyzer.run(null);
                     currentStatus = currentStatus + add;
 
@@ -116,7 +112,6 @@ public class AnalyzerConverterTask extends SwingWorker<String, String> {
     @Override
     protected void done() {
         super.done();
-        LOGGER.log(Level.INFO, "Done");
         progressBar.setValue(100);
         taskDialog.setVisible(false);
     }
@@ -139,10 +134,8 @@ public class AnalyzerConverterTask extends SwingWorker<String, String> {
                 File newjarPath = new File(NucleiJ.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath());
 
                 //concat(File.separator).concat("NucleiJ-Data").concat(File.separator).concat("ndpi-converter.jar"));
-                System.out.println("Pfad der JAR: " + newjarPath.getParent().concat(File.separator).concat("NucleiJ-Data").concat(File.separator).concat("ndpi-converter.jar"));
                 if (newjarPath.exists()) {
                     absolutePathofNdpiJar = newjarPath.getParent().concat(File.separator).concat("NucleiJ-Data").concat(File.separator).concat("ndpi-converter.jar");
-                    System.out.println("Pfad der JAR: " + absolutePathofNdpiJar);
                 } else {
                     JFrame parent = ((SingleFrameApplication) Application.getInstance()).getMainFrame();
 
@@ -160,14 +153,9 @@ public class AnalyzerConverterTask extends SwingWorker<String, String> {
                 e.printStackTrace();
             }
         }
-
         // endregion
-        System.out.println("\nAbsolutePathOfNdpi: " + absolutePathofNdpiJar);
-        System.out.println("FilePath: " + filePath);
-        System.out.println("OutputPath.getParent: " + outputpath.getParent());
 
         Process p;
-
         try {
             switch (ndpiConverter.getMagnification()) {
                 case NdpiConverter.MAG_X10:
@@ -189,7 +177,7 @@ public class AnalyzerConverterTask extends SwingWorker<String, String> {
                     new InputStreamReader(p.getInputStream()));
             String line;
             while ((line = in.readLine()) != null) {
-                System.out.println(line);
+                //System.out.println(line);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -197,7 +185,6 @@ public class AnalyzerConverterTask extends SwingWorker<String, String> {
 
         String renameFileName = "_".concat(ndpiConverter.getMagnification().toLowerCase().concat(".ome.tif"));
         String newTifListElement = filePath.replace(".ndpi", renameFileName);
-        System.out.println("Der Filename nach dem Konvertieren ist:" + newTifListElement);
         glScanAnalyzer.addTifToList(newTifListElement);
 
         // TODO Ausgabe beim dialog verbessern, wenn zB eine datei konv & analysiert werden soll dann muss tif Counter erhoeht werden

@@ -5,7 +5,6 @@
 * System - LaF für Apple & (Linux) 
 * Consolenausgaben entfernen
 * ImageJ Window 
-* Summary (txt) File Seperator
 
 * Speichern/Einlesen von Einstellungen + Jason File (.nucleij)
 

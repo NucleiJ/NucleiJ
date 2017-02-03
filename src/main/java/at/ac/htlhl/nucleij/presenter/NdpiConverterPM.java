@@ -52,8 +52,6 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter> {
 
         // Ausgabe jeder Aenderung
         ndpiConverter.addPropertyChangeListener(evt -> {
-            LOGGER.info("Property name=" + evt.getPropertyName() + ", oldValue=" + evt.getOldValue() + ", newValue=" + evt.getNewValue());
-
             if (NdpiConverter.PROPERTY_MAGNIFICATION.equals(evt.getPropertyName())) {
                 if (evt.getNewValue().toString().toLowerCase().equals(MAG_X5.toLowerCase())) {
                     JOptionPane.showMessageDialog(((SingleFrameApplication) Application.getInstance()).getMainFrame(),
@@ -82,7 +80,6 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter> {
 
 
     private JFileChooser createFileChooser() {
-        LOGGER.info("Select Path Action clicked");
         JFileChooser chooser = new JFileChooser();
 
         chooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
@@ -147,7 +144,6 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter> {
     class MagnificationAction extends AbstractAction implements PropertyChangeListener {
         public void propertyChange(PropertyChangeEvent e) {
             ndpiConverter.setMagnification(e.getPropertyName());
-            LOGGER.info("Magnification= " + e.getPropertyName());
         }
 
         public void actionPerformed(ActionEvent e) {
@@ -225,10 +221,8 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter> {
 
     private void enableDisableROI () {
         if (ndpiConverter.getNumberTifFiles() == 1 && ndpiConverter.getNumberNdpiFiles() == 0) {
-            System.out.println("ROI Modus enablen");
             glScanAnalyzer.setSetroi(true);
         } else {
-            System.out.println("ROI Modus disablen");
             glScanAnalyzer.setSetroi(false);
         }
     }
