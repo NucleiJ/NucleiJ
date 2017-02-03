@@ -413,13 +413,13 @@ public class MainAnalyzer implements PlugInFilter {
         int intcounter = (int) counter;
 
         //Ausgabe ImageJ-LOG
-        IJ.log("\n\n" + ueberschrift);
+        IJ.log("\r\n\r\n" + ueberschrift);
         IJ.log("Founded nuclei:\t\t\t\t" + intcounter);
         IJ.log("Additional measured values:");
 
         //Ausgabe in String -> Summary-File
         String summaryString = "";
-        summaryString = summaryString + "\n\n" + ueberschrift + "\nFound nuclei:\t\t\t\t" + intcounter + "\nAdditional measured values:\n";
+        summaryString = summaryString + "\r\n\r\n" + ueberschrift + "\r\nFound nuclei:\t\t\t" + intcounter + "\r\nAdditional measured values:\r\n";
 
 
         //Werte auf 3 Kommastellen runden und anzeigen
@@ -429,28 +429,28 @@ public class MainAnalyzer implements PlugInFilter {
         //Ausgaben in einem ImageJ Log Fenster / speichern in String:
         csvSummaryString = csvSummaryString + file.getValue().replaceFirst("[.][^.]+$", "") + ";";
 
-        summaryString = summaryString + "gesamte Gewebeflaeche:\t\t" + df.format(properties.getTumorArea()) + " um2\n";
+        summaryString = summaryString + "gesamte Gewebeflaeche:\t\t" + df.format(properties.getTumorArea()) + " um2\r\n";
         csvSummaryString = csvSummaryString + df.format(properties.getTumorArea()) + ";";
 
-        summaryString = summaryString + "Total area of all nuclei:\t" + df.format(area_all) + " um2\n";
+        summaryString = summaryString + "Total area of all nuclei:\t" + df.format(area_all) + " um2\r\n";
         csvSummaryString = csvSummaryString + df.format(area_all) + ";";
 
-        summaryString = summaryString + "Zellkernflaeche in %:\t\t" + df.format(100 / (properties.getTumorArea() / area_all)) + "%\n";
+        summaryString = summaryString + "Zellkernflaeche in %:\t\t" + df.format(100 / (properties.getTumorArea() / area_all)) + "%\r\n";
         csvSummaryString = csvSummaryString + df.format(100 / (properties.getTumorArea() / area_all)) + ";";
 
-        summaryString = summaryString + "Zellkerne pro mm2:\t\t\t" + df.format((intcounter / properties.getTumorArea()) * 1000000) + "\n";        //Zellkerne 1 / Tumorfläche in um2 / 1000000
+        summaryString = summaryString + "Zellkerne pro mm2:\t\t" + df.format((intcounter / properties.getTumorArea()) * 1000000) + "\r\n";        //Zellkerne 1 / Tumorfläche in um2 / 1000000
         csvSummaryString = csvSummaryString + df.format((intcounter / properties.getTumorArea()) * 1000000) + ";";        //Zellkerne 1 / Tumorfläche in um2 / 1000000
 
-        summaryString = summaryString + "Arithmetic Perimeter:\t\t" + df.format(perim_arith) + " um\n";
+        summaryString = summaryString + "Arithmetic Perimeter:\t\t" + df.format(perim_arith) + " um\r\n";
         csvSummaryString = csvSummaryString + df.format(perim_arith) + ";";
 
-        summaryString = summaryString + "largest cell nucleus:\t\t" + df.format(area_max) + " um2\n";        //Ausgabe der Flaeche des groessten gefunden Zellkerns (auf 3 Kommastellen genau)
+        summaryString = summaryString + "largest cell nucleus:\t\t" + df.format(area_max) + " um2\r\n";        //Ausgabe der Flaeche des groessten gefunden Zellkerns (auf 3 Kommastellen genau)
         csvSummaryString = csvSummaryString + df.format(area_max) + ";";        //Ausgabe der Flaeche des groessten gefunden Zellkerns (auf 3 Kommastellen genau)
 
-        summaryString = summaryString + "Arithmetic mean area:\t\t" + df.format(area_arith) + " um2\n";    //Ausgabe des arithmetishen Mittels aller Zellkernflaechen (auf 3 Kommastellen genau)
+        summaryString = summaryString + "Arithmetic mean area:\t\t" + df.format(area_arith) + " um2\r\n";    //Ausgabe des arithmetishen Mittels aller Zellkernflaechen (auf 3 Kommastellen genau)
         csvSummaryString = csvSummaryString + df.format(area_arith) + ";";    //Ausgabe des arithmetishen Mittels aller Zellkernflaechen (auf 3 Kommastellen genau)
 
-        summaryString = summaryString + "Median area:\t\t\t\t" + df.format(median) + " um2\n";                //Ausgabe des Medianwerts aller Zellkernfleachen (auf 3 Kommastellen genau)
+        summaryString = summaryString + "Median area:\t\t\t" + df.format(median) + " um2\r\n";                //Ausgabe des Medianwerts aller Zellkernfleachen (auf 3 Kommastellen genau)
         csvSummaryString = csvSummaryString + df.format(median) + ";\n";                //Ausgabe des Medianwerts aller Zellkernfleachen (auf 3 Kommastellen genau)
 
         //An StringStack uebergeben
