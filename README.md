@@ -4,6 +4,7 @@
 
 ## Changelog NucleiJ
 
+* 03.02.2017: v3.0 released: Converter & Analyzer auf allen Plattformen lauffähig
 * 21.01.2017: Released v1.2: Grundfunktionen voll funktionsfähig
 * 22.01.2017: v1.0_alpha released
 * 13.11.2016: einfache GUI für den Analyzer
