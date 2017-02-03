@@ -25,11 +25,11 @@ import java.util.logging.Logger;
 
 public class AnalyzerConverterTask extends SwingWorker<String, String> {
     private static final Logger LOGGER = Logger.getLogger(AnalyzerConverterTask.class.getName());
-    private JProgressBar   progressBar;
-    private TaskDialog     taskDialog;
-    private GLScanAnalyzer glScanAnalyzer;
-    private NdpiConverter  ndpiConverter;
-    private volatile boolean requestCancel;
+    private          JProgressBar   progressBar;
+    private          TaskDialog     taskDialog;
+    private          GLScanAnalyzer glScanAnalyzer;
+    private          NdpiConverter  ndpiConverter;
+    private volatile boolean        requestCancel;
 
     public AnalyzerConverterTask(JProgressBar progressBar, TaskDialog taskDialog, NdpiConverter ndpiConverter, GLScanAnalyzer glScanAnalyzer) {
         this.progressBar = progressBar;
@@ -145,32 +145,16 @@ public class AnalyzerConverterTask extends SwingWorker<String, String> {
                     absolutePathofNdpiJar = newjarPath.getParent().concat(File.separator).concat("NucleiJ-Data").concat(File.separator).concat("ndpi-converter.jar");
                     System.out.println("Pfad der JAR: " + absolutePathofNdpiJar);
                 } else {
-                    newjarPath = null;
-                    if (OS.contains("linux")) {
-                        System.out.println("Your OS is Linux");
-                    } else if (OS.contains("windows")) {
-                        System.out.println("Your OS is Windows");
-                        newjarPath = new File("C:\\Program Files\\NucleiJ\\ndpi-converter.jar");
-                    } else if (OS.contains("mac")) {
-                        System.out.println("Your OS is Mac OS");
-                    } else {
-                        System.out.println("Your OS is not supported!");
-                    }
+                    JFrame parent = ((SingleFrameApplication) Application.getInstance()).getMainFrame();
 
-                    if (newjarPath.exists()) {
-                        absolutePathofNdpiJar = newjarPath.getAbsolutePath();
-                    } else {
-                        JFrame parent = ((SingleFrameApplication) Application.getInstance()).getMainFrame();
+                    JFileChooser fileChooser = new JFileChooser();
+                    fileChooser.setCurrentDirectory(new File(System.getProperty(newjarPath.getAbsolutePath())));
+                    fileChooser.setFileFilter(new FileNameExtensionFilter("*.jar", "jar"));
 
-                        JFileChooser fileChooser = new JFileChooser();
-                        fileChooser.setCurrentDirectory(new File(System.getProperty(newjarPath.getAbsolutePath())));
-                        fileChooser.setFileFilter(new FileNameExtensionFilter("*.jar", "jar"));
-
-                        int result = fileChooser.showOpenDialog(parent);
-                        if (result == JFileChooser.APPROVE_OPTION) {
-                            File selectedFile = fileChooser.getSelectedFile();
-                            absolutePathofNdpiJar = selectedFile.getAbsolutePath();
-                        }
+                    int result = fileChooser.showOpenDialog(parent);
+                    if (result == JFileChooser.APPROVE_OPTION) {
+                        File selectedFile = fileChooser.getSelectedFile();
+                        absolutePathofNdpiJar = selectedFile.getAbsolutePath();
                     }
                 }
             } catch (URISyntaxException e) {

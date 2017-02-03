@@ -104,26 +104,21 @@ public class NucleiJ extends SingleFrameApplication
 
     private void initLookAndFeel()
     {
-        //NIMBUS
         try {
-            //PlasticLookAndFeel.setPlasticTheme(new SkyBluer());
-            //UIManager.setLookAndFeel(new PlasticXPLookAndFeel());
-
-            //Nimbus Design
-            for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    UIManager.setLookAndFeel(info.getClassName());
-                    break;
+            if (System.getProperty("os.name").toLowerCase().contains("windows")) {
+                for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+                    if ("Nimbus".equals(info.getName())) {
+                        UIManager.setLookAndFeel(info.getClassName());
+                        break;
+                    }
                 }
+            } else {
+                UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
             }
         }
         catch(UnsupportedLookAndFeelException ex) {
             LOGGER.log(Level.SEVERE, "Look and Feel could not be initialized " + ex.getMessage(), ex);
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
+        } catch (IllegalAccessException | InstantiationException | ClassNotFoundException e) {
             e.printStackTrace();
         }
 
