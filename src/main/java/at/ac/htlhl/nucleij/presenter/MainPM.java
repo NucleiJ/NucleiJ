@@ -1,6 +1,7 @@
 package at.ac.htlhl.nucleij.presenter;
 
 import at.ac.htlhl.nucleij.AppContext;
+import at.ac.htlhl.nucleij.NucleiJ;
 import at.ac.htlhl.nucleij.model.GLScanAnalyzer;
 import at.ac.htlhl.nucleij.model.Main;
 import at.ac.htlhl.nucleij.model.NdpiConverter;
@@ -28,6 +29,7 @@ public class MainPM extends PresentationModel<Main> {
     private Action aboutAction;
     private Action exitAction;
     private Action newAction;
+    private Action infoAction;
 
     private GLScanAnalyzerPM glScanAnalyzerPM;
     private NdpiConverterPM  ndpiConverterPM;
@@ -42,7 +44,8 @@ public class MainPM extends PresentationModel<Main> {
         saveAction = new SaveAction();
         aboutAction = new AboutAction();
         exitAction = new ExitAction();
-        newAction = new newAction();
+        newAction = new NewAction();
+        infoAction = new InfoAction();
     }
 
     public GLScanAnalyzerPM getGLScanAnalyzerPM() {
@@ -71,6 +74,10 @@ public class MainPM extends PresentationModel<Main> {
 
     public Action getNewAction() {
         return newAction;
+    }
+
+    public Action getInfoAction() {
+        return infoAction;
     }
 
     private void showAbout() {
@@ -156,9 +163,23 @@ public class MainPM extends PresentationModel<Main> {
         }
     }
 
-    private class newAction extends AbstractAction {
+    private class NewAction extends AbstractAction {
         public void actionPerformed(ActionEvent e) {
             newClass();
+        }
+    }
+
+    private class InfoAction extends AbstractAction {
+        public void actionPerformed(ActionEvent e) {
+            JFrame parent = ((SingleFrameApplication) Application.getInstance()).getMainFrame();
+            TaskDialogs.inform(parent, "Welcome to NucleiJ",
+                    "Thank you for using our software!\n"
+                            + "\n1.\tClick on \"...\" and choose a directory or file. Output dir will be set automatically or you can choose a custom name."
+                            + "\n2.\tSelect your preferred magnification."
+                            + "\n3.\tYou can generate a heatmap and set the heatmap quality. Warning: Higher quality needs more time! Standard: 60"
+                            + "\n4.\tIf you have only selected 1 file, choose a region of interest."
+                            + "\n5.\tPush \"Start Process...\" and wait for NucleiJ converting and analyzing your scans");
+
         }
     }
 }

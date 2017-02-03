@@ -29,12 +29,14 @@ public class MainFrameView extends JFrame {
     private JButton button1;
     private JButton button2;
     private JButton button3;
-    private JPanel hSpacer1;
+    private JPanel hSpacer2;
+    private JButton button4;
     private AbstractAction loadAction;
     private AbstractAction saveAction;
     private AbstractAction aboutAction;
     private AbstractAction exitAction;
     private AbstractAction newAction;
+    private AbstractAction infoAction;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 
     private MainPM mainPM;
@@ -52,6 +54,7 @@ public class MainFrameView extends JFrame {
         aboutAction = (AbstractAction) mainPM.getAboutAction();
         exitAction = (AbstractAction) mainPM.getExitAction();
         newAction = (AbstractAction) mainPM.getNewAction();
+        infoAction = (AbstractAction) mainPM.getInfoAction();
     }
 
     private void initComponents() {
@@ -71,7 +74,8 @@ public class MainFrameView extends JFrame {
         button1 = new JButton();
         button2 = new JButton();
         button3 = new JButton();
-        hSpacer1 = new JPanel(null);
+        hSpacer2 = new JPanel(null);
+        button4 = new JButton();
 
         //======== this ========
         setIconImage(new ImageIcon(getClass().getResource("/at/ac/htlhl/nucleij/resources/images/icon_png_v1.png")).getImage());
@@ -140,10 +144,12 @@ public class MainFrameView extends JFrame {
             button3.setText("Save");
             button3.setAction(saveAction);
             toolBar1.add(button3);
+            toolBar1.add(hSpacer2);
 
-            //---- hSpacer1 ----
-            hSpacer1.setOpaque(false);
-            toolBar1.add(hSpacer1);
+            //---- button4 ----
+            button4.setText("text");
+            button4.setAction(infoAction);
+            toolBar1.add(button4);
         }
         contentPane.add(toolBar1, BorderLayout.NORTH);
         pack();
@@ -173,6 +179,11 @@ public class MainFrameView extends JFrame {
         newAction.putValue(Action.NAME, bundle.getString("MainFrame.newAction.Name"));
         newAction.putValue(Action.SMALL_ICON, new ImageIcon(getClass().getResource("/at/ac/htlhl/nucleij/resources/images/i16x16/document-new.png")));
         newAction.putValue(Action.LARGE_ICON_KEY, new ImageIcon(getClass().getResource("/at/ac/htlhl/nucleij/resources/images/i32x32/document-new.png")));
+
+        //---- infoAction ----
+        infoAction.putValue(Action.SMALL_ICON, new ImageIcon(getClass().getResource("/at/ac/htlhl/nucleij/resources/images/i16x16/help-browser.png")));
+        infoAction.putValue(Action.LARGE_ICON_KEY, new ImageIcon(getClass().getResource("/at/ac/htlhl/nucleij/resources/images/i32x32/help-browser.png")));
+        infoAction.putValue(Action.NAME, "Info");
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 

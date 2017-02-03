@@ -52,7 +52,6 @@ public class NucleiJ extends SingleFrameApplication
         Main main = new Main();
         MainPM mainPM = new MainPM(main);
 
-
         GLScanAnalyzerView glScanAnalyzerView = new GLScanAnalyzerView(mainPM.getGLScanAnalyzerPM());
         NdpiConverterView ndpiConverterView = new NdpiConverterView(mainPM.getNdpiConverterPM());
 
@@ -64,14 +63,6 @@ public class NucleiJ extends SingleFrameApplication
         CombinedView combinedView = new CombinedView(ndpiConverterView, glScanAnalyzerView);
         show(combinedView);
 
-        JFrame parent = ((SingleFrameApplication) Application.getInstance()).getMainFrame();
-        TaskDialogs.inform(parent, "Welcome to NucleiJ",
-                "Thank you for using our software!\n"
-                        + "\n1.\tClick on \"...\" and choose a directory or file. Output dir will be set automatically or you can choose a custom name."
-                        + "\n2.\tSelect your preferred magnification."
-                        + "\n3.\tYou can generate a heatmap and set the heatmap quality. Warning: Higher quality needs more time! Standard: 60"
-                        + "\n4.\tIf you have only selected 1 file, choose a region of interest."
-                        + "\n5.\tPush \"Start Process...\" and wait for NucleiJ converting and analyzing your scans");
         addExitListener(new NucleiJExitListener());
     }
 
@@ -121,23 +112,6 @@ public class NucleiJ extends SingleFrameApplication
         } catch (IllegalAccessException | InstantiationException | ClassNotFoundException e) {
             e.printStackTrace();
         }
-
-
-        //UIManager.put("Synthetica.font.scaleFactor", 110);
-        //UIManager.put("Synthetica.font.scaleFactor", 110);
-        //UIManager.put("Synthetica.slider.hoverAndPressed.enabled", true);
-        //UIManager.put("Synthetica.slider.track.animation.delay", 500);
-        /*
-        try
-        {
-            UIManager.setLookAndFeel(new SyntheticaBlueIceLookAndFeel());
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-        */
-
     }
 
 
