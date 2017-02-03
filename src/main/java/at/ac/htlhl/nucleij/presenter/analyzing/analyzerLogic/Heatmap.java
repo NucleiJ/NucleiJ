@@ -116,7 +116,9 @@ public class Heatmap {
             TaskDialogs.inform(((SingleFrameApplication) Application.getInstance()).getMainFrame(), "Error", "NucleiJ konnte den LookUpTable nicht finden\n" +
                     "Bitte vergewissern Sie sich dass sich dieser im richtigen Verzeichnis befindet.");
         }
+        //TODO Texte auslagern
         //TODO Abstand in Pfad, wieso nicht moeglich?
+        assert newLutPath != null;
         String absolutePathofLUT = newLutPath.getParent().concat(File.separator).concat("NucleiJ-Data").
                 concat(File.separator).concat("lut").concat(File.separator).concat("RedGreenErben.lut");
         try {
