@@ -135,7 +135,7 @@ public class Exporter {
             // In Textdatei exportieren
             String ReportFilename = "Summary-Report.txt";        //Neuen Filenamen festlegen
 
-            String exportReport = path + "\\" + ReportFilename;
+            String exportReport = path + File.separator + ReportFilename;
 
             File file = new File(exportReport);
             try {
