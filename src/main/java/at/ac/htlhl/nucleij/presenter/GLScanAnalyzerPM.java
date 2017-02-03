@@ -29,6 +29,8 @@ import java.util.ResourceBundle;
  */
 public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
 
+    private ResourceBundle bundle = ResourceBundle.getBundle("at.ac.htlhl.nucleij.resources.i18n.dialogs");
+
     // Constants
     // ************************************************************************
     private Action analyzeAction;
@@ -79,17 +81,17 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
         int choice;
         if (numberNdpiFiles > 0 && numberTifFiles > 0) {
             choice = TaskDialogs.radioChoice(parentDialog,
-                    "It seems that you selected both NDPI & TIF Files", //TODO Texte auslagern
-                    "NDPI-Files: \t" + numberNdpiFiles + "\nTIF-Files: \t" + numberTifFiles + "\n\nWhat do you want to do?",
+                    bundle.getString("ChoiceDialog.NdpiTifInstruction.text"),
+                    bundle.getString("ChoiceDialog.NdpiTifText.text") + numberNdpiFiles + "\n" + bundle.getString("ChoiceDialog.NdpiTifText.text2")  + numberTifFiles + "\n\n" + bundle.getString("ChoiceDialog.NdpiTifText.text3"),
                     0,
-                    "Convert & Analyze", "Convert Only", "Analyze Only");
+                    bundle.getString("ChoiceDialog.AnalyzeConvert.text"), bundle.getString("ChoiceDialog.AnalyzeConvert.text2"), bundle.getString("ChoiceDialog.AnalyzeConvert.text3"));
             ndpiConverter.setChoice(choice);
         } else if (numberNdpiFiles > 0 && numberTifFiles == 0) { //Only NDPI Selected
             choice = TaskDialogs.radioChoice(parentDialog,
-                    "It seems that your selection is a Ndpi File",
-                    "What will you do?",
+                    bundle.getString("ChoiceDialog.NdpiInstruction.text"),
+                    bundle.getString("ChoiceDialog.NdpiInstruction.text2"),
                     0,
-                    "Convert & Analyze", "Convert Only");
+                    bundle.getString("ChoiceDialog.AnalyzeConvert.text"), bundle.getString("ChoiceDialog.AnalyzeConvert.text2"));
             ndpiConverter.setChoice(choice);
         } else if (numberNdpiFiles == 0 && numberTifFiles > 0) {
             ndpiConverter.setChoice(2);
@@ -124,7 +126,6 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
             long startTime = System.nanoTime();
 
             JFrame parentAnalyzerConverter = ((SingleFrameApplication) Application.getInstance()).getMainFrame();
-            ResourceBundle bundle = ResourceBundle.getBundle("at.ac.htlhl.nucleij.resources.i18n.dialogs");
 
             int numberNdpiFiles = ndpiConverter.getNumberNdpiFiles();
             int numberTifFiles = ndpiConverter.getNumberTifFiles();
@@ -156,10 +157,9 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
                 analyzerConverterTask.stopProcess(true);
 
                 if (!analyzerConverterTask.isDone()) {
-                    TaskDialog dlg = new TaskDialog(parentAnalyzerConverter, "Beenden..."); // TODO texte auslagern
-                    dlg.setInstruction("Vorgang wird abgebrochen...");
-                    dlg.setText("NucleiJ beendet den Vorgang. Dieser wird in den naechsten\n" +
-                            "Momenten selbststaendig im Hintergrund abgebrochen. Bitte OK druecken");
+                    TaskDialog dlg = new TaskDialog(parentAnalyzerConverter, bundle.getString("QuitTaskDialog.title.text"));
+                    dlg.setInstruction(bundle.getString("QuitTaskDialog.instruction.text"));
+                    dlg.setText(bundle.getString("QuitTaskDialog.text.text"));
                     dlg.setIcon(TaskDialog.StandardIcon.WARNING);
                     dlg.show();
                     ndpiConverter.setNumberNdpiFiles(0);
@@ -189,7 +189,7 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
                 listString += s.concat("\n");
             }
 
-            String InfosOfProcessedScans = "Prozess wurde waerend der Programmlaufzeit abgebrochen!";       //TODO Texte auslagern
+            String InfosOfProcessedScans = bundle.getString("Words.ScanInfo.Text");
             if ((ndpiConverter.getNumberTifFiles() + ndpiConverter.getNumberNdpiFiles()) > 0) {
                 if (ndpiConverter.getChoice() == 1) {
                     InfosOfProcessedScans = "\n<b>" + bundle.getString("Words.KonvertierteDateien.text") + ": </b>" + ndpiConverter.getNumberNdpiFiles();
@@ -254,9 +254,6 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
         }
 
         public void actionPerformed(ActionEvent e) {
-
-            ResourceBundle bundle = ResourceBundle.getBundle("at.ac.htlhl.nucleij.resources.i18n.dialogs");
-
             if (ndpiConverter.getInputpath() != null && ndpiConverter.getInputpath() != "" &&
                     ndpiConverter.getInputpath().contains(".tif") && ndpiConverter.getNumberTifFiles() == 1 &&
                     ndpiConverter.getNumberNdpiFiles() == 0) {

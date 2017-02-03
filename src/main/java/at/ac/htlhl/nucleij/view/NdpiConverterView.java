@@ -28,7 +28,6 @@ public class NdpiConverterView extends JPanel {
     private void createUIComponents() {
         inputPathAction = (AbstractAction) ndpiConverterPM.getInputPathAction();
         outputPathAction = (AbstractAction) ndpiConverterPM.getOutputPathAction();
-        magnificationAction = (AbstractAction) ndpiConverterPM.getMagnificationAction();
     }
 
     public void initBindings() {
@@ -159,6 +158,5 @@ public class NdpiConverterView extends JPanel {
     private JRadioButton magnification5Button;
     private AbstractAction outputPathAction;
     private AbstractAction inputPathAction;
-    private AbstractAction magnificationAction;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

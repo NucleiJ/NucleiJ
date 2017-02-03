@@ -30,12 +30,13 @@ import static at.ac.htlhl.nucleij.model.NdpiConverter.MAG_X5;
 public class NdpiConverterPM extends PresentationModel<NdpiConverter> {
     private static final Logger LOGGER = Logger.getLogger(NdpiConverterPM.class.getName());
 
-    FileNameExtensionFilter ndpiFilter = new FileNameExtensionFilter("Nano Zoomer Digital Pathology Image (.ndpi)", "ndpi");
-    FileNameExtensionFilter tifFilter  = new FileNameExtensionFilter("Tagged Image File (.tif)", "tif");
+    private ResourceBundle bundle = ResourceBundle.getBundle("at.ac.htlhl.nucleij.resources.i18n.dialogs");
+
+    private FileNameExtensionFilter ndpiFilter = new FileNameExtensionFilter("Nano Zoomer Digital Pathology Image (.ndpi)", "ndpi");
+    private FileNameExtensionFilter tifFilter  = new FileNameExtensionFilter("Tagged Image File (.tif)", "tif");
 
     private Action inputPathAction;
     private Action outputPathAction;
-    private Action magnificationAction;
 
     private NdpiConverter  ndpiConverter;
     private GLScanAnalyzer glScanAnalyzer;
@@ -48,15 +49,14 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter> {
 
         inputPathAction = new InputPathAction();
         outputPathAction = new OutputPathAction();
-        magnificationAction = new MagnificationAction();
 
         // Ausgabe jeder Aenderung
         ndpiConverter.addPropertyChangeListener(evt -> {
             if (NdpiConverter.PROPERTY_MAGNIFICATION.equals(evt.getPropertyName())) {
                 if (evt.getNewValue().toString().toLowerCase().equals(MAG_X5.toLowerCase())) {
                     JOptionPane.showMessageDialog(((SingleFrameApplication) Application.getInstance()).getMainFrame(),
-                            "This magnification is currently not aviable!",
-                            "Error",
+                            bundle.getString("JOptionPaneMessage.text"),
+                            bundle.getString("JOptionPaneTitle.text"),
                             JOptionPane.ERROR_MESSAGE);
                     ndpiConverter.setMagnification(MAG_X10);
                 }
@@ -72,10 +72,6 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter> {
     public Action getOutputPathAction() {
         return outputPathAction;
     }
-
-    public Action getMagnificationAction() {
-        return magnificationAction;
-    }
     //endregion
 
 
@@ -87,7 +83,7 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter> {
         chooser.addChoosableFileFilter(ndpiFilter);
         chooser.setControlButtonsAreShown(true);
         chooser.setMultiSelectionEnabled(true);
-        chooser.setDialogTitle("Dateien Auswählen");
+        chooser.setDialogTitle(bundle.getString("FilechooserTitle.text"));
 
         return chooser;
     }
@@ -99,7 +95,6 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter> {
 
         public void actionPerformed(ActionEvent actionEvent) {
             JFrame parent = ((SingleFrameApplication) Application.getInstance()).getMainFrame();
-            ResourceBundle bundle = ResourceBundle.getBundle("at.ac.htlhl.nucleij.resources.i18n.dialogs");
             JFileChooser chooser = createFileChooser();
 
             List<String> ndpiFileList = new ArrayList<>();
@@ -140,17 +135,6 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter> {
             }
         }
     }
-
-    class MagnificationAction extends AbstractAction implements PropertyChangeListener {
-        public void propertyChange(PropertyChangeEvent e) {
-            ndpiConverter.setMagnification(e.getPropertyName());
-        }
-
-        public void actionPerformed(ActionEvent e) {
-
-        }
-    }
-
 
 
     private void loadFilesAndFolders(JFileChooser chooser) {

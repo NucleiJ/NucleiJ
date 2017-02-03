@@ -13,6 +13,7 @@ import org.jdesktop.application.*;
 
 import javax.swing.*;
 import java.util.EventObject;
+import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -25,6 +26,9 @@ public class NucleiJ extends SingleFrameApplication
     // ************************************************************************
     public static final NucleiJ nucleiJ = new NucleiJ();
     private static final Logger LOGGER = Logger.getLogger(NucleiJ.class.getName());
+
+    private ResourceBundle bundle = ResourceBundle.getBundle("at.ac.htlhl.nucleij.resources.i18n.dialogs");
+
 
     // Fields
     private ResourceMap resource;
@@ -130,9 +134,9 @@ public class NucleiJ extends SingleFrameApplication
             JFrame parent = ((SingleFrameApplication) getContext().getApplication()).getMainFrame();
 
             // Confirmation Dialog
-            if(TaskDialogs.ask( parent, "Wollen Sie wirklich beenden?", "Falls Vorgänge noch nicht abgeschlossen sind,\nkönnen diese fehlerhaft beendet werden! ..."))
+            if(TaskDialogs.ask( parent, bundle.getString("QuitNucleiJ.text") , bundle.getString("QuitNucleiJ.text2")))
             {
-                return true;    //TODO Texte auslagern
+                return true;
             }
             else
             {
