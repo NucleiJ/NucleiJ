@@ -144,6 +144,9 @@ public class MainFrameView extends JFrame {
             button3.setText("Save");
             button3.setAction(saveAction);
             toolBar1.add(button3);
+
+            //---- hSpacer2 ----
+            hSpacer2.setOpaque(false);
             toolBar1.add(hSpacer2);
 
             //---- button4 ----

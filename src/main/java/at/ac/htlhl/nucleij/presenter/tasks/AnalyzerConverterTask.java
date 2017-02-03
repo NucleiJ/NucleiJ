@@ -186,9 +186,5 @@ public class AnalyzerConverterTask extends SwingWorker<String, String> {
         String renameFileName = "_".concat(ndpiConverter.getMagnification().toLowerCase().concat(".ome.tif"));
         String newTifListElement = filePath.replace(".ndpi", renameFileName);
         glScanAnalyzer.addTifToList(newTifListElement);
-
-        // TODO Ausgabe beim dialog verbessern, wenn zB eine datei konv & analysiert werden soll dann muss tif Counter erhoeht werden
-        // gehoert dort hin wo andis abfrage ist um nur k oder a werden soll
-        //ndpiConverter.setNumberTifFiles(ndpiConverter.getNumberTifFiles()+1);
     }
 }

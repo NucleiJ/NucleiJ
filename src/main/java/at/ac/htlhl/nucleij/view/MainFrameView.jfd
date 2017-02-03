@@ -29,6 +29,7 @@ new FormModel {
 				} )
 				add( new FormComponent( "com.jformdesigner.designer.wrapper.HSpacer" ) {
 					name: "hSpacer2"
+					"opaque": false
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "button4"

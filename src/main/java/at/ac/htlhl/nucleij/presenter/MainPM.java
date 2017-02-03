@@ -179,7 +179,7 @@ public class MainPM extends PresentationModel<Main> {
                             + "\n3.\tYou can generate a heatmap and set the heatmap quality. Warning: Higher quality needs more time! Standard: 60"
                             + "\n4.\tIf you have only selected 1 file, choose a region of interest."
                             + "\n5.\tPush \"Start Process...\" and wait for NucleiJ converting and analyzing your scans");
-
+        //TODO Texte Auslagern
         }
     }
 }
