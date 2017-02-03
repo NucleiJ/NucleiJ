@@ -22,7 +22,6 @@ import java.awt.event.ActionEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ResourceBundle;
-import java.util.logging.Logger;
 
 /**
  * @author Stefan Erben
@@ -32,8 +31,6 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
 
     // Constants
     // ************************************************************************
-    private static final Logger LOGGER = Logger.getLogger(GLScanAnalyzerPM.class.getName());
-
     private Action analyzeAction;
     private Action calculateandshowheatmapAction;
     private Action setroiAction;
@@ -60,8 +57,6 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
         // Ausgabe jeder Aenderung
         glScanAnalyzer.addPropertyChangeListener(new PropertyChangeListener() {
             public void propertyChange(PropertyChangeEvent evt) {
-                LOGGER.info("Property name=" + evt.getPropertyName() + ", oldValue=" + evt.getOldValue() + ", newValue=" + evt.getNewValue());
-
                 if (GLScanAnalyzer.PROPERTY_CALCULATEANDSHOWHEATMAP.equals(evt.getPropertyName())) {
                     if (evt.getNewValue().equals(false)) {
                         setComponentEnabled(GLScanAnalyzer.PROPERTY_HEATMAPQUALITY, false);
