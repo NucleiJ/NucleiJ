@@ -6,7 +6,7 @@
 * Apple txt File lesbar?
 * GNU Licence
 * Texte auslagern (About, Help)
-* ROI Auswahl anzeigen
+* x40 Analyzer fixen
 
 
 * Speichern/Einlesen von Einstellungen + Jason File (.nucleij)
@@ -17,7 +17,7 @@
 * Listing mit Zeilennummern (Notepad++ Plugin, RTF)
 * Word-Abschnitte (wer hat was geschrieben, Fußzeile)
 * Zitieren: [JGO17a] 
-* Serife Shriftart
+* Serife Schriftart
 
 
 ### 2. Zukunftsmusik ###
@@ -77,6 +77,7 @@
 * ImageJ Window                                                     03.02.17
 * \r\n bei Txt Summaryausgabe                                       03.02.17
 * Hilfe Dialog                                                      03.02.17
+* ROI Auswahl anzeigen                                              03.02.17
 
 
 ### 7. Wichtige Notizen ###

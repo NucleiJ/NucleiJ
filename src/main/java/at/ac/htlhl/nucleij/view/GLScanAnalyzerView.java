@@ -24,21 +24,23 @@ import java.util.ResourceBundle;
 public class GLScanAnalyzerView extends JPanel {
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    private JComponent          heatmapSeparator;
-    private JLabel              calculateandshowheatmapLabel;
-    private JCheckBox           calculateandshowheatmapCheckBox;
-    private JLabel              heatmapqualityLabel;
-    private JSlider             heatmapqualitySlider;
+    private JComponent heatmapSeparator;
+    private JLabel calculateandshowheatmapLabel;
+    private JCheckBox calculateandshowheatmapCheckBox;
+    private JLabel heatmapqualityLabel;
+    private JSlider heatmapqualitySlider;
     private JFormattedTextField heatmapqualityTextField;
-    private JComponent          roiSeperator;
-    private JLabel              selectroiLabel;
-    private JButton             selctroiButton;
-    private JButton             startAnalyzerButton;
-    private AbstractAction      analyzeAction;
-    private AbstractAction      calculateandshowheatmapAction;
-    private AbstractAction      setRoiAction;
-    private AbstractAction      changeheatmapqualityAction;
-    private AbstractAction      deleteroiAction;
+    private JComponent roiSeperator;
+    private JLabel selectroiLabel;
+    private JButton selctroiButton;
+    private JButton deleteRoiButton;
+    private JLabel roiDataLabel;
+    private JButton startAnalyzerButton;
+    private AbstractAction analyzeAction;
+    private AbstractAction calculateandshowheatmapAction;
+    private AbstractAction setRoiAction;
+    private AbstractAction changeheatmapqualityAction;
+    private AbstractAction deleteroiAction;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 
     private GLScanAnalyzerPM glScanAnalyzerPM;
@@ -61,6 +63,7 @@ public class GLScanAnalyzerView extends JPanel {
     private void initBinding() {
         PresentationModelBinder binder = Binders.binderFor(glScanAnalyzerPM);
         binder.bindBeanProperty(GLScanAnalyzer.PROPERTY_CALCULATEANDSHOWHEATMAP).to(calculateandshowheatmapCheckBox);
+        binder.bindBeanProperty(GLScanAnalyzer.PROPERTY_ROIAREA).to(roiDataLabel);
 
         // Property: HeatMapQuality
         ValueModel heatmapQualityValueModel = glScanAnalyzerPM.getModel(GLScanAnalyzer.PROPERTY_HEATMAPQUALITY);
@@ -83,14 +86,16 @@ public class GLScanAnalyzerView extends JPanel {
         roiSeperator = compFactory.createSeparator(bundle.getString("GLScanAnalyzerView.roiSeperator.text"));
         selectroiLabel = new JLabel();
         selctroiButton = new JButton();
+        deleteRoiButton = new JButton();
+        roiDataLabel = new JLabel();
         startAnalyzerButton = new JButton();
 
         //======== this ========
         setBorder(Borders.DIALOG);
         setLayout(new FormLayout(
-                "right:68dlu, $lcgap, 63dlu, $lcgap, pref:grow, $lcgap, default, $lcgap, 24dlu, $lcgap, pref",
-                "pref, $lgap, 16dlu, $lgap, 18dlu, 3*($lgap, pref)"));
-        add(heatmapSeparator, CC.xywh(1, 1, 11, 1));
+            "right:68dlu, $lcgap, 30dlu, $lcgap, default, $lcgap, pref:grow, $lcgap, default, $lcgap, 24dlu, $lcgap, pref",
+            "pref, $lgap, 16dlu, $lgap, 18dlu, 3*($lgap, pref)"));
+        add(heatmapSeparator, CC.xywh(1, 1, 13, 1));
 
         //---- calculateandshowheatmapLabel ----
         calculateandshowheatmapLabel.setText(bundle.getString("GLScanAnalyzerView.calculateandshowheatmapLabel"));
@@ -107,13 +112,13 @@ public class GLScanAnalyzerView extends JPanel {
         //---- heatmapqualitySlider ----
         heatmapqualitySlider.setMinimum(1);
         heatmapqualitySlider.setValue(60);
-        add(heatmapqualitySlider, CC.xywh(3, 5, 5, 1));
+        add(heatmapqualitySlider, CC.xywh(3, 5, 7, 1));
 
         //---- heatmapqualityTextField ----
         heatmapqualityTextField.setBackground(UIManager.getColor("ArrowButton.background"));
         heatmapqualityTextField.setColumns(3);
-        add(heatmapqualityTextField, CC.xy(9, 5, CC.LEFT, CC.DEFAULT));
-        add(roiSeperator, CC.xywh(1, 7, 11, 1));
+        add(heatmapqualityTextField, CC.xy(11, 5, CC.LEFT, CC.DEFAULT));
+        add(roiSeperator, CC.xywh(1, 7, 13, 1));
 
         //---- selectroiLabel ----
         selectroiLabel.setText(bundle.getString("GLScanAnalyzerView.selectroiLabel"));
@@ -121,11 +126,18 @@ public class GLScanAnalyzerView extends JPanel {
 
         //---- selctroiButton ----
         selctroiButton.setAction(setRoiAction);
-        add(selctroiButton, CC.xy(3, 9, CC.LEFT, CC.DEFAULT));
+        add(selctroiButton, CC.xywh(3, 9, 4, 1, CC.LEFT, CC.DEFAULT));
+
+        //---- deleteRoiButton ----
+        deleteRoiButton.setBorderPainted(false);
+        deleteRoiButton.setAction(deleteroiAction);
+        deleteRoiButton.setIcon(new ImageIcon(getClass().getResource("/at/ac/htlhl/nucleij/resources/images/i16x16/process-stop.png")));
+        add(deleteRoiButton, CC.xy(5, 9, CC.LEFT, CC.DEFAULT));
+        add(roiDataLabel, CC.xy(7, 9));
 
         //---- startAnalyzerButton ----
         startAnalyzerButton.setAction(analyzeAction);
-        add(startAnalyzerButton, CC.xywh(5, 11, 5, 1, CC.RIGHT, CC.DEFAULT));
+        add(startAnalyzerButton, CC.xywh(7, 11, 5, 1, CC.RIGHT, CC.DEFAULT));
 
         //---- analyzeAction ----
         analyzeAction.putValue(Action.NAME, bundle.getString("GLScanAnalyzerView.analyzeAction.Name"));

@@ -22,6 +22,7 @@ import java.text.DecimalFormat;
 import java.util.Arrays;
 
 import static at.ac.htlhl.nucleij.model.NdpiConverter.MAG_X10;
+import static com.sun.xml.internal.ws.spi.db.BindingContextFactory.LOGGER;
 
 
 public class MainAnalyzer implements PlugInFilter {
@@ -72,15 +73,11 @@ public class MainAnalyzer implements PlugInFilter {
 
     public void run(ImageProcessor original_alt) {
 
-        //Benutzereingaben verarbeiten
-        getUserInput();
 
         path.setValue(glScanAnalyzer.getOutputpath());
-
         startExporter.setnewDirectoryname(File.separator + "Output");
-
         File outputPathFile = new File(glScanAnalyzer.getOutputpath());
-        boolean success = outputPathFile.mkdirs();
+        outputPathFile.mkdirs();
 
         csvSummaryStack.appendString("csvHeader");
 
@@ -90,15 +87,18 @@ public class MainAnalyzer implements PlugInFilter {
 
         //ist Scan in x10 oder x40 Aufloesung? -> Umrechnungsfaktor px=um
         boolean x10 = file.getValue().toLowerCase().contains("x10");
+        getUserInput(x10);     // x10 pixelsize oder x40?
         double distance = settings.selectMagnificationAutomatically(pfad, x10);
         properties.setMagnification(distance);
 
         //gewaehltes Bild automatisch laden
+        LOGGER.info(pfad);
+
         ImagePlus imp = IJ.openImage(pfad);
         imp.unlock();
 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        ImageWindow.setNextLocation((int) screenSize.getWidth() + 100000, (int) screenSize.getHeight() + 100000);
+        //ImageWindow.setNextLocation((int) screenSize.getWidth() + 100000, (int) screenSize.getHeight() + 100000);
 
         imp.show();
 
@@ -316,8 +316,8 @@ public class MainAnalyzer implements PlugInFilter {
         }
     }
 
-    public void getUserInput() {
-        if(ndpiConverter.getMagnification().toLowerCase() == MAG_X10)
+    public void getUserInput(boolean x10) {
+        if(!x10)
         {
             pixelSize = "34";
         }
@@ -412,15 +412,9 @@ public class MainAnalyzer implements PlugInFilter {
         }
         int intcounter = (int) counter;
 
-        //Ausgabe ImageJ-LOG
-        IJ.log("\r\n\r\n" + ueberschrift);
-        IJ.log("Founded nuclei:\t\t\t\t" + intcounter);
-        IJ.log("Additional measured values:");
-
         //Ausgabe in String -> Summary-File
         String summaryString = "";
         summaryString = summaryString + "\r\n\r\n" + ueberschrift + "\r\nFound nuclei:\t\t\t" + intcounter + "\r\nAdditional measured values:\r\n";
-
 
         //Werte auf 3 Kommastellen runden und anzeigen
         DecimalFormat df = new DecimalFormat("#.###");

@@ -8,7 +8,7 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
-			"$columnSpecs": "right:68dlu, labelcompgap, 63dlu, labelcompgap, pref:grow, labelcompgap, default, labelcompgap, 24dlu, labelcompgap, pref"
+			"$columnSpecs": "right:68dlu, labelcompgap, 30dlu, labelcompgap, default, labelcompgap, pref:grow, labelcompgap, default, labelcompgap, 24dlu, labelcompgap, pref"
 			"$rowSpecs": "pref, linegap, 16dlu, linegap, 18dlu, linegap, pref, linegap, pref, linegap, pref"
 		} ) {
 			name: "this"
@@ -18,7 +18,7 @@ new FormModel {
 				"text": new FormMessage( null, "GLScanAnalyzerView.heatmapSeperator.text" )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 1
-				"gridWidth": 11
+				"gridWidth": 13
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "calculateandshowheatmapLabel"
@@ -48,14 +48,14 @@ new FormModel {
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 3
 				"gridY": 5
-				"gridWidth": 5
+				"gridWidth": 7
 			} )
 			add( new FormComponent( "javax.swing.JFormattedTextField" ) {
 				name: "heatmapqualityTextField"
 				"background": new com.jformdesigner.model.SwingColor( "ArrowButton.background" )
 				"columns": 3
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 9
+				"gridX": 11
 				"gridY": 5
 				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints LEFT
 			} )
@@ -65,7 +65,7 @@ new FormModel {
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 1
 				"gridY": 7
-				"gridWidth": 11
+				"gridWidth": 13
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "selectroiLabel"
@@ -80,7 +80,8 @@ new FormModel {
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 3
 				"gridY": 9
-				"gridWidth": 3
+				"gridWidth": 4
+				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints LEFT
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "deleteRoiButton"
@@ -88,22 +89,21 @@ new FormModel {
 				"action": new FormReference( "deleteroiAction" )
 				"icon": new com.jformdesigner.model.SwingIcon( 0, "/at/ac/htlhl/nucleij/resources/images/i16x16/process-stop.png" )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 7
-				"gridY": 9
-			} )
-			add( new FormComponent( "javax.swing.JButton" ) {
-				name: "selectRoiButton"
-				"action": new FormReference( "setRoiAction" )
-			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 9
+				"gridX": 5
 				"gridY": 9
 				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints LEFT
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "roiDataLabel"
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 7
+				"gridY": 9
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "startAnalyzerButton"
 				"action": new FormReference( "analyzeAction" )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 5
+				"gridX": 7
 				"gridY": 11
 				"gridWidth": 5
 				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints RIGHT

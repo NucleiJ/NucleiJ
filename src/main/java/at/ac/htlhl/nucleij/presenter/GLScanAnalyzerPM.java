@@ -22,6 +22,7 @@ import java.awt.event.ActionEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ResourceBundle;
+import java.util.logging.Logger;
 
 /**
  * @author Stefan Erben
@@ -33,6 +34,8 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
 
     // Constants
     // ************************************************************************
+    private static final Logger LOGGER = Logger.getLogger(GLScanAnalyzerPM.class.getName());
+
     private Action analyzeAction;
     private Action calculateandshowheatmapAction;
     private Action setroiAction;
@@ -54,11 +57,12 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
 
         setComponentEnabled(GLScanAnalyzer.PROPERTY_HEATMAPQUALITY, getBean().isCalculateandshowheatmap());
         setComponentEnabled(GLScanAnalyzer.PROPERTY_SETROI, glScanAnalyzer.isSetroi());
-        setComponentVisible(GLScanAnalyzer.PROPERTY_ROIAREA, false);
 
         // Ausgabe jeder Aenderung
         glScanAnalyzer.addPropertyChangeListener(new PropertyChangeListener() {
             public void propertyChange(PropertyChangeEvent evt) {
+                LOGGER.info("Property name=" + evt.getPropertyName() + ", oldValue=" + evt.getOldValue() + ", newValue=" + evt.getNewValue());
+
                 if (GLScanAnalyzer.PROPERTY_CALCULATEANDSHOWHEATMAP.equals(evt.getPropertyName())) {
                     if (evt.getNewValue().equals(false)) {
                         setComponentEnabled(GLScanAnalyzer.PROPERTY_HEATMAPQUALITY, false);
@@ -301,6 +305,8 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
                         glScanAnalyzer.setRoiHeight((int) roiRec.getHeight());
                         glScanAnalyzer.setRoiWidth((int) roiRec.getWidth());
                         glScanAnalyzer.setSetroi(true);
+                        glScanAnalyzer.setRoiarea((int) roiRec.getX() + " | " + (int) roiRec.getY() + " | " + (int) roiRec.getWidth() + " | " + (int) roiRec.getHeight());
+                        //setComponentEnabled(GLScanAnalyzer.PROPERTY_ROIAREA, true);
                     } else {
                         TaskDialog dlg = new TaskDialog(((SingleFrameApplication) Application.getInstance()).getMainFrame(), "Error");
                         dlg.setIcon(TaskDialog.StandardIcon.ERROR);
@@ -341,6 +347,7 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
 
         public void actionPerformed(ActionEvent e) {
             glScanAnalyzer.setRoiarea("");
+            glScanAnalyzer.setSetroi(false);
         }
     }
     //endregion:
