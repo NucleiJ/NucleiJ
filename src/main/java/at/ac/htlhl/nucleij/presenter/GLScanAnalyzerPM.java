@@ -85,7 +85,7 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
         if (numberNdpiFiles > 0 && numberTifFiles > 0) {
             choice = TaskDialogs.radioChoice(parentDialog,
                     "It seems that you selected both NDPI & TIF Files", //TODO Texte auslagern
-                    "NDPI-Files: \t" + numberNdpiFiles + "\nTIF-Files: \t" + numberTifFiles + "\n\nWhat do you want do?",
+                    "NDPI-Files: \t" + numberNdpiFiles + "\nTIF-Files: \t" + numberTifFiles + "\n\nWhat do you want to do?",
                     0,
                     "Convert & Analyze", "Convert Only", "Analyze Only");
             ndpiConverter.setChoice(choice);
