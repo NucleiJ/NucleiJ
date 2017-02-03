@@ -110,7 +110,7 @@ public class AnalyzerConverterTask extends SwingWorker<String, String> {
     protected void process(List<String> element) {
         super.process(element);
 
-        taskDialog.setText(element.toString());
+        taskDialog.setText(element.get(0));
     }
 
     @Override
@@ -127,7 +127,6 @@ public class AnalyzerConverterTask extends SwingWorker<String, String> {
     }
 
     private void startConverter(String filePath) {
-        String OS = System.getProperty("os.name").toLowerCase();
         File outputpath = new File(ndpiConverter.getOutputpath());
 
         //region ################ NDPI-Converter JAR ################
