@@ -16,12 +16,15 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URISyntaxException;
 import java.util.List;
+import java.util.ResourceBundle;
 
 /**
  * Created by Andreas Mattes and Stefan Erben on 23.01.17.
  */
 
 public class AnalyzerConverterTask extends SwingWorker<String, String> {
+    private ResourceBundle bundle = ResourceBundle.getBundle("at.ac.htlhl.nucleij.resources.i18n.dialogs");
+
     private          JProgressBar   progressBar;
     private          TaskDialog     taskDialog;
     private          GLScanAnalyzer glScanAnalyzer;
@@ -51,15 +54,15 @@ public class AnalyzerConverterTask extends SwingWorker<String, String> {
         switch (choice) {
             case 0:
                 add = 100 / (numberNdpiFiles * 2 + numberTifFiles);
-                taskDialog.setInstruction("Converting & analyzing your Scans...");
+                taskDialog.setInstruction(bundle.getString("SwingworkerDialog.instruction.ca"));
                 break;
             case 1:
                 add = 100 / numberNdpiFiles;
-                taskDialog.setInstruction("Converting your Scans...");
+                taskDialog.setInstruction(bundle.getString("SwingworkerDialog.instruction.c"));
                 break;
             case 2:
                 add = 100 / numberTifFiles;
-                taskDialog.setInstruction("Analyzing your Scans...");
+                taskDialog.setInstruction(bundle.getString("SwingworkerDialog.instruction.a"));
                 break;
             default:
                 add = 0;
@@ -118,7 +121,7 @@ public class AnalyzerConverterTask extends SwingWorker<String, String> {
 
     public void stopProcess(boolean requestCancel) {
         this.requestCancel = requestCancel;
-        taskDialog.setInstruction("Prozess stoppen...");
+        taskDialog.setInstruction("Stop...");
     }
 
     private void startConverter(String filePath) {
