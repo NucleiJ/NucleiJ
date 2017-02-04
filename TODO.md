@@ -6,7 +6,7 @@
 * Apple txt File lesbar?
 * GNU Licence
 * CSV Ausgabe ist alles um eine Spalte verschoben
-
+* Heatmap lässt sich auf linux nicht öffnen
 
 * Speichern/Einlesen von Einstellungen + Jason File (.nucleij)
 
