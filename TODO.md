@@ -7,6 +7,7 @@
 * GNU Licence
 * CSV Ausgabe ist alles um eine Spalte verschoben
 * Heatmap lässt sich auf linux nicht öffnen
+* Wenn nur tif file eibgelesen, Magnification ausgrauen
 
 * Speichern/Einlesen von Einstellungen + Jason File (.nucleij)
 
