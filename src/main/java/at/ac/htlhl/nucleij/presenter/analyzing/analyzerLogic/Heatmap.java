@@ -18,13 +18,16 @@ import java.math.RoundingMode;
 import java.net.URISyntaxException;
 import java.net.URLDecoder;
 import java.text.DecimalFormat;
+import java.util.ResourceBundle;
 
 import static com.sun.xml.internal.ws.spi.db.BindingContextFactory.LOGGER;
 
 
 public class Heatmap {
+    private ResourceBundle bundle = ResourceBundle.getBundle("at.ac.htlhl.nucleij.resources.i18n.dialogs");
 
-    public void create(String filename, String path, String newDirectoryname, int aufloesungSlider, ImagePlus heatmapTmp, ImageProcessor heatmapMaske, ImageProcessor heatmap_ip, int w, int h) {
+    public void create(String filename, String path, String newDirectoryname, int aufloesungSlider, ImagePlus heatmapTmp, ImageProcessor heatmapMaske, ImageProcessor heatmap_ip, int w, int h)
+    {
         //Dichte berechnen:
         float radiusFloat = (float) (w * 0.0002 * aufloesungSlider);        //w/(w/aufloesung);
         int radius = Math.round(radiusFloat);
@@ -113,10 +116,8 @@ public class Heatmap {
         try {
             newLutPath = new File(NucleiJ.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath());
         } catch (URISyntaxException e) {
-            TaskDialogs.inform(((SingleFrameApplication) Application.getInstance()).getMainFrame(), "Error", "NucleiJ konnte den LookUpTable nicht finden\n" +
-                    "Bitte vergewissern Sie sich dass sich dieser im richtigen Verzeichnis befindet.");
+            TaskDialogs.inform(((SingleFrameApplication) Application.getInstance()).getMainFrame(), bundle.getString("LUT.Dialog.instruction"), bundle.getString("LUT.Dialog.text"));
         }
-        //TODO Texte auslagern
         //TODO Abstand in Pfad, wieso nicht moeglich?
         assert newLutPath != null;
         String absolutePathofLUT = newLutPath.getParent().concat(File.separator).concat("NucleiJ-Data").

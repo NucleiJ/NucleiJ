@@ -12,8 +12,6 @@ import org.jdesktop.application.SingleFrameApplication;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.event.ActionEvent;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -52,11 +50,13 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter> {
 
         // Ausgabe jeder Aenderung
         ndpiConverter.addPropertyChangeListener(evt -> {
+            LOGGER.info("Property name=" + evt.getPropertyName() + ", oldValue=" + evt.getOldValue() + ", newValue=" + evt.getNewValue());
+
             if (NdpiConverter.PROPERTY_MAGNIFICATION.equals(evt.getPropertyName())) {
                 if (evt.getNewValue().toString().toLowerCase().equals(MAG_X5.toLowerCase())) {
                     JOptionPane.showMessageDialog(((SingleFrameApplication) Application.getInstance()).getMainFrame(),
                             bundle.getString("JOptionPaneMessage.text"),
-                            bundle.getString("JOptionPaneTitle.text"),
+                            bundle.getString("Error.text"),
                             JOptionPane.ERROR_MESSAGE);
                     ndpiConverter.setMagnification(MAG_X10);
                 }
@@ -164,7 +164,7 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter> {
                     ndpiConverter.setOutputpath(null);
                     ndpiConverter.setInputpath(null);
 
-                    LOGGER.warning("Invalid file extension '" + file.getName().substring(file.getName().indexOf(".")) + bundle.getString("InvalidFileExtension.forFile") + file.getName() + "'");
+                    LOGGER.warning(bundle.getString("InvalidFileExtension.text") + " '" + file.getName().substring(file.getName().indexOf(".")) + bundle.getString("InvalidFileExtension.forFile") + file.getName() + "'");
                     TaskDialog errorDialog = new TaskDialog(parent, "Application Error");
                     errorDialog.setInstruction(bundle.getString("InvalidFileExtension.text2"));
                     errorDialog.setIcon(TaskDialog.StandardIcon.ERROR);

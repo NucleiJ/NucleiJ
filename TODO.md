@@ -2,11 +2,10 @@
 # TO-DO Liste #
 
 ### 1. Erweiterungen: ###
-* Consolenausgaben entfernen
+* Consolenausgaben entfernen - Großteils erledigt
 * Apple txt File lesbar?
 * GNU Licence
-* Texte auslagern (About, Help)
-* x40 Analyzer fixen
+* CSV Ausgabe ist alles um eine Spalte verschoben
 
 
 * Speichern/Einlesen von Einstellungen + Jason File (.nucleij)
@@ -78,6 +77,8 @@
 * \r\n bei Txt Summaryausgabe                                       03.02.17
 * Hilfe Dialog                                                      03.02.17
 * ROI Auswahl anzeigen                                              03.02.17
+* x40 Analyzer fixen - Funktionierteh , mind. 16Gb Ram zuweisen     04.02.17
+* Texte auslagern (About, Help)                                     04.02.17
 
 
 ### 7. Wichtige Notizen ###

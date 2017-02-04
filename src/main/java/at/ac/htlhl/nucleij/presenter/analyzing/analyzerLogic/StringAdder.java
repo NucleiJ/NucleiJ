@@ -1,14 +1,17 @@
 package at.ac.htlhl.nucleij.presenter.analyzing.analyzerLogic;//SummaryCreator Class v1, Stringspeicher fuer SummaryReport
 
+import java.util.ResourceBundle;
+
 public class StringAdder {
-    String zwischenspeicherString = "";
+    private ResourceBundle bundle = ResourceBundle.getBundle("at.ac.htlhl.nucleij.resources.i18n.dialogs");
+
+    private String zwischenspeicherString = "";
 
     public void appendString(String uebergebenerString) {
         if (uebergebenerString == "reset") {
             zwischenspeicherString = "";
         } else if (uebergebenerString == "csvHeader") {
-            zwischenspeicherString = "Dateiname;gesamte Gewebeflaeche [um2];gesamte Zellkernflaeche [um2];Zellkernflaeche in %;Zellkerne / mm2;Arith. Umfang [um];groesste Zellkernflaeche [um2];Arith. Zellkernflaeche [um2];Med. Zellkernflaeche [um2];\n";
-            // TODO texte auslagern
+            zwischenspeicherString = bundle.getString("CSV.StringAdder.text");
         } else {
             zwischenspeicherString = zwischenspeicherString + uebergebenerString;
         }
