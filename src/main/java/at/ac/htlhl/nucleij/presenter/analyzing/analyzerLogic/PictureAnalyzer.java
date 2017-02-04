@@ -52,7 +52,7 @@ public class PictureAnalyzer {
             for (int y = 0; y <= h; y++) {
                 int c = original.getPixel(x, y);
 
-                //Blauwert aus RGB herausfiltern
+                //Farbwerte aus RGB-Pixel herausfiltern
                 int r = (c & 0xff0000) >> 16;
                 int g = (c & 0x00ff00) >> 8;
                 int b = (c & 0x0000ff);
