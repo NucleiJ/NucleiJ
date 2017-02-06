@@ -3,10 +3,8 @@
 
 ### 1. Erweiterungen: ###
 * Consolenausgaben entfernen - Großteils erledigt
-* Apple txt File lesbar?
 * GNU Licence
-* CSV Ausgabe ist alles um eine Spalte verschoben
-* Heatmap lässt sich auf linux nicht öffnen
+* Heatmap lässt sich auf linux nicht öffnen, vorher checken ob lut existiert
 * Wenn nur tif file eibgelesen, Magnification ausgrauen
 
 * Speichern/Einlesen von Einstellungen + Jason File (.nucleij)
@@ -80,6 +78,7 @@
 * ROI Auswahl anzeigen                                              03.02.17
 * x40 Analyzer fixen - Funktionierteh , mind. 16Gb Ram zuweisen     04.02.17
 * Texte auslagern (About, Help)                                     04.02.17
+* CSV Ausgabe Spalte abgeglichen                                    06.02.17
 
 
 ### 7. Wichtige Notizen ###
