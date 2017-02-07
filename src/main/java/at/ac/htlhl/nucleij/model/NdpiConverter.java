@@ -69,7 +69,6 @@ public class NdpiConverter extends Model {
     public void setFilesInDirectory(File[] filesInDirectory) {
         this.filesInDirectory = filesInDirectory;
     }
-
     // endregion other Getter&Setter
 
     // region Getter&Setter

@@ -51,23 +51,28 @@ public class AnalyzerConverterTask extends SwingWorker<String, String> {
         float numberNdpiFiles = ndpiConverter.getNumberNdpiFiles();
         float numberTifFiles = ndpiConverter.getNumberTifFiles();
 
+        // Schrittweite für ProgressBar bestimmen
         switch (choice) {
             case 0:
                 add = 100 / (numberNdpiFiles * 2 + numberTifFiles);
+                // Converting & analyzing your Scans...
                 taskDialog.setInstruction(bundle.getString("SwingworkerDialog.instruction.ca"));
                 break;
             case 1:
                 add = 100 / numberNdpiFiles;
+                // Converting your Scans...
                 taskDialog.setInstruction(bundle.getString("SwingworkerDialog.instruction.c"));
                 break;
             case 2:
                 add = 100 / numberTifFiles;
+                // Analyzing your Scans
                 taskDialog.setInstruction(bundle.getString("SwingworkerDialog.instruction.a"));
                 break;
             default:
                 add = 0;
         }
 
+        // Konvertieren
         if (choice != 2) {
             for (String ndpiListElement : ndpiFileList) {
                 if (!requestCancel) {
@@ -83,6 +88,7 @@ public class AnalyzerConverterTask extends SwingWorker<String, String> {
             }
         }
 
+        // Analysieren
         if (choice != 1) {
             tifFileList = glScanAnalyzer.getTifList();
             for (String tifListElement : tifFileList) {
@@ -134,12 +140,13 @@ public class AnalyzerConverterTask extends SwingWorker<String, String> {
             absolutePathofNdpiJar = jarPath.getAbsolutePath();
         } else {
             try {
+                // Get path of the ndpi-converter.jar
                 File newjarPath = new File(NucleiJ.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath());
 
-                //concat(File.separator).concat("NucleiJ-Data").concat(File.separator).concat("ndpi-converter.jar"));
+                // Wenn gefunden, Pfad setzen
                 if (newjarPath.exists()) {
                     absolutePathofNdpiJar = newjarPath.getParent().concat(File.separator).concat("NucleiJ-Data").concat(File.separator).concat("ndpi-converter.jar");
-                } else {
+                } else { // Ansonsten Filechooser öffnen und manuell auswählen
                     JFrame parent = ((SingleFrameApplication) Application.getInstance()).getMainFrame();
 
                     JFileChooser fileChooser = new JFileChooser();
@@ -170,11 +177,12 @@ public class AnalyzerConverterTask extends SwingWorker<String, String> {
                 case NdpiConverter.MAG_X5:
                     p = Runtime.getRuntime().exec(new String[]{"java", "-jar", absolutePathofNdpiJar, "-i", "0", "-c", "lzw", "-s", filePath, outputpath.getParent()});
                     break;
-                default:
+                default:    // Standard: X10
                     p = Runtime.getRuntime().exec(new String[]{"java", "-jar", absolutePathofNdpiJar, "-i", "2", "-c", "lzw", "-s", filePath, outputpath.getParent()});
                     break;
             }
 
+            // Print inputStream
             assert p != null;
             BufferedReader in = new BufferedReader(
                     new InputStreamReader(p.getInputStream()));
@@ -186,6 +194,7 @@ public class AnalyzerConverterTask extends SwingWorker<String, String> {
             e.printStackTrace();
         }
 
+        // Konvertierte Datei umbenennen und an Tif-Liste zum Analysieren anhängen
         String renameFileName = "_".concat(ndpiConverter.getMagnification().toLowerCase().concat(".ome.tif"));
         String newTifListElement = filePath.replace(".ndpi", renameFileName);
         glScanAnalyzer.addTifToList(newTifListElement);
