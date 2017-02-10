@@ -5,7 +5,10 @@
 * Consolenausgaben entfernen - Großteils erledigt
 * GNU Licence
 * Heatmap lässt sich auf linux nicht öffnen, vorher checken ob lut existiert
-* Wenn nur tif file eibgelesen, Magnification ausgrauen
+* Wenn nur tif file eingelesen, Magnification ausgrauen
+* Schrift unter Linux(auch Mac OS?) abgeschnitten, alle gpq 
+* Bei x40 Warning für Hardwareanforderungen
+* Error Handling wenn nichts Eingestellt ist und auf start gedrückt wird
 
 * Speichern/Einlesen von Einstellungen + Jason File (.nucleij)
 
