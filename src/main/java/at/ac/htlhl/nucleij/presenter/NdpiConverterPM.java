@@ -19,6 +19,7 @@ import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
 import static at.ac.htlhl.nucleij.model.NdpiConverter.MAG_X10;
+import static at.ac.htlhl.nucleij.model.NdpiConverter.MAG_X40;
 import static at.ac.htlhl.nucleij.model.NdpiConverter.MAG_X5;
 
 /**
@@ -59,6 +60,15 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter> {
                             bundle.getString("Error.text"),
                             JOptionPane.ERROR_MESSAGE);
                     ndpiConverter.setMagnification(MAG_X10);
+                }
+            }
+
+            if (NdpiConverter.PROPERTY_MAGNIFICATION.equals(evt.getPropertyName())) {
+                if (evt.getNewValue().toString().toLowerCase().equals(MAG_X40.toLowerCase())) {
+                    JOptionPane.showMessageDialog(((SingleFrameApplication) Application.getInstance()).getMainFrame(),
+                            bundle.getString("X40MagnificationWarning.text"),
+                            bundle.getString("X40MagnificationWarning.text2"),
+                            JOptionPane.WARNING_MESSAGE);
                 }
             }
         });
