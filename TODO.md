@@ -2,15 +2,16 @@
 # TO-DO Liste #
 
 ### 1. Erweiterungen: ###
-* GNU Licence
+* Manuelle Eingabe des Pfades wird nicht übernommen
+
+* Heatmap lässt sich auf linux nicht öffnen, vorher checken ob lut existiert
 * ~ Heatmap lässt sich auf linux nicht öffnen, vorher checken ob lut existiert
 * Wenn nur tif file eingelesen, Magnification ausgrauen
 * Schrift unter Linux(auch Mac OS?) abgeschnitten, alle gpq 
 
-* Speichern/Einlesen von Einstellungen + Jason File (.nucleij)
-
 ### DOKU ###
 * Automatisch Blockschaltbild generieren
+* Speichern/Einlesen von Einstellungen + Jason File (.nucleij)
 * PlantUML: svg - inkscope - emf
 * Listing mit Zeilennummern (Notepad++ Plugin, RTF)
 * Word-Abschnitte (wer hat was geschrieben, Fußzeile)
@@ -79,9 +80,11 @@
 * x40 Analyzer fixen - Funktionierteh , mind. 16Gb Ram zuweisen     04.02.17
 * Texte auslagern (About, Help)                                     04.02.17
 * CSV Ausgabe Spalte abgeglichen                                    06.02.17
-* Bei x40 Warning für Hardwareanforderungen                         11.02.17
-* Error Handling bei eingabelosen Start                             11.02.17
-* Consolenausgaben entfernen                                        11.02.17
+* Consolenausgaben entfernen                                        08.02.17
+* Bei x40 Warning für Hardwareanforderungen hinzufügen              11.02.17
+* Error Handling wenn nichts eingelesen und auf start gedrückt wird 11.02.17
+* GNU Licence                                                       11.02.17
+
 
 ### 7. Wichtige Notizen ###
 * Mergen: https://www.youtube.com/watch?v=j7wyS_gt0T0

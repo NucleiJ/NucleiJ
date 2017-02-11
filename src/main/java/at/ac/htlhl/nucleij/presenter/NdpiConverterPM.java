@@ -67,6 +67,15 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter> {
                             JOptionPane.WARNING_MESSAGE);
                 }
             }
+
+            if (NdpiConverter.PROPERTY_MAGNIFICATION.equals(evt.getPropertyName())) {
+                if (evt.getNewValue().toString().toLowerCase().equals(MAG_X40.toLowerCase())) {
+                    JOptionPane.showMessageDialog(((SingleFrameApplication) Application.getInstance()).getMainFrame(),
+                            bundle.getString("X40MagnificationWarning.text"),
+                            bundle.getString("X40MagnificationWarning.text2"),
+                            JOptionPane.WARNING_MESSAGE);
+                }
+            }
         });
     }
 

@@ -79,7 +79,7 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
         });
     }
 
-    public void analyzeConvertCheck(int numberNdpiFiles, int numberTifFiles) {
+    public void analyzeOrConvertCheck(int numberNdpiFiles, int numberTifFiles) {
         JFrame parentDialog = ((SingleFrameApplication) Application.getInstance()).getMainFrame();
 
         int choice;
@@ -126,24 +126,23 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
         }
 
         public void actionPerformed(ActionEvent e) {
-
-            long startTime = System.nanoTime();
-
             JFrame parentAnalyzerConverter = ((SingleFrameApplication) Application.getInstance()).getMainFrame();
-
             int numberNdpiFiles = ndpiConverter.getNumberNdpiFiles();
             int numberTifFiles = ndpiConverter.getNumberTifFiles();
 
-            if (numberNdpiFiles + numberTifFiles < 1)
-            {
+            // Check ob Dateien eingelesen wurden
+            if (numberNdpiFiles == 0 && numberTifFiles == 0) {
                 JOptionPane.showMessageDialog(((SingleFrameApplication) Application.getInstance()).getMainFrame(),
-                        bundle.getString("JOptionPaneMessageStart.text"),
-                        bundle.getString("StartError.text"),
+                        bundle.getString("ConvertActionError.text"),
+                        bundle.getString("ConvertActionError.text2"),
                         JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
-            analyzeConvertCheck(numberNdpiFiles, numberTifFiles);
+            long startTime = System.nanoTime();
+
+
+            analyzeOrConvertCheck(numberNdpiFiles, numberTifFiles);
 
             if (ndpiConverter.getChoice() == -1) {
                 return;
