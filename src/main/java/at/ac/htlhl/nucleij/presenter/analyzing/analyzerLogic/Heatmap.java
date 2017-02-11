@@ -122,15 +122,24 @@ public class Heatmap {
         assert newLutPath != null;
         String absolutePathofLUT = newLutPath.getParent().concat(File.separator).concat("NucleiJ-Data").
                 concat(File.separator).concat("lut").concat(File.separator).concat("RedGreenErben.lut");
-        try {
-            absolutePathofLUT = URLDecoder.decode(absolutePathofLUT, "UTF-8");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
+        if (new File (absolutePathofLUT).exists())
+        {
+            try {
+                absolutePathofLUT = URLDecoder.decode(absolutePathofLUT, "UTF-8");
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+            LOGGER.info("LUT-Path: " + absolutePathofLUT);
+            IJ.run("LUT... ", "open=".concat(absolutePathofLUT));
         }
-
-        LOGGER.info("LUT-Path: " + absolutePathofLUT);
-
-        IJ.run("LUT... ", "open=".concat(absolutePathofLUT));
+        else
+        {
+            LOGGER.info("LUT not found!");      // TODO Warnungs Dialog der Fehler anzeigt
+            if(absolutePathofLUT.contains(" "))
+            {
+                LOGGER.info("Space in absolute Path of LUT!");
+            }
+        }
 
         int heatmapWidth = heatmap_ip.getWidth();
         int heatmapHeight = heatmap_ip.getHeight();

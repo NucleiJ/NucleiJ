@@ -133,6 +133,16 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
 
             int numberNdpiFiles = ndpiConverter.getNumberNdpiFiles();
             int numberTifFiles = ndpiConverter.getNumberTifFiles();
+
+            if (numberNdpiFiles + numberTifFiles < 1)
+            {
+                JOptionPane.showMessageDialog(((SingleFrameApplication) Application.getInstance()).getMainFrame(),
+                        bundle.getString("JOptionPaneMessageStart.text"),
+                        bundle.getString("StartError.text"),
+                        JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
             analyzeConvertCheck(numberNdpiFiles, numberTifFiles);
 
             if (ndpiConverter.getChoice() == -1) {
