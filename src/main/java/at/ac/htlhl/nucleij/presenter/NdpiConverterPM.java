@@ -60,22 +60,17 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter> {
                             bundle.getString("ErrorX5.text"),
                             JOptionPane.ERROR_MESSAGE);
                     ndpiConverter.setMagnification(MAG_X10);
-                } else if (evt.getNewValue().toString().toLowerCase().equals(MAG_X40.toLowerCase())) {
-                    JOptionPane.showMessageDialog(((SingleFrameApplication) Application.getInstance()).getMainFrame(),
-                            bundle.getString("JOptionPaneMessageX40.text"),
-                            bundle.getString("WarningX40.text"),
-                            JOptionPane.WARNING_MESSAGE);
+                } else if (NdpiConverter.PROPERTY_MAGNIFICATION.equals(evt.getPropertyName())) {
+                    if (evt.getNewValue().toString().toLowerCase().equals(MAG_X40.toLowerCase())) {
+                        JOptionPane.showMessageDialog(((SingleFrameApplication) Application.getInstance()).getMainFrame(),
+                                bundle.getString("X40MagnificationWarning.text"),
+                                bundle.getString("X40MagnificationWarning.text2"),
+                                JOptionPane.WARNING_MESSAGE);
+                    }
                 }
             }
 
-            if (NdpiConverter.PROPERTY_MAGNIFICATION.equals(evt.getPropertyName())) {
-                if (evt.getNewValue().toString().toLowerCase().equals(MAG_X40.toLowerCase())) {
-                    JOptionPane.showMessageDialog(((SingleFrameApplication) Application.getInstance()).getMainFrame(),
-                            bundle.getString("X40MagnificationWarning.text"),
-                            bundle.getString("X40MagnificationWarning.text2"),
-                            JOptionPane.WARNING_MESSAGE);
-                }
-            }
+
         });
     }
 
