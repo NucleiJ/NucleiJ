@@ -18,29 +18,27 @@ public class GLScanAnalyzer extends Model {
     public static final String PROPERTY_HEATMAPQUALITY          = "heatmapquality";
     public static final String PROPERTY_ROIAREA                 = "roiarea";
     public static final String PROPERTY_SETROI                  = "setroi";
-
     // endregion
 
-    // region Fields
+    // region Kasseninterne Objekte
     // ************************************************************************
 
-    //eigene Werte
+    // Kasseninterne Objekte:
     private NdpiConverter ndpiConverter;
     private int           heatmapquality;
     private boolean       calculateandshowheatmap;
     private String        roiarea;
     private boolean       setroi;
 
-    //Listen fuer Pfade der zu verarbeitenden arbeiten
+    // Listen fuer Pfade der zu verarbeitenden Scans
     private List<String> ndpiList;
     private List<String> tifList;
 
-    //ROI Informationen:
+    // ROI Informationen:
     private int roiX;
     private int roiY;
     private int roiWidth;
     private int roiHeight;
-
     // endregion
 
     public GLScanAnalyzer(NdpiConverter ndpiConverter) {
@@ -48,6 +46,7 @@ public class GLScanAnalyzer extends Model {
 
         this.ndpiConverter = ndpiConverter;
 
+        // Initialisierungswerte setzen
         this.heatmapquality = 60;
         this.calculateandshowheatmap = false;
         this.setroi = false;
@@ -58,38 +57,17 @@ public class GLScanAnalyzer extends Model {
         this.roiHeight = 0;
     }
 
-    public List<String> getNdpiList() {
-        return ndpiList;
-    }
-
-    public void setNdpiList(List<String> ndpiList) {
-        this.ndpiList = ndpiList;
-    }
-
-    public List<String> getTifList() {
-        return tifList;
-    }
-
-    public void setTifList(List<String> tifList) {
-        this.tifList = tifList;
-    }
-
-    public void addTifToList(String path) {
-        tifList.add(path);
-    }
-
     // region Getter and Setter
     // ************************************************************************
     public int getHeatmapquality() {
         return heatmapquality;
     }
 
-    public void setHeatmapquality(int heatmapquality)
-    {
-        if (heatmapquality>100) {
-            heatmapquality=100;
-        } else if (heatmapquality <1) {
-            heatmapquality=1;
+    public void setHeatmapquality(int heatmapquality) {
+        if (heatmapquality > 100) {         // Falls User mehr als 100 eingibt
+            heatmapquality = 100;           // wird Wert auf 100 gesetzt
+        } else if (heatmapquality < 1) {    // bei einem zu kleinen Wert
+            heatmapquality = 1;             // wird Slider auf 1 gesetzt
         }
         int oldValue = this.heatmapquality;
         this.heatmapquality = heatmapquality;
@@ -97,7 +75,7 @@ public class GLScanAnalyzer extends Model {
     }
 
     public boolean isSetroi() {
-        if (roiX + roiY + roiHeight + roiWidth < 4) {
+        if (roiX + roiY + roiHeight + roiWidth < 4) {   //falsche Werte vorhanden?
             return false;
         } else {
             return setroi;
@@ -128,6 +106,26 @@ public class GLScanAnalyzer extends Model {
         String oldValue = this.roiarea;
         this.roiarea = roiarea;
         firePropertyChange(PROPERTY_ROIAREA, oldValue, roiarea);
+    }
+
+    public List<String> getNdpiList() {
+        return ndpiList;
+    }
+
+    public void setNdpiList(List<String> ndpiList) {
+        this.ndpiList = ndpiList;
+    }
+
+    public List<String> getTifList() {
+        return tifList;
+    }
+
+    public void setTifList(List<String> tifList) {
+        this.tifList = tifList;
+    }
+
+    public void addTifToList(String path) {
+        tifList.add(path);
     }
 
     public String getInputpath() {

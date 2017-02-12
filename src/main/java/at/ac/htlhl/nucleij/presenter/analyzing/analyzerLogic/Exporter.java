@@ -25,6 +25,7 @@ public class Exporter {
         return newDirectoryname;
     }
 
+    // exportiert die CSV Summary Datei
     public void csvSummary(String resultzeile, String path) {
         String exportReport = path.concat(File.separator + "Results.csv");
 
@@ -75,7 +76,7 @@ public class Exporter {
         // In Textdatei exportieren
         String ReportFilename = filename.replaceFirst("[.][^.]+$", "").concat("_Results.txt");        //Neuen Filenamen festlegen
 
-        //String exportReport = path + newDirectoryname + "\\" + ReportFilename;
+        // Pfad festlegen
         String exportReport = path.concat(File.separator + ReportFilename);
 
         File reportfile = new File(exportReport);
@@ -116,7 +117,7 @@ public class Exporter {
 
     /**
      * The summary method creates and exports a textfile (.txt), which contains and exports the summary of the
-     * analyzed results for the current Scan.
+     * analyzed results for all Scans.
      *
      * @param summaryStack   String, which contains the return value of the method getString() from the object
      *                       summaryStack.
@@ -151,6 +152,7 @@ public class Exporter {
             }
             BufferedWriter writeSummary = new BufferedWriter(fw);
             try {
+                // Kopfzeile einfuegen
                 writeSummary.write("Programm von Stefan Erben und Andreas Mattes. (c) 2016\r\nSummary erstellt am: " + todayTimeStamp + "\r\n");
             } catch (IOException e) {
                 e.printStackTrace();

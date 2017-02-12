@@ -5,6 +5,7 @@ import ij.process.ImageProcessor;
 /**
  * PictureAnalyzer class for the NucleiJ Analyzer
  *
+ * File: PictureAnalyzer.java
  * @author Stefan Erben
  * @version 1.0
  */
@@ -62,6 +63,7 @@ public class PictureAnalyzer {
                     original.putPixel(x, y, 0);
                 }
 
+                //moegliche Gewebepixel markieren
                 if (b > 225 && g > 225 && r > 225) {
                     k++;
                 }

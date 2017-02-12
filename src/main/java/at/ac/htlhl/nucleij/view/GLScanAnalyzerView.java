@@ -61,6 +61,7 @@ public class GLScanAnalyzerView extends JPanel {
     }
 
     private void initBinding() {
+        // Binding fuer die HeatmapCheckbox und die ROI Auswahl (Label)
         PresentationModelBinder binder = Binders.binderFor(glScanAnalyzerPM);
         binder.bindBeanProperty(GLScanAnalyzer.PROPERTY_CALCULATEANDSHOWHEATMAP).to(calculateandshowheatmapCheckBox);
         binder.bindBeanProperty(GLScanAnalyzer.PROPERTY_ROIAREA).to(roiDataLabel);

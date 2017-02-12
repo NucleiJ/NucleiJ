@@ -17,6 +17,6 @@ public class PictureCharacteristics {
 
     public double getTumorArea() {
         double tumorArea = gewebepixel / (magnification * magnification);
-        return tumorArea;
+        return tumorArea; //liefert deie berechnete Flaeche des Tumors
     }
 }
