@@ -6,7 +6,6 @@ import at.ac.htlhl.nucleij.presenter.analyzing.analyzerLogic.*;
 import ij.IJ;
 import ij.ImagePlus;
 import ij.Prefs;
-import ij.gui.ImageWindow;
 import ij.gui.Roi;
 import ij.measure.ResultsTable;
 import ij.plugin.filter.Analyzer;
@@ -21,18 +20,17 @@ import java.nio.file.Paths;
 import java.text.DecimalFormat;
 import java.util.Arrays;
 
-import static at.ac.htlhl.nucleij.model.NdpiConverter.MAG_X10;
 import static com.sun.xml.internal.ws.spi.db.BindingContextFactory.LOGGER;
 
 
 public class MainAnalyzer implements PlugInFilter {
 
     // Constants **************************************************************
-    public String  pixelSize;           //fuer min Partikelgroesse
-    public int     aufloesungSlider;    //fuer die aufloesung der heatmap
-    public boolean cropCheckbox;        //var ob das bild zugeschnitten werden soll
-    public boolean heatmapCheckbox;    //var ob heatmap erstellt werden soll
-    public boolean exportResultsCheckbox;     //var ob Results exportiert werden sollen
+    public String  pixelSize;                   //fuer min Partikelgroesse
+    public int     aufloesungSlider;            //fuer die aufloesung der heatmap
+    public boolean cropCheckbox;                //var ob das bild zugeschnitten werden soll
+    public boolean heatmapCheckbox;             //var ob heatmap erstellt werden soll
+    public boolean exportResultsCheckbox;       //var ob Results exportiert werden sollen
 
     StringAdder            summaryStack        = new StringAdder();
     StringAdder            csvSummaryStack     = new StringAdder();
@@ -61,45 +59,36 @@ public class MainAnalyzer implements PlugInFilter {
         this.dateiname = dateiname;
     }
 
-    public void createSummary() {
+    public void createSummary() {   //Erzeugt die beiden Summary-Files (.txt, .csv)
         startExporter.summary(summaryStack.getString(), path.getValue(), today.getCurrentTimeStamp());
         startExporter.csvSummary(csvSummaryStack.getString(), path.getValue());
     }
-
 
     public int setup(String arg, ImagePlus imp) {
         return NO_IMAGE_REQUIRED;       //Beim Start wird kein geladenes Bild benoetigt
     }
 
     public void run(ImageProcessor original_alt) {
-
-
-        path.setValue(glScanAnalyzer.getOutputpath());
-        startExporter.setnewDirectoryname(File.separator + "Output");
+        path.setValue(glScanAnalyzer.getOutputpath());                                  // Outputpfad holen
+        startExporter.setnewDirectoryname(File.separator + "Output");   // Name des Ordners: Output
         File outputPathFile = new File(glScanAnalyzer.getOutputpath());
-        outputPathFile.mkdirs();
+        outputPathFile.mkdirs();                                                        // Verzeichnis erstellen
 
-        csvSummaryStack.appendString("csvHeader");
-
+        csvSummaryStack.appendString("csvHeader");                     // Header fur csvDatei erstellen
         Path absoulterPfad = Paths.get(dateiname);
         file.setValue(absoulterPfad.getFileName().toString());
         String pfad = dateiname;
 
         //ist Scan in x10 oder x40 Aufloesung? -> Umrechnungsfaktor px=um
         boolean x10 = file.getValue().toLowerCase().contains("x10");
-        getUserInput(x10);     // x10 pixelsize oder x40?
+        getUserInput(x10);                                          // x10 pixelsize oder x40?
         double distance = settings.selectMagnificationAutomatically(pfad, x10);
         properties.setMagnification(distance);
 
         //gewaehltes Bild automatisch laden
         LOGGER.info(pfad);
-
         ImagePlus imp = IJ.openImage(pfad);
         imp.unlock();
-
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        //ImageWindow.setNextLocation((int) screenSize.getWidth() + 100000, (int) screenSize.getHeight() + 100000);
-
         imp.show();
 
         //set Measurements Properties
@@ -136,7 +125,7 @@ public class MainAnalyzer implements PlugInFilter {
     public void startParticleAnalyzer(ImagePlus markiert, String radiobox) {
         //Particle Analyzer parametrisieren und ausfuehren:
         IJ.run("Set Measurements...", "area standard centroid perimeter bounding shape redirect=None decimal=3");
-        String befehl = "size=$-Infinity pixel circularity=0.00-1.00 show=% ";    //display
+        String befehl = "size=$-50 pixel circularity=0.00-1.00 show=% ";    //display
 
         String endbefehl = befehl.replace("$", pixelSize);
         IJ.run("Analyze Particles...", endbefehl.replace("%", radiobox));
@@ -317,12 +306,9 @@ public class MainAnalyzer implements PlugInFilter {
     }
 
     public void getUserInput(boolean x10) {
-        if(!x10)
-        {
-            pixelSize = "34";
-        }
-        else
-        {
+        if (!x10) {
+            pixelSize = "8"; //egal, da in um angegeben
+        } else {
             pixelSize = "8";
         }
 
@@ -417,11 +403,13 @@ public class MainAnalyzer implements PlugInFilter {
         summaryString = summaryString + "\r\n\r\n" + ueberschrift + "\r\nFound nuclei:\t\t\t" + intcounter + "\r\nAdditional measured values:\r\n";
 
         //Werte auf 3 Kommastellen runden und anzeigen
-        DecimalFormat df = new DecimalFormat("#.###");
-        df.setRoundingMode(RoundingMode.HALF_UP);
+        DecimalFormat df = new DecimalFormat("#.000");
+        //df.setRoundingMode(RoundingMode.HALF_UP);
+        //df.setRoundingMode(RoundingMode.);
 
         //Ausgaben in einem ImageJ Log Fenster / speichern in String:
         csvSummaryString = csvSummaryString + file.getValue().replaceFirst("[.][^.]+$", "") + ";";
+        csvSummaryString = csvSummaryString + intcounter + ";";
 
         summaryString = summaryString + "gesamte Gewebeflaeche:\t\t" + df.format(properties.getTumorArea()) + " um2\r\n";
         csvSummaryString = csvSummaryString + df.format(properties.getTumorArea()) + ";";
@@ -437,9 +425,6 @@ public class MainAnalyzer implements PlugInFilter {
 
         summaryString = summaryString + "Arithmetic Perimeter:\t\t" + df.format(perim_arith) + " um\r\n";
         csvSummaryString = csvSummaryString + df.format(perim_arith) + ";";
-
-        summaryString = summaryString + "largest cell nucleus:\t\t" + df.format(area_max) + " um2\r\n";        //Ausgabe der Flaeche des groessten gefunden Zellkerns (auf 3 Kommastellen genau)
-        csvSummaryString = csvSummaryString + df.format(area_max) + ";";        //Ausgabe der Flaeche des groessten gefunden Zellkerns (auf 3 Kommastellen genau)
 
         summaryString = summaryString + "Arithmetic mean area:\t\t" + df.format(area_arith) + " um2\r\n";    //Ausgabe des arithmetishen Mittels aller Zellkernflaechen (auf 3 Kommastellen genau)
         csvSummaryString = csvSummaryString + df.format(area_arith) + ";";    //Ausgabe des arithmetishen Mittels aller Zellkernflaechen (auf 3 Kommastellen genau)
