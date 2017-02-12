@@ -93,7 +93,7 @@ public class Exporter {
         }
         BufferedWriter writeSummary = new BufferedWriter(fw);
         try {
-            writeSummary.write("Results fuer den Scan: " + filename.replaceFirst("[.][^.]+$", "") + "\n\n");
+            writeSummary.write("Results fuer den Scan: " + filename.replaceFirst("[.][^.]+$", "") + "\r\n\r\n");
         } catch (IOException e) {
             e.printStackTrace();
         }

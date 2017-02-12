@@ -180,7 +180,7 @@ public class MainAnalyzer implements PlugInFilter {
 
         //StringBuffer erstellen, in diesen werden nun alle Results gespeichert
         StringBuffer resultzeile = new StringBuffer();
-        resultzeile.append("Nummer\tArea\tPerim.\tRound\tWidth\tHeight\tX\t\t\tY\t\tCirc.\tSolidity\n");
+        resultzeile.append("Nummer\tArea\tPerim.\tRound\tWidth\tHeight\tX\t\tY\tCirc.\tSolidity\r\n");
 
         if (exportResultsCheckbox == true) {
             for (int x = 0; x <= counter - 1; x++) {
@@ -205,7 +205,7 @@ public class MainAnalyzer implements PlugInFilter {
                 resultzeile.append(n32.format(xCoordinate[x]) + "\t\t");
                 resultzeile.append(n32.format(yCoordinate[x]) + "\t");
                 resultzeile.append(n13.format(circ[x]) + "\t");
-                resultzeile.append(n13.format(solidity[x]) + "\n");
+                resultzeile.append(n13.format(solidity[x]) + "\r\n");
 
                 //arithmetischen Umfang berechnen
                 perim_all += perim[x];

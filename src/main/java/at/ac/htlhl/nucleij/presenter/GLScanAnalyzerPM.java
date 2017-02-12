@@ -347,19 +347,19 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
             }
             // Fehlerfaelle: Error Dialog anzeigen
             else if (ndpiConverter.getInputpath().contains(".ndpi") && ndpiConverter.getNumberNdpiFiles() == 1) {
-                TaskDialog dlg = new TaskDialog(((SingleFrameApplication) Application.getInstance()).getMainFrame(), bundle.getString("Warning.text"));
+                TaskDialog dlg = new TaskDialog(((SingleFrameApplication) Application.getInstance()).getMainFrame(), bundle.getString("Error.text"));
                 dlg.setInstruction(bundle.getString("ROInotavialbe.instruction.text"));
                 dlg.setText(bundle.getString("ROInotavialbe.info.text"));
                 dlg.setIcon(TaskDialog.StandardIcon.ERROR);
                 dlg.show();
             } else if (ndpiConverter.getNumberTifFiles() > 1 || ndpiConverter.getNumberNdpiFiles() > 0) {
-                TaskDialog dlg = new TaskDialog(((SingleFrameApplication) Application.getInstance()).getMainFrame(), bundle.getString("Warning.text"));
+                TaskDialog dlg = new TaskDialog(((SingleFrameApplication) Application.getInstance()).getMainFrame(), bundle.getString("Error.text"));
                 dlg.setInstruction(bundle.getString("ROInotavialbe.instruction.text"));
                 dlg.setText(bundle.getString("ROInotavialbe.info.text2"));
                 dlg.setIcon(TaskDialog.StandardIcon.ERROR);
                 dlg.show();
             } else {
-                TaskDialog dlg = new TaskDialog(((SingleFrameApplication) Application.getInstance()).getMainFrame(), bundle.getString("Warning.text"));
+                TaskDialog dlg = new TaskDialog(((SingleFrameApplication) Application.getInstance()).getMainFrame(), bundle.getString("Error.text"));
                 dlg.setInstruction(bundle.getString("ROInotavialbe.instruction.text"));
                 dlg.setText(bundle.getString("ROInotavialbe.info.text3"));
                 dlg.setIcon(TaskDialog.StandardIcon.ERROR);

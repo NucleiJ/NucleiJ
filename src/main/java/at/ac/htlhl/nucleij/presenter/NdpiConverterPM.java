@@ -57,7 +57,7 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter> {
                 if (evt.getNewValue().toString().toLowerCase().equals(MAG_X5.toLowerCase())) {
                     JOptionPane.showMessageDialog(((SingleFrameApplication) Application.getInstance()).getMainFrame(),
                             bundle.getString("JOptionPaneMessageX5.text"),
-                            bundle.getString("ErrorX5.text"),
+                            bundle.getString("Error.text"),
                             JOptionPane.ERROR_MESSAGE);
                     ndpiConverter.setMagnification(MAG_X10);
                 } else if (NdpiConverter.PROPERTY_MAGNIFICATION.equals(evt.getPropertyName())) {
