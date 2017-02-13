@@ -212,7 +212,7 @@ public class Heatmap {
         }
 
         //Speichern der Heatmap
-        String resultsFilename = filename.replaceFirst("[.][^.]+$", "") + "_Heatmap.tif";        //Neuen Filenamen festlegen
+        String resultsFilename = filename.replaceFirst("[.][^.]+$", "") + "_Heatmap.png";        //Neuen Filenamen festlegen
         String exportHeatmap = path + File.separator + resultsFilename;
 
         IJ.run(heatmapTmp, "Median...", "radius=2");
