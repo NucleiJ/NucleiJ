@@ -216,7 +216,7 @@ public class Heatmap {
         String exportHeatmap = path + File.separator + resultsFilename;
 
         IJ.run(heatmapTmp, "Median...", "radius=2");
-        IJ.saveAs(heatmapTmp, "Tif", exportHeatmap);
+        IJ.saveAs(heatmapTmp, "Png", exportHeatmap);
 
         DecimalFormat d3 = new DecimalFormat("#.##");
         d3.setRoundingMode(RoundingMode.HALF_UP);
