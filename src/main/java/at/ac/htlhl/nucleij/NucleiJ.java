@@ -12,6 +12,7 @@ import com.ezware.dialog.task.TaskDialogs;
 import org.jdesktop.application.*;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.EventObject;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -116,8 +117,21 @@ public class NucleiJ extends SingleFrameApplication
         } catch (IllegalAccessException | InstantiationException | ClassNotFoundException e) {
             e.printStackTrace();
         }
+
+
+        setUIFont (new javax.swing.plaf.FontUIResource("Roboto", Font.PLAIN,12));
+
     }
 
+    public static void setUIFont (javax.swing.plaf.FontUIResource f){
+        java.util.Enumeration keys = UIManager.getDefaults().keys();
+        while (keys.hasMoreElements()) {
+            Object key = keys.nextElement();
+            Object value = UIManager.get (key);
+            if (value != null && value instanceof javax.swing.plaf.FontUIResource)
+                UIManager.put (key, f);
+        }
+    }
 
     public static void main(String ... args)
     {
