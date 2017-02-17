@@ -27,7 +27,6 @@ public class MainPM extends PresentationModel<Main> {
     private Action saveAction;
     private Action aboutAction;
     private Action exitAction;
-    private Action newAction;
     private Action infoAction;
 
     private GLScanAnalyzerPM glScanAnalyzerPM;
@@ -43,7 +42,6 @@ public class MainPM extends PresentationModel<Main> {
         saveAction = new SaveAction();
         aboutAction = new AboutAction();
         exitAction = new ExitAction();
-        newAction = new NewAction();
         infoAction = new InfoAction();
     }
 
@@ -69,10 +67,6 @@ public class MainPM extends PresentationModel<Main> {
 
     public Action getExitAction() {
         return exitAction;
-    }
-
-    public Action getNewAction() {
-        return newAction;
     }
 
     public Action getInfoAction() {
@@ -127,11 +121,6 @@ public class MainPM extends PresentationModel<Main> {
         }
     }
 
-    private void newClass() {
-        ndpiConverterPM.setBean(new NdpiConverter());
-        glScanAnalyzerPM.setBean(new GLScanAnalyzer(ndpiConverterPM.getBean()));
-    }
-
     private JFileChooser createPreparedFileChooser() {
         JFileChooser chooser = new JFileChooser();
         chooser.setAcceptAllFileFilterUsed(false);
@@ -160,12 +149,6 @@ public class MainPM extends PresentationModel<Main> {
     private class ExitAction extends AbstractAction {
         public void actionPerformed(ActionEvent e) {
             Application.getInstance().exit(e);
-        }
-    }
-
-    private class NewAction extends AbstractAction {
-        public void actionPerformed(ActionEvent e) {
-            newClass();
         }
     }
 

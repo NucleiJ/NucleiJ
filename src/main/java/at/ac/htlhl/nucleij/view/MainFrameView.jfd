@@ -14,11 +14,6 @@ new FormModel {
 				name: "toolBar1"
 				"floatable": false
 				add( new FormComponent( "javax.swing.JButton" ) {
-					name: "button1"
-					"text": "New"
-					"action": new FormReference( "newAction" )
-				} )
-				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "button2"
 					"text": "Open..."
 					"action": new FormReference( "loadAction" )
@@ -45,11 +40,6 @@ new FormModel {
 				add( new FormContainer( "javax.swing.JMenu", new FormLayoutManager( class javax.swing.JMenu ) ) {
 					name: "settingsMenu"
 					"text": new FormMessage( null, "MainFrame.settingsMenu.text" )
-					add( new FormComponent( "javax.swing.JMenuItem" ) {
-						name: "newMenuItem"
-						"text": "text"
-						"action": new FormReference( "newAction" )
-					} )
 					add( new FormComponent( "javax.swing.JMenuItem" ) {
 						name: "openMenuItem"
 						"text": "text"
@@ -128,17 +118,6 @@ new FormModel {
 			"location": new java.awt.Point( 230, 315 )
 		} )
 		add( new FormNonVisual( "javax.swing.AbstractAction" ) {
-			name: "newAction"
-			"$action.Name": new FormMessage( null, "MainFrame.newAction.Name" )
-			"$action.SmallIcon": new com.jformdesigner.model.SwingIcon( 0, "/at/ac/htlhl/nucleij/resources/images/i16x16/document-new.png" )
-			"$action.SwingLargeIconKey": new com.jformdesigner.model.SwingIcon( 0, "/at/ac/htlhl/nucleij/resources/images/i32x32/document-new.png" )
-			auxiliary() {
-				"JavaCodeGenerator.customCreate": true
-			}
-		}, new FormLayoutConstraints( null ) {
-			"location": new java.awt.Point( 10, 365 )
-		} )
-		add( new FormNonVisual( "javax.swing.AbstractAction" ) {
 			name: "infoAction"
 			"$action.SmallIcon": new com.jformdesigner.model.SwingIcon( 0, "/at/ac/htlhl/nucleij/resources/images/i16x16/help-browser.png" )
 			"$action.SwingLargeIconKey": new com.jformdesigner.model.SwingIcon( 0, "/at/ac/htlhl/nucleij/resources/images/i32x32/help-browser.png" )
@@ -147,7 +126,7 @@ new FormModel {
 				"JavaCodeGenerator.customCreate": true
 			}
 		}, new FormLayoutConstraints( null ) {
-			"location": new java.awt.Point( 90, 365 )
+			"location": new java.awt.Point( 295, 315 )
 		} )
 	}
 }

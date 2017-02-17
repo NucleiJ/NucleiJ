@@ -19,14 +19,12 @@ public class MainFrameView extends JFrame {
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     private JMenuBar menuBar1;
     private JMenu settingsMenu;
-    private JMenuItem newMenuItem;
     private JMenuItem openMenuItem;
     private JMenuItem saveMenuItem;
     private JMenuItem exitMenuItem;
     private JMenu helpMenu;
     private JMenuItem aboutMenuItem;
     private JToolBar toolBar1;
-    private JButton button1;
     private JButton button2;
     private JButton button3;
     private JPanel hSpacer2;
@@ -35,7 +33,6 @@ public class MainFrameView extends JFrame {
     private AbstractAction saveAction;
     private AbstractAction aboutAction;
     private AbstractAction exitAction;
-    private AbstractAction newAction;
     private AbstractAction infoAction;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 
@@ -53,7 +50,6 @@ public class MainFrameView extends JFrame {
         saveAction = (AbstractAction) mainPM.getSaveAction();
         aboutAction = (AbstractAction) mainPM.getAboutAction();
         exitAction = (AbstractAction) mainPM.getExitAction();
-        newAction = (AbstractAction) mainPM.getNewAction();
         infoAction = (AbstractAction) mainPM.getInfoAction();
     }
 
@@ -64,14 +60,12 @@ public class MainFrameView extends JFrame {
         ResourceBundle bundle = ResourceBundle.getBundle("at.ac.htlhl.nucleij.resources.i18n.mainview");
         menuBar1 = new JMenuBar();
         settingsMenu = new JMenu();
-        newMenuItem = new JMenuItem();
         openMenuItem = new JMenuItem();
         saveMenuItem = new JMenuItem();
         exitMenuItem = new JMenuItem();
         helpMenu = new JMenu();
         aboutMenuItem = new JMenuItem();
         toolBar1 = new JToolBar();
-        button1 = new JButton();
         button2 = new JButton();
         button3 = new JButton();
         hSpacer2 = new JPanel(null);
@@ -90,11 +84,6 @@ public class MainFrameView extends JFrame {
             //======== settingsMenu ========
             {
                 settingsMenu.setText(bundle.getString("MainFrame.settingsMenu.text"));
-
-                //---- newMenuItem ----
-                newMenuItem.setText("text");
-                newMenuItem.setAction(newAction);
-                settingsMenu.add(newMenuItem);
 
                 //---- openMenuItem ----
                 openMenuItem.setText("text");
@@ -130,11 +119,6 @@ public class MainFrameView extends JFrame {
         //======== toolBar1 ========
         {
             toolBar1.setFloatable(false);
-
-            //---- button1 ----
-            button1.setText("New");
-            button1.setAction(newAction);
-            toolBar1.add(button1);
 
             //---- button2 ----
             button2.setText("Open...");
@@ -178,11 +162,6 @@ public class MainFrameView extends JFrame {
         exitAction.putValue(Action.NAME, bundle.getString("MainFrame.exitAction.Name"));
         exitAction.putValue(Action.LARGE_ICON_KEY, null);
         exitAction.putValue(Action.SMALL_ICON, null);
-
-        //---- newAction ----
-        newAction.putValue(Action.NAME, bundle.getString("MainFrame.newAction.Name"));
-        newAction.putValue(Action.SMALL_ICON, new ImageIcon(getClass().getResource("/at/ac/htlhl/nucleij/resources/images/i16x16/document-new.png")));
-        newAction.putValue(Action.LARGE_ICON_KEY, new ImageIcon(getClass().getResource("/at/ac/htlhl/nucleij/resources/images/i32x32/document-new.png")));
 
         //---- infoAction ----
         infoAction.putValue(Action.SMALL_ICON, new ImageIcon(getClass().getResource("/at/ac/htlhl/nucleij/resources/images/i16x16/help-browser.png")));
