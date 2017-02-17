@@ -33,4 +33,11 @@ public class Main extends Model {
         return ndpiConverter;
     }
 
+    public void setGlScanAnalyzer(GLScanAnalyzer glScanAnalyzer) {
+        this.glScanAnalyzer = glScanAnalyzer;
+    }
+
+    public void setNdpiConverter(NdpiConverter ndpiConverter) {
+        this.ndpiConverter = ndpiConverter;
+    }
 }

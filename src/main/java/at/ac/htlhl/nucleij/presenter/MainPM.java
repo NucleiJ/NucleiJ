@@ -120,6 +120,7 @@ public class MainPM extends PresentationModel<Main> {
             try {
                 Main loadedMain = AppContext.getInstance().getJsonMapper().readValue(chooser.getSelectedFile(), Main.class);
                 glScanAnalyzerPM.setBean(loadedMain.getGLScanAnalyzer());
+                ndpiConverterPM.setBean(loadedMain.getNdpiConverter());
             } catch (IOException ex) {
                 TaskDialogs.showException(ex);
             }

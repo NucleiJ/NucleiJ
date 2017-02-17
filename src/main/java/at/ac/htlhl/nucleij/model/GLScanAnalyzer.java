@@ -41,6 +41,11 @@ public class GLScanAnalyzer extends Model {
     private int roiHeight;
     // endregion
 
+    public GLScanAnalyzer()
+    {
+        this(null);
+    }
+
     public GLScanAnalyzer(NdpiConverter ndpiConverter) {
         super();
 
