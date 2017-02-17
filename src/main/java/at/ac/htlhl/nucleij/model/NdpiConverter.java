@@ -1,5 +1,6 @@
 package at.ac.htlhl.nucleij.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.jgoodies.binding.beans.Model;
 import com.jgoodies.forms.layout.ColumnSpec;
 
@@ -38,6 +39,7 @@ public class NdpiConverter extends Model {
     }
 
     // region other Getter&Setter
+    @JsonIgnore
     public int getChoice() {
         return choice;
     }
@@ -46,6 +48,7 @@ public class NdpiConverter extends Model {
         this.choice = choice;
     }
 
+    @JsonIgnore
     public int getNumberNdpiFiles() {
         return numberNdpiFiles;
     }
@@ -54,6 +57,7 @@ public class NdpiConverter extends Model {
         this.numberNdpiFiles = numberNdpiFiles;
     }
 
+    @JsonIgnore
     public int getNumberTifFiles() {
         return numberTifFiles;
     }
@@ -62,6 +66,7 @@ public class NdpiConverter extends Model {
         this.numberTifFiles = numberTifFiles;
     }
 
+    @JsonIgnore
     public File[] getFilesInDirectory() {
         return filesInDirectory;
     }
@@ -82,6 +87,7 @@ public class NdpiConverter extends Model {
         firePropertyChange(PROPERTY_MAGNIFICATION, oldValue, magnification);
     }
 
+    @JsonIgnore
     public String getInputpath() {
         return inputpath;
     }

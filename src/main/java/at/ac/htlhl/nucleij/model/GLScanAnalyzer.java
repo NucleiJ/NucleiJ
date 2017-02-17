@@ -1,6 +1,8 @@
 package at.ac.htlhl.nucleij.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.jgoodies.binding.beans.Model;
+import jdk.nashorn.internal.ir.annotations.Ignore;
 
 import java.util.List;
 
@@ -18,6 +20,14 @@ public class GLScanAnalyzer extends Model {
     public static final String PROPERTY_HEATMAPQUALITY          = "heatmapquality";
     public static final String PROPERTY_ROIAREA                 = "roiarea";
     public static final String PROPERTY_SETROI                  = "setroi";
+
+    public static final String PROPERTY_INPUTPATH                  = "inputpath";
+
+    public static final String PROPERTY_ROIX      = "roiX";
+    public static final String PROPERTY_ROIY      = "roiY";
+    public static final String PROPERTY_ROIHEIGHT = "roiHeight";
+    public static final String PROPERTY_ROIWIDTH  = "roiWidth";
+
     // endregion
 
     // region Kasseninterne Objekte
@@ -33,6 +43,8 @@ public class GLScanAnalyzer extends Model {
     // Listen fuer Pfade der zu verarbeitenden Scans
     private List<String> ndpiList;
     private List<String> tifList;
+    private String inputpath;
+    private String outputpath;
 
     // ROI Informationen:
     private int roiX;
@@ -41,8 +53,7 @@ public class GLScanAnalyzer extends Model {
     private int roiHeight;
     // endregion
 
-    public GLScanAnalyzer()
-    {
+    public GLScanAnalyzer() {
         this(null);
     }
 
@@ -103,6 +114,7 @@ public class GLScanAnalyzer extends Model {
         firePropertyChange(PROPERTY_CALCULATEANDSHOWHEATMAP, oldValue, calculateandshowheatmap);
     }
 
+    @JsonIgnore
     public String getRoiarea() {
         return roiarea;
     }
@@ -113,6 +125,7 @@ public class GLScanAnalyzer extends Model {
         firePropertyChange(PROPERTY_ROIAREA, oldValue, roiarea);
     }
 
+    @JsonIgnore
     public List<String> getNdpiList() {
         return ndpiList;
     }
@@ -121,6 +134,7 @@ public class GLScanAnalyzer extends Model {
         this.ndpiList = ndpiList;
     }
 
+    @JsonIgnore
     public List<String> getTifList() {
         return tifList;
     }
@@ -133,22 +147,32 @@ public class GLScanAnalyzer extends Model {
         tifList.add(path);
     }
 
+    @JsonIgnore
     public String getInputpath() {
         return ndpiConverter.getInputpath();
     }
 
+    public void setInputpath(String inputpath)
+    {
+        this.inputpath = inputpath;
+    }
+
+    @JsonIgnore
     public String getOutputpath() {
         return ndpiConverter.getOutputpath();
     }
 
+    @JsonIgnore
     public int getRoiX() {
         return roiX;
     }
 
+    @JsonIgnore
     public void setRoiX(int roiX) {
         this.roiX = roiX;
     }
 
+    @JsonIgnore
     public int getRoiY() {
         return roiY;
     }
@@ -157,6 +181,7 @@ public class GLScanAnalyzer extends Model {
         this.roiY = roiY;
     }
 
+    @JsonIgnore
     public int getRoiWidth() {
         return roiWidth;
     }
@@ -165,6 +190,7 @@ public class GLScanAnalyzer extends Model {
         this.roiWidth = roiWidth;
     }
 
+    @JsonIgnore
     public int getRoiHeight() {
         return roiHeight;
     }
@@ -172,6 +198,10 @@ public class GLScanAnalyzer extends Model {
     public void setRoiHeight(int roiHeight) {
         this.roiHeight = roiHeight;
 
+    }
+
+    public void setOutputpath(String outputpath) {
+        this.outputpath = outputpath;
     }
 
     // endregion

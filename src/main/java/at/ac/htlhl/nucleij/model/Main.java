@@ -25,19 +25,21 @@ public class Main extends Model {
     }
 
     // Getters
-    public GLScanAnalyzer getGLScanAnalyzer() {
-        return glScanAnalyzer;
-    }
 
     public NdpiConverter getNdpiConverter() {
         return ndpiConverter;
     }
 
-    public void setGlScanAnalyzer(GLScanAnalyzer glScanAnalyzer) {
-        this.glScanAnalyzer = glScanAnalyzer;
-    }
 
     public void setNdpiConverter(NdpiConverter ndpiConverter) {
         this.ndpiConverter = ndpiConverter;
+    }
+
+    public GLScanAnalyzer getGlScanAnalyzer() {
+        return glScanAnalyzer;
+    }
+
+    public void setGlScanAnalyzer(GLScanAnalyzer glScanAnalyzer) {
+        this.glScanAnalyzer = glScanAnalyzer;
     }
 }

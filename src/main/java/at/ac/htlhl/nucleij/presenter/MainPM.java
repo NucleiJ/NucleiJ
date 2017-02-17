@@ -36,8 +36,8 @@ public class MainPM extends PresentationModel<Main> {
     public MainPM(Main main) {
         super(main);
 
-        glScanAnalyzerPM = new GLScanAnalyzerPM(main.getGLScanAnalyzer(), main.getNdpiConverter());
-        ndpiConverterPM = new NdpiConverterPM(main.getNdpiConverter(), main.getGLScanAnalyzer());
+        glScanAnalyzerPM = new GLScanAnalyzerPM(main.getGlScanAnalyzer(), main.getNdpiConverter());
+        ndpiConverterPM = new NdpiConverterPM(main.getNdpiConverter(), main.getGlScanAnalyzer());
 
         loadAction = new LoadAction();
         saveAction = new SaveAction();
@@ -119,7 +119,7 @@ public class MainPM extends PresentationModel<Main> {
         if (chooser.showOpenDialog(parent) == JFileChooser.APPROVE_OPTION) {
             try {
                 Main loadedMain = AppContext.getInstance().getJsonMapper().readValue(chooser.getSelectedFile(), Main.class);
-                glScanAnalyzerPM.setBean(loadedMain.getGLScanAnalyzer());
+                glScanAnalyzerPM.setBean(loadedMain.getGlScanAnalyzer());
                 ndpiConverterPM.setBean(loadedMain.getNdpiConverter());
             } catch (IOException ex) {
                 TaskDialogs.showException(ex);
