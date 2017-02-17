@@ -49,6 +49,8 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter> {
         inputPathAction = new InputPathAction();
         outputPathAction = new OutputPathAction();
 
+        setComponentEnabled(NdpiConverter.PROPERTY_INPUTPATH, false);
+
         ndpiConverter.addPropertyChangeListener(evt -> {
             // Ausgabe jeder Aenderung
             LOGGER.info("Property name=" + evt.getPropertyName() + ", oldValue=" + evt.getOldValue() + ", newValue=" + evt.getNewValue());

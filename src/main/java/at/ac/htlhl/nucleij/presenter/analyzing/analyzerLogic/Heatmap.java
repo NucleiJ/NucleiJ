@@ -1,6 +1,7 @@
 package at.ac.htlhl.nucleij.presenter.analyzing.analyzerLogic;
 
 import at.ac.htlhl.nucleij.NucleiJ;
+import com.ezware.dialog.task.TaskDialog;
 import com.ezware.dialog.task.TaskDialogs;
 import ij.IJ;
 import ij.ImagePlus;
@@ -122,6 +123,7 @@ public class Heatmap {
         assert newLutPath != null;
         String absolutePathofLUT = newLutPath.getParent().concat(File.separator).concat("NucleiJ-Data").
                 concat(File.separator).concat("lut").concat(File.separator).concat("RedGreenErben.lut");
+
         if (new File (absolutePathofLUT).exists())
         {
             try {
@@ -134,12 +136,13 @@ public class Heatmap {
         }
         else
         {
-            LOGGER.info("LUT not found!");      // TODO Warnungs Dialog der Fehler anzeigt
+            LOGGER.warning("LUT not found!");      // TODO Warnungs Dialog der Fehler anzeigt
             if(absolutePathofLUT.contains(" "))
             {
-                LOGGER.info("Space in absolute Path of LUT!");
+                LOGGER.warning("Space in absolute Path of LUT!");
             }
         }
+
 
         int heatmapWidth = heatmap_ip.getWidth();
         int heatmapHeight = heatmap_ip.getHeight();
@@ -242,6 +245,17 @@ public class Heatmap {
         }
 
         heatmapTmp.changes = false;
+
+        if(absolutePathofLUT.contains(" "))
+        {
+            LOGGER.warning("Space in absolute Path of LUT!");
+            TaskDialog dlg = new TaskDialog(((SingleFrameApplication) Application.getInstance()).getMainFrame(), bundle.getString("Error.text"));
+            dlg.setInstruction(bundle.getString("LUT.Dialog.instruction"));
+            dlg.setText(bundle.getString("LUT.Dialog.text"));
+            dlg.setIcon(TaskDialog.StandardIcon.ERROR);
+            dlg.show();
+        }
+
         heatmapTmp.close();
 
         return;

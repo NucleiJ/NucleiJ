@@ -2,11 +2,9 @@
 # TO-DO Liste #
 
 ### 1. Erweiterungen: ###
-* Manuelle Eingabe des Pfades wird nicht übernommen
 
-* Heatmap lässt sich auf linux nicht öffnen, vorher checken ob lut existiert
-* ~ Heatmap lässt sich auf linux nicht öffnen, vorher checken ob lut existiert
 * Wenn nur tif file eingelesen, Magnification ausgrauen
+* alle ausgelagerten Texte uebersetzen
 * Schrift unter Linux(auch Mac OS?) abgeschnitten, alle gpq 
 
 ### DOKU ###
@@ -84,7 +82,8 @@
 * Bei x40 Warning für Hardwareanforderungen hinzufügen              11.02.17
 * Error Handling wenn nichts eingelesen und auf start gedrückt wird 11.02.17
 * GNU Licence                                                       11.02.17
-
+* Heatmap - LUT fix                                                 13.02.17
+* Manuelle Eingabe des Pfades wird übernommen                       13.02.17
 
 ### 7. Wichtige Notizen ###
 * Mergen: https://www.youtube.com/watch?v=j7wyS_gt0T0
