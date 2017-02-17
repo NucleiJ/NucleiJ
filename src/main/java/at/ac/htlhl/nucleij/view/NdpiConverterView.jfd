@@ -43,7 +43,7 @@ new FormModel {
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 7
 				"gridY": 3
-				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints LEFT
+				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
 			} )
 			add( new FormComponent( "com.jformdesigner.designer.wrapper.JGoodiesFormsSeparator" ) {
 				name: "separator4"
@@ -76,7 +76,7 @@ new FormModel {
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 7
 				"gridY": 7
-				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints LEFT
+				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
 			} )
 			add( new FormComponent( "com.jformdesigner.designer.wrapper.JGoodiesFormsSeparator" ) {
 				name: "separator2"

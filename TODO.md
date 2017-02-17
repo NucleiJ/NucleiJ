@@ -3,13 +3,12 @@
 
 ### 1. Erweiterungen: ###
 
-* ROI löschen weiter rechts rücken
 * MAC Icons werden nicht angezeigt
 * Info Text zu klein (Größer machen)
 * Table Summary nicht editable machen
 
 * Schriften unter Linux immer noch abgeschnitten
-* ProgressBar dicker machen
+* ProgressBar dicker machen // Noch checken!
  
 
 ### DOKU ###
@@ -80,6 +79,7 @@
 * Manuelle Eingabe des Pfades wird übernommen                       13.02.17
 * alle ausgelagerten Texte uebersetzen                              17.02.17
 * HTML-Link entferenen zu normalen Text                             17.02.17
+* ROI löschen weiter rechts rücken                                  17.02.17
 
 ### 7. Wichtige Notizen ###
 * Dialog Meister: https://mcoj.wordpress.com/category/java/

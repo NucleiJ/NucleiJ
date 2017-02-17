@@ -1,4 +1,4 @@
-JFDML JFormDesigner: "6.0.0.0.71" Java: "1.8.0_112" encoding: "UTF-8"
+JFDML JFormDesigner: "5.2.5.1.342" Java: "1.8.0_112-release" encoding: "UTF-8"
 
 new FormModel {
 	"i18n.bundlePackage": "at.ac.htlhl.nucleij.resources.i18n"
@@ -37,6 +37,7 @@ new FormModel {
 			} )
 			menuBar: new FormContainer( "javax.swing.JMenuBar", new FormLayoutManager( class javax.swing.JMenuBar ) ) {
 				name: "menuBar1"
+				"minimumSize": new java.awt.Dimension( 14, 5 )
 				add( new FormContainer( "javax.swing.JMenu", new FormLayoutManager( class javax.swing.JMenu ) ) {
 					name: "settingsMenu"
 					"text": new FormMessage( null, "MainFrame.settingsMenu.text" )

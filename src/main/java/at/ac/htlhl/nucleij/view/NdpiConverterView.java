@@ -82,7 +82,7 @@ public class NdpiConverterView extends JPanel {
         //---- inputPathButton ----
         inputPathButton.setAction(inputPathAction);
         inputPathButton.setActionCommand(bundle.getString("NdpiConverterView.inputOutputPathAction.name"));
-        add(inputPathButton, CC.xy(7, 3, CC.LEFT, CC.DEFAULT));
+        add(inputPathButton, CC.xy(7, 3, CC.FILL, CC.DEFAULT));
         add(separator4, CC.xywh(1, 5, 9, 1, CC.DEFAULT, CC.FILL));
 
         //---- exportFolder ----
@@ -96,7 +96,7 @@ public class NdpiConverterView extends JPanel {
         //---- outputPathButton ----
         outputPathButton.setAction(outputPathAction);
         outputPathButton.setActionCommand(bundle.getString("NdpiConverterView.inputOutputPathAction.name"));
-        add(outputPathButton, CC.xy(7, 7, CC.LEFT, CC.DEFAULT));
+        add(outputPathButton, CC.xy(7, 7, CC.FILL, CC.DEFAULT));
         add(separator2, CC.xywh(1, 9, 9, 1, CC.DEFAULT, CC.FILL));
 
         //---- setMagnificationLabel ----

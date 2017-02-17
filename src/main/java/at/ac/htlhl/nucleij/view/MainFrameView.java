@@ -80,6 +80,7 @@ public class MainFrameView extends JFrame {
 
         //======== menuBar1 ========
         {
+            menuBar1.setMinimumSize(new Dimension(14, 5));
 
             //======== settingsMenu ========
             {

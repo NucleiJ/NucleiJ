@@ -127,13 +127,13 @@ public class GLScanAnalyzerView extends JPanel {
 
         //---- selctroiButton ----
         selctroiButton.setAction(setRoiAction);
-        add(selctroiButton, CC.xywh(3, 9, 4, 1, CC.LEFT, CC.DEFAULT));
+        add(selctroiButton, CC.xy(3, 9, CC.FILL, CC.DEFAULT));
 
         //---- deleteRoiButton ----
         deleteRoiButton.setBorderPainted(false);
         deleteRoiButton.setAction(deleteroiAction);
         deleteRoiButton.setIcon(new ImageIcon(getClass().getResource("/at/ac/htlhl/nucleij/resources/images/i16x16/process-stop.png")));
-        add(deleteRoiButton, CC.xy(5, 9, CC.LEFT, CC.DEFAULT));
+        add(deleteRoiButton, CC.xy(5, 9, CC.RIGHT, CC.DEFAULT));
         add(roiDataLabel, CC.xy(7, 9));
 
         //---- startAnalyzerButton ----
