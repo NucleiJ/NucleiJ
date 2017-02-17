@@ -3,9 +3,14 @@
 
 ### 1. Erweiterungen: ###
 
-* Wenn nur tif file eingelesen, Magnification ausgrauen
-* alle ausgelagerten Texte uebersetzen
-* Schrift unter Linux(auch Mac OS?) abgeschnitten, alle gpq 
+* ROI löschen weiter rechts rücken
+* MAC Icons werden nicht angezeigt
+* Info Text zu klein (Größer machen)
+* Table Summary nicht editable machen
+
+* Schriften unter Linux immer noch abgeschnitten
+* ProgressBar dicker machen
+ 
 
 ### DOKU ###
 * Automatisch Blockschaltbild generieren
@@ -34,18 +39,7 @@
 * Tell me: NO BUGS!
 
 
-### 4.Diverses ###
-* Warum ist am Ende von jedem Listenelement in ndpiFileList und tifFileList eine "]"??
-
-
-### 5.Einstellungen ###
-* Import external LUT
-* Verschiedene LUTs
-* Standart Filechooserpath einstellbar 
-* Schriftgröße
-
-
-### 6. Abgeschlossene ###
+### 4. Abgeschlossene ###
 * CSV-Summary entbuggen                                             22.01.17
 * SwingWorker zusammenlegen zu einem                                23.01.17
 * neuer Konverter implementiert                                     23.01.17
@@ -84,6 +78,8 @@
 * GNU Licence                                                       11.02.17
 * Heatmap - LUT fix                                                 13.02.17
 * Manuelle Eingabe des Pfades wird übernommen                       13.02.17
+* alle ausgelagerten Texte uebersetzen                              17.02.17
+* HTML-Link entferenen zu normalen Text                             17.02.17
 
 ### 7. Wichtige Notizen ###
 * Mergen: https://www.youtube.com/watch?v=j7wyS_gt0T0

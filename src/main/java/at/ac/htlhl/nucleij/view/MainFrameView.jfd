@@ -9,6 +9,7 @@ new FormModel {
 			name: "this"
 			"iconImage": new com.jformdesigner.model.SwingIcon( 0, "/at/ac/htlhl/nucleij/resources/images/icon_png_v1.png" )
 			"minimumSize": new java.awt.Dimension( 600, 600 )
+			"resizable": false
 			add( new FormContainer( "javax.swing.JToolBar", new FormLayoutManager( class javax.swing.JToolBar ) ) {
 				name: "toolBar1"
 				"floatable": false

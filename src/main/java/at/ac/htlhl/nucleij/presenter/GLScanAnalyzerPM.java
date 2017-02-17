@@ -157,6 +157,7 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
             TaskDialog taskDialogAnalyzerConverter = new TaskDialog(parentAnalyzerConverter, bundle.getString("AnalyzerConverterDialog.title"));
 
             JProgressBar progressBarAnalyzerConverter = new JProgressBar(0, 100);
+            progressBarAnalyzerConverter.setMinimumSize(new Dimension(progressBarAnalyzerConverter.getWidth(), 25));
             progressBarAnalyzerConverter.setStringPainted(true);
             progressBarAnalyzerConverter.setValue(0);
 
@@ -231,6 +232,7 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
             };
             DefaultTableModel modelSpezific = new DefaultTableModel(dataSpezific, columnNamesSpezific);
             JTable tableSpezific = new JTable(modelSpezific);
+
 
             int i = 0;
             for (String ndpiElement : glScanAnalyzer.getNdpiList()) {

@@ -83,7 +83,7 @@ public class MainPM extends PresentationModel<Main> {
         JFrame parentAbout = ((SingleFrameApplication) Application.getInstance()).getMainFrame();
         ResourceBundle bundle = ResourceBundle.getBundle("at.ac.htlhl.nucleij.resources.i18n.dialogs");
 
-        JLabel text = new JLabel("<html> <a href = http://www.htl-hl.ac.at>http://www.htl-hl.ac.at</a> </html>", JLabel.RIGHT);
+        JLabel text = new JLabel("http://www.htl-hl.ac.at", JLabel.RIGHT);
 
         TaskDialog taskDialogAbout = new TaskDialog(parentAbout, bundle.getString("AboutDialog.title"));
         taskDialogAbout.setInstruction(bundle.getString("AboutDialog.instructionMessage"));
