@@ -3,6 +3,7 @@ package at.ac.htlhl.nucleij.view;
 import java.awt.*;
 import java.util.*;
 import javax.swing.*;
+import javax.swing.border.*;
 
 import at.ac.htlhl.nucleij.model.NdpiConverter;
 import at.ac.htlhl.nucleij.presenter.NdpiConverterPM;
@@ -68,11 +69,11 @@ public class NdpiConverterView extends JPanel {
             "right:68dlu, $lcgap, 63dlu, $lcgap, 31dlu:grow, $lcgap, 24dlu, $lcgap, default",
             "2*(18dlu, $lgap), default, 2*($lgap, pref), $lgap, 17dlu"));
         ((FormLayout)getLayout()).setRowGroups(new int[][] {{1, 5, 7, 9}});
-        add(separator3, CC.xywh(1, 1, 9, 1));
+        add(separator3, CC.xywh(1, 1, 9, 1, CC.DEFAULT, CC.FILL));
 
         //---- folderDirectoryLabel ----
         folderDirectoryLabel.setText(bundle.getString("NdpiConverterView.inputFolderDirectory.text"));
-        add(folderDirectoryLabel, CC.xy(1, 3, CC.RIGHT, CC.CENTER));
+        add(folderDirectoryLabel, CC.xy(1, 3, CC.RIGHT, CC.FILL));
 
         //---- inputDirTextField ----
         inputDirTextField.setEditable(false);
@@ -82,11 +83,11 @@ public class NdpiConverterView extends JPanel {
         inputPathButton.setAction(inputPathAction);
         inputPathButton.setActionCommand(bundle.getString("NdpiConverterView.inputOutputPathAction.name"));
         add(inputPathButton, CC.xy(7, 3, CC.LEFT, CC.DEFAULT));
-        add(separator4, CC.xywh(1, 5, 9, 1));
+        add(separator4, CC.xywh(1, 5, 9, 1, CC.DEFAULT, CC.FILL));
 
         //---- exportFolder ----
         exportFolder.setText(bundle.getString("NdpiConverterView.OutputFolder.text"));
-        add(exportFolder, CC.xy(1, 7, CC.RIGHT, CC.CENTER));
+        add(exportFolder, CC.xy(1, 7, CC.RIGHT, CC.FILL));
 
         //---- outputDirTextField ----
         outputDirTextField.setEditable(false);
@@ -96,11 +97,11 @@ public class NdpiConverterView extends JPanel {
         outputPathButton.setAction(outputPathAction);
         outputPathButton.setActionCommand(bundle.getString("NdpiConverterView.inputOutputPathAction.name"));
         add(outputPathButton, CC.xy(7, 7, CC.LEFT, CC.DEFAULT));
-        add(separator2, CC.xywh(1, 9, 9, 1));
+        add(separator2, CC.xywh(1, 9, 9, 1, CC.DEFAULT, CC.FILL));
 
         //---- setMagnificationLabel ----
         setMagnificationLabel.setText(bundle.getString("NdpiConverterView.setMagnificationLabel.text"));
-        add(setMagnificationLabel, CC.xy(1, 11, CC.RIGHT, CC.CENTER));
+        add(setMagnificationLabel, CC.xy(1, 11, CC.RIGHT, CC.FILL));
 
         //======== panel1 ========
         {
