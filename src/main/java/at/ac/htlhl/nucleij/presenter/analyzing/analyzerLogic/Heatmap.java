@@ -119,7 +119,7 @@ public class Heatmap {
         } catch (URISyntaxException e) {
             TaskDialogs.inform(((SingleFrameApplication) Application.getInstance()).getMainFrame(), bundle.getString("LUT.Dialog.instruction"), bundle.getString("LUT.Dialog.text"));
         }
-        //TODO Abstand in Pfad, wieso nicht moeglich?
+
         assert newLutPath != null;
         String absolutePathofLUT = newLutPath.getParent().concat(File.separator).concat("NucleiJ-Data").
                 concat(File.separator).concat("lut").concat(File.separator).concat("RedGreenErben.lut");
@@ -136,7 +136,7 @@ public class Heatmap {
         }
         else
         {
-            LOGGER.warning("LUT not found!");      // TODO Warnungs Dialog der Fehler anzeigt
+            LOGGER.warning("LUT not found!");
             if(absolutePathofLUT.contains(" "))
             {
                 LOGGER.warning("Space in absolute Path of LUT!");
