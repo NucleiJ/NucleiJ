@@ -39,7 +39,7 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
 
     private Action analyzeAction;
     private Action calculateandshowheatmapAction;
-    private Action setroiAction;
+    private Action selectroiAction;
     private Action deleteroiAction;
 
     private GLScanAnalyzer glScanAnalyzer;
@@ -53,11 +53,11 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
 
         analyzeAction = new AnalyzeAction();
         calculateandshowheatmapAction = new CalculateandshowheatmapAction();
-        setroiAction = new SetroiAction();
+        selectroiAction = new SelectroiAction();
         deleteroiAction = new DeleteroiAction();
 
         setComponentEnabled(GLScanAnalyzer.PROPERTY_HEATMAPQUALITY, getBean().isCalculateandshowheatmap());
-        setComponentEnabled(GLScanAnalyzer.PROPERTY_SETROI, glScanAnalyzer.isSetroi());
+        setComponentEnabled(GLScanAnalyzer.PROPERTY_SELECTROI, glScanAnalyzer.isSelectroi());
 
         // Ausgabe jeder Aenderung, mit Aenderungen verbundene Aktionen definieren
         glScanAnalyzer.addPropertyChangeListener(new PropertyChangeListener() {
@@ -119,8 +119,8 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
         return calculateandshowheatmapAction;
     }
 
-    public Action getSetroiAction() {
-        return setroiAction;
+    public Action getSelectroiAction() {
+        return selectroiAction;
     }
 
     //region Getter
@@ -254,6 +254,7 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
             }
 
             TableColumn column = tableSpezific.getColumnModel().getColumn(0);
+            tableSpezific.setEnabled(false);
             column.setPreferredWidth(700);      // Tabellenbreite setzen
 
             // Summary Dialog ausgeben:
@@ -274,8 +275,8 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
         }
     }
 
-    private class SetroiAction extends AbstractAction {
-        public SetroiAction() {
+    private class SelectroiAction extends AbstractAction {
+        public SelectroiAction() {
             super();
         }
 
@@ -330,7 +331,7 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
                         glScanAnalyzer.setRoiY((int) roiRec.getY());
                         glScanAnalyzer.setRoiHeight((int) roiRec.getHeight());
                         glScanAnalyzer.setRoiWidth((int) roiRec.getWidth());
-                        glScanAnalyzer.setSetroi(true);
+                        glScanAnalyzer.setSelectroi(true);
                         glScanAnalyzer.setRoiarea((int) roiRec.getX() + " | " + (int) roiRec.getY() + " | " + (int) roiRec.getWidth() + " | " + (int) roiRec.getHeight());
                     } else {
                         // sonst einen Fehlerdialog anzeigen, dass ROI zu klein ist
@@ -388,7 +389,7 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
         public void actionPerformed(ActionEvent e) {
             // Zuruecksetzen der ROI
             glScanAnalyzer.setRoiarea("");
-            glScanAnalyzer.setSetroi(false);
+            glScanAnalyzer.setSelectroi(false);
         }
     }
 

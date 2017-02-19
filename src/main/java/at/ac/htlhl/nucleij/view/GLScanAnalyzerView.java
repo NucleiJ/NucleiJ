@@ -56,7 +56,7 @@ public class GLScanAnalyzerView extends JPanel {
     private void createUIComponents() {
         analyzeAction = (AbstractAction) glScanAnalyzerPM.getAnalyzeAction();
         calculateandshowheatmapAction = (AbstractAction) glScanAnalyzerPM.getCalculateandshowheatmapAction();
-        setRoiAction = (AbstractAction) glScanAnalyzerPM.getSetroiAction();
+        setRoiAction = (AbstractAction) glScanAnalyzerPM.getSelectroiAction();
         deleteroiAction = (AbstractAction) glScanAnalyzerPM.getDeleteroiAction();
     }
 

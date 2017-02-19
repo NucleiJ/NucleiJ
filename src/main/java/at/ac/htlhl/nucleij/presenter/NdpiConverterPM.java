@@ -121,9 +121,9 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter> {
 
                 // Enable/Disable ROI
                 if (ndpiConverter.getNumberTifFiles() == 1 && ndpiConverter.getNumberNdpiFiles() == 0) {
-                    glScanAnalyzer.setSetroi(true);
+                    glScanAnalyzer.setSelectroi(true);
                 } else {
-                    glScanAnalyzer.setSetroi(false);
+                    glScanAnalyzer.setSelectroi(false);
                 }
 
                 // Warnung wenn mehr als 1 Ordner ausgewählt

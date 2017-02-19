@@ -12,7 +12,6 @@ import ij.plugin.filter.Analyzer;
 import ij.plugin.filter.PlugInFilter;
 import ij.process.ImageProcessor;
 
-import java.awt.*;
 import java.io.File;
 import java.math.RoundingMode;
 import java.nio.file.Path;
@@ -319,7 +318,7 @@ public class MainAnalyzer implements PlugInFilter {
         }
 
         exportResultsCheckbox = true;
-        cropCheckbox = glScanAnalyzer.isSetroi();
+        cropCheckbox = glScanAnalyzer.isSelectroi();
         heatmapCheckbox = glScanAnalyzer.isCalculateandshowheatmap();
         aufloesungSlider = glScanAnalyzer.getHeatmapquality();
     }
