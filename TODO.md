@@ -5,6 +5,8 @@
 
 * MAC Icons werden nicht angezeigt
 * Info Text zu klein (Größer machen)
+* Slider Textfeld nicht mehr enabled? 
+* Texte bei TXT Export auslagern (TODO)
 
 * Schriften unter Linux immer noch abgeschnitten
 * ProgressBar dicker machen // Noch checken!

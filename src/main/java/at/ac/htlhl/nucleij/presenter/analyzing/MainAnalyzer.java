@@ -398,7 +398,7 @@ public class MainAnalyzer implements PlugInFilter {
         int intcounter = (int) counter;
 
         //Ausgabe in String -> Summary-File
-        String summaryString = "";
+        String summaryString = "";          //TODO Texte auslagern
         summaryString = summaryString + "\r\n\r\n" + ueberschrift + "\r\nFound nuclei:\t\t\t" + intcounter + "\r\nAdditional measured values:\r\n";
 
         //Werte auf 3 Kommastellen runden und anzeigen

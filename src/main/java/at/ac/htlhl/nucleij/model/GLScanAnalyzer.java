@@ -20,19 +20,12 @@ public class GLScanAnalyzer extends Model {
     public static final String PROPERTY_ROIAREA                 = "roiarea";
     public static final String PROPERTY_SELECTROI               = "selectroi";
 
-    public static final String PROPERTY_INPUTPATH                  = "inputpath";
-
-    public static final String PROPERTY_ROIX      = "roiX";
-    public static final String PROPERTY_ROIY      = "roiY";
-    public static final String PROPERTY_ROIHEIGHT = "roiHeight";
-    public static final String PROPERTY_ROIWIDTH  = "roiWidth";
-
     // endregion
 
-    // region Kasseninterne Objekte
+    // region Klasseninterne Objekte
     // ************************************************************************
 
-    // Kasseninterne Objekte:
+    // Klasseninterne Objekte:
     private NdpiConverter ndpiConverter;
     private int           heatmapquality;
     private boolean       calculateandshowheatmap;
@@ -42,8 +35,8 @@ public class GLScanAnalyzer extends Model {
     // Listen fuer Pfade der zu verarbeitenden Scans
     private List<String> ndpiList;
     private List<String> tifList;
-    private String inputpath;
-    private String outputpath;
+    private String       inputpath;
+    private String       outputpath;
 
     // ROI Informationen:
     private int roiX;
@@ -151,14 +144,17 @@ public class GLScanAnalyzer extends Model {
         return ndpiConverter.getInputpath();
     }
 
-    public void setInputpath(String inputpath)
-    {
+    public void setInputpath(String inputpath) {
         this.inputpath = inputpath;
     }
 
     @JsonIgnore
     public String getOutputpath() {
         return ndpiConverter.getOutputpath();
+    }
+
+    public void setOutputpath(String outputpath) {
+        this.outputpath = outputpath;
     }
 
     @JsonIgnore
@@ -197,10 +193,6 @@ public class GLScanAnalyzer extends Model {
     public void setRoiHeight(int roiHeight) {
         this.roiHeight = roiHeight;
 
-    }
-
-    public void setOutputpath(String outputpath) {
-        this.outputpath = outputpath;
     }
 
     // endregion

@@ -4,14 +4,45 @@ import ij.process.ImageProcessor;
 
 /**
  * PictureAnalyzer class for the NucleiJ Analyzer
- *
+ * <p>
  * File: PictureAnalyzer.java
+ *
  * @author Stefan Erben
  * @version 1.0
  */
 
 public class PictureAnalyzer {
-    //fehlerhafte (einzlene) Pixel ignorieren und Originalpixelwert wiederherstellen
+    //UP zum Detektieren von bestimmten blauen Pixeln
+    public int detectCellPixels(ImageProcessor original, int w, int h) {
+        //Zellkerne erkennen
+
+        int k = 0;            //Countervar
+        for (int x = 0; x <= w; x++) {
+            for (int y = 0; y <= h; y++) {
+                int c = original.getPixel(x, y);
+
+                //Farbwerte aus RGB-Pixel herausfiltern
+                int r = (c & 0xff0000) >> 16;
+                int g = (c & 0x00ff00) >> 8;
+                int b = (c & 0x0000ff);
+
+                //moegliche Zellkerne markieren
+                if (b > 70 && b < 160 && r < 120) {
+                    original.putPixel(x, y, 0);
+                }
+
+                //Anzahl der Pixel  markieren
+                if (b > 225 && g > 225 && r > 225) {
+                    k++;
+                }
+            }
+        }
+        //Berechnen der Anzahl der Gewebepixel:
+        int gewebepixel = (w * h) - k;
+        return gewebepixel;
+    }
+
+    //fehlerhafte (einzelne) Pixel ignorieren und Originalpixelwert wiederherstellen
     public void ignoreSinglePixels(ImageProcessor original, ImageProcessor copy, boolean x10, int w, int h) {
         for (int x = 0; x <= w; x++) {
             for (int y = 0; y <= h; y++) {
@@ -42,36 +73,6 @@ public class PictureAnalyzer {
             }
         }
         return;
-    }
-
-    //UP zum Detektieren von bestimmten blauen Pixeln
-    public int detectCellPixels(ImageProcessor original, int w, int h) {
-        //Zellkerne erkennen
-
-        int k = 0;            //Countervar
-        for (int x = 0; x <= w; x++) {
-            for (int y = 0; y <= h; y++) {
-                int c = original.getPixel(x, y);
-
-                //Farbwerte aus RGB-Pixel herausfiltern
-                int r = (c & 0xff0000) >> 16;
-                int g = (c & 0x00ff00) >> 8;
-                int b = (c & 0x0000ff);
-
-                //moegliche Zellkerne markieren
-                if (b > 70 && b < 160 && r < 120) {
-                    original.putPixel(x, y, 0);
-                }
-
-                //moegliche Gewebepixel markieren
-                if (b > 225 && g > 225 && r > 225) {
-                    k++;
-                }
-            }
-        }
-        //Berechnen der Anzahl der Gewebepixel:
-        int gewebepixel = (w * h) - k;
-        return gewebepixel;
     }
 
     //Maske ueber Originalbild legen und Endbild erzeugen
