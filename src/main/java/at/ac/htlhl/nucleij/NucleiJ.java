@@ -14,6 +14,7 @@ import org.jdesktop.application.*;
 import javax.swing.*;
 import java.awt.*;
 import java.util.EventObject;
+import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -38,7 +39,7 @@ public class NucleiJ extends SingleFrameApplication
     @Override
     protected void initialize(String[] args) {
         // Force application to use given language setting instead of using OS default
-        //Locale.setDefault(Locale.ENGLISH);
+        Locale.setDefault(Locale.ENGLISH);
 
         // Load NucleiJ.properties file
         ApplicationContext ctxt = getContext();
