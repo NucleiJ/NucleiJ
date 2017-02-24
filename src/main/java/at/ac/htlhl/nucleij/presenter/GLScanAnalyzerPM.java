@@ -154,7 +154,7 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
             }
 
             // Analyseprozess Dialog
-            TaskDialog taskDialogAnalyzerConverter = new TaskDialog(parentAnalyzerConverter, bundle.getString("AnalyzerConverterDialog.title"));
+            TaskDialog taskDialogAnalyzerConverter = new TaskDialog(((SingleFrameApplication) Application.getInstance()).getMainFrame(), bundle.getString("AnalyzerConverterDialog.title"));
 
             JProgressBar progressBarAnalyzerConverter = new JProgressBar(0, 100);
             progressBarAnalyzerConverter.setMinimumSize(new Dimension(progressBarAnalyzerConverter.getWidth(), 25));
