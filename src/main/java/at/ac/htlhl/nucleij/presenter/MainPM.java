@@ -13,8 +13,7 @@ import org.jdesktop.application.SingleFrameApplication;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.util.ResourceBundle;
 
 /**
@@ -84,7 +83,34 @@ public class MainPM extends PresentationModel<Main> {
         taskDialogAbout.setText(bundle.getString("AboutDialog.text"));
         taskDialogAbout.setFixedComponent(text);
 
-        taskDialogAbout.setCommands(TaskDialog.StandardCommand.CANCEL);
+        JTextArea textArea = new JTextArea(8,50);
+        textArea.setEditable(false);
+
+        BufferedReader in = null;
+        try {
+            in = new BufferedReader(new FileReader(new File("gpl.txt")));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        String line = null;
+        try {
+            line = in.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        while(line != null){
+            textArea.append(line + "\n");
+            try {
+                line = in.readLine();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        textArea.setCaretPosition(0);
+        JScrollPane test = new JScrollPane(textArea);
+        taskDialogAbout.getDetails().setExpandableComponent(test);
+
+        taskDialogAbout.setCommands(TaskDialog.StandardCommand.OK);
         taskDialogAbout.setIcon(TaskDialog.StandardIcon.INFO);
 
         taskDialogAbout.show();

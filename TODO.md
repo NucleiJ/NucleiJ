@@ -3,13 +3,7 @@
 
 ### 1. Erweiterungen: ###
 
-* MAC Icons werden nicht angezeigt
-* Info Text zu klein (Größer machen)
-* Slider Textfeld nicht mehr enabled? 
-* Texte bei TXT Export auslagern (TODO)
-
-* Schriften unter Linux immer noch abgeschnitten
-* ProgressBar dicker machen // Noch checken!
+* MAC Icon werden nicht angezeigt
  
 
 ### DOKU ###
@@ -82,6 +76,10 @@
 * Speichern/Einlesen von Einstellungen + Jason File (.nucleij)      17.02.17
 * ROI löschen weiter rechts rücken                                  17.02.17
 * Table Summary nicht editable machen                               19.02.17
+* Slider Textfeld nicht mehr enabled?                               24.02.17
+* Texte bei TXT Export auslagern (TODO)                             24.02.17
+* Schriften unter Linux immer noch abgeschnitten                    24.02.17
+* ProgressBar dicker machen // Noch checken!                        24.02.17
 
 
 ### 7. Wichtige Notizen ###
