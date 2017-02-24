@@ -18,7 +18,7 @@
 * PlantUML: svg - inkscope - emf
 * Listing mit Zeilennummern (Notepad++ Plugin, RTF)
 * Word-Abschnitte (wer hat was geschrieben, Fußzeile)
-* Zitieren: [JGO17a] 
+* Zitieren: [JGO17a]
 * Serife Schriftart
 
 
