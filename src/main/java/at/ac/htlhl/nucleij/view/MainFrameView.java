@@ -73,7 +73,7 @@ public class MainFrameView extends JFrame {
 
         //======== this ========
         setIconImage(new ImageIcon(getClass().getResource("/at/ac/htlhl/nucleij/resources/images/icon_png_v1.png")).getImage());
-        setMinimumSize(new Dimension(600, 600));
+        setMinimumSize(new Dimension(600, 400));
         setResizable(false);
         Container contentPane = getContentPane();
         contentPane.setLayout(new BorderLayout());
