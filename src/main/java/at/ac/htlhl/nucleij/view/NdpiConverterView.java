@@ -67,9 +67,8 @@ public class NdpiConverterView extends JPanel {
         setBorder(Borders.DIALOG);
         setLayout(new FormLayout(
             "right:68dlu, $lcgap, 63dlu, $lcgap, 31dlu:grow, $lcgap, 24dlu, $lcgap, default",
-            "2*(18dlu, $lgap), default, 2*($lgap, pref), $lgap, 17dlu"));
-        ((FormLayout)getLayout()).setRowGroups(new int[][] {{1, 5, 7, 9}});
-        add(separator3, CC.xywh(1, 1, 9, 1, CC.DEFAULT, CC.FILL));
+            "14dlu, $lgap, 18dlu, $pgap, default, $lgap, pref, $pgap, pref, $lgap, 17dlu"));
+        add(separator3, CC.xywh(1, 1, 9, 1, CC.DEFAULT, CC.BOTTOM));
 
         //---- folderDirectoryLabel ----
         folderDirectoryLabel.setText(bundle.getString("NdpiConverterView.inputFolderDirectory.text"));
@@ -83,7 +82,7 @@ public class NdpiConverterView extends JPanel {
         inputPathButton.setAction(inputPathAction);
         inputPathButton.setActionCommand(bundle.getString("NdpiConverterView.inputOutputPathAction.name"));
         add(inputPathButton, CC.xy(7, 3, CC.FILL, CC.DEFAULT));
-        add(separator4, CC.xywh(1, 5, 9, 1, CC.DEFAULT, CC.FILL));
+        add(separator4, CC.xywh(1, 5, 9, 1, CC.DEFAULT, CC.BOTTOM));
 
         //---- exportFolder ----
         exportFolder.setText(bundle.getString("NdpiConverterView.OutputFolder.text"));
@@ -97,7 +96,7 @@ public class NdpiConverterView extends JPanel {
         outputPathButton.setAction(outputPathAction);
         outputPathButton.setActionCommand(bundle.getString("NdpiConverterView.inputOutputPathAction.name"));
         add(outputPathButton, CC.xy(7, 7, CC.FILL, CC.DEFAULT));
-        add(separator2, CC.xywh(1, 9, 9, 1, CC.DEFAULT, CC.FILL));
+        add(separator2, CC.xywh(1, 9, 9, 1, CC.DEFAULT, CC.BOTTOM));
 
         //---- setMagnificationLabel ----
         setMagnificationLabel.setText(bundle.getString("NdpiConverterView.setMagnificationLabel.text"));

@@ -6,6 +6,7 @@ package at.ac.htlhl.nucleij.view;
 
 import java.awt.*;
 import javax.swing.*;
+import com.jgoodies.forms.layout.*;
 import net.miginfocom.swing.*;
 
 /**
@@ -31,8 +32,11 @@ public class CombinedView extends JPanel
         //======== this ========
         setLayout(new MigLayout(
             "hidemode 3",
+            // columns
             "[grow,fill]",
-            "[grow]0[grow]"));
+            // rows
+            "[]0" +
+            "[]"));
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 }
