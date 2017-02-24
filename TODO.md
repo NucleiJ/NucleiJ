@@ -14,7 +14,6 @@
 
 ### DOKU ###
 * Automatisch Blockschaltbild generieren
-* Speichern/Einlesen von Einstellungen + Jason File (.nucleij)
 * PlantUML: svg - inkscope - emf
 * Listing mit Zeilennummern (Notepad++ Plugin, RTF)
 * Word-Abschnitte (wer hat was geschrieben, Fußzeile)
@@ -80,8 +79,10 @@
 * Manuelle Eingabe des Pfades wird übernommen                       13.02.17
 * alle ausgelagerten Texte uebersetzen                              17.02.17
 * HTML-Link entferenen zu normalen Text                             17.02.17
+* Speichern/Einlesen von Einstellungen + Jason File (.nucleij)      17.02.17
 * ROI löschen weiter rechts rücken                                  17.02.17
 * Table Summary nicht editable machen                               19.02.17
+
 
 ### 7. Wichtige Notizen ###
 * Dialog Meister: https://mcoj.wordpress.com/category/java/

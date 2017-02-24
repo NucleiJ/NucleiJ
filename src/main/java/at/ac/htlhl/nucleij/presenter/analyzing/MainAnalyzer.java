@@ -18,6 +18,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.DecimalFormat;
 import java.util.Arrays;
+import java.util.ResourceBundle;
 
 import static com.sun.xml.internal.ws.spi.db.BindingContextFactory.LOGGER;
 
@@ -48,6 +49,8 @@ public class MainAnalyzer implements PlugInFilter {
     private String radiobox = "Nothing";
     private String dateiname;
     private String csvSummaryString = "";
+
+    private ResourceBundle bundle = ResourceBundle.getBundle("at.ac.htlhl.nucleij.resources.i18n.dialogs");
 
     public MainAnalyzer(GLScanAnalyzer glScanAnalyzer, NdpiConverter ndpiConverter) {
         this.glScanAnalyzer = glScanAnalyzer;
@@ -398,8 +401,9 @@ public class MainAnalyzer implements PlugInFilter {
         int intcounter = (int) counter;
 
         //Ausgabe in String -> Summary-File
-        String summaryString = "";          //TODO Texte auslagern
-        summaryString = summaryString + "\r\n\r\n" + ueberschrift + "\r\nFound nuclei:\t\t\t" + intcounter + "\r\nAdditional measured values:\r\n";
+        String summaryString = "";
+        //summaryString = summaryString + "\r\n\r\n" + ueberschrift + "\r\nFound nuclei:\t\t\t" + intcounter + "\r\nAdditional measured values:\r\n";
+        summaryString = summaryString + "\r\n\r\n" + ueberschrift + "\r\n" + bundle.getString("Txt.FoundNuclei.text") + intcounter + "\r\n" + bundle.getString("Txt.AddValues.text") + "\r\n";
 
         //Werte auf 3 Kommastellen runden und anzeigen
         DecimalFormat df = new DecimalFormat("#.000");
@@ -410,25 +414,25 @@ public class MainAnalyzer implements PlugInFilter {
         csvSummaryString = csvSummaryString + file.getValue().replaceFirst("[.][^.]+$", "") + ";";
         csvSummaryString = csvSummaryString + intcounter + ";";
 
-        summaryString = summaryString + "gesamte Gewebeflaeche:\t\t" + df.format(properties.getTumorArea()) + " um2\r\n";
+        summaryString = summaryString + bundle.getString("Txt.GesGewebeA.text") + df.format(properties.getTumorArea()) + " um2\r\n";
         csvSummaryString = csvSummaryString + df.format(properties.getTumorArea()) + ";";
 
-        summaryString = summaryString + "Total area of all nuclei:\t" + df.format(area_all) + " um2\r\n";
+        summaryString = summaryString + bundle.getString("Txt.TotalArea.text") + df.format(area_all) + " um2\r\n";
         csvSummaryString = csvSummaryString + df.format(area_all) + ";";
 
-        summaryString = summaryString + "Zellkernflaeche in %:\t\t" + df.format(100 / (properties.getTumorArea() / area_all)) + "%\r\n";
+        summaryString = summaryString  + bundle.getString("Txt.NucleiArea.text") + df.format(100 / (properties.getTumorArea() / area_all)) + "%\r\n";
         csvSummaryString = csvSummaryString + df.format(100 / (properties.getTumorArea() / area_all)) + ";";
 
-        summaryString = summaryString + "Zellkerne pro mm2:\t\t" + df.format((intcounter / properties.getTumorArea()) * 1000000) + "\r\n";        //Zellkerne 1 / Tumorfläche in um2 / 1000000
+        summaryString = summaryString  + bundle.getString("Txt.NucleipMm.text") + df.format((intcounter / properties.getTumorArea()) * 1000000) + "\r\n";        //Zellkerne 1 / Tumorfläche in um2 / 1000000
         csvSummaryString = csvSummaryString + df.format((intcounter / properties.getTumorArea()) * 1000000) + ";";        //Zellkerne 1 / Tumorfläche in um2 / 1000000
 
-        summaryString = summaryString + "Arithmetic Perimeter:\t\t" + df.format(perim_arith) + " um\r\n";
+        summaryString = summaryString  + bundle.getString("Txt.ArithPeri.text") + df.format(perim_arith) + " um\r\n";
         csvSummaryString = csvSummaryString + df.format(perim_arith) + ";";
 
-        summaryString = summaryString + "Arithmetic mean area:\t\t" + df.format(area_arith) + " um2\r\n";    //Ausgabe des arithmetishen Mittels aller Zellkernflaechen (auf 3 Kommastellen genau)
+        summaryString = summaryString + bundle.getString("Txt.ArithArea.text") + df.format(area_arith) + " um2\r\n";    //Ausgabe des arithmetishen Mittels aller Zellkernflaechen (auf 3 Kommastellen genau)
         csvSummaryString = csvSummaryString + df.format(area_arith) + ";";    //Ausgabe des arithmetishen Mittels aller Zellkernflaechen (auf 3 Kommastellen genau)
 
-        summaryString = summaryString + "Median area:\t\t\t" + df.format(median) + " um2\r\n";                //Ausgabe des Medianwerts aller Zellkernfleachen (auf 3 Kommastellen genau)
+        summaryString = summaryString + bundle.getString("Txt.MedianArea.text") + df.format(median) + " um2\r\n";                //Ausgabe des Medianwerts aller Zellkernfleachen (auf 3 Kommastellen genau)
         csvSummaryString = csvSummaryString + df.format(median) + ";\n";                //Ausgabe des Medianwerts aller Zellkernfleachen (auf 3 Kommastellen genau)
 
         //An StringStack uebergeben
