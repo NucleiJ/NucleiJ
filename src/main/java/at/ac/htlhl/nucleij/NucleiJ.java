@@ -11,6 +11,7 @@ import at.ac.htlhl.nucleij.view.NdpiConverterView;
 import com.ezware.dialog.task.TaskDialogs;
 import org.jdesktop.application.*;
 
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.EventObject;
@@ -101,6 +102,11 @@ public class NucleiJ extends SingleFrameApplication
 
     private void initLookAndFeel()
     {
+        // MAC ICON
+        //Application application = Application.getApplication();
+        //Image image = Toolkit.getDefaultToolkit().getImage("icon.png");
+        //application.setDockIconImage(image);
+
         try {
             if (System.getProperty("os.name").toLowerCase().contains("windows")) {
                 for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {

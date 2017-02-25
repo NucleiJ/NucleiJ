@@ -4,6 +4,7 @@
 ### 1. Erweiterungen: ###
 
 * MAC Icon werden nicht angezeigt
+* ROI Auswahl nur einmal startbar
  
 
 ### DOKU ###
