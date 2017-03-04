@@ -56,7 +56,7 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
         selectroiAction = new SelectroiAction();
         deleteroiAction = new DeleteroiAction();
 
-        setComponentEnabled(GLScanAnalyzer.PROPERTY_HEATMAPQUALITY, getBean().isCalculateandshowheatmap());
+        setComponentEnabled(GLScanAnalyzer.PROPERTY_HEATMAPQUALITY, getBean().isCalculateHeatmap());
         setComponentEnabled(GLScanAnalyzer.PROPERTY_SELECTROI, glScanAnalyzer.isSelectroi());
 
         // Ausgabe jeder Aenderung, mit Aenderungen verbundene Aktionen definieren
@@ -66,7 +66,7 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
                 LOGGER.info("Property name=" + evt.getPropertyName() + ", oldValue=" + evt.getOldValue() + ", newValue=" + evt.getNewValue());
 
                 // Heatmap Checkbox sichtbar/unsichtbar setzen
-                if (GLScanAnalyzer.PROPERTY_CALCULATEANDSHOWHEATMAP.equals(evt.getPropertyName())) {
+                if (GLScanAnalyzer.PROPERTY_CALCULATEHEATMAP.equals(evt.getPropertyName())) {
                     if (evt.getNewValue().equals(false)) {
                         setComponentEnabled(GLScanAnalyzer.PROPERTY_HEATMAPQUALITY, false);
                     } else {
@@ -77,7 +77,7 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
                 // Heatmap Slider sichtbar setzen
                 if (GLScanAnalyzer.PROPERTY_HEATMAPQUALITY.equals(evt.getPropertyName())) {
                     setComponentEnabled(GLScanAnalyzer.PROPERTY_HEATMAPQUALITY, true);
-                    glScanAnalyzer.setCalculateandshowheatmap(true);
+                    glScanAnalyzer.setCalculateHeatmap(true);
                 }
             }
         });
@@ -377,7 +377,7 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
         }
 
         public void actionPerformed(ActionEvent e) {
-            glScanAnalyzer.setCalculateandshowheatmap(glScanAnalyzer.isCalculateandshowheatmap());
+            glScanAnalyzer.setCalculateHeatmap(glScanAnalyzer.isCalculateHeatmap());
         }
     }
 

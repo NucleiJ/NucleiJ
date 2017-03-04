@@ -322,7 +322,7 @@ public class MainAnalyzer implements PlugInFilter {
 
         exportResultsCheckbox = true;
         cropCheckbox = glScanAnalyzer.isSelectroi();
-        heatmapCheckbox = glScanAnalyzer.isCalculateandshowheatmap();
+        heatmapCheckbox = glScanAnalyzer.isCalculateHeatmap();
         aufloesungSlider = glScanAnalyzer.getHeatmapquality();
     }
 

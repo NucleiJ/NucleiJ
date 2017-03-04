@@ -49,10 +49,11 @@ public class GLScanAnalyzerView extends JPanel {
 
         this.glScanAnalyzerPM = glScanAnalyzerPM;
 
-        initComponents();
+        initComponents();   //vom GUI Designer erstelte Komponenten
         initBinding();
     }
 
+    // manuelle, selbst Erstellte Komponenten
     private void createUIComponents() {
         analyzeAction = (AbstractAction) glScanAnalyzerPM.getAnalyzeAction();
         calculateandshowheatmapAction = (AbstractAction) glScanAnalyzerPM.getCalculateandshowheatmapAction();
@@ -63,7 +64,7 @@ public class GLScanAnalyzerView extends JPanel {
     private void initBinding() {
         // Binding fuer die HeatmapCheckbox und die ROI Auswahl (Label)
         PresentationModelBinder binder = Binders.binderFor(glScanAnalyzerPM);
-        binder.bindBeanProperty(GLScanAnalyzer.PROPERTY_CALCULATEANDSHOWHEATMAP).to(calculateandshowheatmapCheckBox);
+        binder.bindBeanProperty(GLScanAnalyzer.PROPERTY_CALCULATEHEATMAP).to(calculateandshowheatmapCheckBox);
         binder.bindBeanProperty(GLScanAnalyzer.PROPERTY_ROIAREA).to(roiDataLabel);
 
         // Property: HeatMapQuality

@@ -15,10 +15,10 @@ public class GLScanAnalyzer extends Model {
     // ************************************************************************
 
     // Properties
-    public static final String PROPERTY_CALCULATEANDSHOWHEATMAP = "calculateandshowheatmap";
-    public static final String PROPERTY_HEATMAPQUALITY          = "heatmapquality";
-    public static final String PROPERTY_ROIAREA                 = "roiarea";
-    public static final String PROPERTY_SELECTROI               = "selectroi";
+    public static final String PROPERTY_CALCULATEHEATMAP = "calculateHeatmap";
+    public static final String PROPERTY_HEATMAPQUALITY   = "heatmapquality";
+    public static final String PROPERTY_ROIAREA          = "roiarea";
+    public static final String PROPERTY_SELECTROI        = "selectroi";
 
     // endregion
 
@@ -28,7 +28,7 @@ public class GLScanAnalyzer extends Model {
     // Klasseninterne Objekte:
     private NdpiConverter ndpiConverter;
     private int           heatmapquality;
-    private boolean       calculateandshowheatmap;
+    private boolean       calculateHeatmap;
     private String        roiarea;
     private boolean       selectroi;
 
@@ -56,7 +56,7 @@ public class GLScanAnalyzer extends Model {
 
         // Initialisierungswerte setzen
         this.heatmapquality = 60;
-        this.calculateandshowheatmap = false;
+        this.calculateHeatmap = false;
         this.selectroi = false;
 
         this.roiX = 0;
@@ -96,14 +96,14 @@ public class GLScanAnalyzer extends Model {
         firePropertyChange(PROPERTY_SELECTROI, oldValue, selectroi);
     }
 
-    public boolean isCalculateandshowheatmap() {
-        return calculateandshowheatmap;
+    public boolean isCalculateHeatmap() {
+        return calculateHeatmap;
     }
 
-    public void setCalculateandshowheatmap(boolean calculateandshowheatmap) {
-        boolean oldValue = this.calculateandshowheatmap;
-        this.calculateandshowheatmap = calculateandshowheatmap;
-        firePropertyChange(PROPERTY_CALCULATEANDSHOWHEATMAP, oldValue, calculateandshowheatmap);
+    public void setCalculateHeatmap(boolean calculateHeatmap) {
+        boolean oldValue = this.calculateHeatmap;
+        this.calculateHeatmap = calculateHeatmap;
+        firePropertyChange(PROPERTY_CALCULATEHEATMAP, oldValue, calculateHeatmap);
     }
 
     @JsonIgnore

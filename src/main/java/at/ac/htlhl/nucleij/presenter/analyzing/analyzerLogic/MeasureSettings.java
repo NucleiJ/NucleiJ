@@ -23,7 +23,6 @@ public class MeasureSettings {
     //Vergroesserung in Dateinamen erkennen
     public double selectMagnificationAutomatically(String str, boolean x10) {
         boolean x40 = str.contains("x40");
-
         double distanceTmp = 4.392;
 
         if (x40 == true && x10 == false) {
@@ -36,7 +35,6 @@ public class MeasureSettings {
         }
         return distanceTmp;
     }
-
 
     public double selectMagnificationManually() {
         GenericDialog x1040 = new GenericDialog("Welche Vergroesserung?");

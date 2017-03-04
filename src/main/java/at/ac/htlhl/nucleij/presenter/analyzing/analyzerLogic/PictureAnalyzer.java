@@ -48,7 +48,7 @@ public class PictureAnalyzer {
             for (int y = 0; y <= h; y++) {
                 int c = original.getPixel(x, y);
                 if (c == 0) {
-                    // naeher Umgebung nach markierten Pixel absuchen
+                    // naeher Umgebung nach weiteren markierten Pixel absuchen
                     int i, j, filter, sum = 0;
                     if (x10 == true) {
                         return;
