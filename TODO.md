@@ -4,8 +4,7 @@
 ### 1. Erweiterungen: ###
 
 * MAC Icon werden nicht angezeigt
-* ROI Auswahl nur einmal startbar
- 
+
 
 ### DOKU ###
 * Automatisch Blockschaltbild generieren
@@ -81,7 +80,7 @@
 * Texte bei TXT Export auslagern (TODO)                             24.02.17
 * Schriften unter Linux immer noch abgeschnitten                    24.02.17
 * ProgressBar dicker machen // Noch checken!                        24.02.17
-
+* ROI Auswahl nur einmal startbar                                   05.03.17
 
 ### 7. Wichtige Notizen ###
 * Dialog Meister: https://mcoj.wordpress.com/category/java/

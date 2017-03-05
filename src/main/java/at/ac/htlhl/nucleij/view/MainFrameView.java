@@ -167,7 +167,7 @@ public class MainFrameView extends JFrame {
         //---- infoAction ----
         infoAction.putValue(Action.SMALL_ICON, new ImageIcon(getClass().getResource("/at/ac/htlhl/nucleij/resources/images/i16x16/help-browser.png")));
         infoAction.putValue(Action.LARGE_ICON_KEY, new ImageIcon(getClass().getResource("/at/ac/htlhl/nucleij/resources/images/i32x32/help-browser.png")));
-        infoAction.putValue(Action.NAME, "Info");
+        infoAction.putValue(Action.NAME, "Information");
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 

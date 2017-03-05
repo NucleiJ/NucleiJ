@@ -36,6 +36,7 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
 
     // Ressourcen Bundle fuer Dialoge
     private ResourceBundle bundle = ResourceBundle.getBundle("at.ac.htlhl.nucleij.resources.i18n.dialogs");
+    private int roiModeActivated;
 
     private Action analyzeAction;
     private Action calculateandshowheatmapAction;
@@ -51,6 +52,7 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
         this.glScanAnalyzer = glScanAnalyzer;
         this.ndpiConverter = ndpiConverter;
 
+        roiModeActivated = 0;
         analyzeAction = new AnalyzeAction();
         calculateandshowheatmapAction = new CalculateandshowheatmapAction();
         selectroiAction = new SelectroiAction();
@@ -282,6 +284,12 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
 
         public void actionPerformed(ActionEvent e) {
             // Wenn Eingabepfad nicht leer ist und nur eine Tif Datei enthaelt
+            roiModeActivated++;
+            if (roiModeActivated > 1)
+            {
+                return;
+            }
+
             if (ndpiConverter.getInputpath() != null && ndpiConverter.getInputpath() != "" &&
                     ndpiConverter.getInputpath().contains(".tif") && ndpiConverter.getNumberTifFiles() == 1 &&
                     ndpiConverter.getNumberNdpiFiles() == 0) {
@@ -344,6 +352,7 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
                         dlg.show();
                     }
                     imp.close();
+                    roiModeActivated--;
                 };
                 Thread thread = new Thread(myRunnable);
                 thread.start();
@@ -355,18 +364,21 @@ public class GLScanAnalyzerPM extends PresentationModel<GLScanAnalyzer> {
                 dlg.setText(bundle.getString("ROInotavialbe.info.text"));
                 dlg.setIcon(TaskDialog.StandardIcon.ERROR);
                 dlg.show();
+                roiModeActivated--;
             } else if (ndpiConverter.getNumberTifFiles() > 1 || ndpiConverter.getNumberNdpiFiles() > 0) {
                 TaskDialog dlg = new TaskDialog(((SingleFrameApplication) Application.getInstance()).getMainFrame(), bundle.getString("Error.text"));
                 dlg.setInstruction(bundle.getString("ROInotavialbe.instruction.text"));
                 dlg.setText(bundle.getString("ROInotavialbe.info.text2"));
                 dlg.setIcon(TaskDialog.StandardIcon.ERROR);
                 dlg.show();
+                roiModeActivated--;
             } else {
                 TaskDialog dlg = new TaskDialog(((SingleFrameApplication) Application.getInstance()).getMainFrame(), bundle.getString("Error.text"));
                 dlg.setInstruction(bundle.getString("ROInotavialbe.instruction.text"));
                 dlg.setText(bundle.getString("ROInotavialbe.info.text3"));
                 dlg.setIcon(TaskDialog.StandardIcon.ERROR);
                 dlg.show();
+                roiModeActivated--;
             }
         }
     }
