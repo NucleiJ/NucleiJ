@@ -8,14 +8,16 @@ import at.ac.htlhl.nucleij.view.CombinedView;
 import at.ac.htlhl.nucleij.view.GLScanAnalyzerView;
 import at.ac.htlhl.nucleij.view.MainFrameView;
 import at.ac.htlhl.nucleij.view.NdpiConverterView;
+import com.apple.eawt.Application;
 import com.ezware.dialog.task.TaskDialogs;
-import org.jdesktop.application.*;
-
+import org.jdesktop.application.ApplicationContext;
+import org.jdesktop.application.ResourceManager;
+import org.jdesktop.application.ResourceMap;
+import org.jdesktop.application.SingleFrameApplication;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.EventObject;
-import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -102,11 +104,6 @@ public class NucleiJ extends SingleFrameApplication
 
     private void initLookAndFeel()
     {
-        // MAC ICON
-        //Application application = Application.getApplication();
-        //Image image = Toolkit.getDefaultToolkit().getImage("icon.png");
-        //application.setDockIconImage(image);
-
         try {
             if (System.getProperty("os.name").toLowerCase().contains("windows")) {
                 for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
@@ -115,7 +112,15 @@ public class NucleiJ extends SingleFrameApplication
                         break;
                     }
                 }
-            } else {
+            } else if (System.getProperty("os.name").toLowerCase().contains("mac")) {
+                UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+                // MAC ICON
+                Application application = Application.getApplication();
+                Image image = Toolkit.getDefaultToolkit().getImage(
+                        "at/ac/htlhl/nucleij/resources/images/icon_png_v1.png");
+                application.setDockIconImage(image);
+            }
+            else {
                 UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
             }
         }
@@ -142,7 +147,7 @@ public class NucleiJ extends SingleFrameApplication
 
     public static void main(String ... args)
     {
-        Application.launch(NucleiJ.class, args);
+        org.jdesktop.application.Application.launch(NucleiJ.class, args);
     }
 
     // region Nested classes
