@@ -25,12 +25,11 @@ import java.util.logging.Logger;
 /**
  * Created by Stefan on 11.11.2016.
  */
-public class NucleiJ extends SingleFrameApplication
-{
+public class NucleiJ extends SingleFrameApplication {
     // Constants
     // ************************************************************************
-    public static final NucleiJ nucleiJ = new NucleiJ();
-    private static final Logger LOGGER = Logger.getLogger(NucleiJ.class.getName());
+    public static final  NucleiJ nucleiJ = new NucleiJ();
+    private static final Logger  LOGGER  = Logger.getLogger(NucleiJ.class.getName());
 
     private ResourceBundle bundle = ResourceBundle.getBundle("at.ac.htlhl.nucleij.resources.i18n.dialogs");
 
@@ -38,6 +37,9 @@ public class NucleiJ extends SingleFrameApplication
     // Fields
     private ResourceMap resource;
 
+    public static void main(String... args) {
+        org.jdesktop.application.Application.launch(NucleiJ.class, args);
+    }
 
     @Override
     protected void initialize(String[] args) {
@@ -54,8 +56,7 @@ public class NucleiJ extends SingleFrameApplication
     }
 
     @Override
-    protected void startup()
-    {
+    protected void startup() {
         LOGGER.log(Level.INFO, "Startup application '" + resource.getString("Application.id") + "'");
 
         Main main = new Main();
@@ -76,23 +77,20 @@ public class NucleiJ extends SingleFrameApplication
     }
 
 
-    @Override
-    protected void shutdown()
-    {
-        super.shutdown();
-    }
-
-
     // endregion
     // Private helper methods
     // ************************************************************************
 
-    private void configureLoggingSystem()
-    {
+    @Override
+    protected void shutdown() {
+        super.shutdown();
+    }
+
+    private void configureLoggingSystem() {
         Logger logger = Logger.getLogger("");
 
         // Remove default logging handlers
-        for (int i = (logger.getHandlers().length - 1) ; i >= 0; i--) {
+        for (int i = (logger.getHandlers().length - 1); i >= 0; i--) {
             logger.removeHandler(logger.getHandlers()[i]);
         }
 
@@ -102,8 +100,7 @@ public class NucleiJ extends SingleFrameApplication
         logger.addHandler(consoleHandler);
     }
 
-    private void initLookAndFeel()
-    {
+    private void initLookAndFeel() {
         try {
             if (System.getProperty("os.name").toLowerCase().contains("windows")) {
                 for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
@@ -119,59 +116,36 @@ public class NucleiJ extends SingleFrameApplication
                 Image image = Toolkit.getDefaultToolkit().getImage(
                         "at/ac/htlhl/nucleij/resources/images/icon_png_v1.png");
                 application.setDockIconImage(image);
-            }
-            else {
+            } else {
                 UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
             }
-        }
-        catch(UnsupportedLookAndFeelException ex) {
-            LOGGER.log(Level.SEVERE, "Look and Feel could not be initialized " + ex.getMessage(), ex);
+        } catch (UnsupportedLookAndFeelException ex) {
+            LOGGER.log(Level.SEVERE, "Look and Feel konnte nicht initialisiert werden " + ex.getMessage(), ex);
         } catch (IllegalAccessException | InstantiationException | ClassNotFoundException e) {
             e.printStackTrace();
         }
 
 
-        setUIFont (new javax.swing.plaf.FontUIResource("Roboto", Font.PLAIN,12));
+        //setUIFont (new javax.swing.plaf.FontUIResource("Roboto", Font.PLAIN,12));
 
-    }
-
-    public static void setUIFont (javax.swing.plaf.FontUIResource f){
-        java.util.Enumeration keys = UIManager.getDefaults().keys();
-        while (keys.hasMoreElements()) {
-            Object key = keys.nextElement();
-            Object value = UIManager.get (key);
-            if (value != null && value instanceof javax.swing.plaf.FontUIResource)
-                UIManager.put (key, f);
-        }
-    }
-
-    public static void main(String ... args)
-    {
-        org.jdesktop.application.Application.launch(NucleiJ.class, args);
     }
 
     // region Nested classes
     // ************************************************************************
 
-    private class NucleiJExitListener implements ExitListener
-    {
-        public boolean canExit(EventObject e)
-        {
+    private class NucleiJExitListener implements ExitListener {
+        public boolean canExit(EventObject e) {
             JFrame parent = ((SingleFrameApplication) getContext().getApplication()).getMainFrame();
 
             // Confirmation Dialog
-            if(TaskDialogs.ask( parent, bundle.getString("QuitNucleiJ.text") , bundle.getString("QuitNucleiJ.text2")))
-            {
+            if (TaskDialogs.ask(parent, bundle.getString("QuitNucleiJ.text"), bundle.getString("QuitNucleiJ.text2"))) {
                 return true;
-            }
-            else
-            {
+            } else {
                 return false;
             }
         }
 
-        public void willExit(EventObject event)
-        {
+        public void willExit(EventObject event) {
 
         }
     }

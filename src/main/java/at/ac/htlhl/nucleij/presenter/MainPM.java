@@ -1,9 +1,7 @@
 package at.ac.htlhl.nucleij.presenter;
 
 import at.ac.htlhl.nucleij.AppContext;
-import at.ac.htlhl.nucleij.model.GLScanAnalyzer;
 import at.ac.htlhl.nucleij.model.Main;
-import at.ac.htlhl.nucleij.model.NdpiConverter;
 import at.ac.htlhl.nucleij.util.SuffixFileFilter;
 import com.ezware.dialog.task.TaskDialog;
 import com.ezware.dialog.task.TaskDialogs;
@@ -20,8 +18,8 @@ import java.util.ResourceBundle;
  * Created by Stefan & Andreas on 11.11.2016.
  */
 public class MainPM extends PresentationModel<Main> {
-    public static final String FILE_EXTENSION = "nucleij";
-    private ResourceBundle bundle = ResourceBundle.getBundle("at.ac.htlhl.nucleij.resources.i18n.dialogs");
+    public static final String         FILE_EXTENSION = "nucleij";
+    private             ResourceBundle bundle         = ResourceBundle.getBundle("at.ac.htlhl.nucleij.resources.i18n.dialogs");
     private Action loadAction;
     private Action saveAction;
     private Action aboutAction;
@@ -76,44 +74,50 @@ public class MainPM extends PresentationModel<Main> {
         JFrame parentAbout = ((SingleFrameApplication) Application.getInstance()).getMainFrame();
         ResourceBundle bundle = ResourceBundle.getBundle("at.ac.htlhl.nucleij.resources.i18n.dialogs");
 
-        JLabel text = new JLabel("http://www.htl-hl.ac.at", JLabel.RIGHT);
+        if (!System.getProperty("os.name").toLowerCase().contains("mac")) {
+            JLabel text = new JLabel("http://www.htl-hl.ac.at", JLabel.RIGHT);
 
-        TaskDialog taskDialogAbout = new TaskDialog(parentAbout, bundle.getString("AboutDialog.title"));
-        taskDialogAbout.setInstruction(bundle.getString("AboutDialog.instructionMessage"));
-        taskDialogAbout.setText(bundle.getString("AboutDialog.text"));
-        taskDialogAbout.setFixedComponent(text);
+            TaskDialog taskDialogAbout = new TaskDialog(parentAbout, bundle.getString("AboutDialog.title"));
+            taskDialogAbout.setInstruction(bundle.getString("AboutDialog.instructionMessage"));
+            taskDialogAbout.setText(bundle.getString("AboutDialog.text"));
+            taskDialogAbout.setFixedComponent(text);
 
-        JTextArea textArea = new JTextArea(8,50);
-        textArea.setEditable(false);
+            JTextArea textArea = new JTextArea(8, 50);
+            textArea.setEditable(false);
 
-        BufferedReader in = null;
-        try {
-            in = new BufferedReader(new FileReader(new File("gpl.txt")));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        String line = null;
-        try {
-            line = in.readLine();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        while(line != null){
-            textArea.append(line + "\n");
+            BufferedReader in = null;
+            try {
+                in = new BufferedReader(new FileReader(new File("gpl.txt")));
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+            String line = null;
             try {
                 line = in.readLine();
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            while (line != null) {
+                textArea.append(line + "\n");
+                try {
+                    line = in.readLine();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            textArea.setCaretPosition(0);
+            JScrollPane test = new JScrollPane(textArea);
+            taskDialogAbout.getDetails().setExpandableComponent(test);
+
+            taskDialogAbout.setCommands(TaskDialog.StandardCommand.OK);
+            taskDialogAbout.setIcon(TaskDialog.StandardIcon.INFO);
+
+            taskDialogAbout.show();
+        } else {
+            TaskDialogs.inform(parentAbout, bundle.getString("AboutDialog.instructionMessage"),
+                    bundle.getString("AboutDialogMAC.text"));
         }
-        textArea.setCaretPosition(0);
-        JScrollPane test = new JScrollPane(textArea);
-        taskDialogAbout.getDetails().setExpandableComponent(test);
 
-        taskDialogAbout.setCommands(TaskDialog.StandardCommand.OK);
-        taskDialogAbout.setIcon(TaskDialog.StandardIcon.INFO);
-
-        taskDialogAbout.show();
     }
 
     private void saveAs() {
