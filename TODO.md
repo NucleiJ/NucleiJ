@@ -3,8 +3,8 @@
 
 ### 1. Erweiterungen: ###
 
-* MAC Icon werden nicht angezeigt
-
+* Informationsdialog ueberarbeiten [M]
+* Ueberdialog [E]
 
 ### DOKU ###
 * Automatisch Blockschaltbild generieren
