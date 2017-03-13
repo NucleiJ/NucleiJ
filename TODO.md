@@ -3,8 +3,7 @@
 
 ### 1. Erweiterungen: ###
 
-* MAC Icon werden nicht angezeigt
-
+* Informationsdialog ueberarbeiten [M]
 
 ### DOKU ###
 * Automatisch Blockschaltbild generieren
@@ -81,6 +80,7 @@
 * Schriften unter Linux immer noch abgeschnitten                    24.02.17
 * ProgressBar dicker machen // Noch checken!                        24.02.17
 * ROI Auswahl nur einmal startbar                                   05.03.17
+* Ueberdialog ueberarbeitet                                         10.03.17
 
 ### 7. Wichtige Notizen ###
 * Dialog Meister: https://mcoj.wordpress.com/category/java/
