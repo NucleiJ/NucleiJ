@@ -112,10 +112,10 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter> {
             if (chooser.showOpenDialog(parent) == JFileChooser.APPROVE_OPTION) {
                 ndpiConverter.setInputpath(chooser.getSelectedFile().getAbsolutePath());
 
-                // Prüfen ob Datei oder Ordner & Erstellen der File-Listen
+                // Check if file or folder & create file-lists
                 loadFilesAndFolders(chooser);
 
-                // Auf Dateityp prüfen und sortieren in ndpiFileList & tifFileList
+                // Check file type and sort to ndpiFileList & tifFileList
                 filesInDirectory = ndpiConverter.getFilesInDirectory();
                 checkAndSetFiles(filesInDirectory, ndpiFileList, tifFileList, chooser);
 
@@ -126,7 +126,7 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter> {
                     glScanAnalyzer.setSelectroi(false);
                 }
 
-                // Warnung wenn mehr als 1 Ordner ausgewählt
+                // Warning for more than 1 folder
                 if (moreThanOneFolder(chooser)) {
                     TaskDialogs.inform(parent,
                             bundle.getString("OnlyOneFolder.text"),
@@ -151,7 +151,6 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter> {
             }
         }
     }
-
 
     private void loadFilesAndFolders(JFileChooser chooser) {
         if (chooser.getSelectedFile().isFile()) {
@@ -183,7 +182,7 @@ public class NdpiConverterPM extends PresentationModel<NdpiConverter> {
                     tifFileList.add(file.getAbsolutePath());
                     numberTifFiles++;
                 } else {
-                    // Input und Output Textfeld leeren und warnung ausgeben
+                    // Clean Input & Output Textfield and show warning
                     ndpiConverter.setOutputpath(null);
                     ndpiConverter.setInputpath(null);
 

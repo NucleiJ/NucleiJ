@@ -143,10 +143,10 @@ public class AnalyzerConverterTask extends SwingWorker<String, String> {
                 // Get path of the ndpi-converter.jar
                 File newjarPath = new File(NucleiJ.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath());
 
-                // Wenn gefunden, Pfad setzen
+                // When found, set path
                 if (newjarPath.exists()) {
                     absolutePathofNdpiJar = newjarPath.getParent().concat(File.separator).concat("NucleiJ-Data").concat(File.separator).concat("ndpi-converter.jar");
-                } else { // Ansonsten Filechooser öffnen und manuell auswählen
+                } else {
                     JFrame parent = ((SingleFrameApplication) Application.getInstance()).getMainFrame();
 
                     JFileChooser fileChooser = new JFileChooser();
