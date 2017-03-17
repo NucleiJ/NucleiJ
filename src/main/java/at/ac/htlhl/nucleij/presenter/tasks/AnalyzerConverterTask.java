@@ -134,7 +134,7 @@ public class AnalyzerConverterTask extends SwingWorker<String, String> {
         File outputpath = new File(ndpiConverter.getOutputpath());
 
         //region ################ NDPI-Converter JAR ################
-        File jarPath = new File("lib/NucleiJ-Data/ndpi-converter.jar");
+        File jarPath = new File("lib/data/ndpi-converter.jar");
         String absolutePathofNdpiJar = jarPath.getAbsolutePath();
         if (jarPath.exists()) {
             absolutePathofNdpiJar = jarPath.getAbsolutePath();
@@ -145,7 +145,7 @@ public class AnalyzerConverterTask extends SwingWorker<String, String> {
 
                 // Wenn gefunden, Pfad setzen
                 if (newjarPath.exists()) {
-                    absolutePathofNdpiJar = newjarPath.getParent().concat(File.separator).concat("NucleiJ-Data").concat(File.separator).concat("ndpi-converter.jar");
+                    absolutePathofNdpiJar = newjarPath.getParent().concat(File.separator).concat("data").concat(File.separator).concat("ndpi-converter.jar");
                 } else { // Ansonsten Filechooser öffnen und manuell auswählen
                     JFrame parent = ((SingleFrameApplication) Application.getInstance()).getMainFrame();
 

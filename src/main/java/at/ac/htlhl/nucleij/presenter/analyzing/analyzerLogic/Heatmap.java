@@ -121,7 +121,7 @@ public class Heatmap {
         }
 
         assert newLutPath != null;
-        String absolutePathofLUT = newLutPath.getParent().concat(File.separator).concat("NucleiJ-Data").
+        String absolutePathofLUT = newLutPath.getParent().concat(File.separator).concat("data").
                 concat(File.separator).concat("lut").concat(File.separator).concat("RedGreenErben.lut");
 
         if (new File (absolutePathofLUT).exists())

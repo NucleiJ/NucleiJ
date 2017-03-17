@@ -75,44 +75,50 @@ public class MainPM extends PresentationModel<Main> {
         ResourceBundle bundle = ResourceBundle.getBundle("at.ac.htlhl.nucleij.resources.i18n.dialogs");
 
         if (!System.getProperty("os.name").toLowerCase().contains("mac")) {
-            JLabel text = new JLabel("http://www.htl-hl.ac.at", JLabel.RIGHT);
+            File licence = new File("gpl.txt");
+            if (licence.exists()) {
+                JLabel text = new JLabel("http://www.htl-hl.ac.at", JLabel.RIGHT);
 
-            TaskDialog taskDialogAbout = new TaskDialog(parentAbout, bundle.getString("AboutDialog.title"));
-            taskDialogAbout.setInstruction(bundle.getString("AboutDialog.instructionMessage"));
-            taskDialogAbout.setText(bundle.getString("AboutDialog.text"));
-            taskDialogAbout.setFixedComponent(text);
+                TaskDialog taskDialogAbout = new TaskDialog(parentAbout, bundle.getString("AboutDialog.title"));
+                taskDialogAbout.setInstruction(bundle.getString("AboutDialog.instructionMessage"));
+                taskDialogAbout.setText(bundle.getString("AboutDialog.text"));
+                taskDialogAbout.setFixedComponent(text);
 
-            JTextArea textArea = new JTextArea(8, 50);
-            textArea.setEditable(false);
+                JTextArea textArea = new JTextArea(8, 50);
+                textArea.setEditable(false);
 
-            BufferedReader in = null;
-            try {
-                in = new BufferedReader(new FileReader(new File("gpl.txt")));
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
-            String line = null;
-            try {
-                line = in.readLine();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            while (line != null) {
-                textArea.append(line + "\n");
+                BufferedReader in = null;
+                try {
+                    in = new BufferedReader(new FileReader(new File("gpl.txt")));
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+                String line = null;
                 try {
                     line = in.readLine();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+                while (line != null) {
+                    textArea.append(line + "\n");
+                    try {
+                        line = in.readLine();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+                textArea.setCaretPosition(0);
+                JScrollPane test = new JScrollPane(textArea);
+                taskDialogAbout.getDetails().setExpandableComponent(test);
+
+                taskDialogAbout.setCommands(TaskDialog.StandardCommand.OK);
+                taskDialogAbout.setIcon(TaskDialog.StandardIcon.INFO);
+
+                taskDialogAbout.show();
+            } else {
+                TaskDialogs.inform(parentAbout, bundle.getString("AboutDialog.instructionMessage"),
+                        bundle.getString("AboutDialogMAC.text"));
             }
-            textArea.setCaretPosition(0);
-            JScrollPane test = new JScrollPane(textArea);
-            taskDialogAbout.getDetails().setExpandableComponent(test);
-
-            taskDialogAbout.setCommands(TaskDialog.StandardCommand.OK);
-            taskDialogAbout.setIcon(TaskDialog.StandardIcon.INFO);
-
-            taskDialogAbout.show();
         } else {
             TaskDialogs.inform(parentAbout, bundle.getString("AboutDialog.instructionMessage"),
                     bundle.getString("AboutDialogMAC.text"));
