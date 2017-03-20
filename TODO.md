@@ -6,15 +6,11 @@
 * Informationsdialog ueberarbeiten [M]
 
 ### DOKU ###
-* Automatisch Blockschaltbild generieren
-* PlantUML: svg - inkscope - emf
-* Listing mit Zeilennummern (Notepad++ Plugin, RTF)
 * Word-Abschnitte (wer hat was geschrieben, Fußzeile)
-* Zitieren: [JGO17a]
-* Serife Schriftart
-
 
 ### 2. Zukunftsmusik ###
+* JDirectoyChooser (_com.l2fprod.common.swing.JDirectoryChooser_)
+* Speicher nach Analyse freigeben
 * Schriftgröße änderbar (optional zur Laufzeit)
 * Sprache änderbar (optional zur Laufzeit)
 * interaktives Tutorial
