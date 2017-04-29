@@ -9,6 +9,7 @@
 * Word-Abschnitte (wer hat was geschrieben, Fußzeile)
 
 ### 2. Zukunftsmusik ###
+* Unterschiedliche Zellkerne in unterschiedlichen Farben Kennzeichnen ("Kategorien?")
 * JDirectoyChooser (_com.l2fprod.common.swing.JDirectoryChooser_)
 * Speicher nach Analyse freigeben
 * Schriftgröße änderbar (optional zur Laufzeit)
